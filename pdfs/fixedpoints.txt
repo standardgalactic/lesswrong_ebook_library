@@ -1,0 +1,1165 @@
+
+Fixed Points
+1. Fixed Point Exercises
+2. Fixed Point Discussion
+3. Topological Fixed Point Exercises
+4. Diagonalization Fixed Point Exercises
+5. Iteration Fixed Point Exercises
+6. Hyperreal Brouwer
+7. Formal Open Problem in Decision Theory
+8. The Ubiquitous Converse Lawvere Problem
+9. Reﬂective oracles as a solution to the converse Lawvere problem
+
+Fixed Point Exercises
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+Sometimes people ask me what math they should study in order to get into agent
+foundations. My ﬁrst answer is that I have found the introductory class in every
+subﬁeld to be helpful, but I have found the later classes to be much less helpful. My
+second answer is to learn enough math to understand all ﬁxed point theorems. These
+two answers are actually very similar. Fixed point theorems span all across
+mathematics, and are central to (my way of) thinking about agent foundations.
+This post is the start of a sequence on ﬁxed point theorems. It will be followed by
+several posts of exercises that use and prove such theorems. While these exercises
+aren't directly connected to AI safety, I think they're quite useful for preparing to think
+about agent foundations research. Afterwards, I will discuss the core ideas in the
+theorems and where they've shown up in alignment research.
+The math involved is not much deeper than a ﬁrst course in the various subjects
+(logic, set theory, topology, computability theory, etc). If you don't know the terms, a
+bit of googling, wikipedia and math.stackexchange should easily get you most of the
+way. Note that the posts can be tackled in any order.
+Here are some ways you can use these exercises:
+You can host a local MIRIx group, and go through the exercises together. This
+might be useful to give a local group an aﬀordance to work on math rather than
+only reading papers.
+You can work on them by yourself for a while, and post questions when you get
+stuck. You can also post your solutions to help others, let others see an alternate
+way of doing a problem, or help you realize that there is a problem with your
+solution.
+You can skip to the discussion (which has some spoilers), learn a bunch of
+theorems from Wikipedia, and use this as a starting point for trying to
+understand some MIRI papers.
+You can use answering these questions as a goalpost for learning a bunch of
+introductory math from a large collection of diﬀerent subﬁelds.
+You can show oﬀ by pointing out that some of the questions are wrong, and then
+I will probably ﬁx them and thank you.
+The ﬁrst set of exercises is here.
+Thanks to Sam Eisenstat for helping develop these exercises, Ben Pace for helping
+edit the sequence, and many AISFP participants for testing them and noticing errors.
+Meta
+Read the following.
+Please use the (new) spoilers feature - the symbol '>' followed by '!' followed by space
+- in your comments to hide all solutions, partial solutions, and other discussions of the
+math. The comments will be moderated strictly to cover up spoilers!
+
+I recommend putting all the object level points in spoilers and leaving metadata
+outside of the spoilers, like so:
+Here's my solution / partial solution / confusion for question #5:
+And put your idea in here! (reminder: LaTex is cmd-4 / ctrl-4)
+
+Fixed Point Discussion
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+Warning: This post contains some important spoilers for Topological Fixed Point
+Exercises, Diagonalization Fixed Point Exercises, and Iteration Fixed Point Exercises. If
+you plan to even try the exercises, reading this post will signiﬁcantly reduce the value
+you can get from doing them.
+Core Ideas
+A ﬁxed point of a function f is an input x such that f(x) = x. Fixed point theorems show
+that various types of functions must have ﬁxed points, and sometimes give methods
+for ﬁnding those ﬁxed points.
+Fixed point theorems come in three ﬂavors: Topological, Diagonal, and Iterative. (I
+sometimes refer to them by central examples as Brouwer, Lawvere, and Banach,
+respectively.)
+Topological ﬁxed points are non constructive. If f is continuous, f(0) > 0, and f(1) < 1,
+then we know f must have some ﬁxed point between 0 and 1, since f(x) must
+somewhere transition from being greater than x to being less than x. This does not tell
+us where it happens. This can be especially troublesome when there are multiple ﬁxed
+points, and there is no principled way to choose between them.
+Diagonal ﬁxed points are constructed with a weird trick where you feed a code for a
+function into that function itself. Given a function f, if you can construct a function g,
+which on input x, interprets x as a function, runs x on itself, and then runs f on the
+result (i.e. g(x) := f(x(x)).), then g(g) is a ﬁxed point of f because g(g) = f(g(g)). This is
+not just an example; everything in the cluster looks like this. It is a weird trick, but it is
+actually very important.
+Iterative ﬁxed points can be found through iteration. For example, if f(x) = −, then
+starting with any x value, iterating f forever will converge to the unique ﬁxed point 
+x = 0.
+(There is a fourth cluster in number theory discussed here, but I am leaving it out,
+since it does not seem relevant to AI, and because I am not sure whether to put it by
+itself or to tack it onto the topological cluster.)
+x2
+
+Topological Fixed Points
+Examples of topological ﬁxed point theorems include Sperner's lemma, the Brouwer
+ﬁxed point theorem, the Kakutani ﬁxed point theorem, the intermediate value
+theorem, and the Poincaré-Miranda theorem.
+Brouwer is the central example of the cluster. Brouwer states that any
+continuous function f from a compact convex set to itself has a ﬁxed point.
+Sperner's Lemma is a discrete analogue which is used in one proof of Brouwer.
+Kakutani is a strengthening of Brouwer to degenerate set valued functions, that
+look almost like continuous functions.
+Poincaré-Miranda is an alternate formulation of Brouwer, which is about ﬁnding
+zeros rather than ﬁxed points.
+The Intermediate Value Theorem is a special case of Poincaré-Miranda. To a ﬁrst
+approximation, you can think of all of these theorems as one big theorem.
+Topological ﬁxed point theorems also have some very large applications. The Kakutani
+ﬁxed point theorem is used in game theory to show that Nash equilibria exist, and to
+show that markets have equilibrium prices! Sperner's lemma is also used in some
+envy-free fair division results. Brouwer is also used is to show the existence of some
+diﬀerential equations.
+In MIRI's agent foundations work, Kakutani is used to construct probabilistic truth
+predicates and reﬂective oracles, and Brouwer is used to construct logical inductors.
+These applications all use topological ﬁxed points very directly, and so carry with
+them most of the philosophical baggage of topological ﬁxed points. For example, while
+Nash equilibria exist, they are not unique, are computationally hard to ﬁnd, and feel
+non-constructive and arbitrary.
+Diagonal Fixed Points
+Diagonal ﬁxed point theorems are all centered around the basic structure of g(g),
+where g(x) := f(x(x)), as mentioned previously.
+The pattern is used in many places.
+In CS theory, it is used to construct quines and the Y-combinator in lambda
+calculus, and to prove Rice's theorem and that the halting problem is
+undecidable.
+In formal logic, it is used to prove the diagonal lemma and important corollaries,
+like Gödel's incompleteness theorem, Löb's theorem, and Tarski's undeﬁnability
+theorem. It is used to show the uncountability of the real numbers with Cantor's
+Diagonal Argument.
+Lawvere's ﬁxed point theorem is the most general version of the argument, and
+can be used to show all of the above as a corollary.
+In MIRI's agent foundations work, this shows up in the Löbian obstacle to self-trust,
+Löbian handshakes in Modal Combat and Bounded Open Source Prisoner's Dilemma,
+
+as well as providing a basic foundation for why an agent reasoning about itself might
+make sense at all through quines.
+Iterative Fixed Points
+Iterative ﬁxed point theorems are less of one cluster than the others; I will factor it
+into two sub-clusters, centered around the Banach ﬁxed point theorem and Tarski
+ﬁxed point theorem. (Each the same size as the original.)
+The Tarski cluster is about ﬁxed points of monotonic functions on (partially) ordered
+sets found by iteration. Tarski's ﬁxed point theorem states that any order preserving
+function on a complete lattice has a ﬁxed point (and further the set of ﬁxed points
+forms a complete lattice). The least ﬁxed point can be found by starting with the least
+element and iterating the function transﬁnitely. This, for example, implies that every
+monotonic function on from [0, 1] to itself has a ﬁxed point, even if it is not
+continuous. Kleene's ﬁxed point theorem strengthens the assumptions of Tarski by
+adding a form of continuity (and also removes some irrelevant assumptions), which
+gives us that the least ﬁxed point can be found by iterating the function only ω times.
+The ﬁxed point lemma for normal functions is similar to Kleene, but with ordinals
+rather than partial orders. It states that any strictly increasing continuous function on
+ordinals has arbitrarily large ﬁxed points.
+The Banach cluster is about ﬁxed points of contractive functions on metric spaces
+found by iteration. A contractive function is a function that sends points closer
+together. A function f is contractive if there exists an ϵ > 0 such that for all x ≠y 
+d(f(x), f(y)) ≤(1 −ϵ)d(x, y). Banach's ﬁxed point theorem state that any contractive
+function has a unique ﬁxed point. This ﬁxed point is lim n→∞f n(x) for any starting point 
+x. An application of this to linear functions is that any ergodic stationary Markov chain
+has a stationary distribution (which is a ﬁxed point of the transition map), which is
+converged to via iteration. This is also used in showing that correlated equilibria exist
+and can be found quickly. Banach can also be used to show that gradient descent
+converges exponentially quickly on a strongly convex function.
+Interdisciplinary Nature
+I think of Pure Mathematics as divided at the top into 5 subﬁelds: Algebra, Analysis,
+Topology, Logic, and Combinatorics.
+The mapping of the key ﬁxed point theorems discussed in the exercises into these
+categories is surjective:
+Lawvere's ﬁxed point theorem is Algebra
+Banach's ﬁxed point theorem is Analysis
+Brouwer ﬁxed point theorem is Topology
+Gödel's ﬁrst incompleteness theorem is Logic
+Sperner's lemma is Combinatorics.
+
+On top of that, major applications of ﬁxed point theorems show up in Diﬀerential
+Equations, CS theory, Machine Learning, Game Theory, and Economics.
+Tomorrow's AI Alignment Forum sequences post will be two short posts 'Approval-
+directed bootstrapping' and 'Humans consulting HCH' by Paul Christiano in the
+sequence Iterated Ampliﬁcation.
+The next posting in this sequence will be four posts of Agent Foundations research
+that use ﬁxed point theorems, on Wednesday 28th November. These will be re-posts
+of content from the now-defunct Agent Foundations forum, all of whose content is now
+ﬁndable on the AI Alignment Forum (and all old links will soon be re-directed to the AI
+Alignment Forum).
+
+Topological Fixed Point Exercises
+Crossposted from the AI Alignment Forum. May contain more technical jargon than usual.
+This is one of three sets of ﬁxed point exercises. The ﬁrst post in this sequence is here, giving
+context.
+1. (1-D Sperner's lemma) Consider a path built out of n edges as shown. Color each vertex
+blue or green such that the leftmost vertex is blue and the rightmost vertex is green. Show
+that an odd number of the edges will be bichromatic.
+2. (Intermediate value theorem) The Bolzano-Weierstrass theorem states that any bounded
+sequence in Rn has a convergent subsequence. The intermediate value theorem states that
+if you have a continuous function f : [0, 1] →R such that f(0) ≤0 and f(1) ≥0, then there
+exists an x ∈[0, 1] such that f(x) = 0. Prove the intermediate value theorem. It may be
+helpful later on if your proof uses 1-D Sperner's lemma and the Bolzano-Weierstrass theorem
+3. (1-D Brouwer ﬁxed point theorem) Show that any continuous function f : [0, 1] →[0, 1] has
+a ﬁxed point (i.e. a point x ∈[0, 1] with f(x) = x). Why is this not true for the open interval 
+(0, 1)?
+4. (2-D Sperner's lemma) Consider a triangle built out of n2 smaller triangles as shown. Color
+each vertex red, blue, or green, such that none of the vertices on the large bottom edge are
+red, none of the vertices on the large left edge are green, and none of the vertices on the
+large right edge are blue. Show that an odd number of the small triangles will be
+trichromatic.
+
+5. Color the all the points in the disk as shown. Let f be a continuous function from a closed
+triangle to the disk, such that the bottom edge is sent to non-red points, the left edge is sent
+to non-green points, and the right edge is sent to non-blue points. Show that f sends some
+point in the triangle to the center.
+
+6. Show that any continuous function f from closed triangle to itself has a ﬁxed point.
+7. (2-D Brouwer ﬁxed point theorem) Show that any continuous function from a compact
+convex subset of R2 to itself has a ﬁxed point. (You may use the fact that given any closed
+convex subset S of Rn, the function from Rn to S which projects each point to the nearest
+point in S is well deﬁned and continuous.)
+8. Reﬂect on how non-constructive all of the above ﬁxed-point ﬁndings are. Find a
+parameterized class of functions where for each t ∈[0, 1], ft : [0, 1] →[0, 1], and the function 
+t ↦ft is continuous, but there is no continuous way to pick out a single ﬁxed point from each
+function (i.e. no continuous function g such that g(t) is a ﬁxed point of ft for all t).
+9. (Sperner's lemma) Generalize exercises 1 and 4 to an arbitrary dimension simplex.
+10. (Brouwer ﬁxed point theorem) Show that any continuous function from a compact
+convex subset of Rn to itself has a ﬁxed point.
+
+11. Given two nonempty compact subsets A, B ⊆Rn, the Hausdorﬀ distance between them is
+the supremum 
+max { sup
+a ∈ A
+ d ( a , B ) , sup
+b ∈ B
+ d ( b , A ) }
+ over all points in either subset of the distance from that point to the other subset. We call a
+set valued function f : S →2T a continuous Hausdorﬀ limit if there is a sequence {fn} of
+continuous functions from S to T whose graphs, {(x, y) ∣y = fn(x)} ⊆S × T, converge to the
+graph of f, {(x, y) ∣f(x) ∋y} ⊆S × T, in Hausdorﬀ distance. Show that every continuous
+Hausdorﬀ limit f : T →2T from a compact convex subset of Rn to itself has a ﬁxed point (a
+point x such that x ∈f(x)).
+12. Let S and T be nonempty compact convex subsets of Rn. We say that a set valued
+function, f : S →2T is a Kakutani function if the graph of f, {(x, y) ∣f(x) ∋y} ⊆S × T, is
+closed, and f(x) is convex and nonempty for all x ∈S. For example, we could take S and T to
+be the interval [0, 1], and we could have f : S →2T send each x <
+ to {0}, map x =
+ to the
+whole interval [0, 1], and map x >
+ to {1}. Show that every Kakutani function is a
+continuous Hausdorﬀ limit. (Hint: Start with the case where S is a unit cube. Construct fn by
+breaking S into small cubes of side length 2−n. Constuct a smaller cube of side length 2−n−1
+ within each 2−n cube. Send each small 2−n−1 to the convex hull of the images of all points in
+the 2−n cube with a continuous function, and glue these together with straight lines. Make
+sure you don't accidentally get extra limit points.)
+13. (Kakutani ﬁxed point theorem) Show that every Kakutani function from a compact
+convex subset of S ⊆Rn to itself has a ﬁxed point.
+Please use the spoilers feature - the symbol '>' followed by '!' followed by space -in your
+comments to hide all solutions, partial solutions, and other discussions of the math. The
+comments will be moderated strictly to hide spoilers!
+I recommend putting all the object level points in spoilers and leaving metadata outside of
+the spoilers, like so: "I think I've solved problem #5, here's my solution <spoilers>" or "I'd
+like help with problem #3, here's what I understand <spoilers>" so that people can choose
+what to read.
+12
+12
+12
+
+Diagonalization Fixed Point Exercises
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+This is the second of three sets of ﬁxed point exercises. The ﬁrst post in this sequence
+is here, giving context.
+1. Recall Cantor's diagonal argument for the uncountability of the real numbers.
+Apply the same technique to convince yourself than for any set S, the cardinality
+of S is less than the cardinality of the power set P(S) (i.e. there is no surjection
+from S to P(S)).
+2. Suppose that a nonempty set T has a function f from T to T which lacks ﬁxed
+points (i.e. f(x) ≠x for all x ∈T). Convince yourself that there is no surjection
+from S to S →T, for any nonempty S. (We will write the set of functions from A to
+B either as A →B or BA; these are the same.)
+3. For nonempty S and T, suppose you are given g : S →T S a surjective function
+from the set S to the set of functions from S to T, and let f be a function from T
+to itself. The previous result implies that there exists an x in T such that f(x) = x.
+Can you use your proof to describe x in terms of f and g?
+4. Given sets A and B, let Comp(A, B) denote the space of total computable
+functions from A to B. We say that a function from C to Comp(A, B) is computable
+if and only if the corresponding function f ′ : C × A →B (given by f ′(c, a) = f(c)(a))
+is computable. Show that there is no surjective computable function from the set
+S of all strings to Comp(S, {T, F}).
+5. Show that the previous result implies that there is no computable function 
+halt(x, y) from S × S →{T, F} which outputs T if and only if the ﬁrst input is a
+code for a Turing machine that halts when given the second input.
+
+6. Given topological spaces A and B, let Cont(A, B) be the space with the set of
+continuous functions from A to B as its underlying set, and with topology such
+that f : C →Cont(A, B) is continuous if and only if the corresponding function 
+f ′ : C × A →B (given by f ′(c, a) = f(c)(a)) is continuous, assuming such a space
+exists. Convince yourself that there is no space X which continuously surjects
+onto Cont(X, S), where S is the circle.
+7. In your preferred programming language, write a quine, that is, a program
+whose output is a string equal to its own source code.
+8. Write a program that deﬁnes a function f taking a string as input, and produces
+its output by applying f to its source code. For example, if f reverses the given
+string, then the program should outputs its source code backwards.
+9. Given two sets A and B of sentences, let Syn(A, B) be the set of all functions from
+A to B deﬁned by substituting the Gödel number of a sentence in A into a ﬁxed
+formula. Let S0 be the set of all sentences in the language of arithmetic with one
+unbounded universal quantiﬁer and arbitrarily many bounded quantiﬁers, and
+let S1 be the set of all formulas with one free variables of that same quantiﬁer
+complexity. By representing syntax using arithmetic, it is possible to give a
+function f ∈Syn(S1 × S1, S0) that substitutes its second argument into its ﬁrst
+argument. Pick some coding of formulas as natural numbers, where we denote
+the number coding for a formula φ as ┌φ┐. Using this, show that for any formula 
+ϕ ∈S1, there is a formula ψ ∈S0 such that ϕ(┌ψ┐) ↔ψ.
+10. (Gödel's second incompleteness theorem) In the set S1, there is a formula ¬Bew
+such that ¬Bew(┌ψ┐) holds iﬀ the sentence ψ is not provable in Peano
+arithmetic. Using this, show that Peano arithmetic cannot prove its own
+consistency.
+11. (Löb's theorem) More generally, the diagonal lemma states that for any formula 
+ϕ with a single free variable, there is a formula ψ such that, provably, ϕ(┌ψ┐) ↔ψ.
+Now, suppose that Peano arithmetic proves that Bew(ψ) →ψ for some formula ψ.
+Show that Peano arithmetic also proves ψ itself. Some facts that you may need
+
+are that (a) when a sentence ψ is provable, the sentence Bew(ψ) is itself
+provable, (b) Peano arithmetic proves this fact, that is, Peano arithmetic proves 
+Bew(ψ) →Bew(Bew(ψ)), for any sentence ψ and (c) Peano arithmetic proves the
+fact that if χ and χ →ζ are provable, then ζ is provable.
+12. (Tarski's theorem) Show that there does not exist a formula ϕ with one free
+variable such that for each sentence ψ, the statement ϕ(┌ψ┐) ↔ψ holds.
+13. Looking back at all these exercises, think about the relationship between them.
+Please use the spoilers feature - the symbol '>' followed by '!' followed by space -in
+your comments to hide all solutions, partial solutions, and other discussions of the
+math. The comments will be moderated strictly to hide spoilers!
+I recommend putting all the object level points in spoilers and including metadata
+outside of the spoilers, like so: "I think I've solved problem #5, here's my solution
+<spoilers>" or "I'd like help with problem #3, here's what I understand <spoilers>" so
+that people can choose what to read.
+
+Iteration Fixed Point Exercises
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+This is the third of three sets of ﬁxed point exercises. The ﬁrst post in this sequence is
+here, giving context.
+Note: Questions 1-5 form a coherent sequence and questions 6-10 form a separate
+coherent sequence. You can jump between the sequences.
+1. Let (X, d) be a complete metric space. A function f : X →X is called a contraction
+if there exists a q < 1 such that for all x, y ∈X, d(f(x), f(y)) ≤q ⋅d(x, y). Show that
+if f is a contraction, then for any x, the sequence {xn = f n(x0)} converges. Show
+further that it converges exponentially quickly (i.e. the distance between the nth
+term and the limit point is bounded above by c ⋅an for some a < 1)
+2. (Banach contraction mapping theorem) Show that if (X, d) is a complete metric
+space and f is a contraction, then f has a unique ﬁxed point.
+3. If we only require that d(f(x), f(y)) < d(x, y) for all x ≠y, then we say f is a weak
+contraction. Find a complete metric space (X, d) and a weak contraction f : X →X
+with no ﬁxed points.
+4. A function f : Rn →R is convex if f(tx + (1 −t)y) ≤tf(x) + (1 −t)f(y), for all 
+t ∈[0, 1] and x, y ∈Rn. A function f is strongly convex if you can subtract a
+positive parabaloid from it and it is still convex. (i.e. f is strongly convex if 
+x ↦f(x) −ε||x||2 is convex for some ε > 0.) Let f be a strongly convex smooth
+function from Rn to R, and suppose that the magnitude of the second derivative 
+∥∇2f∥ is bounded. Show that there exists an ε > 0 such that the function 
+g : Rn →Rn given by x ↦x −ε(∇f)(x) is a contraction. Conclude that gradient
+descent with a suﬃciently small constant step size converges exponentially
+quickly on a strongly convex smooth function.
+
+5. A ﬁnite stationary Markov chain is a ﬁnite set S of states, along with probabilistic
+rule A : S →ΔS for transitioning between the states, where ΔS represents the
+space of probability distributions on S. Note that the transition rule has no
+memory, and depends only on the previous state. If for any pair of states 
+s, t ∈ΔS, the probability of passing from s to t in one step is positive, then the
+Markov chain (S, A) is ergodic. Given an ergodic ﬁnite stationary Markov chain,
+use the Banach contraction mapping theorem to show that there is a unique
+distribution over states which is ﬁxed under application of transition rule. Show
+that, starting from any state s, the limit distribution limn→∞An(s) exists and is
+equal to the stationary distribution.
+6. A function f from a partially ordered set to another partially ordered set is called
+monotonic if x ≤y implies that f(x) ≤f(y). Given a partially ordered set (P, ≤)
+with ﬁnitely many elements, and a monotonic function from P to itself, show that
+if f(x) ≥x or f(x) ≤x, then f n(x) is a ﬁxed point of f for all n > |P|.
+7. A complete lattice (L, ≤) is a partially ordered set in which each subset of
+elements has a least upper bound and greatest lower bound. Under the same
+hypotheses as the previous exercise, extend the notion of f n(x) for natural
+numbers n to f α(x) for ordinals α, and show that f α(x) is a ﬁxed point of f for all 
+x ∈X with f(x) ≤x or f(x) ≥x and all |α| > |L| (|A| ≤|B| means there is an
+injection from A to B, and |A| > |B| means there is no such injection).
+8. (Knaster-Tarski ﬁxed point theorem) Show that the set of ﬁxed points of a
+monotonic function on a complete lattice themselves form a complete lattice.
+(Note that since the empty set is always a subset, a complete lattice must be
+nonempty.)
+9. Show that for any set A, (P(A), ⊆) forms a complete lattice, and that any injective
+function from A to B deﬁnes a monotonic function from (P(A), ⊆) to (P(B), ⊆).
+Given injections f : A →B and g : B →A, construct a subset A′ of A and a subset of
+B′ of B such that B′ = f(A′) and A −A′ = g(B −B′).
+
+10. (Cantor-Schröder-Bernstein theorem) Given sets A and B, show that if |A| ≤|B|
+and |A| ≥|B|, then |A| = |B|. (|A| ≤|B| means there is an injection from A to B,
+and |A| = |B| means there is a bijection)
+Please use the spoilers feature - the symbol '>' followed by '!' followed by space -in
+your comments to hide all solutions, partial solutions, and other discussions of the
+math. The comments will be moderated strictly to hide spoilers!
+I recommend putting all the object level points in spoilers and including metadata
+outside of the spoilers, like so: "I think I've solved problem #5, here's my solution
+<spoilers>" or "I'd like help with problem #3, here's what I understand <spoilers>" so
+that people can choose what to read.
+Tomorrow's AI Alignment Forum Sequences post will be "Approval-directed agents:
+overview" by Paul Christiano in the sequence Iterated Ampliﬁcation.
+The next post in this sequence will be released on Saturday 24th November, and will
+be 'Fixed Point Discussion'.
+
+Hyperreal Brouwer
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+(This post was originally published on Oct 6th 2017, and has been temporarily brought
+forwarded as part of the AI Alignment Forum launch sequence on ﬁxed points.)
+This post explains how to view Kakutani's ﬁxed point theorem as a special case of
+Brouwer's ﬁxed point theorem with hyperreal numbers. This post is just math
+intuitions, but I found them useful in thinking about Kakutani's ﬁxed point theorem
+and many things in agent foundations. This came out of conversations with Sam
+Eisenstat.
+Brouwer's ﬁxed theorem says that a continuous function from a compact convex
+subset of Rn to itself has ﬁxed point. Kakutani's ﬁxed point is similar, but instead of
+continuous functions, it uses Kakutani functions, which are set valued functions with
+closed graph which are point wise nonempty and convex.
+When I think about Kakutani functions, I usually think about them as limits of
+continuous functions. For example, consider the kakutani function f from [−1, 1] to
+itself which sends negative inputs to 1, positive inputs to −1, and sends 0 to the entire
+interval. You can view f as a the limit of a sequence of functions fn sends x to 
+min(max(−n ⋅x, −1), 1). This is not a point wise limit, since if it was 0 would be sent to
+0, rather than the entire interval. Instead, it is a limit in the Hausdorﬀ metric between
+the graphs of the functions.
+Given two compact nonempty subsets X and Y  of Rn, the Hausdorﬀ distance between 
+X and Y  is the maximum over all points in X or Y  of the Euclidean distance between
+that point and the closest point in the other set. Since X and Y  are compact, this
+maximum is achieved.
+Given compact convex subsets X and Y  of Rn, we say that a sequence of continuous
+functions fn from X to Y  converges in graph Hausdorﬀ distance to the closed graph set
+valued function f if the graphs of fn viewed as subsets of X × Y  converges to the graph
+of f in Hausdorﬀ distance.
+We say that a closed graph function f from X to Y  is a continuous graph limit of if
+there exists a sequence of continuous functions which converges to f in graph
+Hausdorﬀ distance.
+
+Theorem 1: Every continuous graph limit f from a compact convex subset of 
+Rn to itself has a ﬁxed point (a point contained in its image).
+Proof: f is a limit of continuous functions fn each of which has a ﬁxed point by Brouwer.
+Choose one ﬁxed point from each fn to get a sequence of points which has a
+convergent subsequence by Bolzano-Weierstrass. Let x be the limit of this convergent
+subsequence. If f(x) did not contain x, then (x, x) would not be in the graph of f. Since 
+f is closed graph, a ball around (x, x) would not be in the graph of f, which contradicts
+the fact that {fn} must contain functions with graphs arbitrarily close to the graph of f
+with ﬁxed points arbitrarily close to x and thus points in their graphs arbitrarily close
+to (x, x). □
+This theorem is not equivalent to Kakutani's ﬁxed point theorem. There exist
+continuous graph limits which are not point wise convex (but only in more than one
+dimension). For example the function from [−1, 1]2 to [−1, 1]2 which sends every
+point to the circle of points distance 1 from 0 is not Kakutani, but is a continuous
+graph limit. It is the limit of functions fn given by (x, y) ↦(cos(n ⋅x), sin(n ⋅x)).
+However, this theorem is strictly stronger that Kakutani's ﬁxed point theorem
+(although sometimes harder to use, since showing a function is Kakutani might be
+easier than showing it is a continuous graph limit)
+Theorem 2: Given compact convex subsets X and Y  of Rn, every Kakutani
+function f from X to Y  is a continuous graph limit.
+Proof: We deﬁne a function fn as follows. Take a ﬁnite set S of radius 1/n open balls in 
+X × Y  such that each ball intersects the graph of f, the X coordinates of the centers of
+all the balls are distinct, and the balls cover the entire graph of f. This induces a
+covering SX of X by radius 1/n open balls by taking balls centered at the X coordinates
+of the centers of S. We continuously map each point in X to a weighted average of
+balls in SX as follows. If a point is the center of some ball, it is sent to 100% that ball.
+Otherwise, it is sent to a combination of all the balls in which it is contained with
+weight proportional to (the reciprocal of the distance to the center of that ball) minus 
+
+n. This gives a function fn from X to Y  by mapping each point to the weighted average
+of the Y  coordinates of the centers of the balls in S with weights equal to the weights
+of the corresponding balls in SX above. One can verify that fn is continuous.
+Observe that the graph of fn contains the centers of all balls in S. Thus, fn contains
+points within 1/n of every point is the graph of f. Thus, if fn did not converge to f, it
+must be because inﬁnitely many fn contain points a distance from the graph of f
+bounded away from 0. Consider a convergent subsequence of these points. This gives
+a point (x, y) not in the graph of f and a subsequence of the fn with points in their
+graphs converging to (x, y).
+Let d be half the distance between y and f(x), and consider the set T of all points in Y
+at most d from the nearest point in f(x). Note that T is convex. Note that all (x′, y′) in
+the graph of f with x′ suﬃciently close to x must have y′ in T, since otherwise there
+would be (x′, y′) with x′ converging to x which must have a convergent subsequence
+with y′ converging to a point not in f(x), contradicting the fact that f has closed graph.
+However fn must send all points within distance ε of x to a point in the convex hull of
+the images under f of points within ε + 1/n of x. But, we showed that for ε suﬃciently
+small and 1/n suﬃciently large all of these points must be in T. Therefore, for all
+suﬃciently large n, fn must send all points within ε of x to points in T, which are
+bounded away from y, contradicting the assumption that points in the fn converge to 
+(x, y). □
+Corollary: Kakutani's ﬁxed point theorem
+We have proven (a strengthening of) Kakutani's Fixed Point Theorem from Brouwer's
+ﬁxed point theorem, and given a way to think about Kakutani functions as just limits of
+graphs of continuous functions, and thus have better intuitions about what (a superset
+of) Kakutani functions look like. We will now take this further and think about Kakutani
+as a consequence of an analogue of Brouwer using Hyperreal inﬁnitesimal numbers. (I
+am going to be informal now. I am not going to use standard notation here. I am not
+going to make sense to people who don't already know something about non-standard
+analysis. Sorry.)
+
+Given a compact convex subset X of Rn, we can deﬁne ∗X to be the set of all
+equivalence classes of inﬁnite sequences of elements of X, where two sequences are
+equivalent if they agree on a set that matters according to some ultraﬁlter U on N. A
+function ∗f from ∗X to itself is deﬁned by a sequence of functions from X to itself {fn}
+, where you apply the functions pointwise. I will call a function hyper-continuous if
+each of the component functions is continuous. (I am not sure what this is actually
+called.) Each point in ∗X has a standard part, which is a point in X, which is the unique
+point such that a subset of components that matter converges to X.
+Claim: Every hyper continuous function ∗f from ∗X to itself has a ﬁxed point.
+Proof: Just take the sequence of the ﬁxed points of the individual component functions.
+□
+Claim: Continuous graph limits f from X to Y  are exactly those closed graph
+set-valued functions such that there exists a hyper-continuous function 
+∗f : ∗X →∗Y  such that y ∈f(x) if and only if there exist points ∗x ∈∗X and 
+∗y ∈∗Y  with standard parts x and y respectively such that f(∗x) = ∗y
+Proof: Use the same sequence of functions with graphs converging to that of f as the
+sequence of functions deﬁning ∗f.□
+Thus, we can view continuous graph limits (and thus Kakutani functions) as something
+you get when looking at just the standard part of a hyper-continuous function from the
+hyper version of X to itself. The ﬁxed point will ﬁx everything, including the
+inﬁnitesimal parts, and we do not have to deal with any set-valued functions.
+For example, consider our original function f from [−1, 1] to itself which sends
+negative inputs to 1, positive inputs to −1, and sends 0 to the entire interval. We can
+view this as a function ∗f involving inﬁnitesimals where everything with positive real
+part is sent to something with real part −1, everything with negative real part is sent
+to something with real part 1, and the inﬁnitesimal numbers very close to 0 are sent
+to something in-between. If we use the sequence of functions from above and let the
+inﬁnitesimal ε be {1/n}, then zooming in on the inputs between −ε and ε, ∗f will just
+be a steep linear function with slope −1/ε.
+
+Now to be even more vague and connect things back up with agent foundations,
+perhaps this can give some good intuitions about what is happening with reﬂective
+oracles and probabilistic truth predicates. The oracle/truth predicate is eﬀectively
+"zooming in" on the area around a speciﬁc probability, and when you stack oracle calls
+or truth predicates within each other, you can zoom in further. The fact that the
+probabilistic truth predicate does not know that it is reﬂectively consistent, can be
+viewed as it not believing a sentence akin to "If I assign probability less that ε to ϕ,
+then I also assign probability less that ε2 to ϕ," which seems very reasonable. It also
+makes reﬂective oracles and the probabilistic truth predicates look more similar to
+other approaches to the same problem that are more hierarchy forming solutions to
+the same problem like normal halting oracles. Here the hierarchy comes from zooming
+in further and further on the inﬁnitesimal in the Kakutani function.
+This post was originally published on Oct 6th 2017, and has been brought forwarded
+as part of the AI Alignment Forum launch sequences.
+Tomorrow's AIAF sequences post will be 'Iterated Ampliﬁcation and Distillation' by
+Ajeya Cotra, in the sequence on iterated ampliﬁcation.
+
+Formal Open Problem in Decision
+Theory
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+(This post was originally published on March 31st 2017, and has been brought
+forwarded as part of the AI Alignment Forum launch sequence on ﬁxed points.)
+In this post, I present a new formal open problem. A positive answer would be
+valuable for decision theory research. A negative answer would be helpful, mostly for
+ﬁguring out what is the closest we can get to a positive answer. I also give some
+motivation for the problem, and some partial progress.
+Open Problem: Does there exist a topological space X (in some convenient category
+of topological spaces) such that there exists a continuous surjection from X to the
+space [0, 1]X (of continuous functions from X to [0, 1])?
+Motivation:
+Topological Naturalized Agents: Consider an agent who makes some observations
+and then takes an action. For simplicity, we assume there are only two possible
+actions, A and B. We also assume that the agent can randomize, so we can think of
+this agent as outputting a real number in [0, 1], representing its probability of taking
+action A.
+Thus, we can think of an agent as having a policy which is a function from the space Y
+of possible observations to [0, 1]. We will require that our agent behaves continuously
+as a function of its observations, so we will think of the space of all possible policies as
+the space of continuous functions from Y  to [0, 1], denoted [0, 1]Y .
+We will let X denote the space of all possible agents, and we will have a function 
+f : X →[0, 1]Y  which takes in an agent, and outputs that agent's policy.
+Now, consider what happens when there are other agents in the environment. For
+simplicity, we will assume that our agent observes one other agent, and makes no
+other observations. Thus, we want to consider the case where Y = X, so f : X →[0, 1]X.
+
+We want f to be continuous, because we want a small change in an agent to
+correspond to a small change in the agent's policy. This is particularly important since
+other agents will be implementing continuous functions on agents, and we would like
+any continuous function on policies to be able to be considered valid continuous
+function on agents.
+We also want f to be surjective. This means that our space of agents is suﬃciently rich
+that for any possible continuous policy, there is an agent in our space that implements
+that policy.
+In order to meet all these criteria simultaneously, we need a space X of agents, and a
+continuous surjection f : X →[0, 1]X.
+Unifying Fixed Point Theorems: While we are primarily interested in the above
+motivation, there is another secondary motivation, which may be more compelling for
+those less interested in agent foundations.
+There are (at least) two main clusters of ﬁxed point theorems that have come up
+many times in decision theory, and mathematics in general.
+First, there is the Lawvere cluster of theorems. This includes the Lawvere ﬁxed point
+theorem, the diagonal lemma, and the existence of Quines and ﬁxed point
+combinators. These are used to prove Gödel's incompleteness Theorem, Cantor's
+Theorem, Löb's Theorem, and achieve robust cooperation in the Prisoner's Dilemma in
+modal framework and bounded variants. All of these can be seen as corollaries of
+Lawvere's ﬁxed point theorem, which states that in a cartesian closed category, if
+there is a point-surjective map f : X →Y X, then every morphism g : Y →Y  has a ﬁxed
+point.
+Second, there is the Brouwer cluster of theorems. This includes Brouwer's ﬁxed point
+theorem, The Kakutani ﬁxed point theorem, Poincaré-Miranda, and the intermediate
+value theorem. These are used to prove the existence of Nash Equilibria, Logical
+Inductors, and Reﬂective Oracles.
+If we had a topological space and a continuous surjection X →[0, 1]X, this would allow
+us to prove the one-dimensional Brouwer ﬁxed point theorem directly using the
+Lawvere ﬁxed point theorem, and thus unify these two important clusters.
+Thanks to Qiaochu Yuan for pointing out the connection to Lawvere's ﬁxed point
+theorem (and actually asking this question three years ago).
+Partial Progress:
+Most Diagonalization Intuitions Do Not Apply: A common initial reaction to this
+question is to conjecture that such an X does not exist, due to cardinality or
+diagonalization intuitions. However, note that all of the diagonalization theorems pass
+
+through (some modiﬁcation of) the same lemma: Lawvere's ﬁxed point theorem.
+However, this lemma does not apply here!
+For example, in the category of sets, the reason that there is no surjection from any
+set X to the power set, {T, F}X, is because if there were such a surjection, Lawvere's
+ﬁxed point theorem would imply that every function from {T, F} to itself has a ﬁxed
+point (which is clearly not the case, since there is a function that swaps T and F).
+However, we already know by Brouwer's ﬁxed point theorem that every continuous
+function from the interval [0, 1] to itself has a ﬁxed point, so the standard
+diagonalization intuitions do not work here.
+Impossible if You Replace [0, 1] with e.g. S1: This also provides a quick sanity
+check on attempts to construct an X. Any construction that would not be meaningfully
+diﬀerent if the interval [0, 1] is replaced with the circle S1 is doomed from the start.
+This is because a continuous surjection X →(S1)X would violate Lawvere's ﬁxed point
+theorem, since there is a continuous map from S1 to itself without ﬁxed points.
+Impossible if you Require a Homeomorphism: When I ﬁrst asked this question I
+asked for a homeomorphism between X and [0, 1]X. Sam Eisenstat has given a very
+clever argument why this is impossible. You can read it here. In short, using a
+homeomorphism, you would be able to use Lawvere to construct a continuous map
+that send a function from [0, 1] to itself to a ﬁxed point of that function. However, no
+such continuous map exists.
+Notes:
+If you prefer not to think about the topology of [0, 1]X, you can instead ﬁnd a space X,
+and a continuous map h : X × X →[0, 1], such that for every continuous function 
+f : X →[0, 1], there exists an xf ∈X, such that for all x ∈X, h(xf, x) = f(x).
+Many of the details in the motivation could be diﬀerent. I would like to see progress on
+similar questions. For example, you could add some computability condition to the
+space of functions. However, I am also very curious which way this speciﬁc question
+will go.
+This post came out of many conversations, with many people, including: Sam,
+Qiaochu, Tsvi, Jessica, Patrick, Nate, Ryan, Marcello, Alex Mennen, Jack Gallagher, and
+James Cook.
+
+This post was originally published on March 31st 2017, and has been brought
+forwarded as part of the AI Alignment Forum launch sequences.
+Tomorrow's AIAF sequences post will be 'Iterated Ampliﬁcation and Distillation' by
+Ajeya Cotra, in the sequence on iterated ampliﬁcation.
+
+The Ubiquitous Converse Lawvere
+Problem
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+(This post was originally published on Oct 20th 2017, and is 1 of 4 posts brought
+forwarded today as part of the AI Alignment Forum launch sequence on ﬁxed points.)
+In this post, I give a stronger version of the open question presented here, and give a
+motivation for this stronger property. This came out of conversations with Marcello,
+Sam, and Tsvi.
+Deﬁnition: A continuous function f : X →Y  is called ubiquitous if for every continuous
+function g : X →Y , there exists a point x ∈X such that f(x) = g(x).
+Open Problem: Does there exist a topological space X with a ubiquitous function 
+f : X →[0, 1]X?
+I will refer to the original problem as the Converse Lawvere Problem, and the new
+version as the the Ubiquitous Converse Lawvere Problem. I will refer to a space
+satisfying the conditions of (Ubiquitous) Converse Lawvere Problem, a (Ubiquitous)
+Converse Lawvere Space, abbreviated (U)CLS. Note that a UCLS is also a CLS, since a
+ubiquitous is always surjective, since g can be any constant function.
+Motivation: True FairBot
+Let X be a Converse Lawvere Space. Note that since such an X might not exist, the
+following claims might be vacuous. Let f : X →[0, 1]X be a continuous surjection.
+We will view X as a space of possible agents in an open source prisoner's dilemma
+game. Given two agents A, B ∈X, we will interpret fA(B) as the probability with which
+A cooperates when playing against B. We will deﬁne UA(B) := 2fB(A) −fA(B), and
+interpret this as the utility of agent A when playing in the prisoner's dilemma with B.
+Since f is surjective, every continuous policy is implemented by some agent. In
+particular, this means gives:
+
+Claim: For any agent A ∈X, there exists another agent A′ ∈X such that fA′(B) = fB(A).
+i.e. A′ responds to B the way that B responds to A.
+Proof: The function B ↦fB(A) is a continuous function, since B ↦fB is continuous, and
+evaluation is continuous. Thus, there is a policy B ↦fB(A) in [0, 1]X. Since f is
+surjective, this policy must be the image under f of some agent A′, so fA′(B) = fB(A).
+Thus, for any ﬁxed agent A, we have some other agent A′ that responds to any B the
+way B responds to A. However, it would be nice if A′ = A, to create a FairBot that
+responds to any opponent the way that that opponent responds to it. Unfortunately, to
+construct such a FairBot, we need the extra assumption that f is ubiquitous.
+Claim: If f is ubiquitous, then exists a true fair bot in X: an agent FB ∈X, such that 
+fFB(A) = fA(FB) for all agents A ∈X.
+Proof: Given an agent B ∈X, there exists an policy gB ∈[0, 1]X such that 
+gB(A) = fA(B) for all A, since A ↦fA(B) is continuous. Further, the function B ↦gB is
+continuous, since the function A, B ↦fA(B) and the deﬁnition of the exponential
+topology. Since f is ubiquitous, there must be some FB ∈X such that fFB = gFB. But
+then, for all A, we have fFB(A) = gFB(A) = fA(FB).
+Note that we may not need the full power of ubiquitous here, but it is the simplest
+property I see that gets the result.
+Note that this FairBot is fair in a stronger sense than the FairBot of modal combat, in
+that it always has the same output as its opponent. This may make you suspicious,
+since the you can also construct an UnfairBot, UB such that fUB(A) = 1 −fA(UB) for all 
+A. This would have caused a problem in the modal combat framework, since you can
+put a FairBot and an UnfairBot together to form a paradox. However, we do not have
+this problem, since we deal with probabilities, and simply have 
+fUB(FB) = fFB(UB) = 1/2. Note that the exact phenomenon that allows this to possibly
+work is the ﬁxed point property of the interval [0, 1] which is the only reason that we
+cannot use diagonalization to show that no CLS exists.
+
+Finally, note that we already have a combat framework that has a true FairBot: the
+reﬂective oracle framework. In fact, the reﬂective oracle framework may have all the
+beneﬁts we would hope to get out of a UCLS. (other than the beneﬁt of simplicity of
+not having to deal with computability and hemicontinuity).
+This post was originally published on Oct 20th 2017, and has been brought forwarded
+as part of the AI Alignment Forum launch sequences.
+Tomorrow's AIAF sequences post will be 'Iterated Ampliﬁcation and Distillation' by
+Ajeya Cotra, in the sequence on iterated ampliﬁcation.
+
+Reﬂective oracles as a solution to the
+converse Lawvere problem
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+(This post was originally published on Nov 30th 2017, and is 1 of 4 posts brought
+forwarded today as part of the AI Alignment Forum launch sequence on ﬁxed points.)
+1 Introduction
+Before the work of Turing, one could justiﬁably be skeptical of the idea of a universal
+computable function. After all, there is no computable function f: N × N →N such that
+for all computable g: N →N there is some index ig such that f (ig, n) = g (n) for all n. If
+there were, we could pick g (n) = f (n, n) + 1, and then
+g (ig) = f (ig, ig) + 1 = g (ig) + 1,
+a contradiction. Of course, universal Turing machines don't run into this obstacle; as
+Gödel put it, "By a kind of miracle it is not necessary to distinguish orders, and the
+diagonal procedure does not lead outside the deﬁned notion." [1]
+The miracle of Turing machines is that there is a partial computable function 
+f: N × N →N ∪{⊥} such that for all partial computable g: N →N ∪{⊥} there is an index
+i such that f (i, n) = g (n) for all n. Here, we look at a diﬀerent "miracle", that of
+reﬂective oracles [2,3]. As we will see in Theorem 1, given a reﬂective oracle O, there
+is a (stochastic) O-computable function f: N × N →{0, 1} such that for any (stochastic) 
+O-computable function g: N →{0, 1}, there is some index i such that f (i, n) and g (n)
+have the same distribution for all n. This existence theorem seems to skirt even closer
+to the contradiction mentioned above.
+We use this idea to answer "in spirit" the converse Lawvere problem posed in [4].
+These methods also generalize to prove a similar analogue of the ubiquitous converse
+Lawvere problem from [5]. The original questions, stated in terms of topology, remain
+open, but I ﬁnd that the model proposed here, using computability, is equally
+satisfying from the point of view of studying reﬂective agents. Those references can
+be consulted for more motivation on these problems from the perspective of reﬂective
+agency.
+Section 3 proves the main lemma, and proves the converse Lawvere theorem for
+reﬂective oracles. In section 4, we use that to give a (circular) proof of Brouwer's ﬁxed
+
+point theorem, as mentioned in [4]. In section 5, we prove the ubiquitous converse
+Lawvere theorem for reﬂective oracles.
+2 Deﬁnitions
+For any measurable space X, the set of probability measures on X is denoted ΔX.
+A probabilistic oracle is a map N →[0, 1]. A probabilistic oracle machine is a
+probabilistic Turing machine that can query a probabilistic oracle O. On a given query 
+n ∈N, it gets the answer 1 with probability O (n) and the answer 0 otherwise. Diﬀerent
+queries are independent events, so this completely determines the behavior of such a
+machine.
+We denote by ϕ
+O
+i  the stochastic partial O-computable function N →Δ (N ∪{⊥}), where 
+⊥ represents nonhalting, computed by the probabilistic Turing machine with index i.
+The notation ϕ
+O
+i (n) ↓ indicates the event that ϕ
+O
+i  halts on input n, and ϕ
+O
+i (n) ↓= m is
+the event that ϕ
+O
+i (n) halts and outputs m. Finally, ϕ
+O
+i (n) ↑ is the event that ϕ
+O
+i  does
+not halt on input n.
+We use ⟨⋅⟩ to represent a computable coding function, in order to biject arbitrary
+countable sets to the naturals for the purpose of computability.
+A reﬂective oracle is a probabilistic oracle O such that for all i, n ∈N and p ∈[0, 1]Q,
+P (ϕ
+O
+i (n) ↓= 1) > p
+⟹
+O (⟨i, n, p⟩) = 1
+P (¬ϕ
+O
+i (n) ↓= 0) < p
+⟹
+O (⟨i, n, p⟩) = 0.
+For more on reﬂective oracles, see Fallenstein et al., 2015 [2].
+A function f: N →[0, 1] is O-computable if there is an index i such that for all n ∈N, we
+have
+P (ϕ
+O
+i (n) ↓∈{0, 1}) = 1
+
+and
+P (ϕ
+O
+i (n) ↓= 1) = f (n) .
+That is, ϕ
+O
+i  represents f by probabilistically outputting either 0 or 1.
+For any m ∈N, a function f: N →[0, 1]m is O-computable if each coordinate fj: N →[0, 1]
+for 1 ≤j ≤m is O-computable.
+A function f: N →[0, 1]N is O-computable if the corresponding function N →[0, 1] given
+by ⟨n, m⟩↦f (n) (m) is O-computable.
+For any point p ∈[0, 1], a probabilistic oracle O is compatible with p if for all r ∈[0, 1]Q
+, we have O (⟨r⟩) = 0 if p < r and O (⟨r⟩) = 1 if p > r. More generally, for any m ∈N and
+any p ∈[0, 1]m, a probabilistic oracle O is compatible with p if for all j such that 
+1 ≤j ≤m and all r ∈[0, 1]Q, we have O (⟨j, r⟩) = 0 if pj < r and O (⟨j, r⟩) = 1 if pj > r.
+A function f: [0, 1]m →[0, 1]m is O-computable if for each coordinate fj: [0, 1]m →[0, 1],
+there is an index i such that whenever P is compatible with p, we have
+P (ϕ
+O,P
+i
+(0) ↓∈{0, 1}) = 1
+and
+P (ϕ
+O,P
+i
+(0) ↓= 1) = fj (p) .
+A map f: N →[0, 1]N is O-computably ubiquitous if for every O-computable map 
+e: N →[0, 1]N, there is some n ∈N such that f (n) = e (n).
+3 Converse Lawvere property
+
+We ﬁrst need a lemma that tells us that we can replace certain partial O-computable
+functions with total ones when working relative to a reﬂective oracle. As discussed in
+the introduction, this contrasts strongly with the situation for computable functions. All
+of our theorems will make essential use of this lemma.
+Lemma 1 (totalizing): There is a computable map τ: N →N such that for all i, n ∈N
+and any reﬂective oracle O, we have
+P (ϕ
+O
+τ(i) (n) ↓∈{0, 1}) = 1
+and for b ∈{0, 1},
+P (ϕ
+O
+τ(i) (n) ↓= b) ≥P (ϕ
+O
+i (n) ↓= b) .
+Proof: We construct τ using a recursive procedure that ensures that P (ϕ
+O
+τ(i) (n) ↓= b)
+upper-bounds P (ϕ
+O
+i (n) ↓= b) using what may be thought of as repeated subdivision or
+binary search. This is essentially the same as the function flip in [3], but we handle
+computability issues diﬀerently. Let S ⊆[0, 1] × [0, 1] be the set of pairs of dyadic
+rationals (p, q) such that p < q. We recursively deﬁne a stochastic O-computable
+function t: N × N × S →Δ {0, 1}; the intent is to have P (t (i, n, p, q) = 1) equal
+if that quantity is in the interval [0, 1], and take the closest possible value, either 0 or 
+1, otherwise. Then, we will be able to deﬁne ϕ
+O
+τ(i) (n) to be t (i, n, 0, 1).
+Construct t so that a call t (i, n, p, q) ﬁrst queries O (⟨i, n, r⟩), where r =
+, and also
+ﬂips a fair coin C. Then, it either outputs 0, 1, or the result of a recursive call, as
+follows:
+P (ϕ
+O
+τ(i) (n) ↓= 1) −p
+q −p
+p+q
+2
+
+t (i, n, p, q) =
+⎧
+⎪ 
+⎪ 
+⎪
+⎨
+⎪ 
+⎪ 
+⎪
+⎩
+0
+if O (⟨i, n, r⟩) = 0 and C = 0
+t (i, n, p, r)
+if O (⟨i, n, r⟩) = 0 and C = 1
+1
+if O (⟨i, n, r⟩) = 1 and C = 0
+t (i, n, r, q)
+if O (⟨i, n, r⟩) = 1 and C = 1.
+We can now choose τ so that ϕ
+O
+τ(i) (n) = t (i, n, 0, 1).
+This algorithm upper bounds the probabilities P (ϕ
+O
+i (n) ↓= 0) and P (ϕ
+O
+i (n) ↓= 1) by
+binary search. Once the initial call t (i, n, 0, 1) has recursed to t (i, n, p, q), it has already
+halted outputting 1 with probability p, conﬁrming that this is an upper bound since it
+received answer 1 from a call to O (⟨i, n, p⟩). Similarly, it has output 0 with probability 
+1 −q, conﬁrming this bound since it received the answer 0 from a call to O (⟨i, n, q⟩).
+Further, since each call to t halts without recursing with probability , t halts almost
+surely. Thus, we get the totality property
+P (ϕ
+O
+τ(i) (n) ↓∈{0, 1}) = 1
+and the bounds
+P (ϕ
+O
+τ(i) (n) ↓= b) ≥P (ϕ
+O
+i (n) ↓= b)
+for b ∈{0, 1}. □
+Now we can prove our main theorem.
+Theorem 1 (converse Lawvere for reﬂective oracles): Let O be a reﬂective oracle.
+Then, there is an O-computable map f: N →[0, 1]N such that for all O-computable 
+g: N →[0, 1], there is some index i such that g = f (i).
+12
+
+Proof: Using τ from the totalizing lemma, let
+f (i) (n) = P (ϕ
+O
+τ(i) (n) ↓= 1) .
+Given any O-computable g: N →[0, 1], there is some i such that
+P (ϕ
+O
+i (n) ↓= 1) = g (n)
+P (ϕ
+O
+i (n) ↓= 0) = 1 −g (n) .
+Then,
+f (i) (n) = P (ϕ
+O
+τ(i) (n) ↓= 1) ≥P (ϕ
+O
+i (n) ↓= 1) = g (n)
+and similarly 1 −f (i) (n) ≥1 −g (n), so f (i) = g. □
+This theorem gives a computable analogue to the problem posed in [4]. The analogy
+would be strengthened if we worked in a cartesian closed category where the present
+notion of O-computability gave the morphisms, and where [0, 1]N is an exponential
+object. In addition, the totalizing lemma would have a nice analogue in this setting. I
+expect that all this can be done using something like an eﬀective topos [6], but I leave
+this for future work.
+4 Recovering Brouwer's ﬁxed point
+theorem
+As mentioned in [4], the intermediate value theorem would follow from the existence
+of a space with the converse Lawvere property, that is, a space X that surjects onto
+the mapping space [0, 1]X. Further, Brouwer's ﬁxed point theorem on the n-ball, Bn,
+would follow from the existence of a topological space X with a surjection X →(Bn)X.
+We can do something similar to conclude Brouwer's ﬁxed point theorem from the
+converse Lawvere theorem for reﬂective oracles. Of course, this is circular; Kakutani's
+ﬁxed point theorem, a generalization of Brouwer's ﬁxed point theorem, is used to
+prove the existence of reﬂective oracles. Still, it is interesting to see how this can be
+done.
+
+We start with two technical lemmas telling us some basic facts about reﬂective-oracle-
+computable functions [0, 1]m →[0, 1]m. Using these, it will be easy to derive Brouwer's
+ﬁxed point theorem.
+Lemma 2 (continuous implies relatively computable): Take m ∈N and let 
+h: [0, 1]m →[0, 1]m be continuous. Then, there is a (deterministic) oracle O such that h
+is O-computable.
+Proof: For each coordinate hj of h, each rectangle
+R = [ℓ1, u1] × ⋯× [ℓm, um] ⊆[0, 1]m
+with rational endpoints, and each pair of rationals ℓ0, u0 ∈[0, 1]Q with ℓ0 < u0, let 
+O (⟨j, ℓ0, u0, ... , ℓm, um⟩) be 1 if hj (R) ⊆[ℓ0, u0] and 0 otherwise. To see that h is O-
+computable, we compute any hj (p) for any j with 1 ≤j ≤m, and any p ∈[0, 1]m,
+making use of O and any oracle P compatible with p.
+We proceed by a search process similar to the argument in the totalizing lemma. Start
+with R0 = [0, 1]m, ℓ
+0
+0 = 0 and u
+0
+0 = 1. At each step s, perform an exhaustive search for
+a rectangle
+Rs+1 = [ℓ
+s+1
+1
+, u
+s+1
+1
+] × ⋯× [ℓ
+s+1
+m
+, u
+s+1
+m
+] ⊆Rs
+and points ℓ
+s+1
+0
+, u
+s+1
+0
+ such that a query to P (⟨k, ℓ
+s+1
+k
+⟩) returns 1 for all k, a query to any
+P (⟨k, u
+s+1
+k
+⟩) returns 0, a query to O (⟨j, ℓ
+s+1
+0
+, u
+s+1
+0
+, Rs+1⟩) returns 1, and where either 
+ℓ
+s+1
+0
+= ℓ
+s
+0 and u
+s+1
+0
+=
+ℓ
+s
+0 +
+u
+s
+0, or ℓ
+s+1
+0
+=
+ℓ
+s
+0 +
+u
+s
+0 and u
+s+1
+0
+= u
+s
+0. In the ﬁrst case,
+output 0 with probability  and continue with probability , and in the second case,
+output 1 with probability  and continue with probability .
+By construction, p ∈Rs and hj (Rs) ⊆[ℓ
+s
+0, u
+s
+0] at each stage s. Since hj is continuous,
+there is some neighbourhood of p on which its image is contained in either 
+13
+23
+23
+13
+13
+23
+13
+23
+
+[ℓ
+s
+0,
+ℓ
+s
+0 +
+u
+s
+0] or [ ℓ
+s
+0 +
+u
+s
+0, u
+s
+0]. There are two possibilities to consider. If p ∈int Rs,
+then there is some rectangle R contained in such a neighbourhood of p, and with 
+p ∈int R. This rectangle would be chosen if considered, so the algorithm will move
+beyond step s.
+The remaining possibility is that p is on the boundary of Rs; say, pk = ℓ
+s
+k. Since Rs was
+chosen previously though, we know that querying P (k, ℓ
+s+1
+k
+) has returned 1 at least
+once, so P (k, ℓ
+s+1
+k
+) ≠0. Thus, the algorithm will almost surely eventually accept Rs or
+another rectangle.
+Putting this together, this algorithm almost surely halts, outputting either 0 or 1. By
+stage s, it has halted outputting 1 with probability ℓ
+s
+0 and outputting 0 with probability 
+1 −u
+s
+0, so overall it outputs 1 with probability hj (p). Thus, h is O-computable. □
+Lemma 3 (composition): Let O be a reﬂective oracle and let g: N →[0, 1]m and 
+h: [0, 1]m →[0, 1]m be O-computable. Then, h ∘g: N →[0, 1]m is O-computable.
+Proof: For each j with 1 ≤j ≤m, take ij ∈N such that ϕ
+O
+ij  witnesses the computability
+of gj. Then, O (⟨ij, n, r⟩) = 0 if gj (n) < r and O (⟨ij, n, r⟩) = 1 if gj (n) > r, so O lets us
+simulate a probabilistic oracle compatible with g (n). Hence, by the O-computability of 
+h, for each k with 1 ≤k ≤m, we have a probabilistic O-machine that always halts,
+outputting either 0 or 1, and that on input n outputs 1 with probability hk ∘g (n). □
+Theorem 2 (Brouwer's ﬁxed point theorem): Take m ∈N and h: [0, 1]m →[0, 1]m.
+Then, h has a ﬁxed point.
+Proof: By Lemma 2, we have an oracle O such that h is O-computable. By relativizing
+the construction of a reﬂective oracle [2,3] to O, we get a reﬂective oracle ˜O above O.
+13
+23
+23
+13
+
+Notice that h is ˜O-computable. Letting f be the ˜O-computable function
+f (i) (n) = P (ϕ
+˜O
+τ(i) (n) ↓= 1)
+constructed in the converse Lawvere theorem for reﬂective oracles, deﬁne 
+fm: N →([0, 1]m)
+N by
+fm (⟨i1, ... , im⟩) (n) = (f (i1) (n) , ... , f (im) (n)) .
+The rest will now follow the proof of Lawvere's ﬁxed point theorem [7].
+Deﬁne g: N →[0, 1]m by g (n) = h (fm (n) (n)); this is ˜O-computable by Lemma 3. Now,
+by converse Lawvere theorem, for each coordinate 1 ≤j ≤m of g, there is some ij ∈N
+such that gj = f (ij). Letting i = ⟨i1, ... , im⟩, we have
+gj (i) = hj (fm (i) (i)) = hj (g (i)) ,
+so g (i) = h (g (i)), and so g (i) is a ﬁxed point of h. □
+5 Ubiquitous converse Lawvere
+property
+Theorem 3 (ubiquitous converse Lawvere): Let O be a reﬂective oracle. Then, there is
+an O-computable, O-computably ubiquitous map f: N →[0, 1]N.
+Proof: This follows by a combination of the recursion theorem and the totalizing
+lemma. We use the same map f from Theorem 1. Let e: N →[0, 1]N be any O-
+computable map. There is a computable map s: N →N such that for all i, n ∈N, we
+have
+P (ϕ
+O
+s(i) (n) ↓∈{0, 1}) = 1,
+and
+
+e (i) (n) = P (ϕ
+O
+s(i) (n) ↓= 1) .
+By the recursion theorem, there is some i such that ϕ
+O
+s(i) = ϕ
+O
+i . Then,
+e (i) (n) = P (ϕ
+O
+s(i) (n) ↓= 1) = P (ϕ
+O
+i (n) ↓= 1)
+= P (ϕ
+O
+τ(i) (n) ↓= 1) = f (i) (n) ,
+so e (i) = f (i). □
+References
+[1] Kurt Gödel. 1946. "Remarks before the Princeton bicentennial conference of
+problems in mathematics." Reprinted in: Martin Davis. 1965. "The Undecidable. Basic
+Papers on Undecidable Propositions, Unsolvable Problems, and Computable
+Functions." Raven Press.
+[2] Benja Fallenstein, Jessica Taylor, and Paul F. Christiano. 2015. "Reﬂective Oracles: A
+Foundation for Classical Game Theory." arXiv: 1508.04145.
+[3] Benya Fallenstein, Nate Soares, and Jessica Taylor. 2015. "Reﬂective variants of
+Solomonoﬀ induction and AIXI." In Artiﬁcial General Intelligence. Springer.
+[4] Scott Garrabrant. 2017. "Formal Open Problem in Decision Theory."
+https://agentfoundations.org/item?id=1356.
+[5] Scott Garrabrant. 2017. "The Ubiquitous Converse Lawvere Problem."
+https://agentfoundations.org/item?id=1372
+[6] Jaap van Oosten. 2008. "Realizability: an introduction to its categorical side."
+Studies in Logic and the Foundations of Mathematics, vol. 152. Elsevier.
+[7] F. William Lawvere. 1969. "Diagonal arguments and cartesian closed categories."
+In Category Theory, Homology Theory and their Applications, II (Battelle Institute
+Conference, Seattle, Wash., 1968, Vol. Two), pages 134-145. Springer.
+This post was originally published on Nov 30th 2017, and has been brought forwarded
+as part of the AI Alignment Forum launch sequences.
+Tomorrow's AIAF sequences post will be 'Iterated Ampliﬁcation and Distillation' by
+Ajeya Cotra, in the sequence on iterated ampliﬁcation.
+

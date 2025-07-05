@@ -1,0 +1,3096 @@
+
+2021 Less Wrong Darwin Game
+1. The 2021 Less Wrong Darwin Game
+2. 2021 Darwin Game - Contestants
+3. 2021 Darwin Game - Tundra
+4. 2021 Darwin Game - Desert
+5. 2021 Darwin Game - Ocean
+6. 2021 Darwin Game - Benthic
+7. 2021 Darwin Game - Human Garbage Dump
+8. 2021 Darwin Game - River
+9. 2021 Darwin Game - Everywhere Else
+
+The 2021 Less Wrong Darwin Game
+It's fall and that means it's time for another Less Wrong Darwin Game. This year, you'll
+be designing up to ten species that will compete for food including (sometimes) eating
+each other.
+Click here to participate [Entries are now closed.] You have one week from
+September 23 to design your species. Submit them by September 30th or earlier.
+Each player starts with a population of organisms. Each round each of your organisms
+will be randomly paired with another organism. At this point, one of two things will
+happen:
+If one organism can eat the other organism then it will do so.
+If nobody gets eaten then both organisms get an opportunity to forage for plants.
+After everyone has eaten, each organism will attempt to reproduce. The more an
+organism eats you eat the most descendents an organism can leave.
+Food
+Each round your organisms lose 20% of their energy to metabolism resulting (on
+average) in a 20% decrease in population. You must eat food to counteract
+metabolism. There are two sources of food: plants and other animals.
+Predation
+There are two phases to combat. In the ﬁrst phase organisms size each other up to
+ﬁgure out which is the predator and which is prey. There are two ways for an organism
+to become the predator.
+1. Venom. If one organism has venom but the other does not have antivenom then
+the organism with venom is the predator. (Antivenom is a prerequisite to venom.)
+2. Weapons. Weapons represent claws, teeth and tusks. If either organism's
+weapons value exceeds the prey's weapons + armor then the organism with the
+higher weapons value will become the predator.
+Venom takes priority over weapons. Once a predator-prey relationship is established (if
+a predator-prey relationship is established) the prey will get a chance to escape. If the
+prey's speed equals or exceeds the predator's then nobody gets eaten.
+Venom, weapons and antivenom all make your organism bigger, which slows down
+reproduction.
+Adaptation Size
+Notes
+Venom
+6
+Requires Antivenom
+Antivenom
+1
+Weapons×n n
+n ≥0
+
+Adaptation Size
+Notes
+Armor×n
+n ≥0
+Speed×n
+n
+n ≥0
+Omnivores priorize meat over plants, when they can get it even if foraging for plants
+would be more metabolically eﬃcient[1].
+Predation has an eﬃciency of 0.95[2]. That means 95% of the prey's energy can be
+used by the predator.
+Only organisms of diﬀerent species eat each other. Cannibalism is disabled.
+Foraging for Plants
+There are various kinds of plant food available. In order to eat each food you'll need the
+proper digestive system.
+Food Nutritional Value Size
+Leaves 7
+5
+Grass
+6
+3
+Seeds 5
+1
+Whether your organism can digest a particular plant food is a binary value. No
+organism is better at digesting leaves than any other organism.
+There is a tradeoﬀ. The ability to eat leaves/grass/seeds makes your organism bigger
+which slows down reproduction. Also, there is a ﬁnite supply of leaves/grass/seeds. The
+more other organisms are foraging from a plant source, the less advantageous it is for
+you to forage for it youself.
+Simple Ecosystems
+Consider an ecosystem with three kinds of plant food available: seeds, leaves and
+grass. 1,000 units of each plant food are produced per round.
+Example 1
+This all may sound a little confusing but it makes sense once we use some real
+exampless. Let's start with two species: housecats and mice.
+Species Weapons Speed Eats Seeds?
+Housecat 1
+2
+No
+Mouse
+0
+1
+Yes
+At ﬁrst, both populations grow. The mice reproduce faster than the cats. Then the cats
+catch up and eat all of the mice. Having exhausted their food supply, the cat
+population starves to extinction.
+3n
+4
+
+Example 2
+What happens if we add songbirds? Songbirds ﬂy. They are fast enough to evade cats.
+But speed costs energy which makes it more expensive for songbirds to breed than for
+mice to breed. Mice outcompete songbirds in a world without cats.
+Species Weapons Speed Eats Seeds?
+Mouse
+0
+1
+Yes
+Songbird 0
+3
+Yes
+We can establish a periodic equilibrium by reintroducing cats. If the mouse population
+rises too much the cat population rises to eat them, decreasing the mouse population.
+
+But there is a limit to how high the cat population can get because the cat population is
+matched randomly with other organisms and those other organism are often songbirds.
+The mouse population is kept in check by the cat population.
+The cat population is kept in check by the bird population.
+The bird population is kept in check by the mouse population.
+Species Weapons Speed Eats Seeds?
+Housecat 1
+2
+No
+Mouse
+0
+1
+Yes
+Songbird 0
+3
+Yes
+Example 3
+What happens if we add a falcon so fast it can catch both mice and songbirds? The
+falcons and housecats eat all of their prey. Our previous equilibrium has been broken.
+The ecosystem collapses. Everyone dies.
+Species Weapons Speed Eats Seeds?
+Falcon
+1
+20[3]
+No
+Housecat 1
+2
+No
+Mouse
+0
+1
+Yes
+Songbird 0
+3
+Yes
+
+To restabilize things we need more prey. Let's add koalas. Koalas eat leaves. I made
+them venomous to protect them from predators.
+Species Weapons Speed Eats Seeds? Eats leaves? Venom/Antivenom?
+Falcon
+1
+20
+No
+No
+No
+Housecat 1
+2
+No
+No
+No
+Mouse
+0
+1
+Yes
+No
+No
+Songbird 0
+3
+Yes
+No
+No
+Koala
+0
+0
+No
+Yes
+Venom
+The venomous koalas eat a food source (leaves) disconnected from the rest of the food
+chain which relies on seeds. Nothing preys on them because they are venomous and
+
+no other animals have antivenom. They koals are eﬀectively disconnected from the
+rest of the ecosystem. They just get in the way of predation by the falcons and the
+housecats which helps stabalize the seed-based food web.
+Example 4
+A world where nothing preys on nor competes with koalas is boring. Let's add owls.
+Owls really do prey on koalas.
+Species Weapons Speed Eats Seeds? Eats leaves? Venom/Antivenom?
+Falcon
+1
+20
+No
+No
+No
+Housecat 1
+2
+No
+No
+No
+Mouse
+0
+1
+Yes
+No
+No
+Songbird 0
+3
+Yes
+No
+No
+Koala
+0
+0
+No
+Yes
+Venom
+Owl
+1
+2
+No
+No
+Antivenom
+Introducing owls gets us exciting population spikes and crashes but it wipes out the
+mice and housecats.
+The problem is owls have too much of an advantage over housecats. Owls and
+housecats are almost identical. The only diﬀerence is antivenom, which is cheap.
+Koalas are a major food source because only owls prey on them. To give housecats a
+chance we need something else to prey on koalas.
+Species Weapons Speed Eats Seeds? Eats leaves? Venom/Antivenom?
+Falcon
+1
+20
+No
+No
+No
+Housecat 1
+2
+No
+No
+No
+Mouse
+0
+1
+Yes
+No
+No
+Songbird
+0
+3
+Yes
+No
+No
+
+Species Weapons Speed Eats Seeds? Eats leaves? Venom/Antivenom?
+Koala
+0
+0
+No
+Yes
+Venom
+Owl
+1
+2
+No
+No
+Antivenom
+Mongoose 1
+1
+No
+No
+Antivenom
+The mongeese do keep the owls in check. I'm starting to think housecats might be a
+lost cause. Whatever the case, we need a stabalizing animal which thrives when
+mongeese are present and declines when there are too many koalas. (This is just the
+songbirds we introduced in the beginning except for leaves/koalas/owls instead of
+seeds/mice/housecats.)
+Giraﬀes eat leaves just like koalas but they are nonvenomous. I gave giraﬀes armor
+instead of weapons because if they had weapons they might eat small animals instead
+of leaves.
+Species Weapons Armor Speed
+Eats
+Seeds?
+Eats
+leaves?
+Venom/Antivenom?
+Falcon
+1
+0
+20
+No
+No
+No
+Housecat 1
+0
+2
+No
+No
+No
+Mouse
+0
+0
+1
+Yes
+No
+No
+Songbird
+0
+0
+3
+Yes
+No
+No
+Koala
+0
+0
+0
+No
+Yes
+Venom
+Giraﬀe
+0
+2
+6
+No
+Yes
+No
+Owl
+1
+0
+2
+No
+No
+Antivenom
+Mongoose 1
+0
+1
+No
+No
+Antivenom
+
+Adding giraﬀes got us mice and housecats back but we lost koalas along with the owls
+and mongeese that prey on koalas.
+Example 5
+Our herbivores only eat seeds and leaves. All the grass is going to waste. Lets add
+some grass eaters to our menagerie.
+Species Weapons Armor Speed
+Eats
+Seeds?
+Eats
+leaves?
+Eats
+Grass? Venom/Antivenom?
+Rabbit
+0
+0
+0
+Yes
+Yes
+Yes
+No
+Panda
+0
+2
+0
+No
+Yes
+Yes
+No
+Snake
+0
+0
+1
+No
+No
+No
+Venom
+
+Out new ecosystem has no more diversity than the previous one. (Only six species
+survive to equilibrium.) But we have achieved something new. The new ecosystem
+sustains a food chain three trophic levels deep. Owls eat snakes eat pandas.
+Multi-Biome Ecosystems
+Let's compare two biomes.
+Name
+Seed Leaf Grass
+Grassland 100
+10
+200
+Rainforest 100
+200
+10
+
+Note that I set the overall plant production lower. This results in smaller populations
+which are more likely to be made extinct by random ﬂuctuations. In the grassland,
+everything dies but songbirds. Leaves and grass go uneaten. In the rainforest we get a
+3-species equilibrium of owls, pandas and mice.
+Example 1
+Suppose we give each animal a small chance (proportional to its speed) of wandering
+to a random biome. Our two biomes are now connected.
+
+This increases biodiversity in ecah particular ecosystem. However, it does not increase
+overall biodiversity.
+Example 2
+What if we add an additional biome?
+Name
+Seed Leaf Grass
+Grassland
+100
+10
+200
+Rainforest
+100
+200
+10
+Temperate Forest 200
+10
+100
+
+Housecats and falcons are back but we lost owls and snakes.
+Surviving the environment
+The world is a dangerous place. It's not just starvation and other animals that can kill
+you. You can only survive in the Ocean/Benthic if you breathe water. You can only
+
+survive on land if you breathe air. Both air and water breathers can survive on the
+Rivers and Coasts.
+You do not have to manually set whether your organism breathes air or water. This will
+be inferred from your spawning location. You cannot start in a river or on a coast.
+Temperature
+You need heat tolerance to survive in the desert. You need cold tolerance to survive in
+the tundra.
+Temperature Adaptation Size
+Heat Tolerance
+2[4]
+Cold Tolerance
+2[4:1]
+Heat and cold tolerance are not useful for aquatic organisms.
+The actual game settings
+The actual game is more complicated than my examples. There are more biomes and
+more plant foods available. I will not be entering my own animals into the game. Only
+player animals will be included.
+Food
+Nutritional Value Size
+Carrion
+10
+6
+Leaves
+7
+5
+Grass
+6
+3
+Seeds
+5
+1
+Detritus
+4
+3
+Coconuts 3
+4
+Algae
+2
+2
+Lichen
+1
+1[5]
+Biomes
+Name
+Carrion Leaves Grass Seeds Detritus Coconuts Algae Lichen
+Grassland
+0
+100
+1000
+2,000
+0
+0
+0
+50
+Rainforest
+0
+1000
+2,000 100
+0
+0
+0
+50
+Temperate Forest
+0
+2,000
+100
+1000
+0
+0
+0
+50
+Ocean
+10
+0
+0
+0
+10
+0
+10,000 0
+Benthic
+10
+0
+0
+0
+1000
+0
+0
+0
+Tundra
+1
+1
+1
+1
+1
+0
+0
+300
+Desert
+100
+0
+1
+1
+1
+0
+0
+0
+Shore
+0
+0
+0
+0
+20
+1000
+1000
+10
+River
+500
+500
+500
+500
+500
+500
+500
+500
+
+Name
+Carrion Leaves Grass Seeds Detritus Coconuts Algae Lichen
+Human Garbage
+Dump
+100
+100
+100
+100
+100
+100
+100
+100
+Edit: I recognize, after posting this, that "Grassland" produces less grass than the
+Rainforest. Too late now; players have already submitted organisms.
+Questions and Answers
+How do I win?
+Your species survives.
+Can I coordinate with other players?
+There is no rule against it.
+Can I betray the other players who think I'm
+coordinating with them?
+There is no rule against it.
+I'm worried my species will do poorly and I'll
+be publicly shamed.
+Use a pseudonym. I will only link to social media if you do well.
+How many species can I enter?
+Up to 10. I am relying on the honor system. Please do not abuse it.
+If multiple participants enter species with the
+same name, will you diﬀerentiate the names
+so that they can prey on each other?
+Yes.
+Can I use multiple entry slots to spawn the
+same species in multiple biomes?
+
+Sort of. I will diﬀerentiate the names. You will have two separate species with identical
+stats but diﬀerent starting conditions.
+Do I have to be a Less Wrong user to
+participate?
+You do not have to be aﬃliated with Less Wrong. Anyone is welcome to participate.
+Invite your friends to play!
+I found a bug in your code.
+Please post a comment or private message me.
+Edit: Multicore discovered some major bugs in the code I used for examples. The real
+game may be very diﬀerent.
+I like your work and would like to support you.
+You are under no obligation whatsoever to send donations. My primary objective is to
+make a fun, educational game for lots of people.
+That said, I do like money. You can Venmo me @Lsusr
+What can I win?
+Honor and glory. I will link to the winners' social media accounts. (Unless it is
+something I consider dangerous or object to on moral grounds.)
+Example source code
+You can try out diﬀerent strategies with the source code below. It is run with hy. You
+can install hy with pip $ pip3 install hy. You will need matplotlib too. Install it with $
+pip3 install matplotlib.
+Source code available on GitLab
+How do I participate?
+Design your species here. [Entries are now closed.] You have one week from
+September 23 to design your species. Submit them by September 30th or earlier.
+1. This seemingly-irrational behavior has precedent among human beings due to
+sexual competition. Jared Diamond writes about why in his book Why Is Sex Fun?:
+The Evolution of Human Sexuality. ↩ 
+2. Changed from 0.80. ↩ 
+
+3. In the real game, weapons, armor and speed will all be limited to 10. ↩ 
+4. Reduced from 5. ↩  ↩ 
+5. Changed from 3. ↩ 
+
+2021 Darwin Game - Contestants
+123 players submitted a total of 556 species. Most players submitted just 1 species.
+One player submitted 11. (I disqualiﬁed his[1] 11ᵗʰ submission.) 555 species qualiﬁed
+for entry. I expected more players would submit 10 species compared to 8 or 9 in order
+to max out their submissions but that didn't happen.
+The most popular name was Krill, which three separate people submitted. This does
+not count Yellow Krill, Green Krill, Red Krill, Nano-krill, Fornicacious Krill, Orange-Krill
+and Orange Krill.
+
+Other duplicate names included Armadillo, Bear, Desert Tortoise, Forest Tribble, Kraken,
+Trash Panda and Flesh-Eating Clam.
+A couple species were placed in the Tundra/Desert without the necessary temperature
+adaptations. I modiﬁed them so they wouldn't instantly die. Other people gave
+cold/heat adaptations to water-breathing species, which are useless. I left those
+unaltered.
+
+Speaking of useless adaptations, Weapons + Armor is only useful up to 10. If your
+Weapons + Armor exceeds 10 the extra armor is useless. 40 submissions (7%) had
+Weapons + Armor more than 10. I think the idea here was to create big exciting
+powerful monsters. This is the realm of Dragons, Forest Dragons, Basilisks, Sandworms,
+White-Whales, Tundrus Rex, Humans, All-eating Leviathans and the so-called "Ultimate
+Lifeform". I expect[2] none of them will survive to the end.
+I tried to render a food web but it didn't work because there were 54,867 connections. I
+let graphviz run for ten hours before putting it out of its misery.
+Stats
+One sixth of the entries were venomous. One third had antivenom.
+Unlike their number of entries, many players did choose to max out weapons, armor
+and speed.
+
+
+Spawning Locations
+
+It makes sense that the ocean is popular because of how much food it supports. I was
+surprised by how popular the human garbage dump was. The Desert and Tundra were
+the least popular, presumably due to the temperature hazards.
+Foraging
+
+The most common foraging adaptations were algae, seeds and carrion.
+Algae is on top because there is the most algae.
+Seeds were popular because they oﬀers lots of nutrition compared to the
+digestive adaptation.
+Carrion it is most nutritionally dense option.
+Forage or Hunt?
+Half of all organisms were pure foragers. Of the rest, the majority had a foraging
+adaptation. Only a tiny minority were specialized hunters.
+
+Social Media
+I promised link to the winners' social media accounts (if they want). Most went with
+Twitter. Some went with LinkedIn, Tumblr, personal websites and Less Wrong itself. Two
+picked Instagram.
+
+1. If you didn't submit "Algae Eater Eater" then this isn't you. ↩ 
+2. I'm writing these words before running the game. ↩ 
+
+2021 Darwin Game - Tundra
+Our Tundra is an inhospitable[1] environment. The only signiﬁcant food available to
+herbivores is Lichen, which has a tiny nutritional value of 1. The Tundra is cold too.
+Staying warm requires the cold tolerance adaptation, which costs +2 size.
+Carrion Leaves Grass Seeds Detritus Coconuts Algae Lichen
+1
+1
+1
+1
+1
+0
+0
+300
+An organism must expend 20% of its energy just to survive. A herbivore foraging for
+lichen cannot have a size greater than 5 or else it will expend more energy in
+metabolism than it is possible to acquire from eating Lichen.
+All organisms have base size 0.1. The cold adaptation (+2) plus the Lichen digestive
+tract (+1) costs a total of +3 size. A Tundra herbivore has a minimum size of 3.1. A
+herbivore with size 5.1 is untenable since it expends more energy (1.02) than is
+possible to obtain from Lichen (1.00).
+Players submitted 39 species native to the Tundra. Only 4 of them were viable
+herbivores: Micropas, Arctic Slug, Northern Nibbler and "lichen" (not to be confused
+with the foragable "Lichen"). (Multicore's Arctic Fox was a carnivore.)
+These species could support little in the way of weapons, armor and speed. They were
+defenseless. In the ﬁrst 8 turns, all four of our viable foragers are eaten to extinction.
+
+Goes Extinct in Generation
+Species
+Goes Extinct in Generation
+Species
+5
+Pristol
+7
+Micropas
+7
+Arctic Slug
+8
+Northern Nibbler
+8
+lichen
+After the viable herbivores were eliminated, total ecological collapse was inevitable.
+Goes Extinct in Generation
+Species
+9
+Yonge_Cold
+9
+Boreakeet
+9
+Beck's Penguin
+10
+SmolFire
+10
+Arctic Ambusher
+10
+Zlorg
+10
+Arctic Fox
+10
+Orange-Krill
+10
+abominable_snowman
+12
+Antasvara
+12
+Unfortunately Large Cockroach
+12
+cg-mouse
+13
+Porostozer Malutki
+13
+1994 Mazda RX7
+14
+Raburetta
+14
+Pittsburgh-Penguins
+15
+Louse-lion
+
+Goes Extinct in Generation
+Species
+15
+Wolverine
+16
+Jtp
+16
+Wolves
+17
+Seals
+19
+Direwolf
+24
+Tsc
+27
+Tundrus Rex
+29
+Frankenstein
+32
+Broken Fetters
+34
+Alaskans
+37
+Dragon
+37
+Porostozer Mamuci
+39
+Rocks
+41
+Duckofants
+43
+White-Whales
+50
+tp511
+52
+Frostwing Snipper
+The Frostwing Snipper
+
+An honorable mention goes to Nem's Frostwing Snipper, a Speed 10 species that could
+digest both Lichen and Seeds. The maximum speed made the Frostwing Snipper
+immune to predation which let it survive the initial carnage. The ability to digest seeds
+meant that the Frostwing Snipper did consume enough energy on average to more
+than replace itself.
+However, "on average" is not enough. The Tundra's carrying capacity of Frostwing
+Snippers was too small. Random ﬂuctuations eventually knocked the Frostwing Snipper
+into extinction.
+Winners
+None
+
+Eratta
+Simon notes that I used 50,000 instead of 1,000 for each species initial energy. Using
+the correct value of 1,000 doesn't really change anything except everyone dies faster
+and MatIsk's Porostozer Mamuci (which eats Carrion) takes the place of Frostwing
+Snipper.
+Porostozer Mamuci
+Venom?
+Yes
+Weapons
+1
+Armor
+10
+Speed
+10
+Forager
+Carrion, Lichen
+Temperature Adaptatations Heat, Cold
+1. The original Tundra was even more inhospitable than this. I made it easier thanks
+to early feedback from aphyer. ↩ 
+
+2021 Darwin Game - Desert
+Our Desert is an inhospitable environment. Carrion, while nutritious, is hard to digest
+and there's not a lot of it. Species must be adapted to the heat too.
+Carrion Leaves Grass Seeds Detritus Coconuts Algae Lichen
+100
+0
+1
+1
+1
+0
+0
+0
+The most dangerous part of the desert is the predators. Two people submitted
+sandworms.
+Name
+Venom Weapons Antivenom Armor Speed Creator
+Desert Carnivore
+10
+✓
+0
+10
+Antihaas
+dp511
+✓
+10
+✓
+0
+10
+horu
+Sand Drake
+6
+0
+10
+Yull-Rete
+Sandworm
+10
+7
+8
+Vanessa
+Shai-Hulud[1]
+10
+✓
+0
+7
+simon
+Only 36 organisms were submitted to the Desert. 23 of them could digest Carrion.
+Carrion is very nutritious so all 23 were viable foragers.
+Generations 1 to 10
+A few apex predators did well.
+
+Goes Extinct in Generation
+Species
+6
+Lesser Desert Rat
+7
+Cordova
+8
+Hyena
+8
+Desert-Ants
+8
+Desert-Foxes
+8
+Desert-Lizard
+9
+Yonge_Hot
+10
+Josep Raich
+Generations 11 to 50
+The apex predators did so well they wiped out all the foragers without maxed out speed
+or defense. Having extinguished the easy prey, the apex predators proceeded to starve.
+Goes Extinct in Generation
+Species
+11
+Desert-Coyotes
+11
+Cockatrice
+11
+cg-wildcat
+12
+Venomous Snark
+
+Goes Extinct in Generation
+Species
+12
+Desert-Snakes
+14
+Bitey-the-scary
+14
+Smok
+16
+Titus
+19
+Desertio
+20
+Qanon
+23
+Wurm
+26
+Sandworm
+33
+Shai-Hulud
+35
+lDha-C293
+38
+Sand Drake
+38
+slow vulture
+41
+Desert Carnivore
+45
+Chocolattos
+45
+Dongles
+46
+dp511
+Generations 51+
+Name
+Venom Weapons Antivenom Armor Speed
+Eats
+Carrion?
+Other
+Creator
+Desert
+Viper
+✓
+0
+✓
+0
+10
+✓
+aphyer
+
+Name
+Venom Weapons Antivenom Armor Speed
+Eats
+Carrion?
+Other
+Creator
+dsc511
+0
+✓
+10
+0
+✓
+Eats
+Leaves,
+Grass,
+Seeds,
+Detritus,
+Coconuts,
+Algae,
+Lichen
+horu
+Booyahs
+2
+0
+10
+✓
+CK
+Rock
+Beetle
+0
+✓
+10
+0
+✓
+Taleuntum
+Desert
+Tortoise1
+0
+✓
+10
+0
+✓
+Multicore
+Desert
+Tortoise2
+0
+✓
+10
+0
+✓
+Yull-Rete
+Armadillo
+v2
+0
+✓
+10
+0
+✓
+Henny
+Sol
+Invictus
+0
+✓
+10
+0
+✓
+simon
+Most of these speccies are identical. They're carrion foragers with maxed-out defense
+(including antivenom) and nothing else. Everyone who isn't a maximally-eﬃcient
+invincible forager dies by generation 61.
+Goes Extinct in Generation
+Species
+55
+dsc511
+60
+Booyahs
+61
+Desert Viper
+It's a random walk among equals from here.
+Winners
+Species
+Player
+Social Media
+Armadillo v2
+Henny
+None
+Desert Tortoise1 Multicore
+None
+
+Species
+Player
+Social Media
+Desert Tortoise2 Yull-Rete
+None
+Rock Beetle
+Taleuntum None
+Sol Invictus
+simon
+None
+Eratta
+Simon notes that I used the wrong starting energy value of 50,000 instead of 1,000.
+Basically the same thing happens (except faster) when I use the correct energy value.
+1. "Shai-Hulud" is what the Fremen call sandworms. ↩ 
+
+2021 Darwin Game - Ocean
+The Ocean has lots of algae, a little carrion and a little detritus. It was the most popular
+biome, with 131 native species.
+Name Carrion Leaves Grass Seeds Detritus Coconuts Algae Lichen
+Ocean 10
+0
+0
+0
+10
+0
+10,000 0
+To thrive in this game as a forager you must survive the initial predators. One way to do
+this is to breed faster than they can eat you. Another way is to use armor or another
+defense.
+Random guy in NY took a third route. He created the First Round Predator Distractor, a
+cheap species with almost zero nutrition and exactly zero chance of survival that kept
+the predators in check for a single round.
+
+Goes Extinct in Generation
+Species
+1
+First Round Predator Distractor
+Now that Random guy in NY's silliness is out of the way let's get on to the real show.
+Generations 1-50
+At ﬁrst the defenseless foragers thrive. Increasingly large carnivores's populations grow
+and crash.
+Name
+Venom +
+Antivenom? Attack Armor Speed
+Forager?
+Creator
+Phytoplankton
+Neither
+0
+0
+0
+Algae
+aphyer
+Algae Tribble
+Neither
+0
+0
+0
+Algae
+simon
+CookieMaximizer Neither
+1
+0
+1
+Saran
+gkdemaree-9-
+eater-of-drifting-
+forager
+Neither
+1
+0
+1
+Grant
+Demaree
+Pike
+Neither
+2
+0
+3
+Yair
+Herring
+Neither
+2
+0
+2
+Measure
+Bhuphin
+Neither
+0
+2
+0
+Algae
+phenx
+Snail-Eating
+Snail
+Antivenom
+only
+5
+0
+2
+Carrion;Seeds;Detritus Taleuntum
+Jilli
+Neither
+3
+0
+1
+Algae
+Milli
+Right whale
+Neither
+5
+0
+5
+EricF
+gkdemaree-10-
+small-shark
+Neither
+6
+0
+6
+Grant
+Demaree
+gkdemaree-1-
+fast-shark
+Antivenom
+only
+10
+0
+10
+Grant
+Demaree
+
+Name
+Venom +
+Antivenom? Attack Armor Speed
+Forager?
+Creator
+gkdemaree-6-
+large-omnivore-
+ﬁsh
+Antivenom
+only
+7
+0
+7
+Algae
+Grant
+Demaree
+Goes Extinct in Generation
+Species
+7
+Cheerless Tidehunters
+12
+Krabs
+12
+Qoxeadian
+13
+Bloade
+13
+Squidheads
+14
+Sleeping Sealions
+16
+Sanguine Scavenger
+17
+Terror Whale
+17
+Sea Snake
+17
+Whale
+17
+Algae Sprinter
+17
+FOERDI 1,0,10,0,CDA
+18
+Blue whale
+18
+Chybcik
+18
+op511
+18
+Crab
+19
+Kraken1
+19
+The Aparatus
+19
+ocean vulture
+20
+magikarp
+20
+sea tortoise
+
+Goes Extinct in Generation
+Species
+20
+1-4-1 carrion
+21
+osc511
+22
+Manta Ray
+22
+Grerft
+24
+Plankton2
+24
+Poisonous Sponge
+24
+cg-ﬁsh
+25
+Speedy Algivore
+26
+cg-whale
+28
+RiverShark
+28
+Yellow Krill
+28
+0-0-0 algae-seed
+29
+Armored Algivore
+30
+Salt Water Crocodiles
+30
+speedFish
+30
+FOERDI 1,1,0,1,A
+31
+ploplo
+31
+Shellder
+32
+gkdemaree-9-eater-of-drifting-forager
+33
+CookiePaladin
+35
+CookieMaximizer
+36
+VenomousRiverShark
+37
+Little ﬁsh
+37
+Coconutwhale
+37
+CookieAshimo
+38
+AlgaeProbably
+38
+Kun
+38
+gkdemaree-3-defensive-venum-forager
+38
+gkdemaree-4-tiny-slow-ﬁsh
+38
+Leuphonim
+38
+Chasnee
+39
+Phytoplankton
+39
+Algae Eater
+39
+Shrimp
+39
+Green Krill
+39
+Angy Shrimp
+39
+Meta-Algae
+39
+Greenglow Bindylow
+39
+Smallums
+39
+Zooplankton
+39
+Anchovy
+39
+Guppy
+
+Goes Extinct in Generation
+Species
+39
+0-0-0 algae
+39
+Algae Tribble
+40
+Plankton1
+40
+Microblu
+40
+Orange Krill
+40
+Krill3
+40
+Yonge_Ocean
+40
+CookieRunner
+40
+Blue Tang
+40
+FOERDI 0,0,0,0,A
+41
+Pike
+41
+Krill2
+41
+Fornicacious Krill
+41
+Red Krill
+41
+Scumsipper
+41
+Herring
+41
+SpeedyFeedy
+41
+OceanEaty
+41
+Beauﬁsh
+41
+Khisesant
+41
+Senuboon
+41
+Bhuphin
+42
+River Llama
+42
+gkdemaree-5-small-omnivore-ﬁsh
+42
+Snail-tooth Grabble
+42
+CookieWhite
+42
+CookieEater
+42
+CookieSzybcik
+42
+ocean omnivore
+42
+cg-ﬂeshﬁsh
+42
+Jilli
+42
+Sea snek run
+42
+FOERDI 0,3,0,3,A
+43
+RiverSharkFood
+43
+Sapphire Jelly
+43
+fooooley
+43
+defenseFish
+43
+Rosemary
+43
+Bissurus
+44
+Right whale
+44
+CookieShroom
+44
+Armor Fish
+
+Goes Extinct in Generation
+Species
+44
+Groundlings
+45
+Slorp
+45
+gkdemaree-10-small-shark
+45
+Emerald Jelly
+45
+Patricians
+46
+Plage
+46
+gkdemaree-8-slow-armored-forager
+46
+Nano-krill
+47
+Electric eel
+47
+CookieDevourer
+47
+CookieMedoKinematic
+47
+Buneh Rizak-e Chenar
+48
+Megaladon
+48
+gkdemaree-6-large-omnivore-ﬁsh
+48
+Twinkle Star
+49
+algae_eater
+49
+Lilli
+Generations 51-100
+By generation 51, only 8 species remain.
+Name
+Venom +
+Antivenom?
+Attack Armor Speed
+Forager?
+Creator
+Killer whale
+Neither
+9
+1
+10
+Yair
+gkdemaree-1-fast-
+shark
+Antivenom only
+10
+0
+10
+Grant
+Demaree
+gkdemaree-2-fast-
+ocean-venum
+Venom +
+Antivenom
+0
+0
+10
+Algae
+Grant
+Demaree
+gkdemaree-7-fast-
+forager-ﬁsh
+Neither
+0
+0
+10
+Algae
+Grant
+Demaree
+Apex Predator
+Antivenom only
+10
+0
+10
+JSH
+Killerspeed
+Antivenom only
+10
+0
+7
+Carrion
+VJ
+Flesh-Eating Clam2
+Antivenom only
+0
+10
+0
+Carrion
+Yull-Rete
+Super-Armor Fish
+Antivenom only
+0
+10
+0
+Carrion;Algae
+Random
+guy in
+NY
+
+By Round 100, all that is left are the invincible foragers with maxed-out defense.
+However, this time there are two niches: one Flesh-Eating Clam 2, which specializes in
+carrion, and another for Super-Armor Fish, which eats algae too.
+Generations 101-9000
+Alas, the Super-Armor Fish's ability to digest Algae lets it eventually outcompete the
+Flesh-Eating Clam2. A Soonbegon wanders in from time to time from to eat the
+accumulated Detritus.
+Winners
+Technically the Soonbegon doesn't survive forever (it goes extinct sometime before
+generation 10,000) but it survived long enough and interestingly enough I'm going to
+bend the rules and give it credit anyway.
+Name
+Venom +
+Antivenom?
+Attack Armor Speed
+Forager?
+Creator
+Social
+Media
+
+Name
+Venom +
+Antivenom?
+Attack Armor Speed
+Forager?
+Creator
+Social
+Media
+Super-
+Armor Fish
+Antivenom only
+0
+10
+0
+Carrion;Algae
+Random
+guy in
+NY
+Facebook
+Soonbegon
+Venom +
+Antivenom
+0
+0
+10
+Detritus
+Randall
+LinkedIn
+
+2021 Darwin Game - Benthic
+Welcome to the depths of the sea, far beyond the reach of sunlight. Here ye shall feast
+upon the dead.
+Name Carrion Leaves Grass Seeds Detritus Coconuts Algae Lichen
+Benthic 10
+0
+0
+0
+1000
+0
+0
+0
+72 species were submitted to the Benthic.
+Generations 0-25
+
+We start with a population crash, as usual. After that, the populations almost look like
+they stabilize. Less than half of our species have gone extinct.
+Goes Extinct in Generation
+Species
+6
+Salpophore
+6
+Tasty
+7
+Marine Snow Worm
+7
+benthic bottom feeder
+8
+Scavenger
+9
+Isopoid
+9
+Detritus Eater Eater
+10
+Scavenger Shrimp
+10
+Rubble on Double
+10
+Sea Zombie
+11
+Fangliphore
+11
+Grumpy Jellyﬁsh
+11
+Doomed
+11
+Happy Hunter
+11
+A new hope
+12
+Krill1
+12
+Sp0r3
+12
+Cnidophore
+12
+Cephalophore
+12
+Not Picky
+13
+Detritus Eater Eater Eater
+14
+Sea Snail
+14
+Hermit Crab
+
+Goes Extinct in Generation
+Species
+14
+Space Horse
+14
+BeauOmni3
+14
+aBa-CG751
+15
+Flounder
+16
+Microbet
+16
+Slowmo
+17
+aBa-D273
+18
+Hund
+18
+Glyptoderm
+18
+Squid Kid
+19
+Anglerﬁsh
+19
+Toxic Squid
+20
+Torpedo Jelly
+23
+Willi
+24
+cg-riverﬁsh
+Here are our populations at generation 25.
+Population
+Species
+170
+Barnacle
+158
+Deepwater Devourer
+124
+The Inﬁnite Depths
+114
+FOERDI 1,6,4,3,D
+98
+Flutz
+88
+DetriusSpeedTank
+66
+Spanish Beard
+55
+BeauOmni1
+50
+Silli
+46
+FOERDI 1,0,10,1,D
+45
+aBa-D262
+43
+Tilli
+40
+FOERDI 0,0,0,10,D
+39
+FOERDI 1,3,7,3,D
+35
+Pilli
+34
+Blood Shark
+33
+FOERDI 1,10,0,1,D
+32
+Xilli
+30
+Chilli
+29
+omastar
+27
+Elephantﬁsh
+27
+Abyssal eel
+24
+Billi
+19
+Kraken2
+
+Population
+Species
+17
+Space Fiddler
+15
+Giant Squid
+10
+The Tideless Depths
+5
+FOERDI 1,9,1,1,D
+5
+Soonbegon
+2
+gonnabiteit
+2
+Deap Sea Tortoise
+2
+Flesh-Eating Clam1
+1
+Killi
+1
+Tachyphore
+As you might guess, the Barnicle is an invincible Detritus eater and the Deepwater
+Devourer is a carnivore. However, the Deepwater Devourer is not an apex predator. It
+has only 3 Attack and 6 speed. (It also has Antivenom and the ability to consume
+Detritus.)
+Generations 25-100
+Barnicles dominate.
+Goes Extinct in Generation
+Species
+6
+Salpophore
+6
+Tasty
+7
+Marine Snow Worm
+7
+benthic bottom feeder
+8
+Scavenger
+
+Goes Extinct in Generation
+Species
+9
+Isopoid
+9
+Detritus Eater Eater
+10
+Scavenger Shrimp
+10
+Rubble on Double
+10
+Sea Zombie
+11
+Fangliphore
+11
+Grumpy Jellyﬁsh
+11
+Doomed
+11
+Happy Hunter
+11
+A new hope
+12
+Krill1
+12
+Sp0r3
+12
+Cnidophore
+12
+Cephalophore
+12
+Not Picky
+13
+Detritus Eater Eater Eater
+14
+Sea Snail
+14
+Hermit Crab
+14
+Space Horse
+14
+BeauOmni3
+14
+aBa-CG751
+15
+Flounder
+16
+Microbet
+16
+Slowmo
+17
+aBa-D273
+18
+Hund
+18
+Glyptoderm
+18
+Squid Kid
+19
+Anglerﬁsh
+19
+Toxic Squid
+20
+Torpedo Jelly
+23
+Willi
+24
+cg-riverﬁsh
+28
+gonnabiteit
+29
+Killi
+33
+Tachyphore
+35
+Giant Squid
+40
+Space Fiddler
+40
+Xilli
+40
+Pilli
+40
+FOERDI 1,9,1,1,D
+43
+Flesh-Eating Clam1
+
+Goes Extinct in Generation
+Species
+44
+Soonbegon
+47
+Deap Sea Tortoise
+63
+omastar
+63
+aBa-D262
+65
+FOERDI 1,3,7,3,D
+66
+Kraken2
+68
+BeauOmni1
+73
+Elephantﬁsh
+75
+Billi
+78
+Flutz
+82
+FOERDI 1,6,4,3,D
+83
+Blood Shark
+83
+Silli
+89
+The Tideless Depths
+Generations 100-1000
+Most of our species die out leaving only Barnicles, Spanish Beards and Tillis.
+You can't see it in the above graph but a few Soonbegons trickle in to compete for
+Detritus.
+
+The Barnicle and Spanish Beard are identicle invincible detritivores. The Tilli occupies a
+slightly diﬀerent niche by foraging for Carrion too.
+Goes Extinct in Generation
+Species
+125
+FOERDI 1,10,0,1,D
+152
+DetriusSpeedTank
+170
+FOERDI 0,0,0,10,D
+183
+Abyssal eel
+203
+FOERDI 1,0,10,1,D
+230
+The Inﬁnite Depths
+232
+Deepwater Devourer
+257
+Chilli
+Winners
+Name
+Venom?
+Attack Armor Speed
+Forage?
+Creator
+Social
+Media
+Barnacle
+Antivenom
+only
+0
+10
+0
+Detritus
+Guy
+Srinivasan
+Spanish
+Beard
+Antivenom
+only
+0
+10
+0
+Detritus
+VJ
+None
+Tilli
+Antivenom
+only
+0
+10
+0
+Carrion;Detritus Milli
+None
+Soonbegon Venom +
+Antivenom
+0
+0
+10
+Detritus
+Martin
+Randall
+LinkedIn
+
+2021 Darwin Game - Human Garbage
+Dump
+The human garbage dump is a place you can ﬁnd anything. It was also (to me)
+surprisingly popular with 90 species submitted.
+Name
+Carrion Leaves Grass Seeds Detritus Coconuts Algae Lichen
+Human Garbage
+Dump
+100
+100
+100
+100
+100
+100
+100
+100
+In each of our previous biomes, there was one primary source of forage. This is our ﬁrst
+biome with many diﬀerent viable options to forage. However, individually, none of
+them are very large. Even if there's no predators, the diverse primary production
+should ensure a little more biodiversity among foragers.
+Generations 0-1
+We start with Anti Predator Flak. It's just like just like the Ocean's First Round Predator
+Distractor except it was created by Multicore.
+
+Goes Extinct in Generation
+Species
+1
+Anti Predator Flak
+Generations 1-10
+Most of the initial populations crash, as usual.
+The Seed Beetle is exactly what it sounds like: a tiny organism with the ability to digest
+seeds and nothing else.
+Goes Extinct in Generation
+Species
+
+Goes Extinct in Generation
+Species
+6
+Goo
+6
+Beauconut
+8
+Gelatinous Cube
+8
+Ivem
+10
+Chittering Harvester
+10
+Boot Nipper
+10
+Dump Leaf Blight
+Generations 10-100
+The Seed Beetle Population explodes. I think what's going on is something Multicore
+pointed out at the game launch. The Seed Beetle is so small that it provides
+inadequate nutrition to large carnivores. At ﬁrst, predators eat the Seed Beetle, then
+the carnivores starve. The Seed Beetle is thus left without predators.
+The Mutant Two-Headed Speed Snail is a Grass forager with Speed 2. The Beauprey
+forages for Seeds and Lichen and has Speed 1.
+Goes Extinct in Generation
+Species
+11
+Trash Lobster
+11
+Carrion Condor
+11
+Roaches
+11
+Trash Panda2
+11
+Muk1
+12
+Small CocoCrab
+12
+The Fart Brigade
+12
+Thread-Nibbler
+12
+Dump Aphid
+
+Goes Extinct in Generation
+Species
+12
+Slime Mold
+12
+mediocre 2-2-s2
+12
+Muk2
+13
+Olchi
+13
+TrashMonster3-2
+14
+Sentient Bio Reactor
+14
+BottomFeeder
+14
+SpeedDemon
+14
+mediocre 2-2-g
+14
+TrashMonster2-2
+15
+TrashMonster3-4
+15
+TrashMonster4-3
+16
+Big CocoCrab
+16
+Unpalatable Coconut Crab
+16
+TrashMonster4-2
+17
+Rabbit
+17
+Lazy Stationary Glutton
+17
+sc511
+17
+trashSeeds
+18
+Grease Monkey
+19
+Garbage Dump Shai-Hulud
+19
+Trolley
+20
+Coconut Crabs (tiny)
+20
+TrashMonster3-3
+21
+Robot
+21
+Rat
+21
+CP445957
+22
+mediocre 2-2-s1
+23
+Frogger
+23
+Coconut Cruncher
+23
+Yonge_Dump
+23
+TrashMonster4-4
+24
+All-eating Leviathan
+24
+Inquisition
+25
+Bleh
+25
+Robber Crab
+27
+Hyper ﬂy
+28
+Coconut crab
+28
+Slow Moving Nuclear Waste
+29
+Garbage Disposal
+32
+Blitz Leech
+32
+2-8-0 A algae-carrion-coconut-detritus-lichen
+
+Goes Extinct in Generation
+Species
+32
+Jibbers Crabst
+33
+Snail-Eating Snail
+34
+Micro Swamp Dragon
+37
+Mecha giraﬀe
+37
+Twangoola
+38
+25kg Racing Snake
+38
+Redneck
+40
+weaponized human
+44
+Garbovorous Mirages
+45
+Dirge Bat
+47
+AI Lawnmower
+48
+Trash Locust+
+50
+gumbler
+50
+Cubic Carrion Crawlers
+56
+Trash Dino
+56
+CarrionSpeedTank
+75
+COCONUT511
+89
+Lary
+89
+Gigantic Cockroach
+99
+Roomba
+Generations 100-200
+Species die out more slowly but there are no dramatic shifts in population.
+Goes Extinct in Generation
+Species
+
+Goes Extinct in Generation
+Species
+105
+hoover
+105
+Living Garbage Can
+107
+Ironshell Crab
+109
+Zigzagoon
+157
+Adventurous Giraﬀe
+Generations 200-500
+Nothing to see here.
+Goes Extinct in Generation
+Species
+330
+Timblewinks
+Generations 500-1000
+Nothing to...wait what?
+
+Let's take a closer look at what's going on.
+There are nine species of consequence.
+Name
+Venom?
+Weapons Armor Speed
+Forage?
+Creator
+Seed Beetle
+Neither
+0
+0
+0
+Seeds
+DaemonicSigil
+Mutant Two-
+Headed Speed
+Snail
+Neither
+0
+0
+2
+Grass
+DaemonicSigil
+Nuclear Waste
+Antivenom
+only
+0
+10
+0
+Carrion
+Henny
+Brown Bear
+Neither
+3
+0
+6
+elspood
+
+Name
+Venom?
+Weapons Armor Speed
+Forage?
+Creator
+Beauprey
+Neither
+0
+0
+1
+Seeds;Lichen Luke
+Trash Slime
+Antivenom
+only
+0
+10
+0
+Detritus
+Yull-Rete
+Forest Finch
+Neither
+0
+0
+3
+Leaves
+MA
+Snark
+Neither
+0
+0
+10
+Leaves
+Vanessa
+Hopsplitter
+Neither
+0
+0
+10
+Grass;Seeds Nem
+We have four invincible foragers: Nuclear Waste consumes Carrion. Trash Slime
+consumes Detritus. Snarks consume Leaves. Hopsplitters consume Grass and Seeds.
+The Forest Finch competes for leaves with the Snark.
+The Hopsplitters compete for seeds with the Seed Beetles and the Beaupreys. The
+Seed Beetle is a tiny organism optimized to consume seeds. The Beauprey is less
+eﬃceint at eating seeds than the Seed Beetle but makes up for it by also being able to
+digest Lichen.
+The Mutant Two-Headed Speed Snail eats grass, where it competes with the
+Hopsplitter.
+The Brown Bear is a pure predator. It cannot eat the invincible foragers but it can eat
+the Seed Beetles, Snails, Hopsplitters, Forest Finghes and Forest Finches.
+Putting this all together, we have two kinds of foragers: small foragers that can be
+eaten by bears and invincible foragers those that cannot. If the bear population
+increases the small forager population decreases which increases the invincible forager
+population which decreases the bear population. This cycle works in reverse too. We
+have a stable ecosystem.
+But if it's stable then what happened around generation 690?
+The Seed Beetle population decreased because the Beauprey population increased.
+The Beauprey Population increased because there was lots of Lichen available. The
+Beauprey is the only species which can eat Lichen. Around generations 550 to 650
+there were very few Beaupreys. The Lichen accumulated. The Beauprey's growth
+around population 680 ate that accumulated Lichen. After the Lichen was consumed,
+the Beauprey population decreased to something stable.
+Generations 1000-9000
+The dynamic equilibrium is maintained until generation 8101 when the Beaupreys
+suddenly go extinct.
+
+Goes Extinct in Generation Species
+8101
+Beauprey
+Let's zoom in.
+What happened is the Brown Bear population randomly rose for long enough to
+extinguish the Beaupreys, which were already in a precarious position due to
+competition from the Seed Beetles..
+But that's not all. I just counted the common species. There are a few rare species
+hiding on the bottom edge of our graph, like Snarks. The Snark is a 10-speed Leaf eater
+by Vanessa. The Beauprey, having Speed 1, comes back from time to time too.
+
+Winners
+Species
+Creator
+Social Media
+Seed Beetle
+DaemonicSigil Twitter
+Mutant Two-Headed Snail DaemonicSigil Twitter
+Nuclear Waste
+Henny
+None
+Forest Finch
+MA
+None
+Brown Bear
+elspood
+None
+Trash Slim
+Yull-Rete
+None
+Snark
+Vanessa
+None
+
+2021 Darwin Game - River
+The River contains lots of every foragable food. The River is like the Human Garbage Dump except:
+1. It has 5x as many resources.
+2. Both air-breathing and water-breathing species can survive in the River.
+3. Organisms may not start in the River. They must wander in.
+Name Carrion Leaves Grass Seeds Detritus Coconuts Algae Lichen
+River
+500
+500
+500
+500
+500
+500
+500
+500
+Generation 0
+At ﬁrst, there are no animals and the foragables accumulate.
+Generations 1-100
+
+Species
+Original
+Biome
+Venom?
+Weapons Armor Speed
+Forage?
+Creator
+Leafy Luncheoner
+Temperate
+Forest
+Neither
+0
+0
+1
+Leaves
+Sean Hyer
+Mooshroom
+Grassland
+Neither
+0
+0
+5
+Grass;Seeds Vanessa
+slow vulture
+Desert
+Antivenom
+only
+0
+10
+10
+Carrion
+eat (Allows
+survival in the
+Desert),Corm
+mediocre 1-2-s
+Grassland
+Neither
+1
+0
+2
+Seeds
+Corm
+Very Lesser Forest
+Dragon
+Rainforest
+Neither
+2
+0
+2
+Persephone 0461
+The same pattern repeats for each foragable. First the foragable accomulates. Then a species which
+can consume the foragable appears. Its population explodes until it has eaten the accumulated
+foragable. Finally, its population reverts to carrying capacity.
+Persephone 0461's Very Lesser Forest Dragon wandered in. It thrived until another predator appeared
+which hunted it to extinction.
+Generations 100-9000
+Species appear. Species Disappear. Life is always in ﬂux.
+This is where all the Ocean's Soonbegons were coming from. Until they didn't anymore.
+
+Winners
+Name
+Native
+Biome
+Venom?
+Attack Armor Speed
+Forage?
+Temperature
+Adaptation? Creator Social
+Media
+Booyahs
+Desert
+Neither
+2
+0
+10
+Carrion
+Heat (Allows
+survival in the
+Desert)
+CK
+None
+Snark
+Temperate
+Forest
+Neither
+0
+0
+10
+Leaves
+Vanessa
+None
+Venomoth Rainforest Venom +
+Antivenom 0
+0
+3
+Grass
+aphyer
+None
+Locust
+Eater
+Eater
+Temperate
+Forest
+Neither
+2
+0
+2
+Seeds
+Multicore None
+Hopsplitter Grassland Neither
+0
+0
+10
+Grass;Seeds
+Nem
+None
+
+2021 Darwin Game - Everywhere Else
+Shore
+The Shore is an inhospitable wasteland. Algae is available, but it's not very nitrutious. Coconuts oﬀer an even
+worse calories-to-digestion ratio.
+Name Carrion Leaves Grass Seeds Detritus Coconuts Algae Lichen
+Shore 0
+0
+0
+0
+20
+1000
+1000
+10
+No coconut eaters got established in the Human Garbage Dump, which means no coconut eaters got
+established in the River or Shore instead. The only available food is algae. The Shore is basically a small bit of
+Ocean biome with ⅒ of the algae. The algae-eating winner of our Ocean competition has zero speed so it
+cannot migrate to the Shore.
+To top all of it oﬀ, predators migrate in from both sea and land.
+
+Soonbegons migrate from time to time to eat the Detritus. Otherwise, the Shore is mostly a graveyard.
+Winners?
+Soonbegons (kind of) by Martin Randall.
+Grassland
+The grassland has lots of grass and even more seeds.
+Name
+Carrion Leaves Grass Seeds Detritus Coconuts Algae Lichen
+Grassland 0
+100
+1000
+2,000
+0
+0
+0
+50
+The Grassland took 500 turns to establish an equilibrium.
+Generations 1-500
+
+Goes Extinct in Generation
+Species
+11
+Meercat colony
+14
+Flock of birbs
+15
+Bool
+16
+Big Oof
+17
+Empowered Turtle
+17
+glpp511
+18
+cg-bird
+19
+Nyarlathotep
+20
+Human
+21
+Tiny Snek
+21
+grass_mouse
+22
+Sleepypotat
+22
+Frontier-W8
+23
+Armored Nutcracker
+23
+Toxikeet
+23
+lGha-S541
+24
+Cowlagor
+27
+Karthosorox
+30
+Piranhakeet
+30
+cg-fastbird
+31
+Wampirek
+32
+Yonge_Snake
+34
+Sheep
+37
+Jackrabbit
+39
+Grassland Tribble
+39
+Grassland Aphid
+40
+basic seed fodder
+40
+Galumphers
+40
+lGca-AS154
+41
+GrassSeeater
+41
+Small Moth
+41
+SpeedyLichen
+41
+BeaupreyButGrassland
+41
+Tribble
+42
+DeﬁnitelyJustARock
+44
+Weedle
+45
+Bob
+45
+SeedyEaty
+45
+Locust-Seeds
+47
+Tribble Hunter Hunter
+49
+Goat
+51
+seed fodder
+52
+Seed Eater Eater Eater
+53
+Frontier-W2
+56
+Trash Panda1
+56
+mediocre 1-2-s
+59
+Common Rat
+61
+Omnivorous Tribble Hunter
+62
+Frontier-W5
+63
+Siolid
+65
+Cannibal Locust
+68
+Tribble Hunter Hunter Hunter Hunter
+73
+Ziarnojad Malutki
+
+Goes Extinct in Generation
+Species
+74
+Horned Owl
+78
+Yonge_Omnivore
+83
+Medium Seedrat
+86
+Maverick Goose
+89
+Squish
+187
+Mooshroom
+294
+Killer Bunny
+345
+Untielopay
+423
+6-0-3 seed
+466
+Yonge_Vegan
+Generations 500-2000
+The grassland establishes an equilibrium. The only native species left is the Hopsplitter.
+You can't see it but there's a single Venomoth on the bottom of the graph.
+Winners
+Species
+Native
+Biome
+Venom? Weapons Armor Speed
+Forage?
+Temperature
+Adaptation?
+Creator
+Social
+Media
+mediocre
+1-3-s
+Temperate
+Forest
+Neither
+1
+0
+3
+Seeds
+Corm
+None
+Hopsplitter Grassland Neither
+0
+0
+10
+Grass;Seeds
+Nem
+None
+Brown
+Bear
+Temperate
+Forest
+Neither
+3
+0
+6
+elspood
+None
+Venomous
+Snark
+Desert
+Venom +
+Antivenom 1
+0
+3
+Carrion
+Heat (Allows
+survival in the
+Desert)
+DaemonicSigil Twitter
+Venomoth Rainforest Venom +
+Antivenom 0
+0
+3
+Grass
+aphyer
+None
+Temperate Forest
+The temperate forest has lots of leaves and signiﬁcant seeds.
+
+Name
+Carrion Leaves Grass Seeds Detritus Coconuts Algae Lichen
+Temperate Forest 0
+2,000
+100
+1000
+0
+0
+0
+50
+Generations 1-200
+The population crows, crashes, and then grows again.
+Goes Extinct in Generation
+Species
+9
+Grizzly Bear
+12
+Optimistic Omnivore
+13
+LeavySpeedyTanky
+13
+The Dark Secret of Harvest Home
+14
+Colonoscopies
+15
+TFP511
+
+Goes Extinct in Generation
+Species
+15
+Gobbledygook
+16
+Boojum
+16
+Ankylosaurus
+16
+Monstrous Bandersnatch
+17
+Arboreal Assailant
+17
+Ultimate Lifeform
+17
+Bear2
+18
+BeauOmni2
+21
+FastHerbivore
+22
+RockMonkey
+22
+Gino Soupprayen
+23
+Hedgie
+24
+Basilisk
+24
+Meta-Lichen
+25
+Armored Pigeon
+26
+Lichen Bug
+26
+Fox
+26
+Predator
+29
+Forest Leaf Blight
+29
+Leaf Tribble
+31
+TreeSeeater
+31
+Yonge_Slug
+32
+Gipgip
+32
+You Worm!
+33
+Leafy Luncheoner
+33
+Caterpie
+33
+Spider
+34
+Forest Dragon
+34
+Woodland Locust
+34
+Forest Tribble2
+40
+Munchers
+41
+Skitter Critter
+52
+SpeedySeedy
+57
+Unicorn
+57
+mediocre 1-3-s
+57
+lF-LM732
+60
+Songalagala
+62
+Mango
+69
+Sky Shark
+70
+Locust Eater Eater
+71
+Brown Bear
+72
+Snake
+78
+Bullfrog
+79
+Pidgeotto
+81
+Fast Venomous Snake
+82
+Morpork Owl
+85
+Deadly Mickey K
+89
+lFa-G172
+93
+Phanpy
+97
+Bear1
+104
+Omnom
+109
+Ken Nishimura
+110
+Forest Scorpion
+
+Goes Extinct in Generation
+Species
+114
+Yonge_Defense
+140
+Snark
+152
+Bastion
+169
+Titanosaur
+Generations 200-2000
+The system achieves stability stable (except for a random walk among equals).
+Goes Extinct in Generation
+Species
+219
+Gypsy Moth
+272
+Armored Sloth
+290
+Donphan
+333
+Armadillo1
+336
+Szaromysik
+342
+Turtling Trencherman
+762
+Bofa #0461-B
+Winners
+None of our ﬁnal species have venom or antivenom.
+Species
+Native Biome
+Venom? Weapons Armor Speed Forage?
+Creator
+Social
+Media
+Cutieﬂy
+Temperate Forest Neither
+0
+0
+0
+Seeds
+alkjash
+None
+Brown Bear
+Temperate Forest Neither
+3
+0
+6
+elspood
+None
+Forest Finch
+Rainforest
+Neither
+0
+0
+3
+Leaves
+MA
+None
+Snark
+Temperate Forest Neither
+0
+0
+10
+Leaves
+Vanessa
+None
+Forest Tribble1
+Temperate Forest Neither
+0
+0
+0
+Seeds
+simon
+None
+Mutant Two-Headed
+Speed Snail
+Human Garbage
+Dump
+Neither
+0
+0
+2
+Grass
+DaemonicSigil Twitter
+An honorable mention goes to the N054J's Forest Tribble2 which is identical to the Cutieﬂy and the Forest
+Tribble1.
+Rainforest
+The Rainforest has lots of leaves and grass but few seeds.
+
+Name
+Carrion Leaves Grass Seeds Detritus Coconuts Algae Lichen
+Rainforest 0
+1000
+2,000 100
+0
+0
+0
+50
+Generations 0-1000
+It takes 1000 generations to establish an introduction.
+Goes Extinct in Generation
+Species
+11
+Quartosaurus
+11
+Jon Rahoi
+
+Goes Extinct in Generation
+Species
+12
+Stinging ant colony
+14
+Slug
+16
+Smok Wawelski Przezuwacz
+18
+Tree Clam
+19
+Slebbon
+22
+Rainmun
+25
+J's RLB
+25
+luden
+29
+Rainforest Leaf Blight
+31
+Tinysnek
+32
+Agyneta insolita
+36
+Crocodile
+37
+Giant Snake
+39
+Forest Ape
+40
+Very Lesser Forest Dragon
+42
+Birgus
+47
+Deerling
+49
+Elephant
+60
+lRa-G256
+61
+Murder Hornet
+64
+Yonge_Rainforest
+66
+BeauOmni2ButRainforest
+79
+Jungle Hare
+81
+Stomporz
+84
+Raincow
+90
+Grazing Snake
+91
+Wombat
+93
+basic grass fodder
+95
+Armadillo2
+98
+Rainforest Aphid
+100
+GrasseatyTank
+111
+Bofa 0461
+119
+Arboreal Grazer
+127
+Boop
+128
+Nine-Banded Armadillo
+145
+Tell Masoud
+156
+Rain Tribble
+168
+Lily the Unicorn
+187
+Panther
+283
+Forest Finch
+305
+mediocre 1-3-g
+306
+Will Die
+316
+lRa-GLM281
+318
+Fodder grass
+344
+Leaf Truck
+537
+Cheetah
+Generations 1000-9000
+The population oscillates from there. A small number of Snarks and Brown Bears are not visible.
+
+Goes Extinct in Generation Species
+1485
+Rony
+Winners
+Species
+Native
+Biome
+Venom?
+Weapons Armor Speed Forage?
+Temperature
+Adaptation?
+Creator
+Venomoth
+Rainforest
+Venom +
+Antivenom
+0
+0
+3
+Grass
+aphyer
+LeavyTanky Rainforest
+Antivenom
+only
+0
+10
+0
+Leaves
+ViktorThink
+Untielopay Grassland
+Neither
+2
+0
+10
+Grass
+Heat (Allows
+survival in the
+Desert)
+Anonymous
+#5
+mediocre
+1-3-s
+Temperate
+Forest
+Neither
+1
+0
+3
+Seeds
+Corm
+Forest
+Finch
+Rainforest
+Neither
+0
+0
+3
+Leaves
+MA
+Snark
+Temperate
+Forest
+Neither
+0
+0
+10
+Leaves
+Vanessa
+

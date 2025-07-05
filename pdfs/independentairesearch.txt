@@ -1,0 +1,1814 @@
+
+Independent AI Research
+1. Modelling and Understanding SGD
+2. SGD Understood through Probability Current
+3. Hypotheses about Finding Knowledge and One-Shot Causal Entanglements
+4. Knowledge Localization: Tentatively Positive Results on OCR
+5. Deﬁning Optimization in a Deeper Way Part 1
+6. Deﬁning Optimization in a Deeper Way Part 2
+7. Deﬁning Optimization in a Deeper Way Part 3
+8. Deﬁning Optimization in a Deeper Way Part 4
+
+Modelling and Understanding SGD
+I began this as a way to get a better understanding of the feeling of SGD in generalized
+models. This doesn't go into detail as to what a loss function actually is, and doesn't even
+mention neural networks. The loss functions are likely to be totally unrealistic, and these
+methods may be well out-of-date. Nonetheless I thought this was interesting and worth
+sharing.
+Imagine we have a one-parameter model, ﬁtting to one datapoint. The parameter starts at 
+W = 0 and the loss is L = −exp(−(W −2)2). The gradient will then be 
+= 2(W −2)exp(−(W −2)2).
+An imaginary continuous gradient descent will smoothly move to the bottom of the well and
+end up with W = 2.
+A stepwise gradient descent needs a hyperparameter T telling it how much to move the
+parameters each step. Let's start with this at 1.
+dL
+dW
+
+This gives us a zig-zag motion. The system is overshooting. Let's pick a smaller T value.
+Hmm. Now our model converges quite slowly. What about 0.5?
+
+Much better. Seems that there's an optimal value of T, which we will later see depends on
+the spikiness of the loss function.
+T is not dimensionless and has the dimension of W 2/L, as ΔW = −T
+. Certain function-
+minimising methods like Newton's method use (for example) ΔW = −k
+/
+ where k is
+dimensionless. This is why diﬀerent loss functions require diﬀerent T values.
+SGD and Local Minima
+What if we have two datapoints? Now L = (l0 + l1)/2. Let l0 = −exp(−(W −2)2) as above but 
+l1 = −exp(−(W −2)2) −exp(−100(W −1)2). 
+dL
+dW
+dL
+dW
+d2L
+dW 2
+
+Now our loss function L has a new local minimum I think of this as "the pit". Where we end
+up depends on where we start. If we start at W = 4 then we'll clearly end up at W = 2 but if
+we start at W = 0, then:
+Huh, this isn't what I expected at all! The gradient must have been too high around the local
+minimum. Let's try with T = 0.05, which will be slower but ought to work better.
+
+This is more like what I expected. Now our system is stuck in the local minimum.
+But most modern gradient descent algorithms use stochastic gradient descent. We can
+model this here by randomly picking one of the two datapoints (with associated loss
+function) to descend by each step.
+What happens now? Well now we have a chance to escape the pit. Let's say we're at the
+minimum of the pit. How many consecutive descent steps performed on l0 will get us out of
+the pit?
+Well by solving for the stationary points of l1, we get W = 1.004 and W = 1.196. It turns out
+5 steps of descent on l0 will get us to W = 1.201 which is out of the pit. Within 100 steps we
+have an 81% chance of getting out.
+The interesting thing is that this doesn't depend much on the depth of the W = 1 pit. If the
+local pit is twice as deep in l1, then we only require one more consecutive step to escape it. If
+this is the case, then W = 1 is in fact a global minimum in L. But because of SGD, it's not
+stable, and the only stable point is p0 = 2! Clearly there is something other than overall
+minimum which aﬀects how the parameter of the model changes over time.
+What about smaller values of T? The number of consecutive steps in l0 needed to escape the
+pit is inversely proportional to T. In the inﬁnite limit as T →∞, we just converge on a
+continuous gradient descent, which will ﬁnd the ﬁrst minimum it comes to.
+
+This reminds me of chemistry. It's as if the size of the step has to be big enough for the
+model to overcome some activation energy to cross the barrier from the p0 = 1 pit to the 
+p0 = 2 one. This is the motivation for the letter T: temperature. The larger T is, the more
+likely it is that the model will cross over out of the local minimum.
+Monte Carlo
+In fact we generally need signiﬁcantly fewer than this. Starting around 1, one update on l0 is
+enough to push us into the high-gradient region of l1, which means even an update on l1 will
+not move us back down into the centre, but rather to the left side of the pit, where a
+subsequent l1 update might push us further towards the right.
+Let's estimate the probability of escaping the pit in 100 steps as a function of T:
+Probability of escaping the pit in 100 steps as a function of T
+What about 1000?
+
+Probability of escaping the pit in 1000 steps as a function of T
+As we sort-of expected, it is easier to escape the pit than our original model predicted.
+Let's look more closely at the region between 0.01 and 0.02:
+
+Probability of escaping the pit in 100 steps as a function of T (note Y axis)
+Probability of escaping the pit in 1000 steps as a function of T
+Probability of escaping the pit in 10000 steps as a function of T
+
+It looks roughly like the log of the number of steps required to escape the pit is a function
+of T. Hopefully the later posts in this series will allow me to understand why.
+
+SGD Understood through Probability
+Current
+My previous post about SGD was an intro to this model. That post concerned a model of a
+loss landscape on two "datapoints". In this post I attempt to build a new model of SGD and
+validate it, with mixed success, but it is sort of interesting.
+Gradient Variance
+We could model this another way. The expected change of W on each step is −T
+, but we
+will also expect variance. W will evolve over time through probability space. There are two
+competing "forces" here, the "spreading force" created by variance in in 
+ over all
+datapoints in the model, and the "descent force" being exerted by gradient descent pushing 
+W back into the centre of a given local minimum.
+I think it makes sense to introduce some new notation here.
+gj(W) =
+ 
+G ( W ) = 
+  = a v e r a g e ( a l l   j ) ( g j ( W ) )
+S2(W) = variance(all j)(gj(W)) 
+S ( W ) = + √ S 2 ( W )
+The S2 notation should be thought of like the cos2(x) notation.
+Plotting these for our current system:
+dW
+dL
+dW
+dlj
+dlj
+dW
+d L
+d W
+
+Places where G is zero and the gradient of G is positive are the stable equilibrium points with
+regards to gradient descent on L (at ~1 and 2). If G and S2 are both zero at the same place,
+then this is an equilibrium point with regards to SGD on L (only at 2). The zero points for G
+ and S2 around the pit at 1 are not quite in the same pace.
+It is possible to consider probability mass of W "moving" according to the following rule:
+A "point" (dirac δ distribution) of probability at W, between t and t + 1, changes to a
+distribution centred at W −TG(W) with a variance of T 2S2(W). 
+Now we have abstracted away T from the actual process of discontinuous updates, we can
+try and factor out the discontinuity entirely. This will make the maths more manageable
+when it comes to generalizing to larger models. T will likely be much smaller for larger
+models but as long as S(W) grows larger with the number of datapoints used, this will
+compensate.
+(Point of notation, I will be using d rather than ∂, even though the latter is arguably more
+correct. As we will never be "mixing" Wand t it won't make a diﬀerence to our results)
+Instead of probability distribution moving, we might now consider it ﬂowing. This can be
+described by a probability current density ρ:
+
+Consider a system with S2(W) = 0 everywhere. The probability will just ﬂow down the
+gradient:
+ρ ( W ,  t ) G = − T G ( W ) P ( W ,  t )
+Taking 
+= −
+ we get (when dependencies are removed for ease of reading):
+  G = T [ G 
+  + P 
+  ]
+Now consider a system with G(W) = 0 everywhere. Now we eﬀectively have the evolution of
+a probability distribution via random walk. This gives a "spreading out" eﬀect. With constant 
+S2 we have the following equation for ρ, borrowed from the heat equation. I will take the
+central limit theorem and assume that the gradients are normally distributed.
+ρ ( W ,  t ) S = −   T 2 S 2 
+ 
+Based on the fundamental solution of the heat equation this will increase our variance by 
+T 2S2 each step of t.
+Which gives us:
+  S = 
+  T 2 S 2 
+  + 
+  T 2 
+  
+ 
+But the speed of "spreading out" is proportional to S(W) which changes the equation. The
+slower the "spreading out", the higher the probability of W being there. This makes S(W) act
+like a "heat capacity" of the location for P(W, t) for which ρ is a conserved current. We might
+be able to borrow more from heat equations. In this case P(W, t)S(W) acts as the
+"temperature" of a region.
+ρ ( W ,  t ) S = − k ( W ) 
+ 
+ρ ( W ,  t ) S = − k ( W ) [ S ( W ) 
+  + P ( W ,  t ) 
+  ]
+Calculating k based on our previous equation gives k(W) =
+T 2S(W), which gives:
+  
+S = − 
+  [ −   T 2 S 2 ( W ) 
+  − 
+  T 2 S ( W ) P ( W ,  t ) 
+  ]
+This can be reduced to the rather unwieldy equation (removing function dependencies for
+clarity):
+dP
+dt
+dρ
+dW
+d P
+d t
+d P
+d W
+d G
+d W
+12
+d P ( W ,  t )
+d W
+d P
+d W
+12
+d 2 P
+d W
+12
+d ( S 2 )
+d W 2 d P
+d W
+d [ P ( W ,  t ) S ( W ) ]
+d W
+d P ( W ,  t )
+d W
+d S ( W )
+d W
+12
+d ρ
+d W
+d
+d W
+12
+d P ( W ,  t )
+d W
+12
+d S ( W )
+d W
+
+  S = T 2 [   S 
+  
+  + 
+  S 2 
+  + 
+  ( 
+  ) 2 P + 
+  S P 
+  ]
+But these can be expressed in terms of S2 rather than S, which is good when S is
+pathological in some way (like when S2 is zero above, S has a discontinuous derivative). It
+also makes sense that our equation shouldn't depend on our choosing positive rather than
+negative S.
+ρ S = − T 2 [   S 2 
+  + 
+  P 
+  ]
+  S = T 2 [   
+  
+  + 
+  S 2 
+  + 
+  
+  P ]
+Finally giving our master equations:
+ρ = − T 2 [   S 2 
+  + 
+  
+  P ] − T [ G P ]
+  = T 2 [   
+  
+  + 
+  S 2 
+  + 
+  
+  P ] + T [ G 
+  + P 
+  ]
+Validation of the First Term of the Equations
+Let's start with the ﬁrst equation, and simulate using our G function from before.
+T = 0.02, no stochasticity yet.
+Here's W on the y-axis, and t on the x-axis. This is what the evolution of W looks like for a
+series of initial W values:
+d P
+d t
+32
+d S
+d W
+d P
+d W
+12
+d 2 P
+d W 2
+12
+d S
+d W
+12
+d 2 S
+d W 2
+12
+d P
+d W
+14
+d ( S 2 )
+d W
+d P
+d T
+34
+d ( S 2 )
+d W
+d P
+d W
+12
+d P 2
+d W
+14
+d 2 ( S 2 )
+d W 2
+12
+d P
+d W
+14
+d ( S 2 )
+d W
+d P
+d t
+34
+d ( S 2 )
+d W
+d P
+d W
+12
+d P 2
+d W
+14
+d 2 ( S 2 )
+d W 2
+d P
+d W
+d G
+d W
+
+Evolution of W values against t
+Now let's pick a couple of initial distributions and see how they evolve over time:
+Time evolution with steps of Δt = 10:
+
+This looks about right!
+Now let's plot the mean of this over time, and compare to the mean and standard deviation
+of a Monte Carlo simulation of gradient descent. The Monte Carlo simulation starts with
+1000 W values chosen to form a normal distribution with the roughly same mean and
+standard deviation (0.5 and 0.175 respectively) as our initial P(W, t) distribution.
+
+Yes there are two lines there.
+Our ﬁrst equation is an accurate description of non-stochastic gradient descent. The rest of
+the diﬀerence in the standard deviation is most likely due to imperfect matching of our initial
+
+data (P is a truncated normal distribution but our Monte Carlo uses a normal distribution with
+matched mean and variance to the truncated P, so some elements are < 0 where the
+gradient is small).
+Validation of the Second Term of the Equations
+Let's take our ﬁrst example as a distribution spreading out. 
+g 0 = − 1 , g 1 = 1 , G = 0 , S 2 = 1
+The probability distribution changes from a concentrated one to a broadened one.
+And compare standard deviations to our Monte Carlo simulation:
+
+Looking good, errors here may also be due to truncation.
+One ﬁnal validation step: take g0 = 1.2W −2,  g1 = 0.8W −2, G = W −2, S2 = 0.4W 2, 
+T = 0.5. This model will be used to assess a few things: our ability to perform well at higher 
+T, its ability to predict the correct form of the counterbalancing "concentrating" and
+"spreading" forces of G and S2, and its ability to predict the concentration of probability
+mass in regions of lower S2.
+
+Here the probability distribution moves from the left to the centre but doesn't
+concentrate due to the gradient variance.
+
+Unfortunately the computational modelling seems to fall apart when applied to the original
+system. The large ﬁrst and second derivatives of S2 lead to a lot of instability. This means I
+can't validate it much more than this. High values of T also cause the model to break down,
+as the gradient might change a lot in the span of a step. I think this can be remedied by (for
+example) picking a g to update on and updating with multiple small steps before changing g.
+I'm no master programmer and I don't have much experience working with unstable PDEs.
+So I can't do much more here.
+Solving for End-States
+For an end-state, ρ = 0 everywhere. This means:
+0 = − T 2 [   S 2 
+  + 
+  
+  P ] − T [ G P ]
+T   S 2 
+  = − T   
+  P − G P
+  
+  = − 
+  
+  − 
+ 
+  = − 
+  
+  − 
+ 
+  = −   
+  − 
+ 
+This shows our problem. When S2 vanishes, our equations don't work terribly well. We might
+have to hope that the two opposing S2 terms cancel out and it works, but who knows. This is
+probably the source of instability in our equations.
+But around some minimum it lets us interpret something. If log(P) is decreasing linearly
+then P decreases exponentially. Let's consider the 
+ term now. If we have two minima (with
+a maximum between them) around which the loss landscapes are exactly the same, except
+one is twice as wide (in all li) then the G component will be halved in the wider one, but the 
+S2 part will be quartered. This means the integral of ∫−
+dW from the centre of the wider
+one to the maximum will be four times that of the narrower one. Therefore the probability
+density at the centre of the wider minimum's basin will be e^4 = 56 times Edit: a lot higher.
+What's the point?
+Reasoning about stochastic processes is diﬃcult. Reasoning about diﬀerential equations is
+also diﬃcult, but the tools to analyse diﬀerential equations are diﬀerent and might be able to
+solve diﬀerent problems.
+12
+d P
+d W
+14
+d ( S 2 )
+d W
+12
+d P
+d W
+14
+d ( S 2 )
+d W
+d P
+d W
+1P
+1
+2 S 2 d ( S 2 )
+d W
+2 G
+T S 2
+d ( l o g ( P ) )
+d W
+1
+2 S 2 d ( S 2 )
+d W
+2 G
+T S 2
+d ( l o g ( P ) )
+d W
+12
+d ( l o g ( S 2 ) )
+d W
+2 G
+T S 2
+2G
+TS2
+2G
+TS2
+
+SGD is believed to have certain "bias" towards low-entropy models of the world. Part of this
+is a preference for "broader" rather than "narrower" minima in L. Now we have some tools
+which may allow us to understand this. Under this model, SGD is also biased towards regions
+of low variance in loss function.
+Further Investigation
+I think there's something like a metric acting on a space here. S2 looks like a metric, and
+perhaps it's actually more correct to consider the space of W with the metric such that 
+S2 = 1 everywhere. For higher dimensions we get the following transformations:
+W → 
+− →
+W  
+G → 
+→
+G 
+S 2 → S 2
+Now 
+−→
+W and 
+→
+G are vectors and S2 is a matrix. This extends nicely as we can choose our
+metric such that S2 = I. It might be useful to deﬁne some sort of function like an "energy"
+over the landscape of \(\\)W in terms of G, S, and T alone which describes the ﬁnal
+probability distribution. In fact such a function must exist assuming SGD converges, as 
+log(P(W, ∞)) is well-deﬁned. What the actual form of this function is would require to do
+some working out, and it may not be at all easily described. This whole process is very
+reminiscent of both chemical dynamical modelling and ﬁnding the minimum-energy
+conﬁguration of a quantum energy landscape, as both consist of a "spreading" term and an
+"energy" term.
+While it is quite interesting, I don't consider this a research priority for myself. About 90% of
+this post has been sitting in my drafts for the past 3 months. Even if powerful AI is created
+using SGD, I'm not convinced that this sort of model will be hugely useful. It might be
+possible to wrangle some selection-theorem-ish-thing out of this but I don't think I'll focus on
+it.
+
+Hypotheses about Finding Knowledge and
+One-Shot Causal Entanglements
+Crossposted from the AI Alignment Forum. May contain more technical jargon than usual.
+Epistemic status: my own thoughts I've thought up in my own time. They may be quite or very wrong! I
+am likely not the ﬁrst person to come to these ideas. All of my main points here are just hypotheses which
+I've come to by the reasoning stated below. Most of it is informal mathematical arguments about likely
+phenomena and none is rigorous proof. I might investigate them if I had the time/money/programming
+skills. Lots of my hypotheses are really long and diﬃcult-to-parse sentences.
+What is knowledge?
+I think this question is bad.
+It's too great of a challenge. It asks us (implicitly) for a mathematically rigorous deﬁnition which ﬁts all of
+our human feelings about a very loaded word. This is often a doomed endeavour from the start, as human
+intuitions don't neatly map onto logic. Also, humans might disagree on what things count as or do not
+count as knowledge. So let's attempt to right this wrong question:
+Imagine a given system is described as "knowing" something. What is the process that leads to the
+accumulation of said knowledge likely to look like?
+I think this is much better.
+We limit ourselves to systems which can deﬁnitely be said to "know" something. This allows us to pick a
+starting point. This might be a human, GPT-3, or a neural network which can tell apart dogs and ﬁsh. In
+fact this will be my go-to answer for the future. We also don't need to perfectly specify the process which
+generates knowledge all at once, only comment on its likely properties.
+Properties of "Learning"
+Say we have a very general system, with parameters θ, with t representing time during learning. Let's say
+they're initialized as θ0 according to some random distribution. Now it interacts with the dataset which we
+will represent with X, taken from some distribution over possible datasets. The learning process will
+update θ0, so we can represent the parameters the parameters after some amount of time as θ(θ0;  X;  t).
+This reminds us that the set of parameters depends on three things: the initial parameters, the dataset,
+and the amount of training.
+Consider θ(θ0;  X;  0). This is trivially equal to θ0, and so it depends only on the choice of θ0. The dataset
+has had no chance to aﬀect the parameters in any way.
+So what about as t →∞? We would expect that θ∞(θ0;  X) = θ(θ0;  X;  ∞) depends mostly on the choice of X
+ and much less strongly on θ0. There will presumably be some dependency on initial conditions, especially
+for very complex models like a big neural network with many local minima. But mostly it's ω which
+inﬂuences θ.
+So far this is just writing out basic sequences stuﬀ. To make a map of the city you have to look at it, and
+to learn your model has to causally entangle itself with the dataset. But let's think about what happens
+when ω is slightly diﬀerent.
+Changes in the world
+
+So far we've represented the whole dataset with a single letter X, as if it were just a number or
+something. But in reality it will have many, many independent parts. Most datasets which are used as
+inputs to learning processes are also highly structured.
+Consider the dog-ﬁsh discriminator, trained on the dataset Xdog/fish. The system θ∞(θ0;  Xdog/fish) could be
+said to have "knowledge" that "dogs have two eyes". One thing this means if we instead fed it an X which
+was identical except every dog had three eyes (TED) then the ﬁnal values of θ would be diﬀerent. The
+same is true of facts like "ﬁsh have scales", "dogs have one tail". We could express this as follows:
+θ ∞ ( θ 0 ;   X d o g / f i s h + Δ X T E D )
+Where ΔXTED is the modiﬁcation of "photoshopping the dogs to have three eyes". We now have:
+θ ∞ ( θ 0 ;   X d o g / f i s h + Δ X T E D ) = θ ∞ ( θ 0 ;   X d o g / f i s h ) + Δ θ ∞ ( θ 0 ;   X d o g / f i s h ;   Δ X T E D )
+Now let's consider how Δθ∞(θ0;  X;  ΔX) behaves. For lots of choices of ΔX it might just be a series of
+random changes tuning the whole set of θ values. But from my knowledge of neural networks, it might
+not be. Lots of image recognizing networks have been found to contain neurons with speciﬁc functions
+which relate to structures in the data, from simple line detectors, all the way up to "cityscape" detectors.
+For this reason I suggest the following hypothesis:
+Structured and localized changes in the dataset that a parameterized learning system is exposed to
+will cause localized changes in the ﬁnal values of the parameters.
+Impracticalities and Solutions
+Now it would be lovely to train all of GPT-3 twice, once with the original dataset, and once in a world
+where dogs are blue. Then we could see the exact parameters that lead it to return sentences like "the
+dog had [chocolate rather than azure] fur". Unfortunately rewriting the whole training dataset around this
+is just not going to happen.
+Finding the ﬂow of information, and inﬂuence in a system is easy if you have a large distribution of
+diﬀerent inputs and outputs (and a good idea of the direction of causality). If you have just a single
+example, you can't use any statistical tools at all. 
+So what else can we do? Well we don't just have access to θ∞. In principle we could look at the course of
+the entire training process and how θ changes over time. For each timestep, and each element of the
+dataset X, we could record how much each element of θ is changed. We'll come back to this
+Let's consider the dataset as a function of the external world: X(Ω). All the language we've been using
+about knowledge has previously only applied to the dataset. Now we can describe how it applies to the
+world as a whole.
+For some things the equivalence of knowledge of X and Ω is pretty obvious. If the dataset is being used
+for a self-driving car and it's just a bunch of pictures and videos then basically anything the resulting
+parameterised system knows about X it also knows about Ω. But for obscure manufactured datasets like
+[4000 pictures of dogs photoshopped to have three eyes] then it's really not clear.
+
+Either way, we can think about Ω as having inﬂuence over X the same way as we can think about X as
+having inﬂuence over θ∞. So we might be able to form hypotheses about this whole process. Let's go back
+to Xdog/fish. First oﬀ imagine a change Ωnew = Ω + ΔΩ, such as "dogs have three eyes". This will change
+some elements of X more than others. Certain angles of dog photos, breeds of dogs, will be changed
+more. Photos of ﬁsh will stay the same!
+Now we can imagine a function Δθ(θ0;  X(Ω);  ΔX(Ω;  ΔΩ)). This represents some propagation of inﬂuence
+from Ω →X →θ. Note that the inﬂuence of Ω on X is independent of our training process or θ0. This makes
+sense because diﬀerent bits of the training dataset contain information about diﬀerent bits of the world.
+How diﬀerent training methods extract this information might be less obvious.
+The Training Process
+During training, θ(t) is exposed to various elements of X and updated. Diﬀerent elements of X will update 
+θ(t) by diﬀerent amounts. Since the learning process is about transferring inﬂuence over θ from θ0 to Ω
+ (acting via X), we might expect that for a given element of X, it has more "inﬂuence" over the ﬁnal values
+of the elements of θ which were changed the most due to exposure to that particular element of X during
+training.
+This leads us to a second hypothesis:
+The degree to which an element of the dataset causes an element of the parameters to be updated
+during training is correlated with the degree to which a change to that dataset element would have
+caused a change in the ﬁnal value of the parameter.
+Which is equivalent to:
+Knowledge of a speciﬁc properties of the dataset is disproportionately concentrated in the elements of
+the ﬁnal parameters that have been updated the most during training when "exposed" to certain
+dataset elements that have a lot of mutual information with that property.
+For the dog-ﬁsh example: elements of parameter space which have updated disproportionately when
+exposed to photos of dogs that contain the dogs' heads (and therefore show just two eyes), will be more
+likely to contain "knowledge" of the fact that "dogs have two eyes".
+This naturally leads us to a ﬁnal hypothesis:
+Correlating update-size as a function of dataset-element across two models will allow us to identify
+subsets of parameters which contain the same knowledge across two very diﬀerent models.
+Therefore
+Access to a simple interpreted model of a system will allow us to rapidly infer information about a
+much larger model of the same system if they are trained on the same datasets, and we have access
+to both training histories.
+Motivation
+I think an AI which takes over the world will have a very accurate model of human morality, it just won't
+care about it. I think that one way of getting the AI to not kill us is to extract parts of the human utility-
+function-value-system-decision-making-process-thing from its model and tell the AI to do those. I think
+that to do this we need to understand more about where exactly the "knowledge" is in an inscrutable
+model. I also ﬁnd thinking about this very interesting.
+
+Knowledge Localization: Tentatively
+Positive Results on OCR
+Epistemic Status: Original research, see previous post for more information
+The Plan
+1. Hard-code a simple ML system in Python (yikes!) so I can see all of the moving parts
+and understand it better.
+2. Give the ML system something to learn (in this case OCR based on the MNIST dataset,
+because it's easy to get hold of and basically a solved problem in terms of actually
+classifying characters)
+3. Actually test my hypothesis:
+Methods
+The neural network used is simple, 784 neurons on the input layer, 100 hidden neurons, 2
+output. The activation function used is log(exp(x) + 1)). All weights and biases were
+initialized with He initialization. For compatibility reasons the data label is either [1, 0] or 
+[0, 1]. The input values are normalized to be between 1/256 and 1 rather than 0 and 255.
+The learning process involves backpropagating on a single datapoint (one labelled character)
+at a time. Overall loss appears to reach a minimum early within the ﬁrst training epoch. For
+this reason the ﬁrst 1200 of 60,000 datapoints were used for phase 1. This refers to training
+a single neural network on a dataset consisting of all of the 6s and 8s; and 1s and 7s, from
+the ﬁrst 12000 datapoints (keeping roughly equal numbers of the two types of data helps to
+keep the biases and weights towards the last layer from having large changes in any one
+direction).
+During the second half of phase 1, the absolute value of the change of each parameter is
+added to one of two running tallies, one for 1s/7s and one for 6s/8s. Then the total updating
+done to each parameter by each class of datapoint can be found. This amounts to summing
+the absolute value of the update sizes from each datapoint. The "relative updating due to
+1s/7s" variable for each parameter is then a/(a + b) where a is the sum of the updates due to
+1s and 7s, and b is the sum of the updates due to 6s and 8s. (The correlation still holds
+whether we look at all of phase 1 or just the second half, but I've found it to be slightly
+stronger for the second half of training.
+Then four copies of the network are made. Both are trained on the remainder of the MNIST
+dataset, one on 1s and 6s/8s, one on 7s and 6s/8s; then one on 1s/7s and 6s, and one on
+1s/7s and 8s. The diﬀerence in the ﬁnal parameter values between these two pairs of
+networks is then found. We then take a similar function c/(c + d) where c is the absolute
+diﬀerence between the parameter values of the 1s vs 6s/8s case and the 7s vs 6s/8s case,
+and d is the diﬀerence between the parameter values of the 6s vs 1s/7s case, and the 8s vs
+1s/7s case.
+
+Analysis
+The hypothesis I was testing is about what update sizes during training can tell us about
+where knowledge is stored in a network. The primary plots are of "relative amount of
+updating due to 1s/7s" against the relative diﬀerence between the 1s vs 6s/8s and 7s vs
+6s/8s  forks. A plot which was strong evidence in favour of my hypothesis would basically just
+be a positive correlation. The parameters which were (relatively) more diﬀerent in the cases
+of the data being 1s vs 7s would have updated more due to 1s and 7s.
+
+Weak-ish correlation for biases, R2 = 0.17, p < 0.0001 by T-test if you're into that.
+
+Correlation for weights is very clear. R2 = 0.28. I'm not going to calculate a p-value here
+because I have eyes.
+
+If we make the markers smaller we can see little clusters. I'm pretty conﬁdent each of these
+clusters is a set of weights going into one of the second layer neurons. Lots of weights will be
+coming from input neurons which only ever have a value of 1/256, so they're all eﬀectively
+the same. The pattern of clusters is almost identical to the pattern of bias updates.
+More interestingly we can also plot the correlation between our two values for the weights
+coming out of each of the input neurons.
+
+I'm not completely sure how to interpret this. Overall correlation is mostly > 0 but we have
+some regions of negative correlation. Round the edges the correlation is much weaker as
+these only ever take 1/256 as input.
+Conclusions and Further Plans
+So this worked pretty well. This is some weak evidence for my hypothesis. Without a doubt
+the most interesting thing is that this only worked for a ReLU-like activation function. I
+was originally using sigmoid activation functions and I couldn't get anything like this. That's
+really weird and other than ReLU being magic, I have no hypotheses.
+I want to try this out on other systems. I wonder if a more abstraction-heavy system would
+make a better candidate. I'd like to ﬁnd out when these correlations are stronger or weaker.
+For this I'll need to mess around with some ML libraries to see if I can extract the data I want.
+Hard-coding a neural network in the slowest language known to man was a bad time.
+
+Deﬁning Optimization in a Deeper Way Part 1
+My aim is to deﬁne optimization without making reference to the following things:
+1. A "null" action or "nonexistence" of the optimizer. This is generally poorly deﬁned, and choices of
+diﬀerent null actions give diﬀerent answers.
+2. Repeated action. An optimizer should still count even if it only does a single action.
+3. Uncertainty. We should be able to deﬁne an optimizer in a fully deterministic universe.
+4. Absolute time at all. This will be the hardest, but it would be nice to deﬁne optimization without
+reference to the "state" of the universe at "time t".
+Attempt one
+First let's just eliminate the concept of a null action. Imagine the state of the universe at a time t.
+Let's divide the universe into two sections and call these A and B.  They have states SA and SB. If we want to
+use continuous states we'll need to have some metric D(s1, s2) which applies to these states, so we can
+calculate things like the variance and entropy of probability distributions over them.
+Treat SA and SB as part of a Read-Eval-Print-Loop. Each S
+A
+t  produces some output O
+A
+t  which acts like a function
+mapping S
+B
+t →S
+B
+t+1, and vice versa. O
+A
+t  can be thought of as things which cross the Markov blanket.
+Sadly we still have to introduce probability distributions. Let's consider a joint probability distribution 
+P
+AB
+t
+(sA, sB), and also the two individual probability distributions P
+A
+t (sA) and P
+B
+t (sB).
+By deﬁning distributions over O outputs based on the distribution P
+AB
+t
+, we can deﬁne P
+AB
+t+1(sA, sB) in the
+"normal" way. This looks like integrating over the space of sA and sB like so:
+P 
+A B
+t + 1 ( s 
+A
+t + 1 , s 
+B
+t + 1 ) = ∫ P 
+A B
+t
+ ( s 
+A
+t  , s 
+B
+t  )   δ ( O 
+A
+t  ( s 
+B
+t  ) − s 
+B
+t + 1 )   δ ( O 
+B
+t  ( s 
+A
+t  ) − s 
+A
+t + 1 )   d s 
+A
+t  d s 
+B
+t
+What this is basically saying is that to deﬁne the probability distribution of states s
+A
+t+1 and s
+B
+t+1, we integrate
+over all states s
+A
+t  and s
+B
+t  and sum up the states where the O
+A
+t  corresponding to s
+A
+t  maps s
+B
+t  to the given s
+B
+t+1.
+Now lets deﬁne an "uncorrelated" version of P
+AB
+t+1, which we will refer to as P
+′AB
+t+1.
+P 
+′ A B
+t + 1 ( s 
+A
+t + 1 , s 
+B
+t + 1 ) = ∫ P 
+A
+t  ( s 
+A
+t  )   P 
+B
+t  ( s 
+B
+t  )   δ ( O 
+A
+t  ( s 
+B
+t  ) − s 
+B
+t + 1 )   δ ( O 
+B
+t  ( s 
+A
+t  ) − s 
+A
+t + 1 )   d s 
+A
+t  d s 
+B
+t
+This loosely represents what happens if we decorrelate sA and sB. In the language of humans, this is like an
+agent taking a random move from a selection.
+We can refer to a probability distribution P
+AB
+t
+ as an "optimizing" probability distribution if P
+′AB
+t+1 is higher entropy
+than P
+AB
+t+1.
+
+For an example, imagine the universe is divided into two parts: a room R and a thermostat T. The room can
+have states in the set sR ∈{hot, lukewarm, cold}, and the thermostat can have states sT ∈{high, low, off}.
+Imagine that OR and OT are deﬁned as follows:
+O T [ h i g h ] : 
+⎧
+⎨
+⎩ 
+h o t → h o t 
+w a r m → h o t 
+c o l d → w a r m 
+  
+O T [ l o w ] : 
+⎧
+⎨
+⎩ 
+h o t → h o t 
+w a r m → w a r m 
+c o l d → c o l d 
+  
+O T [ o f f ] : 
+⎧
+⎨
+⎩ 
+h o t → w a r m 
+w a r m → c o l d 
+c o l d → c o l d 
+ 
+ 
+O R [ h o t ] : 
+⎧
+⎨
+⎩ 
+h i g h → o f f 
+l o w → o f f 
+o f f → o f f 
+  
+O R [ w a r m ] : 
+⎧
+⎨
+⎩ 
+h i g h → l o w 
+l o w → l o w 
+o f f → l o w 
+  
+O R [ c o l d ] : 
+⎧
+⎨
+⎩ 
+h i g h → h i g h 
+l o w → h i g h 
+o f f → h i g h 
+ 
+Basically the thermostat decides whether the room gets warmer, stays the same, or gets colder, and the
+thermostat.
+We can also consider the probability mass ﬂowing from each of the nine states to another one:
+ 
+h o t
+w a r m
+c o l d
+h i g h ( h o t , o f f )
+( h o t , l o w )
+( w a r m , h i g h )
+l o w
+( h o t , o f f )
+( w a r m , l o w ) ( c o l d , h i g h )
+o f f
+( w a r m , l o w ) ( c o l d , l o w )
+( c o l d , h i g h )
+ 
+Imagine the following P
+TR
+0
+(sT, sR):
+
+ 
+h o t w a r m c o l d
+h i g h 0
+0
+1 / 3
+l o w
+0
+1 / 3
+0
+o f f
+1 / 3 0
+0
+This will give us the following P
+TR
+1
+(sT, sR):
+ 
+h o t w a r m c o l d
+h i g h 0
+1 / 3
+0
+l o w
+0
+1 / 3
+0
+o f f
+0
+1 / 3
+0
+Which has 1.6 bits of entropy.
+And the following P
+′TR
+1
+(sT, sR):
+ 
+h o t w a r m c o l d
+h i g h 0
+1 / 9
+2 / 9
+l o w
+1 / 9 1 / 9
+1 / 9
+o f f
+2 / 9 1 / 9
+0
+Which has 2.7 bits of entropy.
+This means that the joint-ness of the probability distribution P
+RT
+0
+ has removed 1.1 bits of entropy from the
+system. We say that our choice of P
+RT
+0
+ is optimizing, with an optimizing strength of 1.1 bits.
+But what if we consider a "smarter" thermostat, which turns oﬀ just before the temperature changes.
+O R [ h o t ] : 
+⎧
+⎨
+⎩ 
+h i g h → o f f 
+l o w → o f f 
+o f f → l o w 
+  
+O R [ w a r m ] : 
+⎧
+⎨
+⎩ 
+h i g h → l o w 
+l o w → l o w 
+o f f → l o w 
+  
+O R [ c o l d ] : 
+⎧
+⎨
+⎩ 
+h i g h → l o w 
+l o w → h i g h 
+o f f → h i g h  
+
+ 
+ 
+h o t
+w a r m
+c o l d
+h i g h ( h o t , o f f )
+( h o t , l o w )
+( w a r m , l o w )
+l o w
+( h o t , o f f )
+( w a r m , l o w ) ( c o l d , h i g h )
+o f f
+( w a r m , o f f ) ( c o l d , l o w )
+( c o l d , h i g h )
+With the same choice of P
+TR
+0
+(sT, sR):
+ 
+h o t w a r m c o l d
+h i g h 0
+0
+1 / 3
+l o w
+0
+1 / 3
+0
+o f f
+1 / 3 0
+0
+This will give us the following P
+TR
+1
+(sT, sR):
+ 
+h o t w a r m c o l d
+h i g h 0
+0
+0
+l o w
+0
+1
+0
+o f f
+0
+0
+0
+With an entropy of zero.
+And the following P
+′TR
+1
+(sT, sR):
+ 
+h o t w a r m c o l d
+h i g h 0
+0
+2 / 9
+l o w
+1 / 9 1 / 3
+1 / 9
+o f f
+2 / 9 0
+0
+Which has 2.2 bits of entropy.
+In the new system, P
+RT
+0
+ has an optimizing strength of 2.2 bits, approximately twice as much. This indicates that
+the latter system is "better" at optimizing the distribution P
+RT
+0
+ in some way.
+So we have eliminated the idea of needing the optimizer to have clearly-deﬁned existence/nonexistence cases,
+or needing some "null" action to compare its outputs to. This is good. We have also eliminated the concept of
+repeated action.
+
+Next I will attempt to eliminate the need to start with a probability distribution. In both of the examples above,
+our choice of P
+RT
+0
+ was important. I want to ﬁnd a more "natural" way of deﬁning probability distributions.
+
+Deﬁning Optimization in a Deeper Way
+Part 2
+We have successfully eliminated the concepts of null actions and nonexistence from our
+deﬁnition of optimization. We have also eliminated the concept of repeated action. We are
+halfway there, and now have to eliminate uncertainty and absolute time. Then we will
+have achieved the goal of being able to wrap a 3D hyperplane boundary around a 4D chunk
+of relativistic spacetime and ask ourselves "Is this an optimizer?" in a meaningful way.
+I'm going to tackle uncertainty next.
+TL;DR I have allowed for a mor
+We've already deﬁned, for a deterministic system, that a joint probability distribution 
+P
+AB
+t
+(sA, sB) has a numerical optimizing-ness, in terms of entropy. Now I want to extend that to
+a non-joint probability distribution of the form P A(sA)P B(sB). We can do this by deﬁning 
+P
+A
+t−1(sA) and P
+B
+t−1(sB) for the previous timestep.
+We can then deﬁne P
+AB
+t
+(sA, sB) as by stepping forwards from t −1 to t as before, according to
+the dynamics of the system.
+A question we might want to ask is, for a given P
+A
+t−1(sA) and P
+B
+t−1(sB), how "optimizing" is the
+distribution P
+AB
+t
+(sA, sB)?
+The Dumb Thermostat
+Lets apply our new idea to the previous models, the two thermostats. Lets begin with
+uncorrelated, maximum entropy distributions.
+For thermostat 1 we have the dynamic matrix:
+ 
+h o t
+w a r m
+c o l d
+h i g h
+( h o t , o f f )
+( h o t , l o w )
+( w a r m , h i g h )
+l o w
+( h o t , o f f )
+( w a r m , l o w )
+( c o l d , h i g h )
+o f f
+( w a r m , o f f )
+( c o l d , l o w )
+( c o l d , h i g h )
+
+(In this matrix, the entry for a cell represents the state at time = t + 1 given the coordinates
+of that cell represent the state at time = t)
+With the P
+RT
+t−1 distribution:
+ 
+h o t w a r m c o l d
+h i g h 1 / 9 1 / 9
+1 / 9
+l o w
+1 / 9 1 / 9
+1 / 9
+o f f
+1 / 9 1 / 9
+1 / 9
+As an aside this has 3.2 bits of entropy.
+Leading to the P
+RT
+t
+ distribution:
+ 
+h o t w a r m c o l d
+h i g h 0
+1 / 9
+2 / 9
+l o w
+1 / 9 1 / 9
+1 / 9
+o f f
+2 / 9 1 / 9
+0
+This gives us the "standard" P
+RT
+t+1 distribution of:
+ 
+h o t w a r m c o l d
+h i g h 0
+2 / 9
+1 / 9
+l o w
+1 / 9 1 / 9
+1 / 9
+o f f
+1 / 9 2 / 9
+0
+And the "decorrelated" P
+′RT
+t+1 distribution is actually just the same as P
+RT
+t
+! When we
+decorrelate the probabilities for sR and sT we just get back to the maximum entropy
+distribution and so P
+′RT
+t+1 = P
+RT
+t
+
+It's clear by inspection that the distributions P
+RT
+t+1 and P
+′RT
+t+1 have the same entropy, so the
+decorrelated maximum entropy P
+R
+t−1P
+T
+t−1 does not produce an "optimizing" distribution at 
+P
+RT
+t
+.
+If we actually consider the dynamics of this system, we can see that this makes sense! The
+temperature actually either stays at (warm, low) or falls into the cycle:
+( h o t , l o w ) → ( h o t , o f f ) → ( w a r m , o f f ) → ( c o l d , l o w )
+ → ( c o l d , h i g h ) → ( w a r m , h i g h ) → ( h o t , l o w )
+So there's no compression of futures into a smaller number of trajectories.
+The Smart Thermostat
+What about our "smarter" thermostat? This one has the dynamic matrix:
+ 
+h o t
+w a r m
+c o l d
+h i g h
+( h o t , o f f )
+( h o t , l o w )
+( w a r m , l o w )
+l o w
+( h o t , o f f )
+( w a r m , l o w )
+( c o l d , h i g h )
+o f f
+( w a r m , l o w )
+( c o l d , l o w )
+( c o l d , h i g h )
+Well now our P
+RT
+t
+ distribution looks like this:
+ 
+h o t w a r m c o l d
+h i g h 0
+0
+2 / 9
+l o w
+1 / 9 1 / 3
+1 / 9
+o f f
+2 / 9 0
+0
+Giving "standard" a P
+RT
+t+1 of this:
+ 
+h o t w a r m c o l d
+
+h i g h 0
+0
+1 / 9
+l o w
+0
+7 / 9
+0
+o f f
+1 / 9 0
+0
+And a "decorrelated" P
+′RT
+t
+ of:
+ 
+h o t
+w a r m c o l d
+h i g h 2 / 27 2 / 27
+2 / 27
+l o w
+5 / 27 5 / 27
+5 / 27
+o f f
+2 / 27 2 / 27
+2 / 27
+Giving the decorrelated P
+′RT
+t+1:
+ 
+h o t
+w a r m c o l d
+h i g h 0
+0
+7 / 27
+l o w
+2 / 27 1 / 3
+2 / 27
+o f f
+7 / 27 0
+0
+Now in this case, these two do have diﬀerent entropies. P
+RT
+t+1 has an entropy of 1.0 bits, and 
+P
+′RT
+t+1 has an entropy of 2.1 bits. This gives us a diﬀerence of 1.1 bits of entropy. This is the
+Optimizing-ness we deﬁned in the last post, but I think it's actually somewhat incomplete.
+Let's also consider the initial diﬀerence between P
+RT
+t
+ and P
+′RT
+t
+. Decorrelating P
+RT
+t
+ takes it
+from 2.2 to 3.0 bits of entropy. So the entropy diﬀerence started oﬀ at 0.8 bits. Therefore the
+diﬀerence of the diﬀerence in entropy is 0.3 bits.
+The value of associated with P
+RT
+t−1 is equal to (S[P
+′RT
+t+1] −S[P
+RT
+t+1]) −(S[P
+′RT
+t
+] −S[P
+RT
+t
+]). which
+can also be expressed as S[P
+′RT
+t+1] + S[P
+RT
+t
+] −S[P
+RT
+t+1] −S[P
+′RT
+t
+]. We might call this quantity the
+adjusted optimizing-ness.
+
+Quantitative Data
+The motivation for this was that a maximum entropy distribution is "natural" in some sense.
+This moves us towards not needing uncertainty. If we have a given state of a system, we
+might be able to "naturally" deﬁne a probability distribution around that state. Then we can
+measure the optimizing-ness of the next step's distribution.
+What happens with a diﬀerent P
+RT
+t−1 condition? What if we have a distribution like this:
+ 
+h o t
+w a r m
+c o l d
+h i g h ϵ 2 / 4
+ϵ ( 1 − ϵ ) / 2 ϵ 2 / 4
+l o w
+ϵ ( 1 − ϵ ) / 2 ( 1 − ϵ ) 2
+ϵ ( 1 − ϵ ) / 2
+o f f
+ϵ 2 / 4
+ϵ ( 1 − ϵ ) / 2 ϵ 2 / 4
+For some small epsilon in the second situation.
+Now P
+RT
+t
+ is like this:
+ 
+h o t
+w a r m
+c o l d
+h i g h 0
+0
+ϵ ( 1 − ϵ ) / 2 + ϵ 2 / 4
+l o w
+ϵ ( 1 − ϵ ) / 2
+( 1 − ϵ ) 2 + ϵ 2 / 2 ϵ ( 1 − ϵ ) / 2
+o f f
+ϵ ( 1 − ϵ ) / 2 + ϵ 2 / 4 0
+0
+So P
+RT
+t+1 is:
+ 
+h o t
+w a r m
+c o l d
+h i g h 0
+0
+ϵ ( 1 − ϵ ) / 2
+l o w
+0
+1 − ϵ ( 1 − ϵ ) 0
+o f f
+ϵ ( 1 − ϵ ) / 2 0
+0
+While it is theoretically possible to decorrelate everything, calculate the next set of things,
+and keep going, it's a huge mess. Using values for epsilon between 0.1 and 10−10 we can
+make the following plot between the entropy of P
+RT
+t−1 and our previously deﬁned adjusted
+optimizing-ness.
+
+It looks linear in the log/log particularly in the region where ϵ is very small. By ﬁtting to the
+leftmost ﬁve points we get a simple linear relation: The adjusted optimizing-ness approaches
+half of the entropy of P
+RT
+t−1.
+This is kind of weird. This might not be an optimal system to study, so let's look at another
+toy example. A more realistic model of a thermostat:
+The Continuous Thermostat
+The temperature of the room is considered as SR ∈R. The activity of the thermostat is
+considered as T ∈R. Each timestep, we have the following updates:
+S 
+T
+t + 1 = S 
+R
+t
+S 
+R
+t + 1 = S 
+R
+t  − k   S 
+T
+t
+Consider the following distributions:
+P 
+R
+t − 1 ( s R ) ∼ U ( 10 − ϵ / 2 , 10 + ϵ / 2 )
+
+P 
+T
+t − 1 ( s T ) ∼ U ( 10 − ϵ / 2 , 10 + ϵ / 2 )
+Where U(a, b) refers to a uniform distribution between a and b. P
+RT
+t−1 can be thought of as a
+square of side length ϵ centered on the point (10, 10). P
+RT
+t
+ turns out to be a rhombus. The
+corners transform like this:
+Time = t −1
+Time = t
+( 10 + ϵ , 10 + ϵ ) ( 10 ( 1 − k ) + ϵ ( 1 − k ) , 10 + ϵ )
+( 10 + ϵ , 10 − ϵ ) ( 10 ( 1 − k ) + ϵ k , 10 + ϵ )
+( 10 − ϵ , 10 + ϵ ) ( 10 ( 1 − k ) − ϵ k , 10 − ϵ )
+( 10 − ϵ , 10 − ϵ ) ( 10 ( 1 − k ) − ϵ ( 1 − k ) , 1 − ϵ )
+For ϵ = 0.1, k = 0.3 the whole sequence looks like the following:
+
+
+So we clearly have some sort of optimization going on here. Estimating or calculating the
+entropy of these distributions is not easy. And when we use the entropy of a continuous
+distribution, we get results which depend on the choice of coordinates (or alternatively the
+choice of some weighting function). Entropies of continuous distributions may also be
+negative, which is quite annoying.
+Perhaps calculating the variance will leave us better oﬀ? Sadly not. I tried it for gaussians of
+decreasing variance and didn't get much. The equivalent to our adjusted optimizing-ness
+
+which we might deﬁne as log(V [P
+′AB
+t+1]) + log(V [P
+AB
+t
+]) −log(V [P
+′AB
+t
+]) −log(V [P
+AB
+t+1]) is always
+zero for this system. The non-adjusted version log(V [P
+′AB
+t+1]) −log(V [P
+AB
+t+1]) ﬂuctuates a lot.
+Where does this leave us?
+We can deﬁne whether something is an optimizer based on a probability distribution which
+need not be joint over A and B. This means we can deﬁne whether something is an optimizer
+for an arbitrarily narrow probability distribution, meaning we can take the limit as the
+probability distribution approaches a delta. We found an interesting relation between
+quantities in our simpliﬁed system but failed to extend it to a continuous system.
+
+Deﬁning Optimization in a Deeper Way
+Part 3
+Last time I got stuck trying to remove the need for uncertainty. I have done it now! In the
+process I have also removed the need for absolute time.
+The Setup
+First we need to consider the universe as a causal network. This can be done without any
+notion of absolute time:
+
+We can imagine dividing the world W into two parts, A and B. We can represent the states of
+each of these parts with vectors wA and wB. We might want this division to be somewhat
+"natural" in the sense of John Wentworth's work on natural abstractions and natural divisions
+of a causal network. But it's not particularly necessary.
+Now consider what happens if we make a small alteration to one of the variables in wB. Let's
+choose one which doesn't depend on any other variables. Everything which is "downstream"
+of it will be aﬀected, so let's highlight those in red. Let's call this universe X.
+
+Now let's imagine that we take everything in A, and replace it with the version from W. So all
+of the inﬂuence coming out of A will be the same as it is in W. Consider what happens to B.
+We'll call this universe Y , and label everything which is diﬀerent from X in green:
+
+Now if any part of the universe is doing a decent job of optimizing, we would expect the
+inﬂuence of changing that node in X to be eliminated over time. Crucially, if A is optimizing B
+, then that diﬀerence should be eliminated in X, but not eliminated as much in Y , since wA
+ has no information about the fact that yB is diﬀerent to wB.
+Example
+Imagine our state-continuous thermostat. The causal network looks like this:
+
+The world is divided into the thermostat T and room R. The dynamics of the system are
+described by the following equations, in which d is the "desired" temperature, and k
+ represents the strength of the thermostat's ability to change the temperature of the room.
+w 
+T
+t  = w 
+R
+t − 1 − d
+w 
+R
+t  = w 
+R
+t − 1 − k × w 
+T
+t − 1
+Choosing w
+T
+0 = 10, w
+R
+0 = 35, k = 0.01, d = 25 and with 1000 timesteps, we can plot the
+course of W like this:
+
+
+As expected, wR approaches 25, and wR approaches 25. If we choose to alter w
+R
+0 by 
+δ = 0.001, we can calculate x
+R
+t , x
+T
+t , and y
+R
+t  values. There's not much point plotting these
+since they're pretty much identical.
+What we can plot are the relative values of x
+R
+t −w
+R
+t  and y
+R
+t −w
+R
+t :
+
+As we can see, xR converges to the same value as wR, while yR remains the same distance
+away. We can take one ﬁnal measure, log(
+) and plot this:
+xR−wR
+yR−wR
+
+Now this plot has an interesting property in the system we are studying: it doesn't depend on
+our choice of δ.
+This metric can be thought of as a sort of "compressing ability" of T with respect to a change
+in w
+R
+0. This optimization is measured with respect to a particular axis of variation.
+The compressing ability actually doesn't change if we add some noise to the system in the
+form of a sinusoidal temperature variation. Even if the sinusoidal temperature variation is
+comically large:
+
+
+Yes, that is actually the new compressing ability being plotted, I didn't accidentally re-use the
+same graph! This is almost certainly a result of the fact that our "thermostat" is very
+mathematically pure.
+What it does depend on is k. With a k of 0.02, we get the following:
+
+It's twice as big! This is almost too good to be true! Looks like we might actually be onto
+something here.
+Further Thoughts
+The next step is obvious. We have to measure this in systems which aren't optimizers, or are
+less good optimizers. If it still holds up, we can try and compare the strengths of various
+optimizers. Then I'd like to explore whether or not this metric is able to ﬁnd optimization
+basins. Ideally this would involve trying to interpret some neural nets modelling some simple
+dynamic system.
+
+Deﬁning Optimization in a Deeper Way
+Part 4
+In the last post I introduced a potential measure for optimization, and applied it to a very
+simple system. In this post I will show how it applies to some more complex systems. My ﬁve
+takeaways so far are:
+1. We can recover an intuitive measure of optimization
+2. Even around a stable equilibrium,  O p ( A ; n , m )  can be negative
+3. Our measures throw up issues in some cases
+4. Our measures are very messy in chaotic environments
+5. O p  seems to be deﬁned even in chaotic systems
+It's good to be precise with our language, so let's be precise. Remember our model system
+which looks like this:
+
+In this network, each node is represented by a real number. We'll use superscript notation to
+notate the value of a node: wn is the value of node n in the world W.
+The heart of this is a quantity I'll call Comp, which is:
+C o m p ( A ;   n ,   m ) = 
+lim
+x m → w n
+ [ 
+  ]
+Which is equivalent to.
+C o m p ( A : n , m ) = 
+  
+∣
+∣ 
+A  varies / 
+  
+∣
+∣ 
+A  constant
+x m − w m
+y m − w m
+∂ s m
+∂ s n
+∂ s m
+∂ s n
+
+(sn is the generic version of wn, xn, yn)
+Our current measure for optimization is the following value:
+O p ( A ; n , m ) = 
+lim
+x m → w n
+ [ − log  | C o m p ( A : n , m ) | ]
+Op is positive when the nodes in A are doing something optimizer-ish towards the node m.
+This corresponds when Comp is < 1. We can understand this as when A is allowed to vary
+with respect to changes in sn, the change that propagates forwards to sm is smaller.
+Op is negative when the nodes in A are doing something like "ampliﬁcation" of the variance
+in m. Speciﬁcally, we refer to A optimizing m with respect to n around the speciﬁc trajectory 
+W, by an amount of nats equal to Op(A; n, m). We'll investigate this measure in a few
+diﬀerent systems.
+A Better Thermostat Model
+Our old thermostat was not a particularly good model of a thermostat. Realistically a
+thermostat cannot apply inﬁnite heating or cooling to a system. For a better model let's
+consider the function
+T h e r m ( θ ,   p ;   s T ) 
+⎧
+⎪
+⎨
+⎪
+⎩ 
+p 
+  θ ≤ s T 
+  s T 
+  − θ < s T < θ 
+− p 
+  s T ≤ − θ 
+ 
+Now imagine we redeﬁne our continuous thermostat like this:
+s 
+T
+t + δ t = s 
+R
+t  − d
+s 
+R
+t + δ t = s 
+R
+t  − δ t × T h e r m ( θ ,   p ;   s 
+T
+t  )
+Within the narrow "basin" of −θ ≤sT ≤θ, it behaves like before. But outside the change in
+temperature over time is constant. This looks like the following:
+pθ
+
+
+When we look at our optimizing measure, we can see that in while sR remains in the linear
+decreasing region, Op = 0. It only increases when sR reaches the exponentially decreasing
+region.
+
+
+Now we might want to ask ourselves another question, for what values of s
+R
+0 is Op(T; s
+R
+0, s
+R
+t )
+ positive for a given value of t, say t = 10? Let's set p = 1,  θ = 1 and the initial s
+T
+0 = 0. The
+graph of this looks like the following:
+
+Every initial sR which has a trajectory which leads into the "optimizing region" between the
+temperatures of 24 and 26 is optimized a bit. The maximum Op values are trajectories which
+start in this region.
+Point 1: We can Recover an Intuitive Measure of
+Optimization
+What we might want to do is measure the "amount" of optimization in this region, between
+the points s
+R
+0 = 5 and s
+R
+0 = 45, with respect to s
+R
+10. If we choose this measure to be the
+integral of 1 −Comp, we get some nice properties. 
+It (almost) no longer depends on θ, but depends linearly on p.
+
+θ = 1, p = 1 gives an integral of 19.961
+
+θ = 0.5, p = 1 gives an integral of 19.611
+
+θ = 1, p = 0.5 gives an integral of 9.980
+As θ →0, our integral remains (pretty much) the same. This is good because it means we can
+assign some "opimizing power" to a thermostat which acts in the "standard" way, i.e.
+applying a change of +p each time unit to the temperature if it's below the set point, and a
+change of −p each time unit if it's above the set point. And it's no coincidence that that
+power is equal to 2pt. 
+Let's take a step back to consider what we've done here. If we consider the following
+diﬀerential equation:
+  = { 
+− p 
+  T > T s e t   
+0 
+  T = T s e t   
+p 
+  T < T s e t 
+ 
+It certainly looks like T values are being compressed about Tset by 2p per time unit, but that
+requires us to do a somewhat awkward manoeuvre: We have to equivocate our metric of the
+space of T at t = 10 with our metric of the space of T at t = 0. For temperatures this can be
+done in a natural way, but this doesn't necessarily extend to other systems. It also doesn't
+d T
+d t
+
+stack up well with systems which naturally compress themselves along some sort of axis, for
+example water going into a plughole.
+We've managed to recreate this using what I consider to be a much more ﬂexible, well-
+deﬁned, and natural measure. This is a good sign for our measure.
+The Lorenz System
+This is a famed system deﬁned by the diﬀerential equations:
+  = σ ( a − b )
+  = a ( ρ − c ) − b
+  = a b − β c
+(I have made the notational change from the "standard" x, y, z →a, b, c in order to avoid
+collision with my own notation)
+Which can fairly easily and relatively accurately be converted to discreet time. We'll keep 
+σ = 10, β =
+ as constant values. For values of ρ < 1 we have a single stable equilibrium
+point. For values 1 < ρ < 24.74 we get three stable equilibria, and for values ρ > 24.74 we
+have a chaotic system. We'll investigate the ﬁrst and third cases.
+The most natural choices for A are all of any one of the a b or c values. We could also equally
+validly choose A to be a pair of them, although this might cause some issues. A reasonable
+choice for n would be the initial value of either of the two a, b, or c which aren't chosen for A.
+Point 2: Even Around a Stable Equilibrium, 
+Op(A; n, m) an be Negative
+Let's choose ρ = 0.8, which means we have a single stable point at a = 0, b = 0, c = 0. Here
+are plots for the choice of a as the set A, and s
+b
+0 as the axis along which to measure
+optimization. (So we're changing the value of s
+b
+0 and looking at how future values of s
+b
+t  and 
+s
+c
+t  change, depending on whether or not values of s
+a
+t  are allowed to change)
+d a
+d t
+d b
+d t
+d c
+d t
+83
+
+
+Due to my poor matplotlib abilities, those all look like one graph. This indicates that we are
+not in the chaotic region of the Lorenz system. The variables a, b, and c approach zero in all
+cases. 
+
+
+As we can see, diﬀerence y
+b
+t −w
+b
+t  is greater than the diﬀerence x
+b
+t −w
+b
+t . The mathematics of
+this are diﬃcult to interpret meaningfully, so I'll settle with the idea that changes in a, b,
+and c in some way compound on one another over time, even as all three approach zero.
+When we plot values for Op we get this:
+
+
+The values for Op(a; s
+b
+0, sb) and Op(a; s
+b
+0, sc) are negative, as expected. This is actually really
+important! It's important that our measure captures the fact that even though the future is
+being "compressed" — in the sense that future values of a, b, and c approach zero as t →∞
+ —  it's not necessarily the case that these variables (which are the only variables in the
+system) are optimizing each other.
+Point 3: Our Measures Throw Up Issues in Some
+Cases
+Now what about variation along the axis s
+c
+0?
+
+
+
+We run into a bit of an issue! For a small chunk of time, the diﬀerences xc −wc and yc −wc
+ have diﬀerent signs. This causes Op to be complex valued, whoops!
+Point 4: Our Measures are Very Messy in Chaotic
+Environments
+When when choose ρ = 28, it's a diﬀerent story. Here we are with a as A, s
+b
+0 as the axis of
+optimization:
+
+Now the variations are huge! And they're wild and ﬂuctuating.
+
+
+Huge variations across everything. This is basically what it means to have a chaotic system.
+But interestingly there is a trend towards Op becoming negative in most cases, which should
+tell us something, namely that these things are spreading one another out.
+What happens if we deﬁne A as a, t ≤10? This means that for s
+a
+t  values with t > 10 we allow
+a diﬀerence between the wa and ya values. We get graphs that look like this:
+
+This is actually a good sign. Since A only has a ﬁnite amount of inﬂuence, we'd expect that it
+can only de-optimize b and c by a ﬁnite degree into the future.
+Point 5: Op Seems to be Deﬁned Even in Chaotic
+Systems
+It's also worth noting that we're only looking at an approximation of Op here. What happens
+when we reduce the δb = x
+b
+0 −w
+b
+0 by some amount? In our other cases we get the same
+answer. Let's just consider the eﬀect on sb.
+
+δ s 
+b
+0 = 10 − 5
+
+δ b = 10 − 6
+Works for a shorter simulation, what about a longer one?
+
+δ b = 10 − 5
+
+δ b = 10 − 6
+
+δ b = 10 − 7
+This seems to be working mostly ﬁne.
+Conclusions and Next Steps
+Looks like our system is working reasonably well. I'd like to apply it to some even more
+complex models but I don't particularly know which ones to use yet! I'd also like to look at
+landscapes of Op and Comp values for the Lorenz system, the same way I looked at
+landscapes of the thermostat system. The aim is to be able to apply this analysis to a neural
+network.
+

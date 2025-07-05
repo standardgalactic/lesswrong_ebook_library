@@ -1,0 +1,788 @@
+
+Decision Analysis
+1. Decision Analysis Sequence
+2. 5 Axioms of Decision Making
+3. Compressing Reality to Math
+4. Measures, Risk, Death, and War
+5. Value of Information: Four Examples
+
+Decision Analysis Sequence
+This is the introduction (conclusion) to my decision analysis sequence. It covers (much
+more quickly and less completely) what you would expect to see in a semester-long
+course on decision making. The posts are:
+1. Uncertainty: the basics of treating uncertainties as probabilities and doing
+Bayesian math.
+2. 5 Axioms of Decision Making: the ﬁve steps / assumptions that form the
+foundation of careful decision-making.
+3. Compressing Reality to Math: how to take a sticky, complicated situation and
+condense it down to something a calculator can solve, without feeling like
+you've left something important out.
+4. Measures, Risk, Death, and War: how to deal with many similar prospects
+(utilities), risks of death, and adversaries.
+5. Value of Information: Four Examples: how to value information-gathering
+activity, like tests or waiting, and incorporate it into your decision-making
+process.
+I'd like to welcome any comments about the sequence here. What parts did I do well?
+What parts need work? What parts would you like to see expanded (or removed)?
+One of the diﬃculties in posting about a topic like this is that it's foundational: basic,
+but important to get right. The idea of an expected utility calculation is not new
+(although the approach I take here may be novel for many of you) and, like I say in the
+VoI post, there's often more beneﬁt in applying the process to examples than
+repeatedly talking about the process. The case studies I have access to, though, are
+not ones I can publish online, and I don't think I can construct an example that would
+work as well as a real one. Do people have problems they would like me to analyze
+with this framework as examples?
+
+5 Axioms of Decision Making
+This is part of a sequence on decision analysis; the ﬁrst post is a primer on Uncertainty.
+Decision analysis has two main parts: abstracting a real situation to math, and then cranking
+through the math to get an answer. We started by talking a bit about how probabilities work,
+and I'll ﬁnish up the inner math in this post. We're working from the inside out because it's
+easier to understand the shell once you understand the kernel. I'll provide an example of
+prospects and deals to demonstrate the math, but ﬁrst we should talk about axioms. In order
+to be comfortable with using this method, there are ﬁve axioms1 you have to agree with,
+and if you agree with those axioms, then this method ﬂows naturally. They are: Probability,
+Order, Equivalence, Substitution, and Choice.
+Probability
+You must be willing to assign a probability to quantify any uncertainty important to your
+decision. You must have consistent probabilities.
+Order
+You must be willing to order outcomes without any cycles. This can be called transitivity of
+preferences: if you prefer A to B, and B to C, you must prefer A to C.
+Equivalence
+If you prefer A to B to C, then there must exist a p where you are indiﬀerent between a deal
+where you receive B with certainty and a deal where you receive A with probability p and C
+otherwise.
+Substitution
+You must be willing to substitute an uncertain deal for a certain deal or vice versa if you are
+indiﬀerent between them by the previous rule. Also called "do you really mean it?"
+Choice
+If you have a choice between two deals, both of which oﬀer A or C, and you prefer A to C,
+then you must pick the deal with the higher probability of A.
+ 
+These ﬁve axioms correspond to ﬁve actions you'll take in solving a decision problem. You
+assign probabilities, then you order outcomes, then you determine equivalence so you
+can substitute complicated deals for simple deals, until you're ﬁnally left with one obvious
+choice.
+You might be uncomfortable with some of these axioms. You might say that your preferences
+genuinely cycle, or you're not willing to assign numbers to uncertain events, or you want
+there to be an additional value for certainty beyond the prospects involved. I can only
+respond that these axioms are prescriptive, not descriptive: you will be better oﬀ if you
+behave this way, but you must choose to.
+Let's look at an example:
+My Little Decision
+ 
+
+Suppose I enter a lottery for MLP toys. I can choose from two kinds of tickets: an A ticket has
+a 1/3 chance of giving me a Twilight Sparkle, a 1/3 chance of giving me an Applejack, and a
+1/3 chance of giving me a Pinkie Pie. A B ticket has a 1/3 chance of giving me a Rainbow
+Dash, a 1/3 chance of giving me a Rarity, and a 1/3 chance of giving me a Fluttershy. There
+are two deals for me to choose between- the A ticket and the B ticket- and six prospects,
+which I'll abbreviate to TS, AJ, PP, RD, R, and FS.
+(Typically, decision nodes are represented as squares, and work just like uncertainty nodes,
+and so A would be above B with a decision node pointing to both. I've displayed them side by
+side because I suspect it looks better for small decisions.)
+The ﬁrst axiom- probability- is already taken care of for us, because our model of the world is
+already speciﬁed. We are rarely that lucky in the real world. The second axiom- order- is
+where we need to put in work. I need to come up with a preference ordering. I think about it
+and come up with the ordering TS > RD > R = AJ > FS > PP. Preferences are personal-
+beyond requiring internal consistency, we shouldn't require or expect that everyone will
+think Twilight Sparkle is the best pony. Preferences are also a source of uncertainty if
+prospects satisfy multiple diﬀerent desires, as you may not be sure about your indiﬀerence
+tradeoﬀs between those desires. Even when prospects have only one measure, that is,
+they're all expressed in the same unit (say, dollars), you could be uncertain about your risk
+sensitivity, which shows up in preference probabilities but deserves a post of its own.
+Now we move to axiom 3: I have an ordering, but that's not enough to solve this problem. I
+need a preference scoring to represent how much I prefer one prospect to another. I might
+prefer cake to chicken and chicken to death, but the second preference is far stronger than
+the ﬁrst! To determine my scoring I need to imagine deals and assign indiﬀerence
+probabilities. There are a lot of ways to do this, but let's jump straight to the most sensible
+one: compare every prospect to a deal between the best and worst prospect.2
+
+I need to assign a preference probability p such that I'm indiﬀerent between the two deals
+presented: either RD with certainty, or a chance at TS (and PP if I don't get it). I think about it
+and settle on .9: I like RD close to how much I like TS.3 This indiﬀerence needs to be two-
+way: I need to be indiﬀerent about trading a ticket for that deal for a RD, and I need to be
+indiﬀerent about trading a RD for that deal.4 I repeat this process with the rest, and decide
+.6 for R and AJ and .3 for FS. It's useful to check and make sure that all the relationships I
+elicited before hold- I prefer R and AJ the same, and the ordering is all correct. I don't need to
+do this process for TS or PP, as p is trivially 1 or 0 in that case.
+Now that I have a preference scoring, I can move to axiom 4. I start by making things more
+complicated- I take all of the prospects that weren't TS or PP and turn them into deals of {p
+TS, 1-p PP}. (Pictured is just the expansion of the right tree; try expanding the tree for A. It's
+much easier.)
+
+Then, using axiom 1 again, I rearrange this tree. The A tree (not shown) and B tree now have
+only two prospects, and I've expressed the probabilities of those prospects in a complicated
+way that I know how to simplify.
+And we have one last axiom to apply: choice. Deal B has a higher chance of the better
+prospect, and so I pick it. Note that that's the case even though my actual chance of
+receiving TS with deal B is 0%- this is just how I'm representing my preferences, and this
+
+computation is telling me that my probability-weighted preference for deal B is higher than
+my probability-weighted preference for deal A. Not only do I know that I should choose deal
+B, but I know how much better deal B is for me than deal A.5
+This was a toy example, but the beauty of this method is that all calculations are local. That
+means we can apply this method to a problem of arbitrary size without changes. Once we
+have probabilities and preferences for the possible outcomes, we can propagate those from
+the back of the tree through every node (decision or uncertainty) until we know what to do
+everywhere. Of course, whether the method will have a runtime shorter than the age of the
+universe depends on the size of your problem. You could use this to decide which chess
+moves to play against an opponent whose strategy you can guess from the board
+conﬁguration, but I don't recommend it.6 Typical real-world problems you would use this for
+are too large to solve with intuition but small enough that a computer (or you working
+carefully) can solve it exactly if you give it the right input.
+Next we start the meat of decision analysis: reducing the real world to math.
+ 
+1. These axioms are Ronald Howard's 5 Rules of Actional Thought.
+2. Another method you might consider is comparing a prospect to its neighbors; RD in terms
+of TS and R, R in terms of RD and FS, FS in terms of R and PP. You could then unpack those
+into the preference probability
+3. Assigning these probabilities is tough, especially if you aren't comfortable with
+probabilities. Some people ﬁnd it helpful to use a probability wheel, where they can see what
+60% looks like, and adjust the wheel until it matches what they feel. See also 1001
+PredictionBook Nights and This is what 5% feels like.
+4. In actual practice, deals often come with friction and people tend to be attached to what
+they have beyond the amount that they want it. It's important to make sure that you're
+actually coming up with an indiﬀerence value, not the worst deal you would be willing to
+make, and ﬂipping the deal around and making sure you feel the same way is a good way to
+check.
+5. If you ﬁnd yourself disagreeing with the results of your analysis, double check your math
+and make sure you agree with all of your elicited preferences. An unintuitive answer can be a
+sign of an error in your inputs or your calculations, but if you don't ﬁnd either make sure
+you're not trying to start with the bottom line.
+6. There are supposedly 10120 possible games of chess, and this method would evaluate all
+of them. Even with computation-saving implementation tricks, you're better oﬀ with another
+algorithm.
+
+Compressing Reality to Math
+This is part of a sequence on decision analysis and follows 5 Axioms of Decision-
+Making, which explains how to turn a well-formed problem into a solution. Here we
+discuss turning reality into a well-formed problem. There are three basic actions I'd like
+to introduce, and then work through some examples.
+Scope
+The ﬁrst thing you have to decide with a problem is, well, what the problem is. Suppose
+you're contemplating remodeling your kitchen, and the contractor you're looking at
+oﬀers marble or granite countertops. While deciding whether you want marble or
+granite, you stop and wonder- is this really the contractor that you should be using?
+Actually, should you even be remodeling your kitchen? Maybe you should to move to a
+better city ﬁrst. But if you're already thinking about moving, you might even want to
+emigrate to another country.
+At this point the contractor awkwardly coughs and asks whether you'd like marble or
+granite.
+Decisions take eﬀort to solve, especially if you're trying to carefully avoid bias. It helps
+to partition the world and deal with local problems- you can ﬁgure out which
+countertops you want without ﬁrst ﬁguring out what country you want to live in. It's
+also important to keep in mind lost purposes- if you're going to move to a new city,
+remodeling your kitchen is probably a mistake, even after you already called a
+contractor. Be open to going up a level, but not paralyzed by the possibility, which is a
+careful balancing act. Spending time periodically going up levels and reevaluating your
+decisions and directions can help, as well as having a philosophy of life.
+Model
+Now that you've got a ﬁrst draft of what your problem entails, how does that corner of
+the world work? What are the key decisions and the key uncertainties? A tool that can
+be of great help here is an inﬂuence diagram, which is a directed acyclic graph1 which
+represents the uncertainties, decisions, and values inherent in a problem. While
+sketching out your model, do you become more or less comfortable with the scope of
+the decision? If you're less comfortable, move up (or down) a level and remodel. 
+Elicit
+Now that you have an inﬂuence diagram, you need to populate it with numbers. What
+(conditional) probabilities do you assign to uncertainty nodes? What preferences do
+you assign to possible outcomes? Are there any other uncertainty nodes you could add
+to clarify your calculations? (For example, when making a decision based on a medical
+test, you may want to add a "underlying reality" node that inﬂuences the test results
+but that you can't see, to make it easier to elicit probabilities.)
+ 
+
+Outing with a Friend
+A friend calls me up: "Let's do something this weekend." I agree, and ponder my
+options. We typically play Go, and I can either host at my apartment or we could meet
+at a local park. If it rains, the park will not be a fun place to be; if it's sunny, though,
+the park is much nicer than my apartment. I check the weather forecast for Saturday
+and am not impressed: 50% chance of rain.2 I check calibration data and see that for a
+3 day forecast, a 50% prediction is well calibrated, so I'll just use that number.3
+If we play Go, we're locked in to whatever location we choose, because moving the
+board would be a giant hassle.4 But we could just talk- it's been a while since we
+caught up. I don't think I would enjoy that as much as playing Go, but it would give us
+location ﬂexibility- if it's nice out we'll go to the park, and if it starts raining we can just
+walk back to my apartment.
+
+Note that I just added a decision to the problem, and so I
+update my diagram accordingly. With inﬂuence diagrams,
+you have a choice of how detailed to be- I could have
+made the activity decision point to two branches, one in
+which I see the weather then pick my location, and
+another where I pick my location and then see the
+weather. I chose a more streamlined version, in which I
+choose between playing Go or walking wherever the rain
+isn't (where the choice of location isn't part of my
+optimization problem, since I consider it obvious.
+Coming up with creative options like this is one of the
+major beneﬁts of careful decision-making. When you
+evaluate every part of the decision and make explicit your dependencies, you can see
+holes in your model or places where you can make yourself better oﬀ by recasting the
+problem. Simply getting everything on paper in a visual format can do wonders to help
+clarify and solve problems.
+At this point, I'm happy with my model- I could come up with other options, but this is
+probably enough for a problem of this size.5 I've got six outcomes- either (we walk,
+play go (inside, outside)) and it (rains, doesn't rain). I decide that I would most prefer
+playing go outside and it doesn't rain, and would least prefer playing go outside and it
+rains.6 Ordering the rest is somewhat diﬃcult, but I come up with the following matrix:
+                                        
+If we walk, I won't enjoy it quite as much as playing Go, but if we play Go in my
+apartment and it's sunny I'll regret that we didn't play outside. Note that all of the
+preferences probabilities are fairly high- that's because having a game interrupted by
+rain is much worse than all of the other outcomes. Calculating the preference value of
+each deal is easy, since the probability of rain is independent of my decision and .5: I
+decide that playing Go at Park is the worst option with an eﬀective .5 chance of the
+best outcome, Go at Home is better with an eﬀective .7 chance of the best outcome,
+and Walk is best with an eﬀective .75 chance of the best outcome.
+Note that working through everything worked out better for us than doing scenario
+planning. If I knew it would rain, I would choose Go at Home; if I knew it wouldn't rain, I
+would choose Go at Park. Walk is dominated by both of those in the case of certainty,
+but its lower variance means it wins out when I'm very uncertain about whether it will
+rain or not.7
+What's going up a level here? Evaluating whether or not I want to do something with
+this friend this weekend (and another level might be evaluating whether or not I want
+them as a friend, and so on). When evaluating the prospects, I might want to compare
+them to whatever I was planning before my friend called to make sure this is actually a
+better plan. It could be the chance of rain is so high it makes this plan worse than
+whatever alternatives I had before I knew it was likely to rain.
+
+Managing a Store
+Suppose I manage a store that sells a variety of products. I decide that I want to
+maximize proﬁts over the course of a year, plus some estimate of intangibles (like
+customer satisfaction). I have a number of year-long commitments (the lease on my
+space, employment contracts for full-time employees, etc.) already made, which I'll
+consider beyond the scope of the problem. I then have a number of decisions I have to
+make month-to-month8 (how many seasonal employees to hire, what products to
+order, whether to change wages or prices, what hours the store should be open), and
+then decisions I have to make day-to-day (which employees to schedule, where to
+place items in the store, where to place employees in the store, how to spend my
+time).
+I look at the day-to-day decisions and decide that I'm happy modeling those as policies
+rather than individual decisions- I don't need to have mapped those out now, but I do
+need to put my January orders in next week. Which policies I adopt might be relevant
+to my decision, though, and so I still want to model them on that level.
+Well, what about my uncertainties? Employee morale seems like one that'll vary
+month-to-month or day-to-day, though I'm comfortable modeling it month-to-month, as
+that's when I would change the employee composition or wages. Customer satisfaction
+is an uncertainty that seems like it would be worth tracking, and so is customer
+demand- how the prices I set will inﬂuence sales. And I should model demand by item-
+or maybe just by category of items. Labor costs, inventory costs, and revenue are all
+nodes that I could stick in as uncertainty nodes (even though they might just
+deterministically calculate those based on their input nodes).
+You can imagine that the inﬂuence diagram I'm sketching is starting to get massive-
+and I'm just considering this year! I also need to think carefully about how I put the
+dependencies in this network- should I have customer satisfaction point to customer
+demand, or the other way around? For uncertainty nodes it doesn't matter much (as we
+know how to ﬂip them), but may make elicitation easier or harder. For decision nodes,
+order is critical, as it represents the order the decisions have to be made in.
+But even though the problem is getting massive, I can still use this methodology to
+solve it. This'll make it easier for me to keep everything in mind- because I won't need
+to keep everything in mind. I can contemplate the dependencies and uncertainties of
+the system one piece at a time, record the results, and then integrate them together.
+Like with the previous example, it's easy to include the results of other people's
+calculations in your decision problem as a node, meaning that this can be extended to
+team decisions as well- maybe my marketer does all the elicitation for the demand
+nodes, and my assistant manager does all the elicitation for the employee nodes, and
+then I can combine them into one decision-making network.
+Newcomb's Problem
+Newcomb's Problem is a thought experiment designed to highlight the diﬀerence
+between diﬀerent decision theories that has come up a lot on Less Wrong.
+AnnaSalamon wrote an article (that even includes inﬂuence diagrams that are much
+prettier than mine) analyzing Newcomb's Problem, in which she presents three ways to
+interpret the problem. I won't repeat her analysis, but will make several observations:
+
+1. Problem statements, and real life, are often ambiguous or uncertain. Navigating
+that ambiguity and uncertainty about what problem you're actually facing is a
+major component of making decisions. It's also a major place for bias to creep in:
+if you aren't careful about deﬁning your problems, they will be deﬁned in careless
+ways, which can impose real and large costs in worse solutions.
+2. It's easy to construct a thought experiment with contradictory premises, and not
+notice if you keep math and pictures out of it. Draw pictures, show the math. It
+makes normal problems easier, and helps you notice when a problem boils down
+to "could an unstoppable force move an immovable object?",9 and then you can
+move on.
+3. If you're not quite sure which of several interpretations is true, you can model
+that explicitly. Put an uncertainty node at the top which points to the model
+where your behavior and Omega's decision are independent and the model
+where your behavior determines Omega's behavior. Elicit a probability, or
+calculate what the probability would need to be for you to make one decision and
+then compare that to how uncertain you are.
+1. This means that there are a bunch of nodes connected by arrows (directed edges),
+and that there are no cycles (arrows that point in a loop). As a consequence, there are
+some nodes with no arrows pointing to them and one node with no arrows leaving it
+(the value node). It's also worth mentioning that inﬂuence diagrams are a special case
+of Bayesian Networks.
+2. This is the actual prediction for me as of 1:30 PM on 12/14/2011. Link here, though
+that link should become worthless by tomorrow. Also note that I'm assuming that rain
+will only happen after we start the game of Go / decide where to play, or that the
+switching costs will be large.
+3. The actual percentage in the data they had collected by 2008 was ~53%, but as it
+was within the 'well calibrated' region I should use the number at face value.
+4. If it started raining while we were playing outside, we would probably just stop and
+do something else rather than playing through the rain, but neither of those are
+attractive prospects.
+5. I strongly recommend satisﬁcing, in the AI sense of including the costs of optimizing
+in your optimization process, rather than maximization. Opportunity costs are real. For
+a problem with, say, millions of dollars on the line, you'll probably want to spend quite
+a bit of time trying to come up with other options.
+6. You may have noticed a trend that the best and worst outcome are often paired
+together. This is more likely in constructed problems, but is a feature of many diﬃcult
+real-world problems.
+7. We can do something called sensitivity analysis to see how sensitive this result is; if
+it's very sensitive to a value we elicited, we might go back and see if we can narrow
+the uncertainty on that value. If it's not very sensitive, then we don't need to worry
+much about those uncertainties.
+8. This is an artiﬁcial constraint- really, you could change any of those policies any day,
+or even at any time during that day. It's often helpful to chunk continuous periods into
+a few discrete ones, but only to the degree that your bins carve reality at the joints.
+
+9. The unstoppable force being Omega's prediction ability, and the immovable object
+being causality only propagating forward in time. Two-boxers answer "unmovable
+object," one-boxers answer "unstoppable force."
+
+Measures, Risk, Death, and War
+This is the fourth post of a sequence on decision analysis, preceded by Compressing
+Reality to Math. It touches on a wide variety of topics which didn't seem to work well as
+posts of their own, either because they were too short or too long.
+Measures over Prospects
+So far, we've looked at distinct prospects: diﬀerent toys, diﬀerent activities, diﬀerent
+life experiences. Those are diﬃcult to compare, and we might actually be unsure about
+the ordering of some of them. Would I prefer playing Go or chatting more? It takes a bit
+of eﬀort and imagination to say.
+Oftentimes, though, we face prospects that are measured in the same units. Would you
+prefer having $10 to having $4? There's no eﬀort or imagination necessary: the answer
+is yes.1 Facing wildly diﬀerent prospects- a vacation to the Bahamas, a new computer,
+a raise at work- it can be helpful to try and reduce them to common units, so that
+preferences are easy to calculate. This is especially true if the prospects are fungible:
+you could sell your new computer at some time cost to receive a dollar amount, or
+could buy one from a store at some dollar cost. It doesn't make sense to value winning
+a computer higher than the cost to buy one (or gain from selling one, if that manages
+to be higher), even if you value it much more highly than its cost.2
+As always, adding uncertainty makes things interesting: would you prefer having {.5
+$10, .5 $0} or {1 $4}?3 The answer depends on your circumstances: if lunch costs $3
+and you get $10 worth of value out of eating lunch (the ﬁrst time), then the certain
+deal is probably better. If these are your marginal investment dollars, though, a 20%
+expected return is probably worth jumping on.
+When dealing with a complicated problem with lots of dollar prospects, we could
+express each one as the certain equivalent of a deal between the highest and lowest
+dollar prospects. If we aren't great at eliciting preferences, though, we might end up
+with weird results we don't really agree with, and adding a new dollar amount requires
+eliciting a new preference probability.
+An alternative is to come up with a function that maps the prospects to preference
+probabilities. The function can be ﬁt with only a few elicited parameters, and then just
+evaluated for every prospect, making large problems and adding new prospects easy.
+As you've probably guessed, that function is called a utility function.4 I haven't brought
+it up before now because it's not necessary,5 though a useful computational trick, and
+it's dangerous to think of utilities as measurable numbers out there, rather than
+expressions of an individual's preferences.
+Risk Aversion
+The primary information encoded by a utility function over one type of prospect is risk
+sensitivity. We can divide risk sensitivity into risk-averse, risk-neutral, and risk-loving
+
+(also called risk-aﬃne)- basically, whether the utility function is concave, ﬂat, or
+convex.
+ 
+                                                        Averse, Neutral, and Loving. Images from wikipedia.
+In the risk-averse case, you essentially take some function of the variance oﬀ of the
+expected value of each deal. A risk averse person might rather have 9±1 than 10±10.
+Notice that which one they prefer depends on how curved their utility function is, i.e.
+how much penalty they charge risk. In the risk neutral case, variance is simply
+unimportant- you only decide based on expected values. In the risk-loving case, you
+add some function of the variance to the expected value- a risk aﬃne person might
+prefer 9±10 to 10±1.
+Globally risk-loving people are hard to come by, although it's easy to imagine a utility
+function that's locally risk-loving (especially one that's risk-loving up to a certain point).
+True risk neutrality is also hard to come by- typically, if you multiply the scale by 10
+enough times someone becomes risk-averse. Local risk neutrality, though, is the norm-
+zoom in on any utility function close enough and it'll be roughly ﬂat.
+So the utility functions we'll look at will be concave. Log is a common choice, but is
+sometimes awkward in that log(0) is negative inﬁnity, and log(inﬁnity) is also inﬁnity-
+it's unbounded both above and below. Exponential is better behaved- 1-exp(0)=0 and
+1-exp(inﬁnity)=1, and so it's bounded both above and below. It also follows what's
+called the Delta property: if we add a constant amount to every prospect, our behavior
+doesn't change.6 The irrelevance of 'money in the bank' is sometimes sensible, but
+sometimes not- if we re-examine the earlier deal of ({$10, .5; $0, .5} or {$4, 1}), and
+add $3 to replace it with ({$13, .5; $3, .5} or {$7, 1}), the investor will just up his price
+
+by $3, whereas the lunch-buyer might switch from the second choice to the ﬁrst.
+Thinking about the delta property- as well as risk premiums (how much would you pay
+to narrow an outcome uncertainty?) helps determine whether you should use linear,
+log, or exponential utility functions.
+ 
+Micromorts
+The methodology we've discussed seems like it might have trouble comparing things of
+wildly diﬀerent value. Suppose I like reading in the park more than reading in my home,
+but getting to the park requires traveling, and also suppose that traveling includes
+some non-zero chance of death. If I had a categorical preference that ranked the
+continuation of my life ﬁrst, I would never choose to go to the park.
+But that seems far too cautious. If the diﬀerence in enjoyment were large enough - say
+the choice was between attending my daughter's wedding in the park and reading at
+home - it seems like I should accept the chance of death and travel. But perhaps that is
+too bold- if it were almost certain that I would die along the way, I suspect it would be
+wiser to not go, and others would agree with my assessment. That is, if we adopt
+categorical preferences (no amount of B could compensate for a reduction in A), we
+can construct realistic scenarios where we would make regrettable decisions.
+That suggests what we need to do is make a measured tradeoﬀ. If I have a slight
+preference for living at the park to living at home, and a massive preference for living
+at home to dying along the way, then in order to go to the park I need it to be almost
+certain I will arrive alive, but there is some chance of death small enough that I would
+be willing to accept it.
+How small? The ﬁrst 'small probability' that comes to mind is 1%, but that would be far,
+far too large. That's about 600 times riskier than skydiving. I don't expect my mind to
+process smaller numbers very eﬀectively. When I think of 1 in 10,000 and 1 in 100,000,
+does the ﬁrst feel ten times bigger?
+Like we just discussed, the way to deal with this sort of elicitation trouble is to turn to
+utility functions. Howard outlines an approach in a 1984 paper which has some sensible
+features. Given an exponential utility function, there is some maximum probability of
+death one will accept money for- and in the example they give it's about 10%, though
+that number will obvious vary from person to person.7 Anything riskier, and you
+couldn't be paid enough to accept.
+Conveniently, though, there is a large "safety region" where prices are linear with
+chance of death. That is, the price of an incremental risk doesn't change until the risks
+get rather severe. To make this easier to handle, consider a one millionth chance of
+dying: a micromort. That's a fairly convenient unit, as many risky behaviors have easily
+imagined scales at one micromort. For example, walking 17 miles is one micromort;
+and so going to the park a two miles away and coming back represents a 2.5e-7
+chance of dying. (You can calculate your baseline chance of dying here, though it
+should be noted by 'baseline' they mean 'average' rather than 'without doing
+anything.')
+How should we value that incremental amount? Well, it depends on what utility
+function you want to use, and what you assume about your life. Optimistic
+
+singularitarians, for example, should need far more money to accept a chance of dying
+than others, because they expect their lives to be longer and better than traditional
+analysis would suggest, but pessimistic singularitarians should need far less money to
+accept a chance of dying than others, because they expect their lives to be shorter or
+worse than traditional analysis would suggest.8 The EPA suggests $8.24 for Americans
+(in 2011 dollars), but this number should vary based on age, sex, risk attitude, wealth,
+and other factors. Common values seem to range from $2 to $50; when I ran my
+numbers a while back I got about $10. If we take the EPA number, it looks like walking
+to the park will cost me about $2. If I would rather be at the park and $2 poorer than if I
+were at home, then I should walk over there, even though it brings me a bit closer to
+death. When considering risky activities like skydiving, I just just adjust the price
+upwards and decide if I would still want to do it if it cost that much extra, but was safe.
+(For skydiving, each jump costs about $144 using the EPA micromort value.)
+ 
+Adversarial Decision Making
+So far, we've mostly discussed decision-making under uncertainty by focusing on
+natural uncertainties- you're not sure if it'll rain or not, you're not sure if you'll win the
+lottery or not, you're not sure if you'll get involved in an accident on the way to the
+park or not. That's not the full picture, though: many important decisions include an
+adversary. Adversaries represent a special kind of uncertainty, because they react to
+your decisions, have their own uncertainties, and often actively want to make you
+worse oﬀ, rather than just not caring about your preferences.
+Game Theory
+Game Theory behaves a lot like the methods we've described before. Take a real
+situation, turn it into an action-payoﬀ matrix, and ﬁnd equilibria and mixed strategies.
+It's a large, rich ﬁeld and I'm not going to describe how it works in detail, as there are
+other resources for that.
+One of the pitfalls with Game Theory, though, is that it requires some strong
+assumptions about how your opponent makes decisions. Can you really be sure your
+opponent will play the game-theoretically correct strategy, or that you've determined
+their payoﬀ matrix correctly?
+For example, consider a game of rock-paper-scissors. Game Theory suggests a mixed
+strategy of throwing each possibility with 1/3 probability. When playing against Bart
+Simpson, you can do better. Even when playing against a normal person, there are
+biases you can take advantage of.
+As another example, consider that you run a small ﬁrm that's considering entering a
+market dominated by a large ﬁrm. After you choose to enter or not, they can choose
+whether to cut prices or not. You estimate the dollar payoﬀs are (yours, theirs):
+
+You see that, regardless of what you do, they earn more not having a price war, and if
+they don't go for a price war you would prefer entering to not entering. Indeed, (Enter,
+Don't) is a Nash Equilibrium. But suppose the scenario instead looked like this:
+The cells of the matrix all have the same ranking- regardless of whether or not you
+enter, they earn more by not having a price war. But the diﬀerence is much smaller,
+and the loss to you for entering if they do have a price war is much higher. (This could
+be because the entire ﬁrm will go under if this expansion fails, rather than just losing
+some money.) Someone might conﬁdently announce that they won't engage in a price
+war, and so you should enter- but you might want to do a little research ﬁrst on how
+strong their preference for dollars are. They might value market share- which isn't
+included in this payoﬀ matrix- much more highly. That is, the Nash Equilibrium for this
+matrix (which is still the same cell) might not be the Nash Equilibrium for the real-world
+scenario.
+You can model this uncertainty about your opponent's strategy explicitly: include it as
+an uncertainty node that leads to several decision nodes, each operating on diﬀerent
+preferences. You might decide, say, that you need >83% conﬁdence that they'll behave
+selﬁshly rather than vengefully (when it comes to dollars) in the second scenario, but
+
+only >33% conﬁdence that they'll behave selﬁshly rather than vengefully (when it
+comes to dollars) in the ﬁrst scenario.
+ 
+1. Obviously, this is not true for everything- I might prefer two apples to one apple, but
+a million apples might be more trouble than they're worth. (Where would I put them?)
+For dollars, though, more is better in a much more robust way.
+2. This assumes that you'll still be able to buy the computer with whatever option you
+pick. If I decide to receive non-transferable tickets to a show that I enjoy at $1000
+instead of a computer that costs $500 but I enjoy at $3000, and don't have the money
+to buy the computer, I made a mistake. But if I have at least $500 spare, I can consider
+myself as already having the ﬁrst computer- the question is what a second one is
+worth. Ideally, preferences should be calculated over life experiences, not just events-
+your future life where you got the computer vs. your future life where you got the
+tickets.
+3. That is, option A is $10 50% of the time and $0 the other 50% of the time. Option B
+is $4 every time.
+4. What I described is a special case: a utility function which has a min of 0 and max of
+1 on the domain of the problem. General utility functions don't have that constraint.
+5. The Von Neumann-Morgenstern axioms and the 5 axioms I discussed earlier are
+mostly the same, and so if you have someone willing to make decisions the way I'm
+describing they should also be willing to construct a utility function and compute
+expected utilities. Indeed, the processes will be diﬃcult to distinguish, besides
+vocabulary, and so this is more a statement that the word is unnecessary than that the
+idea is unnecessary.
+6. It's so called because Δ is often used to signify a small amount- this is going through
+and replacing all prospects xi with xi+Δ.
+7. Incidentally, this is one of the diﬀerences between a log utility function and a
+exponential utility function. Someone with a log utility function would accept an
+arbitrarily small chance of life with an arbitrarily high wealth- but as wealth is
+practically bounded (there's only one Earth to own at present) that bounds the
+maximum chance of death.
+8. Interestingly, cryonics doesn't seem to alter this calculation, unless you think
+freezing technology will rapidly improve over your lifespan. That said, instead of just
+tracking risk of death you also need to track risk of not being frozen soon enough,
+meaning cause of death is much more relevant.
+
+Value of Information: Four Examples
+Value of Information (VoI) is a concept from decision analysis: how much answering a
+question allows a decision-maker to improve its decision. Like opportunity cost, it's
+easy to deﬁne but often hard to internalize; and so instead of belaboring the deﬁnition
+let's look at some examples.
+ 
+Gambling with Biased Coins
+Normal coins are approximately fair.1 Suppose you and your friend want to gamble,
+and fair coins are boring, so he takes out a quarter and some gum and sticks the gum
+to the face of the quarter near the edge. He then oﬀers to pay you $24 if the coin
+lands gum down, so long as you pay him $12 to play the game. Should you take that
+bet?
+First, let's assume risk neutrality for the amount of money you're wagering. Your
+expected proﬁt is $24p-12, where p is the probability the coin lands gum down. This is
+a good deal if p>.5, but a bad deal if p<.5.  So... what's p? More importantly, how
+much should you pay to ﬁgure out p?
+A Bayesian reasoner looking at this problem ﬁrst tries to put a prior on p. An easy
+choice is a uniform distribution between 0 and 1, but there are a lot of reasons to be
+uncomfortable with that distribution. It might be that the gum will be more likely to be
+on the bottom- but it also might be more likely to be on the top. The gum might not
+skew the results very much- or it might skew them massively. You could choose a
+diﬀerent prior, but you'd have trouble justifying it because you don't have any solid
+evidence to update on yet.2
+If you had a uniform prior and no additional evidence, then the deal as oﬀered is
+neutral. But before you choose to accept or reject, your friend oﬀers you another deal-
+he'll ﬂip the coin once and let you see the result before you choose to take the $12
+deal, but you can't win anything on this ﬁrst ﬂip. How much should you pay to see one
+ﬂip?
+Start by modeling yourself after you see one ﬂip. It'll either come up gum or no gum,
+and you'll update and produce a posterior for each case. In the ﬁrst case, your
+posterior on p is P(p)=2p; in the second, P(p)=2-2p. Your expected proﬁt for playing in
+the ﬁrst case is $4;3 your expected proﬁt for playing in the second case is negative
+$4. You think there's a half chance it'll land gum side up, and a half chance it'll land
+gum side down, and if it lands gum side down you can choose not to play. There's a
+half chance you get $4 from seeing the ﬂip, and a half chance you get nothing
+(because you don't play) from seeing the ﬂip, and so $2 is the VoI of seeing one ﬂip of
+the biased coin, given your original prior.
+Notice that, even though it'd be impossible to ﬁgure out the 'true' chance that the coin
+will land gum down, you can model how much it would be worth it to you to ﬁgure that
+out. If I were able to tell you p directly, then you could choose to gamble only when
+p>.5, and you would earn an average of $3.4  One coin ﬂip gives you two thirds of the
+value that perfect information would give you.
+
+Also notice that you need to change your decision to get any value out of more
+information. Suppose that, instead of letting you choose whether or not to gamble,
+your friend made you decide, ﬂipped two coins, and then paid you if the second coin
+landed gum down and you paid him. The coin is ﬂipped the same number of times,
+but you're worse oﬀ because you have to decide with less information.
+It's also worth noting that multimodal distributions- where there are strong clusters
+rather than smooth landscapes- tend to have higher VoI. If we knew the biased coin
+would either always come up heads or always come up tails, and expected each case
+were equally likely, then seeing one ﬂip is worth $6, because it's a half chance of a
+guaranteed $12.
+ 
+Choosing where to invest
+Here's an example I came across in my research:
+Kleinmuntz and Willis were trying to determine the value of doing detailed anti-
+terrorism assessments in the state of California for the Department of Homeland
+Security. There are hundreds of critical infrastructure sites across the state, and it's
+simply not possible to do a detailed analysis of each site. There are terrorism experts,
+though, who can quickly provide an estimate of the risk to various sites.
+They gave a carefully designed survey to those experts, asking them to rate the
+relative probability that a site would be attacked (conditioned on an attack occurring)
+and the probability that an attack would succeed on a scale from 0 to 10, and the
+scale of fatalities and economic loss on a logarithmic scale from 0 to 7. The experts
+were comfortable with the survey5 and able to give meaningful answers.
+Now Kleinmutz and Willis were able to take the elicited vulnerability estimates and
+come up with an estimated score for each facility. This estimated score gave them a
+prior over detailed scores for each site- if the experts all agreed that a site was a (0, 1,
+2, 3), then that still implies a range over actual values. The economic loss resulting
+from a successful attack (3) could be anywhere from $100 million to $1 billion. (Notice
+that having a panel of experts gave them a natural way to determine the spread of
+the prior beyond the range inherent in their answers- where the experts agreed, they
+could clump the probability mass together, with only a little on answers the experts
+didn't give, and where the experts disagreed they knew where to spread the
+probability out over.) They already had, from another source, data on the
+eﬀectiveness of the risk reductions available at the various sites and the costs of
+those reductions.
+The highest actual consequence elicited was for $6 billion, assuming a value of $6
+million per life. The highest VoI of getting a detailed site analysis, though, was only
+$1.1 million. From the deﬁnition, this shouldn't be that surprising- VoI is only large
+when you would be surprised or uncertainty is high. For some sites, it was obvious
+that DHS should invest in reducing risk; in others, it was obvious that DHS shouldn't
+invest in reducing risk. The detailed vulnerability analysis would just tell them what
+they already knew, and so wouldn't provide any value. Some sites were on the edge-
+it might be worthwhile to reduce risk, it might not. For those sites, a detailed
+vulnerability analysis would provide value- but because the site was on the edge, the
+expected value of learning more was necessarily small!6 Remember, for VoI to be
+
+positive you have to change your decision, and if that doesn't happen there's no
+VoI.
+Distressingly, they went on to consider the case where risk reduction could not be
+performed without a detailed vulnerability analysis. Then, rather than measuring VoI,
+they were mostly measuring the value of risk reduction- and the maximum value shot
+up to $840 million. When Bayesian evidence is good enough, requiring legal evidence
+can be costly.7
+ 
+Medical Testing
+About two years ago, I was sitting at my computer and noticed a black dot on my
+upper arm. I idly scratched it, and then saw its little legs move.
+It was an tick engorged on my blood, which I had probably picked up walking through
+the woods earlier. I removed it, then looked up online the proper way to remove it.
+(That's the wrong order, by the way: you need the information before you make your
+decision for it to be of any use. I didn't do it the proper way, and thus increased my
+risk of disease transmission.)
+Some ticks carry Lyme disease, and so I looked into getting tested. I was surprised to
+learn that if I didn't present any symptoms by 30 days, the recommendation was
+against testing. After a moment's reﬂection, this made sense- tests typically have
+false positive rates. If I didn't have any symptoms after 30 days, even if I took the test
+and got a positive result the EV could be higher for no treatment than for treatment.
+In that case, the VoI of the test would be 0- regardless of its outcome, I would
+have made the same decision. If I saw symptoms, though, then the test would be
+worthwhile, as it could distinguish Lyme disease from an unrelated rash, headache, or
+fever. "Waiting for symptoms to appear" was the test with positive VoI, not getting a
+blood test right away.
+One could argue that the blood test could have "peace of mind" value, but that's
+distinct from VoI. Even beyond that, it's not clear that you would get positive peace of
+mind on net. Suppose the test has a 2% false positive rate- what happens when you
+multiply the peace of mind from a true negative by .98, and subtract the costs of
+dealing with the false positives by .02? That could easily be negative.
+(I remain symptom-free; either the tick didn't have Lyme disease, didn't transfer it to
+me, or my immune system managed to destroy it.)
+ 
+Choosing a Career
+Many careers have signiﬁcant prerequisites: if you want to be a doctor, you're going to
+have to go to medical school. People often have to choose where to invest their time
+with limited knowledge- you can't know what the career prospects will be like when
+you graduate, how much you'll enjoy your chosen ﬁeld, and so on. Many people just
+choose based on accumulated experience- lawyers were high-status and rich before,
+so they suspect becoming a lawyer now is a good idea.8
+
+Reducing that uncertainty can help you make a better decision, and VoI helps decide
+what ways to reduce uncertainty are eﬀective. But this example also helps show the
+limits of VoI: VoI is best suited to situations where you've done the background
+research and are now considering further experiments. With the biased coin, we
+started oﬀ with a uniform prior; with the defensive investments, we started oﬀ with
+estimated risks. Do we have a comparable springboard for careers?
+If we do, it'll take some building. There's a lot of diﬀerent value functions we could
+build- it probably ought to include stress, income (both starting and lifetime)9, risk of
+unemployment, satisfaction, and status. It's not clear how to elicit weights on those,
+though. There's research on what makes people in general happy, but you might be
+uncomfortable just using those weights.10
+There are also hundreds, if not thousands, of career options available. Prior
+distributions on income are easy to ﬁnd, but stress is harder to determine.
+Unemployment risk is hard to predict over a lifetime, especially as it relies on
+macroeconomic trends that may be hard to predict. (The BLS predicts employment
+numbers out 10 years from data that's a few years old. It seems unlikely that they're
+set up to see crashes coming, though.)
+Satisfaction is probably the easiest place to start: there are lots of career aptitude
+tests out there that can take self-reported personality factors and turn that into a list
+of careers you might be well-suited for. Now you have a manageable decision
+problem- probably somewhere between six and twenty options to research in depth.
+What does that look like from a VoI framework? You've done a ﬁrst screening which
+has identiﬁed places where more information might alter your decision. If you faint at
+the sight of blood, it doesn't matter how much surgeons make, and so any time spent
+looking that up is wasted. If you do a quick scoring of the six value components I listed
+above (after brainstorming for other things relevant to you), just weighting them with
+those quick values may give you good preliminary results. Only once you know what
+comparisons are relevant- "what tradeoﬀ between status and unemployment risk am I
+willing to make?"- would you spend a long time nailing down your weights.
+This is also a decision problem that could take a long, long time. (Even after you've
+selected a career, the option to switch is always present.) It can be useful to keep
+upper and lower bounds for your estimates and update those along with your
+estimates- their current values and their changes with the last few pieces of
+information you found can give you an idea of how much you can expect to get from
+more research, and so you can ﬁnish researching and make a decision at a carefully
+chosen time, rather than when you get fatigued.
+ 
+Conclusion
+Let's take another look at the deﬁnition: how much answering a question allows a
+decision-maker to improve its decision.
+The "answering" is important because we need to consider all possible answers.11
+We're replacing one random variable with two random variables- in the case of the
+biased coin, it replaced one unknown coin (one ﬂip) with either the lucky coin and the
+unlucky coin (two ﬂips- one to ﬁgure out which coin, one to bet on). When computing
+
+VoI, you can't just consider one possible answer, but all possible answers considering
+their relative likelihood.12
+The "improve" is important because VoI isn't about sleeping better at night or
+covering your ass. If you don't expect to change your decision after receiving this
+information, or you think that the expected value of the information (the chance you
+change your decision times the relative value of the decisions) is lower than the cost
+of the information, just bite the bullet and don't run the test you were considering.
+The "decision" is important because this isn't just curiosity. Learning facts is often fun,
+but for it to ﬁt into VoI some decision has to depend on that fact. When watching
+televised poker, you know what all the hands are- and while that may alter your
+enjoyment of the hand, it won't aﬀect how any of the players play. You shouldn't pay
+much for that information, but the players would pay quite a bit for it.13
+ 
+1. Persi Diaconis predicts most human coin ﬂips are fair to 2 decimals but not 3, and
+it's possible through training to bias coins you ﬂip. With a machine, you can be precise
+enough to get the coin to come up the same way every time.
+2. There is one thing that isn't coin-related: your friend is oﬀering you this gamble,
+and probably has information you don't. That suggests the deal favors him- but
+suppose that you and your friend just thought this up, and so neither of you has more
+information than the other.
+3. Your proﬁt is 24p-12; your distribution on p is P(p)=2p, and so your distribution on
+proﬁt is 48p2-24p integrated from 0 to 1, which is 4.
+4. Again, your proﬁt is 24p-12; you have a uniform distribution on what I will tell you
+about p, but you only care about the section where p>.5. Integrated from .5 to 1,
+that's 3.
+5. Whenever eliciting information from experts, make sure to repeat back to them
+what you heard and ensure that they agree with it. You might know decision theory,
+but the reason you're talking to experts is because they know things you don't.
+Consistency can take a few iterations, and that's to be expected.
+6. A common trope in decision analysis is "if a decision is hard, ﬂip a coin." Most
+people balk at this because it seems arbitrary (and, more importantly, hard to justify
+to others)- but if a decision is hard, that typically means both options are roughly
+equally valuable, and so the loss from the coin ﬂip coming up the wrong value is
+necessarily small.
+7. That said, recommendations for policy-makers are hard to make here. Legal
+evidence is designed to be hard to game; Bayesian evidence isn't, and so Bayesian
+evidence is only "good enough" if it's not being gamed. Checking your heuristic (i.e.
+the expert's estimates) to keep it honest can provide signiﬁcant value. Performing
+detailed vulnerability analysis on some (how many?) randomly chosen sites for
+calibration is often a good choice. Beyond that, I can't do much besides point you to
+psychology to ﬁgure out good ways to diagnose and reduce bias.
+8. It doesn't appear that this is the case anymore. The supply of lawyers has
+dramatically increased, and so wages are declining; as well, law is a pretty soul-
+crushing ﬁeld from a stress, work-life balance, and satisfaction perspective. If law
+
+looks like the best ﬁeld for you and you're not in it for the money or status, the advice
+I hear is to specialize in a niche ﬁeld that'll put food on the table but stay interesting
+and tolerably demanding.
+9. Both of these capture diﬀerent information. A job with a high starting salary but no
+growth prospects might translate into more happiness than a job with a low starting
+salary but high growth prospects, for example.
+10. Most of the happiness/satisfaction literature I've seen has asked people about
+their attributes and their happiness/satisfaction. That's not a randomized trial, though,
+and so there could be massive selection eﬀects. If we ﬁnd that engineers are
+collectively less happy than waiters, does that mean engineering causes unhappiness,
+unhappiness causes engineering, that unhappiness and engineering are caused by the
+same thing, or none of those?
+11. Compare this with information theory, where bits are a property of answers, not
+questions. Here, VoI is a property of questions, not answers.
+12. If you already know the cost of the information, then you can stop computing as
+soon as you ﬁnd a positive outcome good enough and likely enough that the VoI so far
+is higher than the cost.
+13. In high-stakes poker games, the VoI can get rather high, and the deceit / reading
+involved is why poker is a more interesting game than, say, the lottery.
+

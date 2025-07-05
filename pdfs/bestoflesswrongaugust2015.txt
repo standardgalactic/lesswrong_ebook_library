@@ -1,0 +1,752 @@
+
+Best of LessWrong: August 2015
+1. Why people want to die
+2. Less Wrong EBook Creator
+3. Travel Through Time to Increase Your Eﬀectiveness
+4. Where coulds go
+5. Self compassion
+6. There are no "bad people"
+7. Not yet gods
+
+Why people want to die
+Over and over again, someone says that living for a very long time would be a bad
+thing, and then some futurist tries to persuade them that their reasoning is faulty,
+telling them that they think that way now, but they'll change their minds when they're
+older.
+The thing is, I don't see that happening.  I live in a small town full of retirees, and
+those few I've asked about it are waiting for death peacefully.  When I ask them about
+their ambitions, or things they still want to accomplish, they have none.
+Suppose that people mean what they say.  Why do they want to die?
+The reason is obvious if you just watch them for a few years.  They have nothing to
+live for.  They have a great deal of free time, but nothing they really want to do with it.
+ They like visiting friends and relatives, but only so often.  The women knit.  The men
+do yardwork.  They both work in their gardens and watch a lot of TV.  This
+observational sample is much larger than the few people I've asked.
+You folks on LessWrong have lots of interests.  You want to understand math, write
+stories, create start-ups, optimize your lives.
+But face it.  You're weird.  And I mean that in a bad way, evolutionarily speaking.  How
+many of you have kids?
+Damn few.  The LessWrong mindset is maladaptive.  It leads to leaving behind fewer
+oﬀspring.  A well-adapted human cares above all about sex, love, family, and friends,
+and isn't distracted from those things by an ADD-ish fascination with type theory.
+ That's why they probably have more sex, love, and friends than you do.
+Most people do not have open-ended interests the way LWers do.  If they have a
+hobby, it's something repetitive like ﬂy-ﬁshing or needlepoint that doesn't provide an
+endless frontier for discovery.  They marry, they have kids, the kids grow up, they
+have grandkids, and they're done.  If you ask them what the best thing in their life
+was, they'll say it was having kids.  If you ask if they'd do it again, they'll laugh and
+say absolutely not.
+We could get into a long argument over the evolution of aging, and whether people
+would remain eager to have kids if they remained physically young.  Maybe some
+would.  Some would not, though.  Many young parents are looking forward to the day
+their kids leave.
+A lot of interests in life are passing.  You fall in love with a hobby, you learn it, you do
+it for a few years, then you get tired of it.  The things that were fascinating when you
+were six hold no magic for you now.  Pick up a toy soldier and try to play with it.  You
+can't.  Skateboarding seems awesome for about ﬁve years, and then everyone except
+Tony Hawk gets tired of it.
+Having kids might be like that for some people.  Thing is, it's literally the only thing
+humans have evolved to be interested in.  Once you're tired of that, you're done.  If
+some of you want to keep going, that's an accidental by-product of evolution.  And
+there was no evolutionary pressure to exempt it from the common waning of interest
+with long exposure.
+
+The way to convert deathists isn't to argue with them, but to get them interested in
+something.  Twist them the way you're twisted.
+
+Less Wrong EBook Creator
+I read a lot on my kindle and I noticed that some of the sequences aren't available in book form. Also,
+the ones that are mostly only have the posts. I personally want them to also include some of the high
+ranking comments and summaries. So, that is why I wrote this tool to automatically create books from a
+set of posts. It creates the book based on the information you give it in an excel file. The excel file
+contains:
+Post information
+Book name
+Sequence name
+Title
+Link
+Summary description
+Sequence information
+Name
+Summary
+Book information
+Name
+Summary
+The only compulsory component is the link to the post.
+I have used the tool to create books for  Living Luminously,  No-Nonsense Metaethics,  Rationality: From AI to
+Zombies, Benito's Guide and more. You can see them in the examples folder in this github link. The tool just
+creates epub books you can use calibre or a similar tool to convert it to another format.  
+Below is an FAQ on how to use it. If you have any other questions, let me know.
+FAQ:
+How can I quickly get the tool running?
+Download the tool from this dropbox link. Copy the jar and the lib folder and then run.
+You can use the xlsx files in the examples folder at this github link for input.
+You can use the lesswrong.html file in the resources folder at this  github link  for a cover page. If
+someone wants to create a better cover page, then I will update it.
+How does it work?
+The below image is an example of the program running.
+
+Descriptions of each of the configurable options are below:
+Output File Location - this is where the epub file will be saved
+Input Data - this is where the excel file that you want to use as input can be found. The excel file should
+be in a specific format. You can see examples in the Examples folder in the github location for the
+format.
+Cover page - this is the location of any html file that you want to use as a cover page. Any image files
+that this html file uses should be in the same folder.
+Include comments - this is used to determine whether comments should be included or not
+Include children comments >= threshold - this determines whether you only want top posts that are
+greater or equal to the threshold or whether you want to include children posts that are greater or equal
+to this threshold as well. For example, if the threshold is five then out of the below comments 1 and 3
+would be included if this is checked if it is not checked only comment 1 will be.
+Comment 1 7 points
+ Comment2 3 points
+Comment 3 5 points
+Threshold - only comments which have a point score that is greater than or equal to this threshold will
+be included
+
+Include posts parent - if this is checked than comments 1, 2 and 3 below would be included. This is
+because comment 3 is greater than or equal to the threshold and comment 1 and 2 are parents of this
+comment. Only parents of comments greater than or equal to the threshold will be included.
+Comment 1 2 points
+Comment2 3 points
+Comment 3 5 points
+Include posts children - if this is checked than comments 1, 2 and 3 below would be included. This is
+because comment 1 is greater than or equal to the threshold the other comments are children of a
+comment that is greater than or equal to the threshold.
+Comment 1 7 points
+Comment2 3 points
+Comment 3 5 points
+What sites can this tool pull posts from
+http://lesswrong.com
+http://wiki.lesswrong.com
+http://www.yudkowsky.net
+http://www.overcomingbias.com/ (includes all comments if comments included)
+Do you have some example output of the tool?
+See the epub files in the examples folder at this github link
+The example books had the include comments option checked and the threshold was set to 5.
+Do you have some example input data that I can use to create epubs?
+See the xlsx files in the examples folder at this github link
+Do you have an example cover page that I can use
+See the lesswrong.html file in the resources folder at this github link
+Where can I download the tool?
+Here is the dropbox link to the jar file. Copy the jar and the lib folder and then run.
+Where can I download the code?
+At this github link
+How do I create an input file?
+Copy one of the xlsx files in the examples folder at this  github link. Update it as appropriate, e.g.
+change the links to the posts.
+Each row in the first sheet defines a post that will be included in the book, its title, a summary to display
+for this post and which sequence and book it belongs to.
+The second and third sheet define the summary to be shown for the sequence and book.
+
+I created or improved some of the input files by adding summaries. Should I share them?
+Yes. I haven't written summaries for most of the example excel files. If someone wants to write
+summaries. then I will then add them to the github link.
+I found a problem with the tool or it is not working. What should I do?
+Post a comment below and I will look into it.
+What does "Parent comment not included" mean?
+An example of this is when you have Include children comments >= threshold set and threshold at 5. If
+you had the below comments, 1 and 3 would be included, but comment 2 would not be. When you
+include children comments there is normally a link to the parent comment. However, the parent
+(comment 2) for comment 3 is not included as its score was less than the threshold. Hence, "parent
+comment below threshold" indicates that the parent comment was not included. If you do want to
+include comment 2, then you should recreate the book with the include children or parent option
+selected.
+Comment 1 7 points
+Comment2 3 points
+Comment 3 5 points
+Hasn't someone else already done this?
+Yes. See  here  for some examples, but I don't think that included any ability to get comments or
+summaries.
+Why is this a separate GUI and not integrated into less wrong?
+I was really just writing this for myself and also based on what was said here, also below, it sounds like
+it should be separate.
+Matthew Fallshaw:
+Implementing this in the code doesn't seem to be significantly better than implementing an
+independent scraper, and it increases the amount of code we have to maintain. I think this is not a
+desirable feature.
+
+Travel Through Time to Increase Your
+Eﬀectiveness
+I am a time traveler.
+I hold this belief not because it is true, but because it is useful. That it also happens to
+be true -- we are all time travelers, swept along by the looping chrono-currents of
+reality that only seem to ﬂow in one direction -- is largely beside the point.
+In the literature of instrumental rationality, I am struck by a pattern in which tips I ﬁnd
+useful often involve reframing an issue from a diﬀerent temporal perspective. For
+instance, when questioning whether it is worth continuing an ongoing commitment,
+we are advised to ask ourselves "Knowing what I know now, if I could go back in time,
+would I make the same choice?"1 Also, when embarking on a new venture, we are
+advised to perform a "pre-mortem", imagining ourselves in a future where it didn't pan
+out and identifying what went wrong.2 This type of thinking has a long tradition.
+Whenever we use visualization as a tool for achieving goals, or for steeling ourselves
+against the worst case scenarios,3 we are, in a sense, stepping outside the present.
+To the degree that intelligence is the ability to model the universe and "search out
+paths through probability to any desired future" we should not be surprised that
+mental time travel comes naturally to us. And to the degree that playing to this
+strength has already produced so many useful tips, I think it is worth experimenting
+with it in search of other tools and exploits.
+Below are a few techniques I've been developing over the last two years that
+capitalize on how easy it is to mentally travel through time. I fully admit that they
+simply "re-skin" existing advice and techniques. But it's possible that you, my fellow
+traveller, may ﬁnd, as I do, that these skins easier to slip into.
+Second Chances
+There are those who tell you to live each day as if it might be your last. I prefer to live
+each day as if I'm doing it over.
+These philosophies could not be more diﬀerent. The ﬁrst invites short-sightedness,
+and, if followed to its logical conclusion, results in each day being worse than the one
+preceding it, as you burn bridges and fail to act on any longer-term goals. The second
+philosophy, in contrast, invites you to optimize for mindfulness, growth, or
+productivity based on the circumstances of the day and its relation to all subsequent
+days.
+I am doing today over. I trust that there is some reason I chose to go back in time to
+today speciﬁcally. In this particular case, I came back to write this article -- an article
+which, in a prior version of the future, never got written. How much sadder, that other
+future. What an opportunity I have to improve on it! In the grand scheme of things,
+whatever else I might have done today must not have really mattered; that must be
+why I picked today. But this article... this could really make a diﬀerence in someone's
+life! No wonder I burned out a star to power the machine that took me back to this
+
+moment. (It helps to imagine that the choice to come back was taken after much
+deliberation, and at great expense.)
+So today might be all about productivity. But most of the last two weeks I did over
+again with a focus on growth. You see, I wasn't ready for the prior version of the future
+-- the one where I brought my best knowledge and skills to bear, but still fell short. So
+I did those days over. I studied. I trained.  Then I studied and trained some more.
+Maybe this time it will be enough.
+Other days have been more about mindfulness. I've always had a diﬃcult time being
+"in the moment" during times I hope to be able to look back on fondly. I can be prickly
+and impatient at weddings, for example. On vacations, I fret about the money I'm
+spending, and worry about the home I've left unattended. On such days, it helps to
+imagine that I've chosen to come back to this day and really appreciate it this time --
+to soak in the beauty of the of my surroundings, to relish the functionality of my still-
+youthful body, to feel the warm presence of my loved ones, to fully imprint the
+memory of the smile on my daughters face. More than appreciate the day, I want to
+master it, with Bill Murray-like panache, Groundhog Day style. I want to grab my wife's
+hand, and, at just the right moment, tell her I love her in a way that makes her know I
+mean it.
+I don't have to limit myself to the coarse grain of an entire day. Most days actually
+have a mix of purposes. Whenever I'm driving a car, the purpose of the moment is to
+prevent getting that ticket or getting into that accident -- you know, the one that
+happened in the prior version of that commute. How embarrassed was my future self!
+To think that I had thought that going a little bit faster mattered in the slightest, or
+that the notiﬁcations on my phone couldn't wait until I got home. How lucky I am to be
+able to ﬁx things this time around, and with such trivial changes to my behavior.4
+Split Selves
+I think that much of our stress and akrasia come from feeling overwhelmed by what
+the future requires of us. We ﬁnd it hard to write chapter 4 because the thought of still
+having to write chapters 5 through 36 terriﬁes. If you don't trust yourself to stick with
+the program tomorrow, there's no point in working on it today. The fear becomes self-
+fulﬁlling.
+Much has been written about the importance of building up habits that allow you to
+trust yourself. While I agree that those are important, my conﬁdence comes from a
+diﬀerent place: the place next to my time machine where I keep my cloning vats.
+At an undisclosed location outside of time, there is a version of myself who notices
+when I have chosen a goal that requires reliable performance over an extended
+period. This self then runs an integrity check and, provided the task does not seem
+prima facie unrealistic given our capabilities, replicates us as many times as there are
+days needed to complete the task. Each clone is sent to a speciﬁc day.
+I am one of these clones. I don't need to worry about whether I will follow through on
+my commitments beyond today, because that's not my job. Someone else is handling
+that. I am TodayMe, and if I follow through on my portion of the task, then I can trust
+that TomorrowMe -- who is, after all, identical -- will also do his part. And so on.5 
+
+This is how the 2,000+ anki cards for my classroom spaced repetition eﬀort got
+written last year.
+Bobbling
+A "bobble", to the uninitiated, is a type of stasis sphere central to Vernor Vinge's
+novels The Peace War and Marooned in Realtime. Anyone or anything inside a bobble
+experiences no passage of time until the bobble bursts at some speciﬁed future time
+determined at the bobble's creation. The experience of being bobbled is one of
+instantly ﬁnding oneself in that future.
+What I call bobbling is a speciﬁc variation of the Split Selves technique, one that I ﬁnd
+to be of use with tasks that are hard to get into and stay focused on, as writing often
+is. It's really just a role-playing wrapper for the timeboxing method of your choice (i.e.
+The Pomodoro Technique).
+In its most elaborate form, bobbling works like this:
+It's almost 5:00. I'm going to make a jump to 6:30. From my perspective, I will
+blink 90 minutes into a future where someone has done 90 minutes of work on my
+project -- someone with exactly the same brains and skills as me, but much more
+focused.
+There are some restrictions: I cannot have any speciﬁc expectations about what
+that 90 minutes of progress will produce; I just have to trust it will be at least as
+much progress as I myself could have made in that time. Also, the task has to be
+one that I myself wouldn't mind or have trouble doing if I didn't live in realtime,
+with all its anxieties and distractions.
+Before I make the jump, I'm going to make some preparations. It's bad to jump on
+a full bladder or an empty stomach.6 It also wouldn't do for anyone to ﬁnd out
+that I'm mucking with time, so I'd better do what I can to make sure I'll be left
+alone. I close the door...
+Do you ever have dreams that you're not completely in? Where there is
+thought but not self? Just ideas coalescing, cohering, constructing... Words
+becoming sentences, sentences becoming paragraphs, revising and
+rearranging... There is no outside world. There is no world at all. Only a
+sphere of focus ﬂoating on ripples of reﬂection in an aether sea where time
+has no meaning.
+A timer beeps somewhere. 6:30? I thought it was 5:00.7 Oh yeah, I must have
+bobbled. It can be disorienting.
+Hey, look at all this progress someone left. Hmm... [shifty eyes]... Guess I'll just
+take credit for this [shuﬄing papers up]...
+One way to look at bobbling is that you're forking oﬀ a temporary version of yourself
+who ignores the passage of time and forgets all cares beyond the task at hand. As the
+forked self, it doesn't matter how long it takes to "spool up" and get through the "ugh
+ﬁeld" surrounding the task, because time is meaningless inside the bobble. It takes
+what it takes and that's that.
+
+This is how much of my ﬁction and code gets written. And how my tax returns get
+completed.
+The Past, Interrupted
+Context shifting carries costs. We are more productive when we can play a single role
+for an extended period without interruption. But sometimes it can't be helped. You
+need to get back to what you were doing and pick up where you left oﬀ. Hours ago.
+Days. Weeks. This is diﬃcult because what you were doing just seconds ago is still
+running through your head.
+Let it go.
+When you last stopped doing the older task that you now need to resume, you created
+a Restore Point. Everything you've done since then has been a diﬀerent Save ﬁle. Now
+it's time to suspend this present self and re-load your past self. If there's something
+you need to write down, do it... but you have to shut the present self down completely
+because you can't run two versions of yourself at once. Just do it quickly and
+eﬃciently, and don't feel bad about it. When it's time to go back to the newer self, you
+will, wholeheartedly, with that same zeal that you are now reverting to the past. It's
+going to be ok.
+You are now the past self. Everything else was an irrelevant interruption.
+Case Study: The Sleeper
+Sleep is super important, so let me tell you about an increasingly old version of myself
+I call The Sleeper. The Sleeper has been trying to get a really good night's sleep since
+March of 2014. But something always happens. The sun comes up. An alarm goes oﬀ.
+And the sleeper keeps getting Suspended for 16 hours or so. So cranky is The Sleeper!
+You see, I have always had trouble falling asleep, tossing and turning for 30-60
+minutes most nights. But staying asleep and going back to sleep have never been
+problems. And there's nothing more satisfying than having an alarm go oﬀ on a
+Saturday, realizing that I can turn it oﬀ, and going back to bed.
+So I no longer go to sleep every night. I only go back to sleep, by suspending my
+present self, loading up the The Sleeper and thinking, "Lousy stupid day interrupting
+my sleep. [Grumble grumble]. Now, where was I?...[snore]"
+It's such a stupid-sounding hack, I know, but it works amazingly well for me. Your
+mileage may vary. For reference, I'm biologically a night owl.
+Toward a More Excellent Future
+In the 1989 cinematic masterpiece, Bill & Ted's Excellent Adventure, the titular time-
+traveling protagonists ﬁnd themselves in the clutches of the San Dimas police
+department. They escape this "bogus" predicament by committing to use their time
+machine in the future to arrange the details of their escape. From IMDB:
+Captain Logan: [Captain Logan sees Bill and Ted pushing Billy the Kid out of the prison block window] Ted, what in the hell
+do you think you're doing?
+
+Ted: Trash can... remember a trash can!
+Captain Logan: Trash can? What are you talking about...
+[a trash can with "Wyld Stallyans Rule" written on the side lands on Captain Logan's head]
+It stands to reason that they did not leave their future behavior to chance. If possible,
+they probably used their machine as soon as they escaped. If not, they probably left
+themselves detailed notes and reminders. Whatever they did, it obviously worked.
+They made good on their commitments. This is excellence.
+Successful time travel is all about bringing our past, present, and future selves into a
+cooperative alignment. They need to trust each other. They need to communicate.
+Sometimes, we need to prepare things in the present and send messages into the
+future. Sometimes, we have to envision diﬀerent futures to provide direction to the
+present. Sometimes, we need to honor the past.
+I wrote an initial draft of this article more than 18 months ago. I was eager to ﬁnish it
+and post it to Discussion with my freshly created LW account. But I knew that the
+article would improve with time and experience, after I had tested the ideas more and
+accumulated clearer examples. Perhaps, I thought, it could even become worthy of
+posting to Main. 
+So to my draft I added some notes, links, and questions. I asked my my future selves
+to revisit the ﬁle, and also to accumulate enough LW karma to gain Main-posting
+privileges.
+If I may now indulge myself with a message to my past: "Here's that trash can you
+ordered, dude."
+Party on.
+Exercises
+Second Chances
+Imagine that your future self made great sacriﬁces to come back and do today
+over. Figure out what today was for, and get it right this time.
+When struggling to feel fully present in a moment you wish to be able to look
+back on fondly, imagine that you have come back from the future solely to
+appreciate this singular occasion.
+When performing a dangerous activity (i.e. driving), imagine that you have
+traveled back in time to prevent the accident you were otherwise going to have
+today.
+Split Selves & Bobbling
+When working on a task that requires consistent long-term output, imagine that
+you are a clone whose only concern is the portion of the task that has to be
+completed today. Other clones will handle other days, because they are identical
+to you.
+When struggling to make headway on a task requiring focused attention:
+1.  Imagine blinking forward 1-4 hours into a future where that much work
+has been done on it. 
+
+2. Create conditions where a version of yourself could avoid all distractions
+during that window, and start a timer.
+3. Enjoy role-playing a time-insensitive version of your mind for whom
+nothing exists but the intellectual world of the task.
+The Past, Interrupted
+When needing to perform a dramatic task shift:
+1. Write down any thoughts you are afraid of losing from your current
+context.
+2. Completely dump the contents your current working memory without any
+reservations. 
+3. Imagine that you are now the prior self who last worked on the "new" (old)
+task.
+If you're struggling to fall asleep, role-play a version of yourself who was
+sleeping soundly but was interrupted by something temporary. Go back to sleep.
+Toward a More Excellent Future
+Imagine a cool future outcome that is inevitable because you've returned to
+carry out the requisite steps. Enjoy the sense of excellence that comes from
+being one with your past, present, and future.
+1Cialdini, Inﬂuence
+2Klein, Harvard Business Review (and many other writers in diﬀerent places)
+3Vika has written about this on LessWrong fairly recently.
+4I feel like Eliezer or someone else may have articulated a version of that driving
+mindset somewhere else on LW, but I have been unable to locate it. My apologies if I
+am forgetting to credit someone.
+5I will leave the relevant analysis of decision theory in Newcomblike scenarios to
+others.
+6I am aware that a true bobble would have no such restrictions. My methods are not
+purely Vingean.
+7You might reasonably ask what a clock is doing inside my bobble at all. Wouldn't it
+break the illusion? I answer that, in the bobbled mindset, the clock is less a
+chronological tracker than a device that randomly shows diﬀerent combinations of
+digits, one of which will burst the bobble. It is not showing them in an order that
+necessarily brings this combination closer. The clock is more akin to a pair of dice that
+someone keeps rolling until it comes up snake-eyes and an alarm goes oﬀ. Time is
+meaningless here. Keep working.
+
+Where coulds go
+This is a linkpost for https://mindingourway.com/where-coulds-go/
+Most people don't think they "could" cure Alzheimers by snapping their ﬁngers, and so
+they don't feel terrible about failing to do this.
+By contrast, people who fail to resist overeating, or who fail to stop playing Civilization
+at a reasonable hour, feel strongly that they "could have" resisted, and take this as a
+license to feel terrible about their decisions.
+As I said last week, most people have broken "coulds."
+Willpower is scarce in this world. Sometimes, you can will yourself out of a mental rut
+you're in, but only rarely; more often, sheer force of will alone is not suﬃcient. If your
+plan to stop staying up too late playing Civilization is "well I'll just force myself harder
+next time," then this plan is doomed to failure. If it didn't work last time, it likely won't
+work next time. Willpower is a stopgap, not a remedy.
+I think that most people's "coulds" are broken because they put the action nodes in
+the wrong place. They think that the "choice" occurred at turn 347 of Civilization,
+when they decided to continue playing one more round (and at each following turn
+between midnight and 4:00 in the morning).
+But that's not where the choice occurred. If you have to force yourself to change your
+behavior, then you've already missed the real choice node.
+The actual choice occurs when you decide whether to play Civilization or not, at the
+very beginning.
+Say you have one acquaintance in your social circles who regularly frustrates you, and
+every so often, you explode at them and get into a big shouting match. You know you
+shouldn't start yelling at them, you try to not be frustrated. Whenever they start
+annoying you, you will yourself to cool down, but it never quite works (no matter how
+strongly you resolve to force yourself harder next time). In this case, I suggest that
+you stop trying to force yourself to hold back as your frustration peaks, and instead
+start noticing what happens ﬁve minutes before you explode. That's where the real
+choice is. The real choice isn't in whether or not you explode in the moment, it's in
+whether you exit the situation ﬁve minutes earlier.
+The real choices tend to happen a few minutes before the choices that people beat
+themselves up about. If you have to apply willpower, you've already missed the choice
+node. (In fact, I've previously suggested promising yourself that you'll never pull
+yourself out of a situation using willpower — knowing that you won't save your own
+ass if you get into a situation where you need willpower to extract yourself really
+makes you notice the true point of no return when it comes along.)
+If you ﬁnd yourself in a pattern of behavior you don't like, then I recommend
+pretending you don't have any willpower. Imagine you lived in the world where you
+couldn't force yourself to stop doing something addicting after starting. In that world,
+how would you act?
+
+Look for the triggers that precede the action you wish you could make diﬀerently.
+What happens an hour beforehand? What happens ﬁve minutes beforehand? What
+happens sixty seconds before you fail to act as you wish?
+That's where the real choice lies.
+Most people's coulds are broken. They treat themselves like they "could" start
+bingeing a TV show and then stop at a reasonable hour. They put themselves in a
+situation that tempts them against their better judgement, and then berate
+themselves when they succumb.
+By contrast, I don't treat myself as if I "could" stop binge-reading a good book, and
+therefore I don't feel terrible if I binge. Instead, I say, "ah, I see, I binge-read engaging
+books; I will treat 'read an engaging book' as a single atomic action that takes ﬁve to
+twenty hours, with no choice nodes in between." Where others are berating
+themselves for failing to complete an impossible task ("stop binge-reading halfway
+through and get back to real work"), I am learning what I am and am not capable of,
+and learning where my real action nodes are.
+We humans don't have all the choice nodes. Sometimes, we can't stop binge-reading
+a good book anymore than we could snap our ﬁngers to cure Alzheimer's disease.
+Sometimes, addiction takes over; other times, the lizard brain takes over; other times,
+primal rage takes over. In those moments, we don't get to call the shots. We aren't the
+choice-makers at every point in our lives. We often lack the willpower to override our
+impulses, instincts, and habits.
+The goal is to win anyway.
+Our better judgement is not the absolute arbiter of our actions, and there are often
+times when the voice of judgement is nearly powerless to aﬀect our behavior. We
+aren't yet gods. We're still monkeys. Still neural nets.
+I suggest you stop berating yourself for failing to complete impossible tasks, and start
+experimenting and identifying which action nodes work.
+Search for the choices that let you act as you wish before the decision gets diﬃcult to
+execute. Learn how to identify the moments when your mind is readily responding to
+your will. Those are the real choice-points, and it is from there that you may optimize.
+
+Self compassion
+This is a linkpost for https://mindingourway.com/self-compassion/
+Imagine a time when you were feeling guilt-wracked. Maybe a time you hurt a friend
+badly. Maybe a time you tried to do get some important work done, and found you
+couldn't, and this kicked oﬀ a failure spiral leading to a deep depression. Maybe some
+other time: the important thing is to load into memory a time you felt guilt-wracked,
+and recall how you felt towards yourself in that case.
+(When I do this, I get an internal sense of resistance, of not-wanting-to-look, of willing-
+the-past-to-be-diﬀerent.)
+Now imagine you have a child, who grows to the same age that you were then, who
+ﬁnds themselves in exactly the same situation. Maybe they, too, hurt somebody badly
+-- they didn't consciously realize how badly they were about to hurt a friend until one
+moment too late, and now they feel terrible. Or maybe they, too, tried to do
+something important, and found it hard, and started doubting themselves, and
+spiraled downwards into a depression that they now have trouble climbing out of.
+Imagine what you might feel towards your child, in this scenario.
+(When I do this, I get a sense of compassion, of protectiveness, and a desire to
+reassure them that this is what it looks like to learn hard lessons, for us monkeys.)
+I encourage you to simulate the feelings you would feel towards your child in this
+situation —
+— and then check whether you can also feel that way towards yourself.
+When you think of your own failings, can you feel that compassion and protectiveness
+and impulse to reassure towards you?
+Many can't. Some don't feel compassion towards others in the ﬁrst place (this post is
+not for them — if you want help feeling compassion towards your fellow humans, then
+maybe try this post and see if it works for you.) Others can as easily feel compassion
+for themselves as others. But many people I've spoken to experience a wide gulf
+between compassion for others and self-compassion — which is a shame, because
+self-compassion is an important part of self-loyalty and the mental toolset I'm trying to
+convey with these posts.
+To close the gap between compassion and self-compassion, I oﬀer two tools. The ﬁrst
+is a reminder that self-compassion is not the same thing as self-pity, and nor is it the
+same thing as making excuses for yourself. It is well possible to feel self-compassion
+even while thinking that you are not moving fast enough. It is perfectly possible to feel
+self-compassion even as you notice that you're completely failing to act as you wish
+to.
+For example, imagine someone going through boot camp in World War II, ﬁlled with
+resolve and determination to become a soldier and defend the free world — except
+they are a small person, and a weak one. Imagine them working their heart out, trying
+as hard as they can, and failing anyway. Imagine them failing to make the cut. Now,
+
+can you imagine feeling compassion for them, feeling warmth towards them, and
+maybe feeling a hint of sadness for their loss, without feeling any sense of pity?
+Compassion for yourself can be similar, without any hint of pity.
+Or imagine another person going through the same boot camp, who really wants to go
+defend the free world with all their peers (on some level), but who lacks the deep
+drive. They want to feel the same passion and ﬁre as their diminutive counterpart, but
+instead they feel resistance and suﬀer from depression — and every day they drag
+themselves out of bed (slightly too late), and every day they force themselves through
+the obstacle courses (but not quickly enough), and they aren't going to make the cut,
+and they're sick with guilt about it. Can you imagine feeling compassion for them in
+their plight, while making absolutely no excuses for their performance? Again, self-
+compassion can be the same way. You don't need to make excuses for yourself, to
+take the outside view and feel the same warmth for a monkey that's trying to try,
+against the gradient of depression and doubt.
+Now imagine someone else doing what you're trying to do. Imagine them working on
+hard problems, and putting in what eﬀort they can muster — sometimes it is enough,
+sometimes it isn't; sometimes they are highly motivated, other times they are blocked
+by their own mind and unable to act as they wish. Look at them and see the fragile
+monkey trying to build a satisfactory life, trying to improve their world. See if you can
+feel compassion for them. You don't need to pity them, you don't need to make
+excuses for their failures, you don't need to ﬁnd ways they could improve: simply see
+if you can feel some warmth, for a fellow lost monkey — and then shift your gaze to
+yourself, and see if you can feel a similar sort of warmth.
+The second tool I oﬀer, to close the gap between compassion for others and
+compassion for yourself, is this: I recommend that you pinch yourself, and remember
+what you are. Practice original seeing while looking upon yourself and your situation.
+What do you see?
+I see bundles of proteins and lipids arranged in a giant colony of cells, their lives given
+over to the implementation of a wet protein computer that thinks it's a person.
+I see fractal patterns that arise on precisely the right sort of planet when you pour
+sunlight into it for a billion years.
+I see wiggles in the Sun's wake that struggle to understand the universe.
+Incomprehensibly large constructs made of atoms, which are unnoticeably small on
+the scale of galaxies.
+Look at us, the ﬁrst species among the animals that can ﬁgure out what the stars are,
+yet still tightly bound to impulse and social pressure. (Notice how silly it is, monkeys
+acting all serious and wise as they try to aﬀect the course of history.)
+Look at us: half monkey, half god; towering below the stars.
+Look at whatever quest you've taken on, you who was forged by the death of your
+father's brothers and now claims dominion over the future. Acknowledge that what
+you're trying to do is diﬃcult. Turn the monkey sight on yourself, and see the lost
+monkey who's trying to steer an entire universe...
+and say hello. Check in with the monkey. See how it's doing.
+
+Steering the future is a diﬃcult thing. The world is large beyond comprehension, and
+the monkey wasn't really built for this. The monkey isn't really used to this sort of
+thing, and it can be pretty hard to work with sometimes.
+Let the monkey know that you have its back. Let it know that you'll still have its back,
+even if it gets ornery or diﬃcult or depressed. Through thick and thin, let you know
+that you have your support; that even when you screw everything, you'll stand by
+yourself, and help you through the mess, and help you ﬁgure out how to do better in
+the future.
+See if you can resolve to work with yourself. You can do powerful things, if you work
+together.
+
+There are no "bad people"
+This is a linkpost for https://mindingourway.com/there-are-no/
+When I help friends debug their intrinsic motivation, here's a pattern I often bump
+into:
+Well, if I don't actually start working soon, then I'll be a bad person.
+Or, even more worrying:
+Well they wanted me to just buckle down and do the work, and I really didn't want
+to do it then, which means that either they were bad, or I was bad. And I didn't
+want to be the bad one bad, so I got angry at them, and...
+I confess, I do not know what it would mean for somebody to be a "bad person." I do
+know what it means for somebody to be bad at achieving the goals they set for
+themselves. I do know what it means for someone to be good at pursuing goals that I
+dislike. I have no idea what it would mean for a person to "be bad."
+I know what it means for a person to lack skill in a speciﬁc area. I know what it means
+for a person to be procrastinating. I know what it means for a person to be acting
+under impulses that they don't endorse, such as spite or disgust. I know what it means
+for someone to fail to act as they wish to act. I know what it means for someone to
+hurt other people, either on purpose or with a feeling of helpless resignation.
+But I don't know what it would mean for a person to "be bad." That fails to parse.
+People don't have a hidden stone deep inside their brain that is either green or red
+depending on whether they are good or bad. "Badness" is not a fundamental property
+that a person can have. At best, "they're bad" can be shorthand for either "I don't
+want their goals achieved" or "they are untrained in a number of skills which would be
+relevant to the present situation"; but in all cases, "they are bad" must be either
+shorthand or nonsense.
+Asking whether a person is "fundamentally good" or "fundamentally bad" is a type
+error. Life is not a quest where you struggle to wind up "good." That's not the sort of
+reality we ﬁnd ourselves in.
+Rather, we ﬁnd ourselves embedded in a vast universe, with control over the future
+and a goal of making it wonderful. We ﬁnd ourselves to be part of a grand
+deterministic pattern, and we're trying to make that pattern as beautiful as possible.
+Step back and imagine history as a ﬁxed path through the great crystal that is our
+universe over all time; the time-crystal that describes everything everywhere and
+everywhen; the time-crystal where you can look not only forwards and backwards, but
+beforewards and afterwards. Imagine the path of history that dances through
+conﬁgurations to the tune of physics. That same physics, according to which the line
+jigs and jags, is what implements you. In those jigs and jags is the pattern that is your
+mind. Some of the jigs compute your thoughts, some of the jags compute your
+choices, and your choices determine how the line dances in the afterwards direction
+past the event of your choice.
+
+We aren't here to alter the color of the fundamental "goodness" stone buried within
+us; we're here to make the path through time be a good one.
+Life is not a game of "wind up good at the end"; life is about steering the future.
+Look not to whether you are good or bad. Look to where you are, and what you can do
+from there.
+Living this mindset does not mean that you lack regrets. It does not free you from the
+burdens of your wrongdoings. I, like anyone, suﬀer from recalling harms that I have
+done to others. But instead of treating those recollections as dark judgements on my
+soul, I treat them as messages from my past, information about what sorts of
+undesirable behavior the Nate-monkey is liable to execute if I am not careful.
+I sometimes ﬁnd myself unable to act as I wish; unresponsive to my own cajoling. I
+treat these not as evidence of my fundamental brokenness, but as evidence about
+how and when I can intervene on the world.
+While I often fail, I do not act under fear of being judged inadequate by the universe. I
+may be inadequate to the tasks I undertake, I may fail to steer the future as I wish to,
+but I cannot be "fundamentally bad." That sentence does not parse.
+There is something freeing about this: I may succeed; I may fail; but I will not be
+judged by someone who roots through my mind to see whether the stone is green or
+red.
+I will be judged only by the path that the future takes; as will we all.
+By contrast, when I help friends debug their motivation, I often ﬁnd them motivated
+by a desperate attempt to avoid "being bad."
+Where I can, I encourage them not to let that be at the core of what motivates them.
+It's well and good, when introspecting about why what you're doing is important, to
+get an answer from yourself that is of the form "otherwise I'll be bad." That's a ﬁne
+answer to get. But don't let that be the end of things. Don't pretend that that's the
+ﬁnal answer. Investigate.
+Ask yourself, "what do I mean by that?" Say to yourself, "I bet that's shorthand for
+something." Unpack the feeling of would-be-bad.
+If someone wants you to do the laundry, and you don't want to do the laundry, and
+you get angry at them because you have a sense that if there is conﬂict then one of
+you must be bad and you don't want to be bad—
+—then pause, and investigate further.
+Focus, and ask yourself what bad thing would happen if you did do the laundry, and
+what bad thing would happen if you didn't.
+Maybe you get an answer like "if I don't do the laundry then it will strain my
+relationship with my friend, but if I do do the laundry then it will spend scarce energy
+and attention and I'm feeling really exhausted and don't want to force myself to do it."
+
+That's great! (The answer doesn't need to be comfortable, it just needs to be
+unpacked. You may well reveal conﬂicting desires. You may well ﬁnd that you were
+ignoring goals that you had but didn't endorse, such as preserving your own attention
+or energy.) This is a similar mental action to unpacking a should: if you ﬁnd yourself
+compelled to do something because otherwise you'd "be bad," then become curious,
+investigate, and unpack the feeling into it's component parts.
+Ask yourself, "I don't know what it would mean to be bad; can you elaborate?"
+Then, listen to yourself. Don't worry if your answers seem senseless! Often, I have
+watched people completely fail to ﬁgure out what is blocking them, because as soon
+as they get an answer from deep inside their mind, they declare that it's ridiculous,
+and then they struggle to dismiss it or cover it up or decry it as "irrational."
+Perhaps they ask themselves what they mean by "then I'd be bad" and ﬁnd something
+like "I apparently think that if I don't do the laundry then it's evidence that I can't do
+anything, and that means I'll lose my job and end up on the street and die cold and
+alone, and that's stupid, so..." at which point they start lecturing themselves about
+why their concerns are dumb, instead of declaring self-loyalty and standing by
+themselves. (If you ﬁnd yourself doing this, I suggest taking your concerns seriously,
+and explaining your diﬀerent beliefs earnestly, with the same respect you'd show an
+inquisitive child who wants to understand the world but has a few ﬂaws in their
+understanding.)
+You're still a monkey! You often have inconsistent, strange preferences. Parts of you
+often have beliefs that other parts of you don't endorse. That's ok. Decrying your own
+inconsistencies is no way to ﬁx them: work with yourself.
+So don't settle for being motivated to do something because otherwise you'd "be
+bad." Unpack the feeling of "being bad," and ﬁgure out what outcomes you're aiming
+for. Figure out what you want to do. Figure out how you want the future to be.
+Because at the end of the day, a person "being bad" fails to parse. "Goodness" and
+"badness" are not properties of people. People can do terrible things; they can pursue
+horrible goals; they can watch with growing despair as they act against their own best
+interests; but they do not have a fundamental stone buried deep inside of them which
+measures their worth.
+Life is not a game of "wind up good at the end." Life is about steering the future.
+
+Not yet gods
+This is a linkpost for https://mindingourway.com/not-yet-gods/
+You probably don't feel guilty for failing to snap your ﬁngers in just such a way as to
+produce a cure for Alzheimer's disease.
+Yet, many people do feel guilty for failing to work until they drop every single day
+(which is a psychological impossibility). They feel guilty for failing to magically
+abandon behavioral patterns they dislike, without practice or retraining (which is a
+cognitive impossibility). What gives?
+The diﬀerence, I think, is that people think they "couldn't have" snapped their ﬁngers
+and cured Alzheimer's, but they think they "could have" used better cognitive
+patterns. This is where a lot of the damage lies, I think:
+Most people's "coulds" are broken.
+People think that they "could have" avoided anxiety at that one party. They think they
+"could have" stopped playing Civilization at a reasonable hour and gone to bed. They
+think they "could have" stopped watching House of Cards between episodes. I'm not
+making a point about the illusion of free will, here — I think there is a sense in which
+we "could" do certain things that we do not in fact do. Rather, my point is that most
+people have a miscalibrated idea of what they could or couldn't do.
+People berate themselves whenever their brain fails to be engraved with the cognitive
+patterns that they wish it was engraved with, as if they had complete dominion over
+their own thoughts, over the patterns laid down in their heads. As if they weren't a
+network of neurons. As if they could choose their preferred choice in spite of their
+cognitive patterns, rather than recognizing that choice is a cognitive pattern. As if
+they were supposed to choose their mind, rather than being their mind.
+As if they were already gods.
+We aren't gods.
+Not yet.
+We're still monkeys.
+Almost everybody is a total mess internally, as best as I can tell. Almost everybody
+struggles to act as they wish to act. Almost everybody is psychologically fragile, and
+can be put into situations where they do things that they regret — overeat,
+overspend, get angry, get scared, get anxious. We're monkeys, and we're fairly fragile
+monkeys at that.
+So you don't need to beat yourself up when you miss your targets. You don't need to
+berate yourself when you fail to act exactly as you wish to act. Acting as you wish
+doesn't happen for free, it only happens after tweaking the environment and training
+your brain. You're still a monkey!
+
+Don't berate the monkey. Help it, whenever you can. It wants the same things you
+want — it's you. Assist, don't badger. Figure out how to make it easy to act as you
+wish. Retrain the monkey. Experiment. Try things.
+And be kind to it. It's trying pretty hard. The monkey doesn't know exactly how to get
+what it wants yet, because it's embedded in a really big complicated world and it
+doesn't get to see most of it, and because a lot of what it does is due to a dozen
+diﬀerent levels of subconscious cause-response patterns that it has very little control
+over. It's trying.
+Don't berate the monkey just because it stumbles. We didn't exactly pick the easiest
+of paths. We didn't exactly set our sights low. The things we're trying to do are hard.
+So when the monkey runs into an obstacle and falls, help it to its feet. Help it practice,
+or help it train, or help it execute the next clever plan on your list of ways to overcome
+the obstacles before you.
+One day, we may gain more control over our minds. One day, we may be able to
+choose our cognitive patterns at will, and eﬀortlessly act as we wish. One day, we
+may become more like the creatures that many wish they were, the imaginary
+creatures with complete dominion over their own minds many rate themselves
+against.
+But we aren't there yet. We're not gods. We're still monkeys.
+

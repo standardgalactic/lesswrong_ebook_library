@@ -1,0 +1,749 @@
+
+So You Want To Colonize The Universe
+1. So You Want to Colonize The Universe
+2. So You Want to Colonize the Universe Part 2: Deep Time Engineering
+3. So You Want To Colonize The Universe Part 3: Dust
+4. So You Want to Colonize The Universe Part 4: Velocity Changes and Energy
+5. So You Want to Colonize The Universe Part 5: The Actual Design
+
+So You Want to Colonize The Universe
+Epistemic Status: Mix of facts, far-future-speculation with the inevitable biases from
+only considering techniques we know are physically possible, fermi calculations, and
+an actual spacecraft design made during a one-week research bender.
+(this is a sequence. 2, 3, 4, 5)
+Part 1a: Gotta Go Fast, Astronomy is a-Wasting
+Once a civilization or agent grows up enough to set it sights on colonizing realms
+beyond its host planet as its ﬁrst priority (instead of averting existential risks), there is
+a very strong convergent instrumental goal which kicks in. Namely, going as close to
+lightspeed (abbreviated as c) as possible.
+This is because the universe is expanding, so there is a ﬁnite sphere of reachable
+galaxies, and more pass outside the horizon every year. IIRC (60% probability), about
+half of the galaxies in the Hubble Ultra-Deep Field are unreachable even if we traveled
+at lightspeed.
+Arriving at a galaxy even one year faster nets you a marginal gain of (one galaxy of
+stars)*(average stellar luminosity)*(1 year) of energy, which for our Milky way comes
+out to about 1.6 × 1044 Joules. Assuming energy production on earth stays constant,
+that's enough energy for a billion years of earth civilization, 130 trillion times over.
+And I'd expect a transhuman civilization to be quite a few orders of magnitude better
+at getting value from a joule of energy than our current civilization. And that's just for
+a single galaxy. There are a lot of galaxies, a one-year speedup in reaching them has
+tremendous value.
+This is basically Bostrom's astronomical waste argument, except Bostrom's version
+then goes on to apply this loss in total form (which is far larger) instead of marginal
+form, to argue for the value of reducing existential risk.
+Now, there are a few corrections to this to take into account. The ﬁrst and most
+important is that, by the Landauer limit, the amount of (irreversible) computations
+that can be done is inversely proportional to temperature, so waiting until the
+universe cools down from its current 2.7 K temperature nets you several orders of
+magnitude more computational power from a given unit of energy than spending it
+now. Also, if you do reversible computation, this limit doesn't apply except to bit
+erasures, which nets you a whole lot more orders of magnitude of computation.
+Another correction is that if there are aliens, they'll be rushing to colonize the
+universe, so the total volume a civilization can grab is going to be much smaller than
+the entire universe. There's still an incentive to go fast to capture more stars before
+they do, though.
+There's also a correction where the total energy available from colonizing at all is
+more like the mass-energy of a galaxy than the fusion power of a galaxy, for reasons
+I'll get to in a bit. The marginal loss from tarrying for one year is about the same,
+though.
+
+And ﬁnally, if we consider the case where there aren't aliens and we're going up to the
+cosmological horizon, the marginal loss is less than stated for very distant galaxies,
+because by the time you get to a distant galaxy, it will have burned down to red
+dwarfs only, which aren't very luminous.
+Putting all this together, we get the conclusion that, for any agent whose utility
+function scales with the amount of computations done, the convergent strategy is "go
+really really fast, capture as many galaxies as possible, store as much mass-energy as
+possible in a stable form and ensure competitors don't arise, then wait until the
+universe is cold and dead to run ultra-low-temperature reversible computing nodes."
+Part 1b: Stars For the Black Hole God! Utils For the Util Throne!
+Now, banking mass-energy for sextillions of years in a way that doesn't decay is a key
+part of this, and fortunately, there's something in nature that does it! Kerr black holes
+are spinning rapidly, and warp space around them in such a way that it's possible to
+recover some energy from them, at the cost of spinning down the black hole slightly.
+For a maximally spinning black hole, 29% of the mass-energy can be recovered as
+energy via either the Penrose Process (throwing something near the hole in a way that
+involves it coming back with more energy than it went in), or the Blandford-Znajek
+Process (which involves setting up a magnetic ﬁeld around the hole and this inducing
+a current, and this is a major process powering quasars). I'm more partial to the
+second because it produces a current. Most black holes are Kerr black holes, and
+we've found quite a few black holes (including supermassive ones) that are spinning
+at around 0.9x the maximum spin, so an awful lot of energy can be extracted from
+them. So, if we sacriﬁced the entire Milky Way galaxy to the black hole at the center
+by nudging stellar orbits until they all went in, we'd have 5x10^57 joules of
+extractible energy to play around with. Take a minute to appreciate how big this is.
+And remember, this is per-galaxy. Another order of magnitude could be gotten if
+there's some way for a far-future civilization to interface with dark matter.
+So, the dominant strategy is something like "get to as much of the universe as fast as
+possible, and sacriﬁce all the stars you encounter to the black hole gods, and then in
+the far far future you can get the party started, with an absolutely ridiculous amount
+of energy at your disposal, and also the ability to use a given unit of energy far far
+more eﬃciently than we can today, by reversible computation and the universe being
+really cold"
+(It's a fuzzy memory, and Eliezer is welcome to correct me on this if I've
+misrepresented his views, and I'll edit this section)
+Due to the expansion of the universe, these mega-black-holes will be permanently
+isolated from each other. I think Eliezer's proposal was to throw as much mass back to
+the Milky Way as possible, and set up shop there, instead of cutting far-future
+civilization into a bunch of absolutely disconnected islands. I don't think this is as
+good, because I'd prefer a larger civilization over the whole universe (from not having
+to throw mass back to the milky way, just throw it to the nearest hole), cut into more
+disconnected islands, than a much smaller civilization that's all in one island.
+Part 1c: The Triple Tradeoﬀ
+In unrelated news, there's also a unsettling argument that I came up with that there's
+a convergent incentive to reduce the computational resources the computing node
+consumes. If you switch a simulated world to be lower ﬁdelity, and 80% as fun, but
+now it only takes a ﬁfth of the computational resources so 5x as much lifespan is
+
+available, I think I'd take that bargain. Taking this to the endpoint, I made the joke on
+a Dank EA Memes poll that the trillion trillion heavens of the far-future all have shitty
+Minecraft graphics, but I'm actually quite uncertain how that ends up, and there's also
+the argument that most of the computational power goes to running the minds
+themselves and not the environment, in which case there's an incentive for
+simplifying one's own thought processes so they take less resources.
+Generalizing this, there seems to be a three-way tradeoﬀ between population,
+lifespan, and computational resources consumed per member. Picking the population
+extreme, you'd get a gigantic population of short-lived simple agents. Picking the
+lifespan extreme, you get a small population of simple agents living for a really really
+long time. Picking the computational resources extreme, you get a small population of
+short-lived really really posthuman agents. (note that short-lived can still be quite long
+relative to human lifespans) I'm not sure what the best tradeoﬀ point is here, and it
+may vary by person, so something like "you get a ﬁnite but ridiculously large amount
+of computational resources, and if you want to be simpler and live longer, or go
+towards ever-greater heights of posthumanity with a shorter life, or have a bunch of
+babies and split your resources with them, you can do that". However, that approach
+plus would lead to most of the population being descended from people who valued
+reproduction over long life or being really transhuman, and they'd get less resources
+for themselves, and that seems intuitively bad. Also maybe there could be merging of
+people, with associated pooling of resources? I'm not quite sure how to navigate this
+tradeoﬀ, except to say that the population extreme of it seems bad, and that it's a
+really important far-future issue. I should probably also point out that if this is the
+favored approach, in the long-time limit, most of those that are left will be those that
+have favored lifespan over being really transhuman or reproduction, so I guess the
+last thing left living before heat death might actually be a minimally-resource-
+intensive conscious agent in a world with low-quality graphics.
+Part 1d: An Exploitable Fiction Opportunity
+Also, in unrelated news, I think I see an exploitable gap in ﬁction-writing. The elephant
+in the room for all space-travel stories is that space is incompatible with mammals,
+and due to advances in electronics, it just makes more sense to send up robotic
+probes.
+However, Burnside's Zeroth Law of Space Combat is:
+Science ﬁction fans relate more to human beings than to silicon chips.
+I'm not a writer, but this doesn't strike me as entirely true, due to the tendency of
+humans to anthropomorphize. When talking about the goal of space travel being to hit
+up as many stars and galaxies as possible as fast as possible, and throw them into
+black holes, the very ﬁrst thing that came to mind was "aww, the civilization is acting
+just like an obsessive speedrunner!"
+I like watching speedruns, it's absolutely fascinating watching that much optimization
+power being directed at the task of going as fast as possible in deﬁance of the local
+rules and ﬁnding cool exploits. I'd totally read about the exploits of a civilization that's
+overjoyed to ﬁnd a way to make their dust shields 5% more eﬃcient because that
+means they can reach a few thousand more galaxies, and Vinny the Von Neumann
+probe struggling to be as useful as it can given that it was sent to a low-quality
+asteroid, and stuﬀ like that. The stakes are massive, you just need to put in some
+work to make the marginal gain of accelerated colonization more vivid for the reader.
+
+It's the ultimate real-life tale of munchkinry for massive stakes and there's also ample
+"I know you know I know..." reasoning introduced by virtue of light-speed
+communication delays, and everyone's on the same side vs. nature.
+I think Burnside might have been referring to science ﬁction for a more conventional
+audience, given the gap between his advice and my own reaction. But hard-sci-ﬁ fans
+are already a pretty self-selected group, and Less Wrong readers are even moreso,
+and besides, with the advent of the internet, really niche ﬁction is a lot easier to pull
+oﬀ, it feels like there's a Hard-SciFi x Speedrunning niche out there available to be
+ﬁlled. A dash of anthropomorphization along with Suﬃciently Intelligent Probes feels
+like it could go a long way towards making people relate to the silicon chips.
+So I think there's an exploitable niche here.
+Putting all this to the side, though, I'm interested in the "go fast" part. Really, how
+close to light speed is attainable?
+
+So You Want to Colonize the Universe
+Part 2: Deep Time Engineering
+Part 2: Deep Time Engineering
+(1, 3, 4, 5)
+So, with "Gotta go Fast" as the highest goal, and aware of the fact that the amount of
+computational resources and thinking time devoted to building fast starships will
+exceed by many orders of magnitude all human thought conducted so far, due to the
+importance of it...
+I set myself to designing a starship to get to the Virgo supercluster (about 200 million
+light years away) in minimum time, as a lower-bound on how much of the universe
+could be colonized. I expect the future to beat whatever bar I set, whether humanity
+survives or not (it turned out to be about 0.9 c)
+Now, most people focus on interstellar travel, but the intergalactic travel part is
+comparatively underexplored (see comments). We have one big advantage here,
+which is that we don't need to keep mammals around, and this lets us have a much
+smaller payload. Instead of delivering a vessel that can support earth-based life for
+hundreds of millions of years, we just have to deliver about 100 kg of Von Neumann
+probes and stored people, which build more of themselves. (The true number is
+probably a lot less than this, but as it turns out, it isn't harder to design for the 100 kg
+case than the 1 mg case because there's a minimum viable mass for dust shielding,
+and we'll be cheating the rocket equation.)
+Before we get into intergalactic starship design (part 5), I want to take a minute to
+point out the ﬁeld of Deep Time engineering, which is something that I just
+crystallized as a concept while working on this.
+Note that whatever starship design you're building, it has to last for 200 million years,
+getting bombarded by relativistic protons and dust the whole way, and even with
+relativity speeding things up, you're still talking about building machinery that last for
+tens of millions of years and works with extremely high reliability the whole way. This
+is incredibly far beyond what engineering normally does, it takes god-like levels of
+redundancy and reliability, and if you've got something with moving parts, there's
+erosion by friction to consider, and also 200 million years worth of cosmic rays... I
+didn't focus on actual solutions that much, but just the awareness of the existence of
+tasks which require building machinery that works for hundreds of millions of years
+sparked something.
+Engineers have shorter time horizons than you might expect. In environmental
+engineering (my major), we typically focused on a 20-50 year design life for building
+wastewater treatment systems. They're also dependent on the electrical grid for
+functioning. I think that I could design a 500-year treatment plant that also wasn't
+dependent on the electrical grid. It would take a while, bring in quite a few
+nonstandard considerations, and be far outside of the scope of normal design, and a
+bunch of standard approaches (like using energy-hungry air pumps to aerate the
+
+water) wouldn't work. A plant that does this would also have an enormously larger
+footprint than standard wastewater treatment plants.
+Several-hundred or several-thousand year solutions are in a very diﬀerent design
+space than standard solutions.
+I should also make the note that we've ﬁgured out how Roman Concrete works, which
+is far more erosion-resistant than standard concrete (it lasts for several thousands of
+years, and is far more resistant to saltwater than standard cement), and this is why
+the Colosseum is still standing. Basically, you just use seawater instead of regular
+water when making it. Also the steel beams in regular concrete which give it tensile
+strength instead of mere compressive strength accelerate corrosion signiﬁcantly.
+However, regular concrete takes a few hours to cure enough to apply weight, and
+cures fully in about a month. Roman Concrete takes two years to fully cure. And this is
+why very few places use Roman Concrete, even though it lasts over an order of
+magnitude longer. (I did ﬁnd an article about a Hindu temple under construction that
+was using Roman Concrete, and was designed for a thousand years, though).
+Even in civil engineering, the land of roads and bridges and buildings, you tend to see
+100-year design lives at most, as well. I should note that there are tables that tell you
+the average magnitude of a 100-year ﬂood (largest ﬂood expected in 100 years), and
+these are used in design. And also the teachers mentioned that due to climate
+change, extreme weather events are more likely to occur than the tables indicate. But
+they didn't explicitly connect these two things, it was left unstated for the students to
+click together, and there was also an unstated implication that going to the higher-
+redundancy systems that'd handle 100 years+climate change would lead to people
+asking you why you're using 1,000-year ﬂood numbers instead of 100-year ﬂood
+numbers and the design wouldn't pass.
+There are exceptions. The sea walls in the Netherlands are sized for 10,000-year ﬂood
+numbers, and I got a pleasant chill up my back when I read that, because there's
+something really nice about seeing a civilization build for thousands of years in the
+future.
+There's also the attempt to design nuclear waste storage that warns people away for
+tens of thousands of years, even if civilization falls in the meantime. This popular
+account is worth reading, as a glimpse into long-timescale engineering.
+But in general, Deep Time Engineering is pretty underexplored, because it requires
+much higher costs, much higher reliability, a larger footprint, and about all of the
+machinery that you'd buy isn't rated for hundreds or thousands of years, there's no
+supporting infrastructure for engaging in construction projects of that design life.
+The speciﬁc manifestations of it would vary widely by ﬁeld and the speciﬁcs of what
+you're building, but in general it seems to be a discrete Thing that hasn't previously
+been named, and that our civilization neglects.
+Building a 100-million year (or even billion-year) starship is an especially extreme
+example of this. For my speciﬁc starship design, the only thing that actually requires
+continuously running the whole time is the antimatter chilling system to get it to 0.1 K
+when the cosmic microwave background is 2.73 K (otherwise it heats up enough that
+you lose all your antimatter to evaporation against starcraft walls by the time you get
+there). This takes less than a watt of power to do, but keeping an antimatter cooling
+system (and storage system, although superconducting coils help immensely)
+continuously running for geologic timescales is a very impressive feat. Also, all the
+
+machinery for deceleration has to still work at the end of 100 million years of cosmic
+ray damage and such, and there's a part in there where end up ﬁring a multi-gigawatt
+nuclear engine for a few millenia to target a speciﬁc star, which is also going to be
+extremely hard to design for that level of reliability. (imagine the radiation damage to
+the engine from that level of power, it won't be pretty).
+Repairing nanobots help, but it's still going to be an impressive feat.
+
+So You Want To Colonize The Universe
+Part 3: Dust
+(1, 2, 4, 5)
+Part 3a: Dust and Explosions
+To a ﬁrst approximation, there's exactly one thing that sets the speed limit on going
+fast in space.
+Dust.
+In the future, dust will be a Very Big Deal, as it's the dominant constraint on the most-
+important instrumental goal of going fast.
+Anders Sandberg's paper pointed out dust as a constraint on interstellar probe design,
+but I didn't realize exactly how huge of an obstacle dust was until I started playing
+around with a spreadsheet.
+To start with, interstellar (and intergalactic) dust has a size distribution, which tells
+you, for a given diameter range, how many dust grains there are of that diameter in a
+given volume.
+At least for the range of 35-120 nanometers, (which shows up especially strongly in
+astronomical observations) it follows a power-law distribution, with an exponent of
+-3.5.
+However, this dust isn't what we're worried about. There's erosion from protons and
+small dust hitting your dust shield at relativistic speeds, but doubling the dust
+diameter means it's 8x as massive and hits with 8x the energy.
+At 0.9 c, 180 nm dust hits with 1 joule of energy. So all the normal dust isn't that much
+of an issue.
+Going up to dust that's 1 micrometer wide, it hits with about 100 joules of energy, the
+energy of a ﬁrecracker. For all the following explosion comparisions, note that it's
+going to take the form of a super-narrow pinprick of kinetic energy directed on a single
+point, which is more destructive than a simple explosion, which radiates in all
+directions and has much of its energy dissipated as heat.
+Destructive power keeps scaling rapidly, with about a factor-of-ten increase for every
+doubling in dust diameter, until we reach 20 micrometer dust, which hits with the
+energy of a grenade.
+40 micrometer dust hits with the energy of 1.5 kg of dynamite. 86 micrometer dust
+hits with the energy of 30 bricks of C4. 0.18 mm dust hits with the energy of half a
+cruise missile. 0.4 mm dust hits with the energy of the Oklahoma city bombing. 0.86
+mm dust hits with the energy of the largest non-nuclear weapon, the Russian FOAB.
+8.6 mm dust hits with the energy of the Fat Man nuclear weapon, and 1.8 cm dust (a
+ball bearing) hits with the energy of a W87 ﬁssion warhead.
+
+So, from about 1 to 20 micrometers, we get a pretty decent amount of boom that's
+shieldable. Whipple shields are the current standard for micrometeor impact. They
+have a protective thin layer that gets hit, turning the blast into a cone of shield-vapor,
+and then the force of the blast is dissipated over the area of a cross-section of the
+cone on the main bulk of the ship, which is much more manageable. However, I'm
+pretty sure that at relativistic speeds, the cone gets a lot more narrow, so they get
+less eﬀective.
+20 micrometers to about .1 mm is handleable if your ship is really damn sturdy.
+.1 mm to 1 mm requires increasingly large dust shields that will start looking more
+asteroid-like, getting bigger than the mass of the rest of the ship, as they have to be
+that big to tank a hit from the largest non-nuclear weapon focused in a single tiny
+pinprick and narrow cone. Remember, by relativity, there's no diﬀerence between
+cruising through the interstellar medium at 0.9 c and being in the beam dump of a
+particle accelerator that's whipping stuﬀ up to 0.9 c. Anything larger than 1 mm
+requires that most of the mass of the mission is composed of an asteroid, with the size
+of the asteroid rapidly scaling with dust size.
+So, up to about 10 micrometers, we need a decent dust shield, 10 micrometers to 0.2
+mm requires the sort of dust shield that can tank a hit from a cruise missile focused in
+a single point, and beyond that we basically have to whip an asteroid up to 0.9 c and
+attach a small ship to it with very rapidly scaling asteroid size. This requires quantities
+of energy that could blow the crust oﬀ a planet.
+We know a lot about low-diameter dust that can be conventionally shielded with little
+issue, but we know very little about the distribution of higher-diameter dust, and
+that's the dominant constraint on mission speed and colonizing the universe. Of
+course, if we get a really bad distribution of higher-diameter dust, we can always go
+slower. For non-relativistic speeds, halving the velocity cuts the impact energy by a
+factor of 4, and for relativistic speeds, you get a lot more than that because of
+decreases in the relativistic-mass of the dust grain.
+Maybe we'll get lucky and ﬁnd that there's a sharp dust-grain cutoﬀ beyond a certain
+size. Maybe we'll get unlucky.
+Part 3b: Dust Distribution Facts and Implications
+There are three relevant considerations I found, trying to work it out from ﬁrst
+principles and astronomy facts. The ﬁrst is that a dust size distribution implies a
+certain amount mass in a volume of space by doing the appropriate integral over
+diameter. The -3.5 exponent means that the amount of mass diverges. In order for the
+integral to converge and have ﬁnite dust mass in the universe, you need an exponent
+a hair below -4. But we don't know the diameter where the exponent shifts down to -4
+or lower.
+The second is that the asteroid belt has a size distribution of -3.5, and this is
+apparently characteristic of fragmentation processes. The reason there isn't inﬁnite
+mass in the asteroid belt is because there's a size cutoﬀ at the mass of Ceres. And we
+get the intuitive result that the mass of the asteroid belt is mostly in large asteroids.
+The third consideration is that dust comes from many processes. Supernovae and
+dying stars ﬂoof out a bunch of dust into the environment. We found a supernova
+grain as large as 25 micrometers once, which is worrying. But most supernova dust is
+a lot smaller than that. For the millimeter-size dust grains, I imagine it'd come from
+
+planetary formation discs that got disrupted, which is a diﬀerent process with a
+diﬀerent dust production rate. So I'd expect diﬀerent regions of space to have
+diﬀerent dust size distributions, some of which might come with a natural mass cutoﬀ.
+Maybe molecular clouds with forming stars are especially dangerous. Maybe the void
+between galaxies is mostly devoid of fatal dust (relative to the hydrogen density).
+Maybe dust gets more and more abundant as a galaxy ages so it's much more
+dangerous to travel in distant galaxies that have aged by the time we get there. We
+don't know, but it's probably modelable.
+Now, there's two more things to note.
+The ﬁrst is that required-asteroid-mass to shield against the largest dust grain likely to
+be encountered is ridiculously sensitive to the scaling exponent, and pretty sensitive
+to how fast you're going. Pretty much, if you make your asteroid have twice the
+radius, you get 8x the mass, so you can tank 8x larger explosions, right? Well, maybe
+tankable explosion power doesn't scale linearly with mass, I'm unsure. But more
+importantly, your asteroid now sweeps out 4x the area because it has 4x the area, so
+you're 4x more likely to hit dust of a given size. Now, overall, you're still better oﬀ, but
+an increase in mass doesn't buy you nearly as much dust protection power as you'd
+naively assume, so dust still sets a pretty hard speed limit with quite rapidly scaling
+asteroid mass for traveling longer distances and higher velocities.
+The second is that, due to the fact that dust is the dominant obstacle to going really
+fast, there will be an awful lot of optimization power directed at this problem, so the
+standard caveats apply about concluding that even a transhuman civilization can't do
+high-speed missions due to dust. Two obvious improvements I can see are making
+materials that are really good at dissipating massive pinpoint kinetic energy strikes,
+and ﬁnding some way to deﬂect dust. I think there's ways of charging the dust ahead
+of you and using a magnetic ﬁeld to move it out of your way, but it's hard because
+we're mostly interested in large dust which is a lot less susceptible to these
+shenanigans, though I'd have to check. Also, any dust deﬂection system (and the
+power drain imposed by it) must be running full-time over the intergalactic voyage,
+which brings in the standard problems about making machinery that long-lasting.
+Edit: In the three hours since typing this, I found that someone invented a completely
+novel deﬂection strategy I missed, and I also invented another one on the spot,
+proving my "don't underestimate the future" point very well. The one I didn't come up
+with is throwing a bunch of liquid metal droplets ahead of your ship, enough to ensure
+that a dust grain hits at least one of them and explodes, like an extremely long-
+distance whipple shield and very slightly accelerating the whole way so you can
+recapture the droplets and launch them back ahead of you. This has the issue of
+requiring continuous acceleration, and losing mass the whole way due to cosmic ray
+spallation of the droplets, and droplet vaporization when they get hit by smaller dust
+grains. Oﬀ the top of my head, it'd be pretty decent for an in-galaxy mission, but I
+worry that for intergalactic missions, the cumulative mass loss from droplets getting
+destroyed, and the propellant/continuous engine operation required to continuously
+accelerate the whole way, would be a bit much, plus it doesn't work on deceleration,
+just coasting. No, I'm not going to redo my design from scratch to take this into
+account, it's eaten enough time already. As for my insight, it's that if you have many
+spacecraft in a line, each can protect the next one, so the volume of space swept out
+by the ﬂeet is much lower. Or, heck, you can just have the ﬁrst dozen in the train
+being inert blocks of rock and only build important attachments for the stuﬀ in the
+back.
+
+So, for my mission, I assumed we're just directly tanking the impacts on a giant block
+of graphite, and there's a dust scaling exponent of -5 in intergalactic space (there are
+less protoplanetary discs which is where I think a lot of the scary dust comes from,
+and there aren't a lot there), a scaling exponent of -4 in interstellar space, and -3.5
+closer to a star. As an example, shifting the dust scaling exponent of intergalactic
+space to -4.5 increases the mass of the asteroid we have to send by about 3.4 million
+times. This is what I meant by mass being ridiculously sensitive to scaling exponent
+size. The resulting dust shield mass per supercluster-ship (mostly dust shield though)
+is about 120,000 tons for a squat cylinder of graphite 42 m or about 140 feet long , or
+about 1/5th the mass of the titanic. Also we'll need about 30 of these for a 99.9%
+chance that at least one survives (higher survival probabilities are attainable by just
+sending more) It's far more eﬃcient on a mass basis to send a fair few ships with a
+moderate chance of survival than to send one big ship with a 99.9% survival chance.
+So in summary, dust size is the dominant constraint by far on how fast you can go,
+with unacceptably rapid-scaling mass increases as the exponent on the power law
+goes up.
+Edit: Unless transhuman or mere-human ingenuity comes up with a way to cheat
+some part of the dust problem, in which case we're back in business.
+
+So You Want to Colonize The Universe
+Part 4: Velocity Changes and Energy
+(1, 2, 3, 5)
+Part 4a: Speeding Up
+Ok, so how do you get up to 0.9 c in the ﬁrst place?
+The common answer is "antimatter", but antimatter actually isn't that good for
+missions that are extremely relativistic. This is because of the Tsiolkovsky Rocket
+Equation, which applies anytime you're carrying your energy source and propellant
+onboard. Fortunately, it's very simple. ΔV = Ve ∗ln(
+) . ΔV  is your change in
+velocity. Ve is your exhaust velocity. And mfull is the mass of the rocket full of
+propellant, with mempty being the mass of the rocket without propellant.
+Eyeballing this, we see that the exhaust velocity gives you a decent approximation to
+how much you can change your velocity by, if you've got about 2 parts propellant to 1
+part mass. Getting more velocity change requires an exponential rise in your mass
+ratio, and very rapidly gets to not be worth it, as pretty much no rocket has a mass
+ratio greater than about 20. Also, for stuﬀ going really fast, the energy delivered is
+high, but the momentum isn't nearly as high, so high-speciﬁc-impulse rockets that
+whip their exhaust up to relativistic speeds emit an awful lot of energy, but have the
+sort of thrust typically associated with a ﬂeet of asthmatic hummingbirds because
+they're very fuel-eﬃcient and have a low mass-loss rate.
+There are relativistic adjustments, of course, but the same basic behavior applies. Also
+antimatter annihilation has the problem of spending about 40% of its energy as
+gamma rays which just go in all directions and can't be used for thrust as a result, so
+you have to adjust the equation to account for that ineﬃciency.
+So, even for a beam-core antimatter rocket, it's a bit more disappointing than you'd
+think. The classic example of this is the Frisbee Antimatter Starship, a hilariously
+ambitious starship design that is about 700 km long, has about 160,000 tons of
+antimatter aboard, blasts out 100 terawatts of power, and achieves a measly 0.25 c.
+There have been notable improvements in beam-core engine design since then, but
+it's still too much for too little speed. And eyeballing it, the dust shield looks pretty
+puny, because it's sized for erosion from relativistic protons and small dust grains, not
+the cruise-missile-level dust grains I'm worried about.
+Certainly insuﬃcient for an intergalactic mission at high-relativistic velocities.
+Edit: Found another beam-core antimatter starship design that does a lot better, the
+Valkyrie starship. Apparently the titanic size is partly an artifact of trying to squeeze
+high thrust out of an antimatter beam core so it doesn't take millenia to get up to full
+speed, and the antimatter beam core innately has very little thrust, so you have to
+crank up the power to enormous extremes. It's also partly an artifact of having a
+gamma-ray shield that's a lot bigger than strictly necessary with a diﬀerent
+mfull
+mempty
+
+conﬁguration, which requires massive radiators, which means you have more dry
+mass to push, which means you have to make everything else bigger to compensate,
+which includes the rocket and the shield and you make the radiators bigger again...
+The Valkyrie claims the ability to get up to 0.92 c and back down with a 20:1
+antimatter to ship ratio by mass, or 2,000 tons of antimatter, which is a bit much,
+especially because solid (anti)hydrogen isn't very dense, and if it's possible to go a
+given speed without getting destroyed by dust, the upcoming pair of approaches
+seems to be strictly better than any given antimatter rocket design because they
+completely dodge the rocket equation and the pesky ln term interfering with high-
+relativistic speeds, and also don't require enormous amounts of antimatter.
+But if you think about it, why does the energy source for getting the ship to go fast
+have to be onboard?
+A far superior solution is a lightsail, a gigantic and very thin and very reﬂective sheet
+that you can ﬁre a laser at to get your payload up to speed. Now, I didn't really design
+this part to a high degree of detail, and I think there might be issues with having a
+suﬃciently large sheet not crumple like tissue paper under the stress of its launch. A
+spot for future work on making a realistic design if someone wants to take it up. You
+also need a gigantic ﬂoating laser lens to shoot the thing up to a distance of about 40
+lightyears.
+However, assuming you've got a dyson swarm available, you have more than enough
+energy on tap to bring whatever you'd want up to high-relativistic speeds. I was
+getting numbers that were something like an exawatt per ship (and again, we'd need
+30 of them). So you'd need astronomical levels of energy-harvesting and lasers, and
+especially heat radiators, and this wouldn't be an immediate pulse, but you'd be
+cranking out multiple exawatts for decades at a time. Fortunately, assuming the
+ability to devote enough resources towards ﬁrin an astronomically large lazor, this is
+peanuts compared to the energy that's available from a star, and it lets you skip the
+rocket equation completely! No reason to be powered by antimatter when you've got
+the fury of a star-powered laser at your back, launching you unto the cosmic void.
+Of course, transhuman technology might ﬁnd something better, or a great reﬁnement
+on the basic idea, but I'm still pretty conﬁdent that they'll skip designs subject to the
+rocket equation, that ln is a pretty punishing aspect.
+But how do you slow down? That will take just as much energy as speeding up....
+Part 4b: Slowing Down
+Once upon a time, Robert Bussard had an idea for a starship. Interstellar space isn't
+empty, it has a very thin misting of protons in it. If you could do proton-proton fusion,
+you could have a giant magnetic scoop that funneled the interstellar medium into the
+rocket, where it'd fuse it for energy, then shoot it out the back, so it'd be gathering its
+own propellant and energy source as it went, and could get up to very relativistic
+speeds.
+It captured the popular imagination, and then more calculations were done. It turned
+out to be bad. Really bad. So hilariously bad that it managed to achieve the elusive
+feat stated in Reversed Stupidity is not Intelligence about how a broken car couldn't
+go 200 mph in reverse, even if it was really broken.
+
+The magnetic ﬁeld produced a lot of drag. A hell of a lot of drag. In fact, the basic
+insight of "set up a large magnetic ﬁeld in the interstellar medium" is the currently
+known best way to come to an absolutely screeching halt from relativistic speeds and
+is plausibly going to be an indispensable part of any serious interstellar mission. It
+produces so much drag that it is used to drop my starship design from 90% of
+lightspeed to 2% of lightspeed in 1.5 lightyears, pulling 1.5 g's of deceleration at the
+peak. This is a lot.
+It turns out the way to decelerate from relativistic speeds doesn't take a rocket, it just
+takes a big loop of superconducting coil towed behind you and which slows down by
+dumping kinetic energy into violently shoving interstellar hydrogen away.
+Now, there's a caveat. My design actually doesn't shed most of the kinetic energy. The
+analogy is that if you've got a crashing plane and a passenger on it, you're much
+better oﬀ attaching the parachute to the passenger than the crashing plane. Yes,
+you're going very fast, but you're only going through a lightyear and a half, so much
+less dust shielding is needed because you're much less likely to get hit in that space
+interval, so you can just separate from most of the dust-shielding block, let it streak
+through the galaxy at 0.9 c, (and get spectacularly wrecked in a violent kaboom by a
+piece of gravel at some point), and keep dumping shielding-mass as you slow, which
+makes it even easier to slow you down, and it feeds on itself until most of the
+remaining mass is actually in the superconducting coil.
+There's some further details, one is about how to slow down from 2% of light speed
+(magsails don't slow you much at nonrelativistic velocities, but this is still far beyond
+the capabilities of almost all rockets that aren't antimatter, but there's another way to
+cheat this without propellant), and the other is about how you probably can't hit a
+speciﬁc star from 200 million lightyears away so you'll need some extremely beefy
+engine to get about 0.1% of lightspeed of ΔV  on approach so you can boost sideways
+to aim at a speciﬁc star that looks promising, but those are implementation details
+that I'll go over later.
+Part 5c: Power Sources and the Proper Use of Antimatter
+Wait, didn't that previous stuﬀ about needing an energy source for the ﬁnal
+deceleration and the magnetic parachute, imply the use of power?
+To a ﬁrst approximation, there's exactly three energy sources that are compact
+enough for space missions (that we know about given present technology). There's
+antimatter, which releases about 100% of itself as energy. There's fusion, which
+releases about 1% of itself as energy. And ﬁssion of radioactive elements, which
+releases about 0.1% of itself as energy.
+Obviously you'd want to use antimatter, right?
+Well, it depends on how much you're using. You see, antimatter annihilation has
+extremely penetrating decay products. There's a bunch of very high-energy gamma
+rays (low hundreds of megaelectronvolts, MeV). There's a bunch of charged pions with
+a similar energy range, which go about 60 m or 60 ft (I forgot) before decaying into
+muons and neutrinos. Both muons and charged pions are really penetrating. We
+regularly ﬁnd notable levels of muon radiation from cosmic rays 100 meters down in
+the earth, which is why many sensitive particle physics occur in deep mines, and
+pions are about equally penetrating due to a similar mass. Now, these pions and
+muons are much lower-energy than cosmic ray muons, so the situation isn't quite that
+
+bad, but they still have a tendency to require an awful lot of shielding. And a couple
+percent of the energy is radiated as kaons, which have similar issues, and can be
+charged or uncharged, the latter of which is unaﬀected by magnetic ﬁelds.
+Amusingly enough, kaons contain a strange quark, which marks the only time the
+strange quark is actually relevant to a practical engineering design.
+I'll get into more details later, but you'll require a pretty healthy weight of shielding
+mass unless you want to lose a bunch of your antimatter energy to space and hose
+every starship part in the vicinity with enough gamma radiation to give a person an
+instant-coma radiation dose in a few seconds. Yes, there are no people, just silicon
+chips, but radiation hardening isn't that advanced. (Yet)
+So, in the limit of large amounts of energy, antimatter is deﬁnitely the best. But for
+smaller amounts, antimatter power's total mass is dominated by shielding mass,
+fusion's mass is dominated by the mass of whatever the most-compact fusion device
+of a given wattage the future can come up with (and neutron shielding, if they go for
+that type of fusion power), and ﬁssion... has a bunch of weight by itself, but you also
+need your nuclear reactor and the associated shielding.
+My design has about 160 g of antimatter on board, which is both quite manageable to
+produce relative to the absurd 150,000 tons an antimatter starship needs (Edit: see
+above, maybe not), and in the realm where it's kind of unclear which power source
+does best. I picked antimatter over "ultra-compact fusion reactor" mainly because it's
+sexy and more fun to speculate about. I used about 3 tons of shielding, so maybe
+fusion would be better if the future can make a fusion reactor that produces 10
+megawatts and weighs under 3 tons. Or maybe a ﬁssion reactor could make it work,
+although the fuel alone (with a very eﬃcient 20% burnup) would weigh a ton, and this
+neglects the rest of the reactor and neutron shielding.
+Part 5d: You've Gotta Have Radiators
+Vacuum is a great insulator! This is why vacuum-layer windows are awesome for
+insulation, because the only way heat can leave is by radiating away. This is a big
+problem in space travel, though. If you're cranking out a gigawatt of heat energy, your
+spacecraft will heat up until it's radiating a gigawatt in thermal radiation and glowing
+bright orange, toasting anything onboard that requires temperatures lower than
+molten iron to function.
+So most of a practical spaceship's visual space is composed of radiators. Ordinary
+chemical rockets drop much of their energy in the form of hot escaping propellant, but
+fusion, ﬁssion, and antimatter rockets are very eﬃcient with their propellant, so this
+avenue isn't available.
+You'll need some way to deal with this if you want to do any space mission with a
+ﬁssion, fusion, or antimatter power source of any appreciable magnitude. Remember
+the Frisbee Antimatter Starship I mentioned earlier? 500 of the 700 km of length is
+just a gigantic radiator to dissipate the heat being absorbed by the gamma-radiation
+shield of the antimatter engine. I got my radiator for the antimatter reactor down to a
+paltry 1/4 of a kilometer, and I feel pretty proud about that.
+An especially cool technology for this is the liquid drop radiator, which uses some sort
+of molten metal, and sprays it out as a sheet of ﬁne droplets which has massive area,
+which is then collected and recirculated. It's unsuitable for really long missions
+because of very slow metal evaporation into space, but pretty nifty.
+
+Due to the unsuitability of these for really long missions, the part in my design where
+there's a 10,000-year burn of a dusty-plasma-ﬁssion rocket, (The antimatter beam
+core is also acceptable, and probably has more manageable radiation shielding issues,
+but I wanted to highlight an obscure design that shows that ﬁssion can be surprisingly
+eﬀective) for steering to a good-looking star, cranking out 3.5 gigawatts of heat the
+whole way, required something a bit more... solid. Diamond is the best heat
+conductor, and I'm assuming it's available by nanotech, so the giant cylindrical plug of
+graphite is also going to have extensible diamond radiator ﬁns that will glow bright
+orange on approach.
+Part 5e: More Notes On Antimatter Shielding
+I think magnetic ﬁelds can conﬁne the pions and muons and charged kaons to a ﬁnite
+region until they interact with something, dissipating their energy, and then you just
+need gamma ray shielding. Also, beams of charged particles can have energy
+extracted from them in a much more eﬃcient way than dissipating heat. This would
+probably be used in a practical design, but I was being stubborn and wanted to
+capture the neutral kaons too, and ﬁgured "hey, if we're shielding gamma rays, is it
+practical to shield everything and drop the mass of the magnet and energy-extraction
+subsystem and have a vanilla turbine operating oﬀ the heat from the shield?"
+Basically, it'd just be a solid ball of shielding, and you shoot the antimatter into the
+center, where ~all of the radiation is absorbed, and the ball can be cooled down by a
+coat of liquid metal being pumped over it.
+Now, the muons only show up later, and if you can stop the pions, the kinetic energy
+of the decay muons is low enough that they actually aren't that penetrating. So the
+task is to stop a ﬂux of high energy gamma rays and pions and kaons. The dominant
+energy loss mechanism at these energies is inelastic collisions, where the pion or kaon
+smacks an atomic nucleus directly, blasting it to bits, which smack into other nuclei,
+and the energy level and penetratingness of the radiation drastically falls as energy
+drops, until the entire cascade is contained. For gamma rays, they smack an atomic
+nucleus directly, and turn into an electron-antielectron pair, which does a smaller
+cascade and is less penetrating. Still, even a more sensible design with charged
+particle energy extraction is going to need the gamma ray shielding (or just incredible
+radiation resistance) and weigh a decent amount.
+Crunching the numbers, I discovered something hilarious. There's a number that is
+basically "what thickness of material gets half of your beam to interact", and for very
+dense elements, this gets thin enough to counteract the increased density of your
+ball. Lead is used in conventional gamma-shielding because it's cheap and pretty
+dense. But, as starship design is a very important priority for a civilization, they'd
+probably splurge on whatever material is optimal.
+The optimal material turned out to be osmium (although iridium and platinum would
+be about as good). Yes, in starship design, where every gram counts, I found a
+perfectly legitimate engineering reason to stick a 3-ton ball of osmium in the middle,
+as the antimatter reactor core. As a bonus, antimatter reactions tend to split heavy
+nuclei, so there's an energy boost from induced ﬁssion in the osmium, and osmium is
+really hard to melt so it can deﬁnitely accommodate the reaction.
+
+So You Want to Colonize The Universe
+Part 5: The Actual Design
+Alright, here's the actual design for an intergalactic mission to the Virgo Supercluster.
+(1, 2, 3, 4)
+Phase 1: Acceleration
+To begin with, you use really big lightsails and exawatt dyson-swarm-powered laser
+arrays to get your ﬂeet of 30 or so ships (really just a cylinder of some fancy graphite-
+based dust-impact-resistant material that weighs about 1/5 of the Titanic, and has
+about a 20 meter radius) up to cruising speed of 0.9 c for their 200-million-light-year
+voyage across the intergalactic void to the Virgo Supercluster, or at least where it's
+projected to be in the future by cosmic evolution simulations.
+Phase 2: Coasting
+By time dilation, this is dropped to 100 million years of waiting in an absolutely black
+void between the galaxies, where nothing of note happens except for occasional
+nanobot repairs, and keeping the antimatter at 0.1 K. And most of the ﬂeet dies
+because they got hit by a grain of sand that's out in the galactic void for some
+improbable reason, but over those sorts of distances, even very improbable sand
+grains will show up at some point. However, several of them probably make it
+through, with the front looking pretty moth-eaten.
+Phase 3: Target Selection and the Steering Burn
+At a few tens or hundreds of thousands of lightyears out, the next phase can begin.
+Telescopic monitoring of the incoming galaxy, to build up a map of where the stars will
+be upon arrival, and the interstellar density distribution, and pick a good-looking one.
+Sticking a telescope out in front leads to the sensors getting destroyed by the proton
+ﬂux, so they'll probably be shielded at the bottom of a tube of solid-but-transparent
+material.
+Steering to the appropriate star location is done by a dusty-plasma-ﬁssion rocket ﬁring
+sideways, which provides 200 newtons of thrust (equivalent to a model rocket engine),
+and emits 3.5 gigawatts of waste heat. For thrust that low with that much energy, the
+exhaust must be going really fast, and by the rocket equation, it gets the 0.1% of c
+change in velocity with only about 5% of the starship mass devoted to propellant, ie
+ﬁssile uranium (or plutonium, bred from ordinary uranium by an onboard nuclear
+reactor, which is much more common and less prone to decaying over these time
+intervals and easier to store). So that's another 7,200 tons of uranium. An antimatter
+beam core rocket would have much less radiation damage, but it only has 1/10th the
+thrust for the same power output, which may end up being a bit much for the
+radiators if we crank up the power by 10x to compensate.
+To dissipate the heat, the cylinder extends diamond ﬁns, which start glowing bright
+orange at temperatures that'd melt iron.
+Phase 4: Magnetic Parachute Deceleration
+
+At about 1.6 lightyears to go, near a peripheral star with gas density about 100x lower
+than the sun (and about 5000x higher than intergalactic space), the bulk of the dust
+shield is cut free to ﬂy through the galaxy, leaving two sub-ships with a dust shield of
+about 14,700 tons each, or about 10 meters radius, which move away from each other
+and unfurl a 1 km radius (or larger if you want to do this braking maneuver in a more
+ﬂexible range of gas densities, or brake over a longer distance) loop of
+superconducting coil behind them, charged up from the earlier dusty plasma rocket
+ﬁring, dragging behind the dust shield, and attached by carbon nanotube cables (or
+some other really high tensile strength material, their mass is low enough that I think
+carbon nanotubes might turn out to be overkill)
+These reduced dust shields will disintegrate, cutting more and more fragments loose,
+over the 6-year braking time, as lower speeds require a smaller dust shield, which also
+reduces the intercepted volume of space, and a smaller dust shield can decelerate
+faster. Think of the star as the enemy gate (it's down), with a parachute above you,
+and cutting mass oﬀ the bottom of the payload to fall below you so you're lighter.
+With the superconducting loop parachute, and the rapidly shrinking dust shield, a
+peak deceleration of 1.5 g's is reached, which the antimatter storage is going to have
+to resist to prevent a big boom. Enough mass is lost on the deceleration to 2% of
+lightspeed that the dominant mass is from the magsail parachute itself.
+Phase 5: Electric Sail Deceleration
+At some point around 2% of lightspeed, the superconducting loop itself is cut free, and
+the next phase begins, with three more ships cut free and separating. Each consists of
+a dust shield a measly 2.3 feet in radius, with the payload, antimatter storage,
+antimatter reaction chamber, power-generating machinery, 1/4 of a kilometer liquid-
+metal-droplet radiator, and the machinery for the next deceleration strategy all hiding
+in that narrow cylinder of safe space, about 170x longer than it is wide.
+For the next 50 years, the antimatter reactor works through its stash of about 160 g of
+antimatter, cycling liquid metal past the osmium ball and running a very compact
+turbine oﬀ of the temperature diﬀerential induced by the liquid metal, and cooling oﬀ
+the metal in the 10 megawatt radiator which makes up most of the length, so the
+spaceship would look like an arrow glowing red. This is to power the electric sail.
+The electric sail consists of about 10,000 50 km long ﬁne ﬁbers, which are charged up
+to 4 million volts so they all stick out away from each other. Think of the spacecraft as
+a dandelion seed with a really disproportionate parachute, 200x longer than the seed
+tail length. This electric sail repels protons, which causes deceleration, but they work
+way better at low velocities than magsails. Steering can ﬁnally be done by charging
+diﬀerent ﬁbers by diﬀerent amounts. The long narrow radiator is in tension, not
+compression, since the electric sail is at the tail, so the ship can safely be that lone
+without collapsing. The charged ﬁbers attract electrons, so we'll need a 1.5 megawatt
+electron gun at the tail. Total spacecraft weight at this stage is 18 tons, most of which
+is the radiator, antimatter reactor, and dust shield.
+Over 50 years, this decelerates to 600 m/s near some suitable asteroid or comet.
+Phase 6: Final Landing
+Finally, the last 0.9 ton stage detaches to do a ﬁnal landing.
+
+600 m/s of change in velocity is easily attainable by conventional chemical rockets.
+We aren't taking oﬀ from orbit, we're dropping onto an asteroid, so the rocket of
+choice is the monomethyhydrazine-dinitrogen tetroxide thrusters that are used to
+alter the orientation of the space shuttle in orbit. Those rocket engines only weigh a
+couple kg, and the speciﬁc impulse is high enough that we only need 18% of the
+rocket mass composed of propellant, or 160 kg. The ﬁnal stage lands on the asteroid
+or comet, and deploys the Von Neumann probes, the frozen state of the emulated
+people who decided to come along (they can't be active for the voyage because most
+of the ships are going to die by dust), and either some solar panels for probe energy,
+or a 490 kg mini-nuclear reactor for probe recharging if it's far from the sun (that ice
+isn't gonna melt itself...)
+And done! No 700 kilometer antimatter starships needed.
+Just a multi-exawatt dyson swarm laser array, some ridiculously big lightsails, giant
+blocks of graphite launched at 0.9 c, multi-million-year antimatter storage, a few
+thousand tons of ﬁssile material to ﬁre a nuclear rocket for thousands of years as
+steering, diamond radiators, superconducting magnetic parachutes, several tons of
+osmium, a few kilograms of antimatter, a quarter-km of liquid metal radiators, a 50-
+km radius "cosmic dandelion seed" of thin ﬁbers charged to several million volts,
+good-old-fashioned chemical rockets, self-replicating probes, and repeated spacecraft
+sacriﬁces to the vengeful god of cosmic dust, may future civilizations punch him in the
+metaphorical face by making a design better than this, I know it's doable
+Finally I can exorcise this special interest from my soul and get back to the fancier sort
+of math that ensures I live to see it happen.
+(Also, Anders Sandberg, if you're reading this, hit me up, I've got an unrelated paper
+idea you might be interested in)
+

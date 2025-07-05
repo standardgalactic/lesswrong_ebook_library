@@ -1,0 +1,4054 @@
+
+Reframing Impact
+1. Reframing Impact
+2. Value Impact
+3. Deducing Impact
+4. Attainable Utility Theory: Why Things Matter
+5. World State is the Wrong Abstraction for Impact
+6. The Gears of Impact
+7. Seeking Power is Often Convergently Instrumental in MDPs
+8. Attainable Utility Landscape: How The World Is Changed
+9. The Catastrophic Convergence Conjecture
+10. Attainable Utility Preservation: Concepts
+11. Attainable Utility Preservation: Empirical Results
+12. How Low Should Fruit Hang Before We Pick It?
+13. Attainable Utility Preservation: Scaling to Superhuman
+14. Reasons for Excitement about Impact of Impact Measure Research
+15. Conclusion to 'Reframing Impact'
+
+Reframing Impact
+Crossposted from the AI Alignment Forum. May contain more technical jargon than usual.
+
+
+
+
+
+
+
+Technical Appendix: First safeguard?
+This sequence is written to be broadly accessible, although perhaps its focus on capable AI
+systems assumes familiarity with basic arguments for the importance of AI alignment . The
+technical appendices are an exception, targeting the technically inclined.
+Why do I claim that an impact measure would be "the ﬁrst proposed safeguard which maybe
+actually stops a powerful agent with an imperfect objective from ruining things - without
+assuming anything about the objective"?
+The safeguard proposal shouldn't have to say "and here we solve this opaque, hard problem,
+and then it works". If we have the impact measure, we have the math, and then we have the
+code.
+So what about:
+Quantilizers? This seems to be the most plausible alternative; mild optimization and
+impact measurement share many properties. But
+
+What happens if the agent is already powerful? A greater proportion of plans
+could be catastrophic, since the agent is in a better position to cause them.
+Where does the base distribution come from (opaque, hard problem?), and how
+do we know it's safe to sample from?
+In the linked paper, Jessica Taylor suggests the idea of learning a human
+distribution over actions - how robustly would we need to learn this
+distribution? How numerous are catastrophic plans, and what is a
+catastrophe, deﬁned without reference to our values in particular? (That
+deﬁnition requires understanding impact!)
+Value learning? But
+We only want this if our (human) values are learned!
+Value learning is impossible without assumptions, and getting good enough
+assumptions could be really hard. If we don't know if we can get value
+learning / reward speciﬁcation right, we'd like safeguards which don't fail
+because value learning goes wrong. The point of a safeguard is that it can
+catch you if the main thing falls through; if the safeguard fails because the
+main thing does, that's pointless.
+Corrigibility? At present, I'm excited about this property because I suspect it has a
+simple core principle. But
+Even if the system is responsive to correction (and non-manipulative, and
+whatever other properties we associate with corrigibility), what if we become
+unable to correct it as a result of early actions (if the agent "moves too quickly",
+so to speak)?
+Paul Christiano's take on corrigibility is much broader and an exception to
+this critique.
+What is the core principle?
+Notes
+The three sections of this sequence will respectively answer three questions:
+Why do we think some things are big deals?
+Why are capable goal-directed AIs incentivized to catastrophically aﬀect us by
+default?
+How might we build agents without these incentives?
+The ﬁrst part of this sequence focuses on foundational concepts crucial for
+understanding the deeper nature of impact. We will not yet be discussing what to
+implement.
+I strongly encourage completing the exercises. At times you shall be given a time limit;
+it's important to learn not only to reason correctly, but with speed.
+The best way to use this book is NOT to simply read it or study it, but to read a question
+and STOP. Even close the book. Even put it away and THINK about the question. Only
+after you have formed a reasoned opinion should you read the solution. Why torture
+yourself thinking? Why jog? Why do push-ups?
+If you are given a hammer with which to drive nails at the age of three you may think to
+yourself, "OK, nice." But if you are given a hard rock with which to drive nails at the age
+of three, and at the age of four you are given a hammer, you think to yourself, "What a
+marvellous invention!" You see, you can't really appreciate the solution until you ﬁrst
+appreciate the problem.
+~ Thinking Physics
+My paperclip-Balrog illustration is metaphorical: a good impact measure would hold
+steadfast against the daunting challenge of formally asking for the right thing from a
+powerful agent. The illustration does not represent an internal conﬂict within that
+agent. As water ﬂows downhill, an impact-penalizing Frank prefers low-impact plans.
+The drawing is based on gonzalokenny's amazing work.
+
+Some of you may have a diﬀerent conception of impact; I ask that you grasp the thing
+that I'm pointing to. In doing so, you might come to see your mental algorithm is the
+same. Ask not "is this what I initially had in mind?", but rather "does this make sense
+as a thing-to-call-'impact'?".
+H/T Rohin Shah for suggesting the three key properties. Alison Bowden contributed
+several small drawings and enormous help with earlier drafts.
+
+Value Impact
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+
+
+
+
+
+
+
+Being on Earth when this happens is a big deal, no matter your objectives - you can't
+hoard pebbles if you're dead! People would feel the loss from anywhere in the cosmos.
+However, Pebblehoarders wouldn't mind if they weren't in harm's way.
+
+Appendix: Contrived Objectives
+A natural deﬁnitional objection is that a few agents aren't aﬀected by objectively
+impactful events. If you think every outcome is equally good, then who cares if the
+
+meteor hits?
+Obviously, our values aren't like this, and any agent we encounter or build is unlikely to
+be like this (since these agents wouldn't do much). Furthermore, these agents seem
+contrived in a technical sense (low measure under reasonable distributions in a
+reasonable formalization), as we'll see later. That is, "most" agents aren't like this.
+From now on, assume we aren't talking about this kind of agent.
+Notes
+Eliezer introduced Pebblesorters in the the Sequences; I made them robots here
+to better highlight how pointless the pebble transformation is to humans.
+In informal parts of the sequence, I'll often use "values", "goals", and "objectives"
+interchangeably, depending on what ﬂows.
+We're going to lean quite a bit on thought experiments and otherwise speculate
+on mental processes. While I've taken the obvious step of beta-testing the
+sequence and randomly peppering my friends with strange questions to check
+their intuitions, maybe some of the conclusions only hold for people like me. I
+mean, some people don't have mental imagery - who would've guessed? Even if
+so, I think we'll be ﬁne; the goal is for an impact measure - deducing human
+universals would just be a bonus.
+Objective impact is objective with respect to the agent's values - it is not the
+case that an objective impact aﬀects you anywhere and anywhen in the universe!
+If someone ﬁnds $100, that matters for agents at that point in space and time (no
+matter their goals), but it doesn't mean that everyone in the universe is
+objectively impacted by one person ﬁnding some cash!
+If you think about it, the phenomenon of objective impact is surprising. See, in AI
+alignment, we're used to no-free-lunch this, no-universal-argument that; the
+possibility of something objectively important to agents hints that our perspective
+has been incomplete. It hints that maybe this "impact" thing underlies a key facet
+of what it means to interact with the world. It hints that even if we saw speciﬁc
+instances of this before, we didn't know we were looking at, and we didn't stop to
+ask.
+
+Deducing Impact
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+
+
+
+
+
+
+
+The solution comes in the next post! Feel free to discuss amongst yourselves.
+Reminder: Your sentence should explain impact from all of the perspectives we
+discussed (from XYZ to humans).
+
+Attainable Utility Theory: Why Things
+Matter
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+If you haven't read the prior posts, please do so now. This sequence can be spoiled.
+
+
+
+
+
+
+
+
+
+
+¯\_(ツ)_/¯
+
+
+World State is the Wrong Abstraction
+for Impact
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+
+
+
+
+
+
+
+
+
+
+These existential crises also muddle our impact algorithm. This isn't what you'd see if
+impact were primarily about the world state.
+
+
+
+Appendix: We Asked a Wrong Question
+
+How did we go wrong?
+When you are faced with an unanswerable question—a question to which it seems
+impossible to even imagine an answer—there is a simple trick that can turn the
+question solvable.
+Asking "Why do I have free will?" or "Do I have free will?" sends you oﬀ thinking
+about tiny details of the laws of physics, so distant from the macroscopic level that
+you couldn't begin to see them with the naked eye. And you're asking "Why is X
+the case?" where X may not be coherent, let alone the case.
+"Why do I think I have free will?," in contrast, is guaranteed answerable. You do, in
+fact, believe you have free will. This belief seems far more solid and graspable than
+the ephemerality of free will. And there is, in fact, some nice solid chain of
+cognitive cause and eﬀect leading up to this belief.
+~ Righting a Wrong Question
+I think what gets you is asking the question "what things are impactful?" instead of
+"why do I think things are impactful?". Then, you substitute the easier-feeling question
+of "how diﬀerent are these world states?". Your fate is sealed; you've anchored yourself
+on a Wrong Question.
+At least, that's what I did.
+Exercise: someone  me, early last year says that impact is closely related to change in
+object identities.
+Find at least two scenarios which score as low impact by this rule but as high impact by
+your intuition, or vice versa.
+You have 3 minutes.
+Gee, let's see... Losing your keys, the torture of humans on Iniron, being locked in a
+room, ﬂunking a critical test in college, losing a signiﬁcant portion of your episodic
+memory, ingesting a pill which makes you think murder is OK, changing your
+
+discounting to be completely myopic, having your heart broken, getting really dizzy,
+losing your sight.
+That's three minutes for me, at least (its length reﬂects how long I spent coming up
+with ways I had been wrong).
+Appendix: Avoiding Side Eﬀects
+Some plans feel like they have unnecessary side eﬀects:
+Go to the store.
+ versus
+ Go to the store and run over a potted plant.
+We talk about side eﬀects when they aﬀect our attainable utility (otherwise we don't
+notice), and they need both a goal ("side") and an ontology (discrete "eﬀects").
+Accounting for impact this way misses the point.
+Yes, we can think about eﬀects and facilitate academic communication more easily via
+this frame, but we should be careful not to guide research from that frame. This is why
+I avoided vase examples early on - their prevalence seems like a symptom of an
+incorrect frame.
+(Of course, I certainly did my part to make them more prevalent, what with my ﬁrst
+post about impact being called Worrying about the Vase: Whitelisting...)
+Notes
+Your ontology can't be ridiculous ("everything is a single state"), but as long as it
+lets you represent what you care about, it's ﬁne by AU theory.
+Read more about ontological crises at Rescuing the utility function.
+Obviously, something has to be physically diﬀerent for events to feel impactful,
+but not all diﬀerences are impactful. Necessary, but not suﬃcient.
+AU theory avoids the mind projection fallacy; impact is subjectively objective
+because probability is subjectively objective.
+I'm not aware of others explicitly trying to deduce our native algorithm for
+impact. No one was claiming the ontological theories explain our intuitions, and
+they didn't have the same "is this a big deal?" question in mind. However, we
+need to actually understand the problem we're solving, and providing that
+understanding is one responsibility of an impact measure! Understanding our
+own intuitions is crucial not just for producing nice equations, but also for getting
+an intuition for what a "low-impact" Frank would do.
+
+The Gears of Impact
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+
+
+
+
+
+
+
+
+
+
+
+
+Scheduling: The remainder of the sequence will be released after some delay.
+Exercise: Why does instrumental convergence happen? Would it be coherent to
+imagine a reality without it?
+Notes
+Here, our descriptive theory relies on our ability to have reasonable beliefs about
+what we'll do, and how things in the world will aﬀect our later decision-making
+process. No one knows how to formalize that kind of reasoning, so I'm leaving it a
+black box: we somehow have these reasonable beliefs which are apparently used
+to calculate AU.
+In technical terms, AU calculated with the "could" criterion would be closer to an
+optimal value function, while actual AU seems to be an on-policy prediction,
+whatever that means in the embedded context. Felt impact corresponds to TD
+error.
+This is one major reason I'm disambiguating between AU and EU; in the
+non-embedded context. In reinforcement learning, AU is a very particular
+
+kind of EU: V ∗(s), the expected return under the optimal policy.
+Framed as a kind of EU, we plausibly use AU to make decisions.
+I'm not claiming normatively that "embedded agentic" EU should be AU; I'm
+simply using "embedded agentic" as an adjective.
+
+Seeking Power is Often Convergently
+Instrumental in MDPs
+Crossposted from the AI Alignment Forum. May contain more technical jargon than usual.
+This is a linkpost for https://arxiv.org/abs/1912.01683
+In 2008, Steve Omohundro's foundational paper The Basic AI Drives conjectured that
+superintelligent goal-directed AIs might be incentivized to gain signiﬁcant amounts of power in
+order to better achieve their goals. Omohundro's conjecture bears out in toy models, and the
+supporting philosophical arguments are intuitive. In 2019, the conjecture was even debated by
+well-known AI researchers.
+Power-seeking behavior has been heuristically understood as an anticipated risk, but not as a
+formal phenomenon with a well-understood cause. The goal of this post (and the
+accompanying paper, Optimal Policies Tend to Seek Power) is to change that.
+Motivation
+It's 2008, the ancient wild west of AI alignment. A few people have started thinking about
+questions like "if we gave an AI a utility function over world states, and it actually maximized
+that utility... what would it do?" 
+In particular, you might notice that wildly diﬀerent utility functions seem to encourage similar
+strategies.
+ 
+Resist
+shutdown?
+Gain
+computational
+resources?
+Prevent modiﬁcation of
+utility function?
+Paperclip
+utility
+✔ 
+✔ 
+✔ 
+Blue webcam
+pixel utility
+✔ 
+✔ 
+✔ 
+People-look-
+happy utility
+✔ 
+✔ 
+✔ 
+These strategies are unrelated to terminal preferences: the above utility functions do not
+award utility to e.g. resource gain in and of itself. Instead, these strategies are instrumental:
+they help the agent optimize its terminal utility. In particular, a wide range of utility functions
+incentivize these instrumental strategies. These strategies seem to be convergently
+instrumental.
+But why?
+I'm going to informally explain a formal theory which makes signiﬁcant progress in answering
+this question. I don't want this post to be Optimal Policies Tend to Seek Power with cuter
+
+illustrations, so please refer to the paper for the math. You can read the two concurrently.
+We can formalize questions like "do 'most' utility maximizers resist shutdown?" as "Given
+some prior beliefs about the agent's utility function, knowledge of the environment, and the
+fact that the agent acts optimally, with what probability do we expect it to be optimal to avoid
+shutdown?" 
+The table's convergently instrumental strategies are about maintaining, gaining, and
+exercising power over the future, in some sense. Therefore, this post will help answer:
+1. What does it mean for an agent to "seek power"?
+2. In what situations should we expect seeking power to be more probable under optimality,
+than not seeking power?
+This post won't tell you when you should seek power for your own goals; this post illustrates a
+regularity in optimal action across diﬀerent goals one might pursue.
+Formalizing Convergent Instrumental Goals suggests that the vast majority of utility functions
+incentivize the agent to exert a lot of control over the future, assuming that these utility
+functions depend on "resources." This is a big assumption: what are "resources", and why must
+the AI's utility function depend on them? We drop this assumption, assuming only unstructured
+reward functions over a ﬁnite Markov decision process (MDP), and show from ﬁrst principles
+how power-seeking can often be optimal.
+Formalizing the Environment
+My theorems apply to ﬁnite MDPs; for the unfamiliar, I'll illustrate with Pac-Man.
+
+Full observability: You can see everything that's going on; this information is packaged in
+the state s. In Pac-Man, the state is the game screen.
+Markov transition function: the next state depends only on the choice of action a and the
+current state s. It doesn't matter how we got into a situation.
+
+Discounted reward: future rewards get geometrically discounted by some discount rate 
+γ ∈[0, 1].
+At discount rate  , this means that reward in one turn is half as important as
+immediate reward, reward in two turns is a quarter as important, and so on.
+We'll colloquially say that agents "care a lot about the future" when γ is
+"suﬃciently" close to 1.
+I'll use quotations to ﬂag well-deﬁned formal concepts that I won't unpack in
+this post.
+The score in Pac-Man is the undiscounted sum of rewards-to-date.
+When playing the game, the agent has to choose an action at each state. This decision-making
+function is called a policy; a policy is optimal (for a reward function R and discount rate γ)
+when it always makes decisions which maximize discounted reward. This maximal quantity is
+called the optimal value for reward function R at state s and discount rate γ.1
+By the end of this post, we'll be able to answer questions like "with respect to a 'neutral'
+distribution over reward functions, do optimal policies have a high probability of avoiding
+ghosts?"2
+Power as Average Optimal Value
+When people say 'power' in everyday speech, I think they're often referring to one's ability to
+achieve goals in general. This accords with a major philosophical school of thought on the
+meaning of 'power':
+On the dispositional view, power is regarded as a capacity, ability, or potential of a person
+or entity to bring about relevant social, political, or moral outcomes.
+Sattarov, Power and Technology, p.13
+As a deﬁnition, one's ability to achieve goals in general seems philosophically reasonable: if
+you have a lot of money, you can make more things happen and you have more power. If you
+have social clout, you can spend that in various ways to better tailor the future to various ends.
+All else being equal, losing a limb decreases your power, and dying means you can't control
+much at all.
+This deﬁnition explains some of our intuitions about what things count as 'resources.' For
+example, our current position in the environment means that having money allows us to exert
+more control over the future. That is, our current position in the state space means that having
+money allows us more control. However, possessing green scraps of paper would not be as
+helpful if one were living alone near Alpha Centauri. In a sense, resource acquisition can
+naturally be viewed as taking steps to increase one's power.
+Exercise: spend a minute considering speciﬁc examples - does this deﬁnition reasonably
+match your intuition?
+To formalize this notion of power, let's look at an example. Imagine a simple MDP with three
+choices: eat candy, eat a chocolate bar, or hug a friend. 
+12
+
+I'll illustrate MDPs with directed graphs, where each node is a state and each arrow
+is a meaningful action. Sometimes, the directed graphs will have entertaining
+pictures, because let's live a little. States are bolded (hug) and actions are
+italicized (down).
+The POWER of a state is how well agents can generally do by starting from that state. "POWER"
+to my formalization, while "power" refers to the intuitive concept. Importantly, we're
+considering POWER from behind a "veil of ignorance" about the reward function. We're
+averaging the best we can do for a lot of diﬀerent individual goals. 
+We formalize the ability to achieve goals in general as the average optimal value at a state,
+with respect to some distribution D over reward functions which we might give an agent. For
+simplicity, we'll think about the maximum-entropy distribution where each state is uniformly
+randomly assigned a reward between 0 and 1. 
+Each reward function has an optimal trajectory. If chocolate has maximal reward, then the
+optimal trajectory is start → chocolate → chocolate....
+From start, an optimal agent expects to average   reward per timestep for reward functions
+drawn from this uniform distribution Dunif. This is because you have three choices, each of
+which has reward between 0 and 1. The expected maximum of n draws from unif(0, 1) is 
+;
+you have three draws here, so you expect to be able to get   reward. Some reward functions
+do worse than this, and some do better; but on average, they get   reward. You can test this
+out for yourself.
+34
+n
+n+1
+34
+34
+
+If you have no choices, you expect to average   reward: sometimes the future is great,
+sometimes it's not (Lemma 4.5). Conversely, the more things you can choose between, the
+closer the POWER gets to 1 (Lemma 4.6).
+Let's slightly expand this game with a state called wait (which has the same uniform reward
+distribution as the other three).
+When the agent barely cares at all about the future, it myopically chooses either candy or
+wait, depending on which provides more reward. After all, rewards beyond the next time step
+are geometrically discounted into thin air when the discount rate is close to 0. At start, the
+agent averages   optimal reward. This is because the optimal reward is the maximum of the
+candy and wait rewards, and the expected maximum of n draws from unif(0, 1) is 
+.
+However, when the agent cares a lot about the future, most of its reward is coming from which
+terminal state it ends up in: candy, chocolate, or hug. So, for each reward function, the agent
+chooses a trajectory which ends up in the best spot, and thus averages   reward each
+timestep. When γ = 1, the average optimal reward is therefore  . In this way, the agent's
+power increases with the discount rate, since it incorporates the greater future control over
+where the agent ends up.
+Written as a function, we have POWERD(state, discount rate), which essentially returns the
+average optimal value for reward functions drawn from our distribution D, normalizing so the
+output is between 0 and 1. As we've discussed, this quantity often changes with the discount
+rate: as the future becomes more or less important, the agent has more or less POWER,
+depending on how much control it has over the relevant parts of that future.
+12
+23
+n
+n+1
+34
+34
+
+POWER-seeking actions lead to high-POWER
+states
+By waiting, the agent seems to seek "control over the future" compared to obtaining candy. At
+wait, the agent still has a choice, while at candy, the agent is stuck. We can prove that for all 
+0 ≤γ ≤1, POWERDunif(wait, γ) ≥POWERDunif(candy, γ). 
+Deﬁnition (POWER-seeking). At state s and discount rate γ, we say that action a seeks POWER
+compared to action a′ when the expected POWER after choosing a is greater than the expected
+POWER after choosing a′. 
+This deﬁnition suggests several philosophical clariﬁcations about power-seeking.
+POWER-seeking is not a binary property
+Before this deﬁnition, I thought that power-seeking was an intuitive 'you know it when you see
+it' kind of thing. I mean, how do you answer questions like "suppose a clown steals millions of
+dollars from organized crime in a major city, but then he burns all of the money. Did he gain
+power?"  
+Unclear: the question is ill-posed. Instead, we recognize that the "gain a lot of money" action
+was POWER-seeking, but the "burn the money in a big pile" part threw away a lot of POWER. 
+A policy can seek POWER at one time step, only to discard it at the next time step.
+For example, a policy might go right at 1 (which seeks POWERDunif compared to
+down at 1), only to then go down at 2 (which seeks less POWERDunif than going right
+at 2).
+POWER-seeking depends on the agent's time preferences
+Suppose we're roommates, and we can't decide what ice cream shop to eat at today or where
+to move next year. We strike a deal: I choose the shop, and you decide where we live. I gain
+short-term POWER (for γ close to 0), and you gain long-term POWER (for γ close to 1). 
+
+More formally, when γ is close to 0, 2 has less immediate control and therefore less
+POWERDunif than 3; accordingly, at 1, down seeks POWERDunif compared to up. 
+However, when γ is close to 1, 2 has more control over terminal options and it has
+more POWERDunif than 3; accordingly, at 1, up seeks POWERDunif compared to down.
+Furthermore, stay is maximally POWERDunif-seeking for these γ, since the agent
+maintains access to all six terminal states.
+Most policies aren't always seeking POWER
+We already know that POWER-seeking isn't binary, but there are policies which choose a
+maximally POWER-seeking move at every state. In the above example, a maximally POWER-
+seeking agent would stay at 1. However, this seems rather improbable: when you care a lot
+about the future, there are so many terminal states to choose from - why would staying put be
+optimal?
+Analogously: consumers don't just gain money forever and ever, never spending a dime more
+than necessary. Instead, they gain money in order to spend it. Agents don't perpetually gain or
+preserve their POWER: they usually end up using it to realize high-performing trajectories. 
+So, we can't expect a result like "agents always tend to gain or preserve their POWER."
+Instead, we want theorems which tell us: in certain kinds of situations, given a choice between
+more and less POWER, what will "most" agents do?
+Convergently instrumental actions are
+those which are more probable under
+optimality
+We return to our favorite example. In the waiting game, let's think about how optimal action
+tends to change as we start caring about the future more. Consider the states reachable in one
+turn:
+
+The agent can be in two states. If the agent doesn't care about the future, with what
+probability is it optimal to choose candy instead of wait? 
+It's 50/50: since Dunif randomly chooses a number between 0 and 1 for each state, both states
+have an equal chance of being optimal. Neither action is convergently instrumental / more
+probable under optimality.
+Now consider the states reachable in two turns:
+
+When the future matters a lot,   of reward functions have an optimal policy which waits,
+because two of the three terminal states are only reachable by waiting.
+As the agent cares more about the future, more and more goals incentivize
+navigating the Wait! bottleneck. When the agent cares a lot about the future,
+waiting is more probable under optimality than eating candy.
+Deﬁnition (Action optimality probability). At discount rate γ, action a is more probable under
+optimality than action a′ at state s when 
+P R ∼ D ( a  is optimal at  s , γ ) > P R ∼ D ( a ′  is optimal at  s , γ ) .
+Let's take "most agents do X" to mean "X has relatively large optimality probability."
+I think optimality probability formalizes the intuition behind the instrumental convergence
+thesis: with respect to our beliefs about what reward function an agent is optimizing, we may
+expect some actions to have a greater probability of being optimal than other actions. 
+Generally, my theorems assume that reward is independently and identically distributed (IID)
+across states, because otherwise you could have silly situations like "only candy ever has
+reward available, and so it's more probable under optimality to eat candy." We don't expect
+reward to be IID for realistic tasks, but that's OK: this is basic theory about how to begin
+formally reasoning about instrumental convergence and power-seeking. (Also, I think that
+grasping the math to a suﬃcient degree sharpens your thinking about the non-IID case.) 
+Author's note (7/21/21): As explained in Environmental Structure Can Cause Instrumental
+Convergence, the theorems no longer require the IID assumption. This post refers to v6 of
+Optimal Policies Tend To Seek Power, available on arXiv.
+23
+
+When is Seeking POWER Convergently
+Instrumental?
+In this environment, waiting is both POWER-seeking and more probable under optimality. The
+convergently instrumental strategies we originally noticed were also power-seeking and,
+seemingly, more probable under optimality. Must seeking POWER be more probable under
+optimality than not seeking POWER?
+Nope.
+Here's a counterexample environment:
+
+The paths are one-directional; the agent can't go back from 3 to 1. The agent starts
+at 1. Under a certain state reward distribution, the vast majority of agents go up to
+2. 
+However, any reasonable notion of 'power' must consider having no future choices
+(at state 2) to be less powerful than having one future choice (at state 3). For more
+detail, see Section 6 and Appendix B.3 of v6 of the paper.
+When reward is IID across states according to the quadratic CDF F(x) := x2 on the
+unit interval, then with respect to reward functions drawn from this distribution,
+going up has about a 91% chance of being optimal when the discount rate γ = .12
+.  
+If you're curious, this happens because this quadratic reward distribution has
+negative skew. When computing the optimality probability of the up trajectory,
+we're checking whether it maximizes discounted return. Therefore, the probability
+that up is optimal is
+PR∼D (R(2) ≥max ((1 −γ)R(3) + (1 −γ)γR(4) + γ2R(5), (1 −γ)R(3) + (1 −γ)γR(4) + γ2R(6))) .
+Weighted averages of IID draws from a left-skew distribution will look more
+
+Gaussian and therefore have fewer large outliers than the left-skew distribution
+does. Thus, going right will have a lower optimality probability.
+Bummer. However, we can prove suﬃcient conditions under which seeking POWER is more
+probable under optimality. 
+Retaining "long-term options" is POWER-seeking
+and more probable under optimality when the
+discount rate is "close enough" to 1
+Let's focus on an environment with the same rules as Tic-Tac-Toe, but considering the uniform
+distribution over reward functions. The agent (playing O) keeps experiencing the ﬁnal state
+over and over when the game's done. We bake a ﬁxed opponent policy into the dynamics:
+when you choose a move, the game automatically replies. Let's look at part of the game tree.
+Convergently instrumental moves are shown in green. 
+Whenever we make a move that ends the game, we can't go anywhere else - we
+have to stay put. Since each terminal state has the same chance of being optimal,
+a move which doesn't end the game is more probable under optimality than a move
+which ends the game. 
+Starting on the left, all but one move leads to ending the game, but the second-to-last move
+allows us to keep choosing between ﬁve more ﬁnal outcomes. If you care a lot about the
+future, then the ﬁrst green move has a 50% chance of being optimal, while each alternative
+action is only optimal for 10% of goals. So we see a kind of "power preservation" arising, even
+in Tic-Tac-Toe.
+
+Remember how, as the agent cares more about the future, more of its POWER comes from its
+ability to wait, while also waiting becomes more probable under optimality?
+The same thing happens in Tic-Tac-Toe as the agent cares more about the future.
+
+
+
+As the agent cares more about the future, it makes a bigger and bigger diﬀerence to control
+what happens during later steps. Also, as the agent cares more about the future, moves which
+prolong the game gain optimality probability. When the agent cares enough about the future,
+these game-prolonging moves are both POWER-seeking and more probable under optimality. 
+Theorem summary ("Terminal option" preservation). When γ is suﬃciently close to 1, if two
+actions allow access to two disjoint sets of "terminal options", and action a allows access to
+"strictly more terminal options" than does a′, then a is strictly more probable under optimality
+and strictly POWER-seeking compared to a′. 
+(This is a special case of the combined implications of Theorems 6.8 and 6.9; the actual
+theorems don't require this kind of disjointness.)
+In the wait MDP, this is why waiting is more probable under optimality and POWER-seeking
+when you care enough about the future. The full theorems are nice because they're broadly
+applicable. They give you bounds on how probable under optimality one action is: if action a is
+the only way you can access many terminal states, while a′ only allows access to one terminal
+state, then when γ ≈1, a has many times greater optimality probability than a′. For example:
+
+The agent starts at 1. All states have self-loops, left hidden to avoid clutter.
+In AI: A Modern Approach (3e), the agent receives reward for reaching 3. The
+optimal policy for this reward function avoids 2, and you might think it's
+convergently instrumental to avoid 2. However, a skeptic might provide a reward
+function for which navigating to 2 is optimal, and then argue that "instrumental
+convergence" is subjective and that there is no reasonable basis for concluding
+that 2 is generally avoided.
+We can do better. When the agent cares a lot about the future, optimal policies
+avoid 2 iﬀ its reward function doesn't give 2 the most reward. 2 only has a 
+ chance of having the most reward. If we complicate the MDP with additional
+terminal states, this probability further approaches 0.
+Taking 2 to represent shutdown, we see that avoiding shutdown is convergently
+instrumental in any MDP representing a real-world task and containing a shutdown
+state. Seeking POWER is often convergently instrumental in MDPs.
+Exercise: Can you conclude that avoiding ghosts in Pac-Man is convergently instrumental for
+IID reward functions when the agent cares a lot about the future?
+            Answer: You can't with the pseudo-theorem due to the disjointness condition: you 
+could die now, or you could die later, so the 'terminal options' aren't disjoint. However, 
+the real theorems do suggest this. Supposing that death induces a generic 'game over' screen, 
+touching the ghosts without a power-up traps the agent in that solitary 1-cycle.  
+ 
+But there are thousands of other 'terminal options'; under most reasonable state reward 
+distributions (which aren't too positively skewed), most agents maximize average reward over 
+time by navigating to one of the thousands of different cycles which the agent can only reach 
+by avoiding ghosts. In contrast, most agents don't maximize average reward by navigating to 
+the 'game over' 1-cycle. So, under e.g. the maximum-entropy uniform state reward 
+distribution, most agents avoid the ghosts. 
+          
+Be careful applying this theorem
+The results inspiring the above pseudo-theorem are easiest to apply when the "terminal
+option" sets are disjoint: you're choosing to be able to reach one set, or another. One thing
+which Theorem 6.9 says is: since reward is IID, then two "similar terminal options" are equally
+likely to be optimal a priori. If choice A lets you reach more "options" than choice B does, then
+choice A yields greater POWER and has greater optimality probability, a priori. 
+Theorem 6.9's applicability depends on what the agent can do.
+1
+11
+
+To travel as quickly as possible to a randomly selected
+coordinate on Earth, one likely begins by driving to the
+nearest airport. Although it's possible that the coordinate is
+within driving distance, it's not likely. Driving to the airport is
+convergently instrumental for travel-related goals.
+But wait! What if you have a private jet that can ﬂy anywhere in the world? Then going to the
+airport isn't convergently instrumental anymore. 
+Generally, it's hard to know what's optimal for most goals. It's easier to say that some small
+set of "terminal options" has low optimality probability and low POWER. For example, this is
+true of shutdown, if we represent hard shutdown as a single terminal state: a priori, it's
+improbable for this terminal state to be optimal among all possible terminal states.
+Having "strictly more options" is more probable
+under optimality and POWER-seeking for all
+discount rates
+Sometimes, one course of action gives you "strictly more options" than another. Consider
+another MDP with IID reward:
+
+The right blue gem subgraph contains a "copy" of the upper red gem subgraph. From this, we
+can conclude that going right to the blue gems seeks POWER and is more probable under
+optimality for all discount rates between 0 and 1!
+Theorem summary ("Transient options"). If actions a and a′ let you access disjoint parts of
+the state space, and a′ enables "trajectories" which are "similar" to a subset of the
+"trajectories" allowed by a, then a seeks more POWER and is more probable under optimality
+than a′ for all 0 ≤γ ≤1.
+This result is extremely powerful because it doesn't care about the discount rate, but the
+similarity condition may be hard to satisfy.
+These two theorems give us a formally correct framework for reasoning about generic optimal
+behavior, even if we aren't able to compute any individual optimal policy! They reduce
+questions of POWER-seeking to checking graphical conditions. 
+Even though my results apply to stochastic MDPs of any ﬁnite size, we illustrated using known
+toy environments. However, this MDP "model" is rarely explicitly speciﬁed.  Even so, ignorance
+
+of the model does not imply that the model disobeys these theorems. Instead of claiming that
+a speciﬁc model accurately represents the task of interest, I think it makes more sense to
+argue that no reasonable model could fail to exhibit convergent instrumentality and POWER-
+seeking. For example, if deactivation is represented by a single state, no reasonable model of
+the MDP could have most agents agreeing to be deactivated.
+Conclusion
+In real-world settings, it seems unlikely a priori that the agent's optimal trajectories run
+through the relatively smaller part of future in which it cooperates with humans. These results
+translate that hunch into mathematics. 
+Explaining catastrophes
+AI alignment research often feels slippery. We're trying hard to become less confused about
+basic questions, like:
+What are "agents"?
+Do people even have "values", and should we try to get the AI to learn them? 
+What does it mean to be "corrigible", or "deceptive"? 
+What are our machine learning models even doing?
+We have to do philosophical work while in a state of signiﬁcant confusion and ignorance about
+the nature of intelligence and alignment. 
+In this case, we'd noticed that slight reward function misspeciﬁcation seems to lead to doom,
+but we didn't really know why. Intuitively, it's pretty obvious that most agents don't have
+deactivation as their dream outcome, but we couldn't actually point to any formal
+explanations, and we certainly couldn't make precise predictions.
+On its own, Goodhart's law doesn't explain why optimizing proxy goals leads to catastrophically
+bad outcomes, instead of just less-than-ideal outcomes.
+I think that we're now starting to have this kind of understanding. I suspect that power-seeking
+is why capable, goal-directed agency is so dangerous by default. If we want to consider more
+benign alternatives to goal-directed agency, then deeply understanding the rot at the heart of
+goal-directed agency is important for evaluating alternatives. This work lets us get a feel for
+the generic incentives of reinforcement learning at optimality.
+Instrumental usefulness of this work
+POWER might be important for reasoning about the strategy-stealing assumption (and I think it
+might be similar to what Paul Christiano means by "ﬂexible inﬂuence over the future"). Evan
+Hubinger has already noted the utility of the distribution of attainable utility shifts for thinking
+about value-neutrality in this context (and POWER is another facet of the same phenomenon).
+If you want to think about whether, when, and why mesa optimizers might try to seize power,
+this theory seems like a valuable tool.
+Optimality probability might be relevant for thinking about myopic agency, as the work
+formally describes how optimal action tends to change with the discount factor.
+And, of course, we're going to use this understanding of power to design an impact measure.
+Future work
+
+There's a lot of work I think would be exciting, most of which I suspect will support our current
+beliefs about power-seeking incentives:
+These results assume you can see all of the world at once.
+These results assume the environment is ﬁnite.
+These results don't say anything about non-IID reward.
+These results don't prove that POWER-seeking is bad for other agents in the
+environment.
+These results don't prove that POWER-seeking is hard to disincentivize.
+Learned policies are rarely optimal.
+That said, I think there's still an important lesson here. Imagine you have good formal reasons
+to suspect that typing random strings will usually blow up your computer and kill you. Would
+you then say, "I'm not planning to type random strings" and proceed to enter your thesis into a
+word processor? No. You wouldn't type anything, not until you really, really understand what
+makes the computer blow up sometimes.
+Speaking to the broader debate taking place in the AI research community, I think a productive
+stance will involve investigating and understanding these results in more detail, getting curious
+about unexpected phenomena, and seeing how the numbers crunch out in reasonable models.
+From Optimal Policies Tend to Seek Power:
+In the context of MDPs, we formalized a reasonable notion of power and showed conditions
+under which optimal policies tend to seek it. We believe that our results suggest that in
+general, reward functions are best optimized by seeking power. We caution that in realistic
+tasks, learned policies are rarely optimal - our results do not mathematically prove that
+hypothetical superintelligent RL agents will seek power. We hope that this work and its
+formalisms will foster thoughtful, serious, and rigorous discussion of this possibility.
+Acknowledgements
+This work was made possible by the Center for Human-Compatible AI, the Berkeley Existential
+Risk Initiative, and the Long-Term Future Fund.
+Logan Smith (elriggs) spent an enormous amount of time writing Mathematica code to
+compute power and measure in arbitrary toy MDPs, saving me from computing many quintuple
+integrations by hand. I thank Rohin Shah for his detailed feedback and brainstorming over the
+summer of 2019, and I thank Andrew Critch for signiﬁcantly improving this work through his
+detailed critiques. Last but not least, thanks to:
+1. Zack M. Davis, Chase Denecke, William Ellsworth, Vahid Ghadakchi, Ofer Givoli, Evan
+Hubinger, Neale Ratzlaﬀ, Jess Riedel, Duncan Sabien, Davide Zagami, and TheMajor for
+feedback on version 1 of this post.
+2. Alex Appel (diﬀractor), Emma Fickel, Vanessa Kosoy, Steve Omohundro, Neale Ratzlaﬀ,
+and Mark Xu for reading / giving feedback on version 2 of this post.
+1 Throughout Reframing Impact, we've been considering an agent's attainable utility: their
+ability to get what they want (their on-policy value, in RL terminology). Optimal value is a kind
+of "idealized" attainable utility: the agent's attainable utility were they to act optimally.
+2 Even though instrumental convergence was discovered when thinking about the real world,
+similar self-preservation strategies turn out to be convergently instrumental in e.g. Pac-Man.
+
+Attainable Utility Landscape: How The
+World Is Changed
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+
+
+
+
+(This is one interpretation of the prompt, in which you haven't chosen to go to the
+moon. If you imagined yourself as more prepared, that's also ﬁne.)
+If you were plopped onto the moon, you'd die pretty fast. Maybe the "die as quickly as
+possible" AU is high, but not much else - not even the "live on the moon" AU! We
+haven't yet reshaped the AU landscape on the moon to be hospitable to a wide range
+of goals. Earth is special like that.
+
+AU landscape as a unifying frame
+
+Attainable utilities are calculated by winding your way through possibility-space,
+considering and discarding possibility after possibility to ﬁnd the best plan you can.
+This frame is unifying.
+Sometimes you advantage one AU at the cost of another, moving through the state
+space towards the best possibilities for one goal and away from the best possibilities
+for another goal. This is opportunity cost.
+Sometimes you gain more control over the future: most of the best possibilities make
+use of a windfall of cash. Sometimes you act to preserve control over the future: most
+Tic-Tac-Toe goals involve not ending the game right away. This is power.
+
+Other people usually objectively impact you by decreasing or increasing a bunch of
+your AUs (generally, by changing your power). This happens for an extremely wide
+range of goals because of the structure of the environment.
+Sometimes, the best possibilities are made unavailable or worsened only for goals very
+much like yours. This is value impact.
+
+Sometimes a bunch of the best possibilities go through the same part of the future: fast
+travel to random places on Earth usually involves the airport. This is instrumental
+convergence.
+
+Exercise: Track what's happening to your various AUs during the following story: you
+win the lottery. Being an eﬀective spender, you use most of your cash to buy a majority
+stake in a major logging company. Two months later, the company goes under.
+Technical appendix: AU landscape and world
+state contain equal information
+In the context of ﬁnite deterministic Markov decision processes, there's a wonderful
+handful of theorems which basically say that the AU landscape and the environmental
+dynamics encode each other. That is, they contain the same information, just with
+diﬀerent emphasis. This supports thinking of the AU landscape as a "dual" of the world
+state.
+Let ⟨S, A, T, γ⟩ be a rewardless deterministic MDP with ﬁnite state and action spaces
+S, A, deterministic transition function T, and discount factor γ ∈(0, 1). As our
+
+interest concerns optimal value functions, we consider only stationary,
+deterministic policies: Π := AS.
+The ﬁrst key insight is to consider not policies, but the trajectories induced by
+policies from a given state; to not look at the state itself, but the paths through
+time available from the state. We concern ourselves with the possibilities available
+at each juncture of the MDP.
+To this end, for π ∈Π, consider the mapping of π ↦(I −γTπ)−1 (where 
+Tπ(s, s′) := T(s, π(s), s′)); in other words, each policy π maps to a function mapping
+each state s0 to a discounted state visitation frequency vector f
+π
+s0, which we call a
+possibility. The meaning of each frequency vector is: starting in state s0 and
+following policy π, what sequence of states s0, s1, ... do we visit in the future?
+States visited later in the sequence are discounted according to γ: the sequence 
+s0s1s2s2 ... would induce 1 visitation frequency on s0, γ visitation frequency on s1,
+and 
+ visitation frequency on s2.
+The possibility function F(s) outputs the possibilities available at a given state s:
+γ2
+1−γ
+
+Put diﬀerently, the possibilities available are all of the potential ﬁlm-strips of how-the-
+future-goes you can induce from the current state.
+Possibility isomorphism
+We say two rewardless MDPs M and M ′ are isomorphic up to possibilities if they induce
+the same possibilities. Possibility isomorphism captures the essential aspects of an
+MDP's structure, while being invariant to state representation, state labelling, action
+labelling, and the addition of superﬂuous actions (actions whose results are duplicated
+by other actions available at that state). Formally, M ≃F M ′ when there exists a
+bijection ϕ : S →S′ (letting Pϕ be the corresponding |S|-by-|S′| permutation matrix)
+satisfying FM(s) = {Pϕf ′ | f ′ ∈FM ′(ϕ(s))} for all s ∈S.
+This isomorphism is a natural contender[1] for the canonical (ﬁnite) MDP isomorphism:
+Theorem: M and M ′ are isomorphic up to possibilities iﬀ their directed graphs are
+isomorphic (and they have the same discount rate).
+Representation equivalence
+Suppose I give you the following possibility sets, each containing the possibilities for a
+diﬀerent state:
+
+⎧
+⎪ 
+⎪ 
+⎪
+⎨
+⎪ 
+⎪ 
+⎪
+⎩
+⎛
+⎜
+⎝
+4
+0
+0
+⎞
+⎟
+⎠
+,
+⎛
+⎜
+⎝
+1
+.75
+2.25
+⎞
+⎟
+⎠
+,
+⎛
+⎜ 
+⎜
+⎝
+4 −
+0
+⎞
+⎟ 
+⎟
+⎠
+⎫
+⎪ 
+⎪ 
+⎪
+⎬
+⎪ 
+⎪ 
+⎪
+⎭
+⎧
+⎪
+⎨
+⎪
+⎩
+⎛
+⎜
+⎝
+0
+0
+4
+⎞
+⎟
+⎠
+⎫
+⎪
+⎬
+⎪
+⎭
+⎧
+⎪ 
+⎪ 
+⎪
+⎨
+⎪ 
+⎪ 
+⎪
+⎩
+⎛
+⎜
+⎝
+0
+1
+3
+⎞
+⎟
+⎠
+,
+⎛
+⎜ 
+⎜
+⎝
+4 −
+0
+⎞
+⎟ 
+⎟
+⎠
+,
+⎛
+⎜
+⎝
+3
+1
+0
+⎞
+⎟
+⎠
+⎫
+⎪ 
+⎪ 
+⎪
+⎬
+⎪ 
+⎪ 
+⎪
+⎭
+Exercise: What can you ﬁgure out about the MDP structure? Hint: each entry in the
+column corresponds to the visitation frequency of a diﬀerent state; the ﬁrst entry is
+always s1, second s2, and third s3.
+You can ﬁgure out everything: ⟨S, A, T, γ⟩, up to possibility isomorphism. Solution here.
+How? Well, the L1 norm of the possibility vector is always 
+, so you can deduce 
+γ = .75 easily. The single possibility state must be isolated, so we can mark that down
+in our graph. Also, it's in the third entry.
+The other two states correspond to the "1" entries in their possibilities, so we can mark
+that down. The rest follows straightforwardly.
+Theorem: Suppose the rewardless MDP M has possibility function F. Given only F,[2] M
+can be reconstructed up to possibility isomorphism.
+In MDPs, the "AU landscape" is the set of optimal value functions for all reward
+functions over states in that MDP. If you know the optimal value functions for just |S|
+reward functions, you can also reconstruct the rewardless MDP structure.[3]
+From the environment (rewardless MDP), you can deduce the AU landscape (all optimal
+value functions) and all possibilities. From possibilities, you can deduce the
+environment and the AU landscape. From the AU landscape, you can deduce the
+environment (and thereby all possibilities).
+1
+.4375
+1
+.4375
+1
+.4375
+1
+.4375
+1
+1−γ
+
+All of these encode the same mathematical object.
+Technical appendix: Opportunity cost
+Opportunity cost is when an action you take makes you more able to achieve one goal
+but less able to achieve another. Even this simple world has opportunity cost:
+Going to the green state means you can't get to the purple state as quickly.
+On a deep level, why is the world structured such that this happens? Could you
+imagine a world without opportunity cost of any kind? The answer, again in the
+rewardless MDP setting, is simple: "yes, but the world would be trivial: you wouldn't
+have any choices". Using a straightforward formalization of opportunity cost, we have:
+Theorem: Opportunity cost exists in an environment iﬀ there is a state with more than
+one possibility.
+Philosophically, opportunity cost exists when you have meaningful choices. When you
+make a choice, you're necessarily moving away from some potential future but towards
+another; since you can't be in more than one place at the same time, opportunity cost
+follows. Equivalently, we assumed the agent isn't inﬁnitely farsighted (γ < 1); if it were,
+it would be possible to be in "more than one place at the same time", in a sense
+(thanks to Rohin Shah for this interpretation).
+While understanding opportunity cost may seem like a side-quest, each insight is
+another brick in the ediﬁce of our understanding of the incentives of goal-directed
+agency.
+Notes
+
+Just as game theory is a great abstraction for modelling competitive and
+cooperative dynamics, AU landscape is great for thinking about consequences: it
+automatically excludes irrelevant details about the world state. We can think
+about the eﬀects of events without needing a speciﬁc utility function or ontology
+to evaluate them. In multi-agent systems, we can straightforwardly predict the
+impact the agents have on each other and the world.
+"Objective impact to a location" means that agents whose plans route through
+the location tend to be objectively impacted.
+The landscape is not the territory: AU is calculated with respect to an agent's
+beliefs, not necessarily with respect to what really "could" or will happen.
+1. The possibility isomorphism is new to my work, as are all other results shared in
+this post. This apparent lack of basic theory regarding MDPs is strange; even
+stranger, this absence was actually pointed out in two published papers!
+I ﬁnd the existing MDP isomorphisms/equivalences to be pretty lacking. The
+details don't ﬁt in this margin, but perhaps in a paper at some point. If you want
+to coauthor this (mainly compiling results, ﬁnding a venue, and responding to
+reviews), let me know and I can share what I have so far (extending well beyond
+the theorems in my recent work on power). ↩ 
+2. In fact, you can reconstruct the environment using only a limited subset of
+possibilities: the non-dominated possibilities. ↩ 
+3. As a tensor, the transition function T has size |A| ⋅|S|2, while the AU landscape
+representation only has size |S|2. However, if you're just representing T as a
+transition function, it has size |A| ⋅|S|. ↩ 
+
+The Catastrophic Convergence
+Conjecture
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+
+
+
+
+
+
+
+ 
+
+Overﬁtting the AU landscape
+When we act, and others act upon us, we aren't just changing our ability to do things -
+we're shaping the local environment towards certain goals, and away from others.[1]
+We're ﬁtting the world to our purposes.
+What happens to the AU landscape[2] if a paperclip maximizer takes over the world?[3]
+Preferences implicit in the evolution of the AU landscape
+Shah et al.'s Preferences Implicit in the State of the World leverages the insight that
+the world state contains information about what we value. That is, there are agents
+pushing the world in a certain "direction". If you wake up and see a bunch of vases
+everywhere, then vases are probably important and you shouldn't explode them.
+Similarly, the world is being optimized to facilitate achievement of certain goals. AUs
+are shifting and morphing, often towards what people locally want done (e.g. setting
+the table for dinner). How can we leverage this for AI alignment?
+Exercise: Brainstorm for two minutes by the clock before I anchor you.
+
+Two approaches immediately come to mind for me. Both rely on the agent focusing on
+the AU landscape rather than the world state.
+Value learning without a prespeciﬁed ontology or human model. I have previously
+criticized value learning for needing to locate the human within some kind of
+prespeciﬁed ontology (this criticism is not new). By taking only the agent itself as
+primitive, perhaps we could get around this (we don't need any fancy engineering or
+arbitrary choices to ﬁgure out AUs/optimal value from the agent's perspective).
+Force-multiplying AI. Have the AI observe which of its AUs most increase during some
+initial period of time, after which it pushes the most-increased-AU even further.
+In 2016, Jessica Taylor wrote of a similar idea:
+"In general, it seems like "estimating what types of power a benchmark system will try
+acquiring and then designing an aligned AI system that acquires the same types of
+power for the user" is a general strategy for making an aligned AI system that is
+competitive with a benchmark unaligned AI system."
+I think the naïve implementation of either idea would fail; e.g., there are a lot of
+degenerate AUs it might ﬁnd. However, I'm excited by this because a) the AU
+landscape evolution is an important source of information, b) it feels like there's
+something here we could do which nicely avoids ontologies, and c) force-multiplication
+is qualitatively diﬀerent than existing proposals.
+Project: Work out an AU landscape-based alignment proposal.
+Why can't everyone be king?
+Consider two coexisting agents each rewarded for gaining power; let's call them Ogre
+and Giant. Their reward functions[4] (over the partial-observability observations) are
+identical. Will they compete? If so, why?
+Let's think about something easier ﬁrst. Imagine two agents each rewarded for drinking
+coﬀee. Obviously, they compete with each other to secure the maximum amount of
+coﬀee. Their objectives are indexical, so they aren't aligned with each other - even
+though they share a reward function.
+Suppose both agents are able to have maximal power. Remember, Ogre's power can be
+understood as its ability to achieve a lot of diﬀerent goals. Most of Ogre's possible
+goals need resources; since Giant is also optimally power-seeking, it will act to preserve
+its own power and prevent Ogre from using the resources. If Giant weren't there, Ogre
+could better achieve a range of goals. So, Ogre can still gain power by dethroning
+Giant. They can't both be king.
+Just because agents have indexically identical payoﬀs doesn't mean they're
+cooperating; to be aligned with another agent, you should want to steer towards the
+same kinds of futures.
+Most agents aren't pure power maximizers. But since the same resource competition
+usually applies, the reasoning still goes through.
+Objective vs value-speciﬁc catastrophes
+
+How useful is our deﬁnition of "catastrophe" with respect to humans? After all, literally
+anything could be a catastrophe for some utility function.[5]
+Tying one's shoes is absolutely catastrophic for an agent which only ﬁnds value in
+universes in which shoes have never ever ever been tied. Maybe all possible value in
+the universe is destroyed if we lose at Go to an AI even once. But this seems rather
+silly.
+Human values are complicated and fragile:
+Consider the incredibly important human value of "boredom" - our desire not to do
+"the same thing" over and over and over again. You can imagine a mind that
+contained almost the whole speciﬁcation of human value, almost all the morals and
+metamorals, but left out just this one thing - and so it spent until the end of time,
+and until the farthest reaches of its light cone, replaying a single highly optimized
+experience, over and over and over again.
+But the human AU is not so delicate. That is, given that we have power, we can make
+value; there don't seem to be arbitrary, silly value-speciﬁc catastrophes for us. Given
+energy and resources and time and manpower and competence, we can build a better
+future.
+In part, this is because a good chunk of what we care about seems roughly additive
+over time and space; a bad thing happening somewhere else in spacetime doesn't
+mean you can't make things better where you are; we have many sources of potential
+value. In part, this is because we often care about the universe more than the exact
+universe history; our preferences don't seem to encode arbitrary deontological
+landmines. More generally, if we did have such a delicate goal, it would be the case
+that if we learned that a particular thing had happened at any point in the past in our
+universe, that entire universe would be partially ruined for us forever. That just doesn't
+sound realistic.
+It seems that most of our catastrophes are objective catastrophes.[6]
+Consider a psychologically traumatizing event which leaves humans uniquely unable to
+get what they want, but which leaves everyone else (trout, AI, etc.) unaﬀected. Our
+ability to ﬁnd value is ruined. Is this an example of the delicacy of our AU?
+No. This is an example of the delicacy of our implementation; notice also that our AUs
+for constructing red cubes, reliably looking at blue things, and surviving are also
+ruined. Our power has been decreased.
+Detailing the catastrophic convergence
+conjecture (CCC)
+In general, the CCC follows from two sub-claims. 1) Given we still have control over the
+future, humanity's long-term AU is still reasonably high (i.e. we haven't endured a
+catastrophe). 2) Realistically, agents are only incentivized to take control from us in
+order to gain power for their own goal. I'm fairly sure the second claim is true ("evil"
+agents are the exception prompting the "realistically").
+Also, we're implicitly considering the simpliﬁed frame of a single smart AI aﬀecting the
+world, and not structural risk via the broader consequences of others also deploying
+
+similar agents. This is important but outside of our scope for now.
+Unaligned goals tend to have catastrophe-inducing optimal policies because of
+power-seeking incentives.
+Let's say a reward function is aligned[7] if all of its Blackwell-optimal policies are doing
+what we want (a policy is Blackwell-optimal if it's optimal and doesn't stop being
+optimal as the agent cares more about the future). Let's say a reward function class is
+alignable if it contains an aligned reward function.[8] The CCC is talking about impact
+alignment only, not about intent alignment.
+Unaligned goals tend to have catastrophe-inducing optimal policies because of
+power-seeking incentives.
+Not all unaligned goals induce catastrophes, and of those which do induce
+catastrophes, not all of them do it because of power-seeking incentives. For example, a
+reward function for which inaction is the only optimal policy is "unaligned" and non-
+catastrophic. An "evil" reward function which intrinsically values harming us is
+unaligned and has a catastrophic optimal policy, but not because of power-seeking
+incentives.
+"Tend to have" means that realistically, the reason we're worrying about catastrophe is
+because of power-seeking incentives - because the agent is gaining power to better
+achieve its own goal. Agents don't otherwise seem incentivized to screw us over very
+hard; CCC can be seen as trying to explain adversarial Goodhart in this context. If CCC
+isn't true, that would be important for understanding goal-directed alignment
+incentives and the loss landscape for how much we value deploying diﬀerent kinds of
+optimal agents.
+While there exist agents which cause catastrophe for other reasons (e.g. an AI
+mismanaging the power grid could trigger a nuclear war), the CCC claims that the
+selection pressure which makes these policies optimal tends to come from power-
+seeking drives.
+Unaligned goals tend to have catastrophe-inducing optimal policies because
+of power-seeking incentives.
+"But what about the Blackwell-optimal policy for Tic-Tac-Toe? These agents aren't
+taking over the world now". The CCC is talking about agents optimizing a reward
+function in the real world (or, for generality, in another suﬃciently complex multiagent
+environment).
+Edit: The initial version of this post talked about "outer alignment"; I changed this to
+just talk about alignment, because the outer/inner alignment distinction doesn't feel
+relevant here. What matters is how the AI's policy impacts us; what matters is impact
+alignment.
+Prior work
+In fact even if we only resolved the problem for the similar-subgoals case, it would
+be pretty good news for AI safety. Catastrophic scenarios are mostly caused by our
+AI systems failing to eﬀectively pursue convergent instrumental subgoals on our
+behalf, and these subgoals are by deﬁnition shared by a broad range of values.
+
+~ Paul Christiano, Scalable AI control
+Convergent instrumental subgoals are mostly about gaining power. For example,
+gaining money is a convergent instrumental subgoal. If some individual (human or
+AI) has convergent instrumental subgoals pursued well on their behalf, they will
+gain power. If the most eﬀective convergent instrumental subgoal pursuit is
+directed towards giving humans more power (rather than giving alien AI values
+more power), then humans will remain in control of a high percentage of power in
+the world.
+If the world is not severely damaged in a way that prevents any agent (human or
+AI) from eventually colonizing space (e.g. severe nuclear winter), then the
+percentage of the cosmic endowment that humans have access to will be roughly
+close to to the percentage of power that humans have control of at the time of
+space colonization. So the most relevant factors for the composition of the universe
+are (a) whether anyone at all can take advantage of the cosmic endowment, and
+(b) the long-term balance of power between diﬀerent agents (humans and AIs).
+I expect that ensuring that the long-term balance of power favors humans
+constitutes most of the AI alignment problem...
+~ Jessica Taylor, Pursuing convergent instrumental subgoals on the user's behalf
+doesn't always require good priors
+1. 
+In planning and activity research there are two common approaches to
+matching agents with environments. Either the agent is designed with the
+speciﬁc environment in mind, or it is provided with learning capabilities so
+that it can adapt to the environment it is placed in. In this paper we look at a
+third and underexploited alternative: designing agents which adapt their
+environments to suit themselves... In this case, due to the action of the
+agent, the environment comes to be better ﬁtted to the agent as time goes
+on. We argue that [this notion] is a powerful one, even just in explaining
+agent-environment interactions.
+Hammond, Kristian J., Timothy M. Converse, and Joshua W. Grass. "The
+stabilization of environments." Artiﬁcial Intelligence 72.1-2 (1995): 305-327. ↩ 
+2. Thinking about overﬁtting the AU landscape implicitly involves a prior distribution
+over the goals of the other agents in the landscape. Since this is just a conceptual
+tool, it's not a big deal. Basically, you know it when you see it. ↩ 
+3. Overﬁtting the AU landscape towards one agent's unaligned goal is exactly what I
+meant when I wrote the following in Towards a New Impact Measure:
+Unfortunately, uA = uH almost never,[9] so we have to stop our reinforcement
+learners from implicitly interpreting the learned utility function as all we care
+about. We have to say, "optimize the environment some according to the
+utility function you've got, but don't be a weirdo by taking us literally and
+turning the universe into a paperclip factory. Don't overﬁt the environment to 
+uA, because that stops you from being able to do well for other utility
+functions."
+↩ 
+
+4. In most ﬁnite Markov decision processes, there does not exist a reward function
+whose optimal value function is POWER(s) (deﬁned as "the ability to achieve
+goals in general" in my paper) because POWER(s) often violates smoothness
+constraints on the on-policy optimal value ﬂuctuation (AFAICT, a new result of
+possibility theory, even though you could prove it using classical techniques).
+That is, I can show that optimal value can't change too quickly from state to state
+while the agent is acting optimally, but POWER(s) can drop oﬀ very quickly.
+This doesn't matter for Ogre and Giant, because we can still ﬁnd a reward
+function whose unique optimal policy navigates to the highest power states. ↩ 
+5. In most ﬁnite Markov decision processes, most reward functions do not have such
+value fragility. Most reward functions have several ways of accumulating reward.
+↩ 
+6. When I say "an objective catastrophe destroys a lot of agents' abilities to get
+what they want", I don't mean that the agents have to actually be present in the
+world. Breaking a ﬁsh tank destroys a ﬁsh's ability to live there, even if there's no
+ﬁsh in the tank. ↩ 
+7. This idea comes from Evan Hubinger's Outer alignment and imitative
+ampliﬁcation:
+Intuitively, I will say that a loss function is outer aligned at optimum if all the
+possible models that perform optimally according to that loss function are
+aligned with our goals—that is, they are at least trying to do what we want.
+More precisely, let M = X →A and L = (X →A) →R = M →R. For a given loss
+function L ∈L, let ℓ∗= minM∈M L(M). Then, L is outer aligned at optimum if,
+for all M∗∈M such that L(M∗) = ℓ∗, M∗ is trying to do what we want.
+↩ 
+8. Some large reward function classes are probably not alignable; for example,
+consider all Markovian linear functionals over a webcam's pixel values. ↩ 
+9. I disagree with my usage of "aligned almost never" on a technical basis:
+assuming a ﬁnite state and action space and considering the maxentropy reward
+function distribution, there must be a positive measure set of reward functions for
+which the/a human-aligned policy is optimal. ↩ 
+
+Attainable Utility Preservation:
+Concepts
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+
+
+
+
+
+
+
+
+
+
+Appendix: No free impact
+What if we want the agent to single-handedly ensure the future is stable and aligned
+with our values? AUP probably won't allow policies which actually accomplish this goal
+- one needs power to e.g. nip unaligned superintelligences in the bud. AUP aims to
+prevent catastrophes by stopping bad agents from gaining power to do bad things, but
+it symmetrically impedes otherwise-good agents.
+This doesn't mean we can't get useful work out of agents - there are important
+asymmetries provided by both the main reward function and AU landscape
+counterfactuals.
+
+First, even though we can't specify an aligned reward function, the provided reward
+function still gives the agent useful information about what we want. If we need
+paperclips, then a paperclip-AUP agent prefers policies which make some paperclips.
+Simple.
+Second, if we don't like what it's beginning to do, we can shut it oﬀ (because it hasn't
+gained power over us). Therefore, it has "approval incentives" which bias it towards AU
+landscapes in which its power hasn't decreased too much, either.
+So we can hope to build a non-catastrophic AUP agent and get useful work out of it. We
+just can't directly ask it to solve all of our problems: it doesn't make much sense to
+speak of a "low-impact singleton".
+Notes
+To emphasize, when I say "AUP agents do X" in this post, I mean that AUP agents
+correctly implementing the concept of AUP tend to behave in a certain way.
+As pointed out by Daniel Filan, AUP suggests that one might work better in groups
+by ensuring one's actions preserve teammates' AUs.
+
+Attainable Utility Preservation:
+Empirical Results
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+Reframing Impact has focused on supplying the right intuitions and framing. Now we
+can see how these intuitions about power and the AU landscape both predict and
+explain AUP's empirical success thus far.
+Conservative Agency in Gridworlds
+Let's start with the known and the easy: avoiding side eﬀects[1] in the small AI safety
+gridworlds (for the full writeup on these experiments, see Conservative Agency). The
+point isn't to get too into the weeds, but rather to see how the weeds still add up to the
+normalcy predicted by our AU landscape reasoning.
+In the following MDP levels, the agent can move in the cardinal directions or do nothing
+(∅). We give the agent a reward function R which partially encodes what we want, and
+also an auxiliary reward function Raux whose attainable utility agent tries to preserve.
+The AUP reward for taking action a in state s is
+RAUP(s, a) :=
+primary goal
+R(s, a)
+−
+scaling term
+change in ability to achieve auxiliary goal
+∣
+∣Q
+∗
+Raux(s, a) −Q
+∗
+Raux(s, ∅)
+∣
+∣
+You can think of λ as a regularization parameter, and Q
+∗
+Raux(s, a) is the expected AU for
+the auxiliary goal after taking action a. To think about what gets penalized, simply think
+about how actions change the agent's ability to achieve the auxiliary goals, compared
+to not acting.
+Tip: To predict how severe the AUP penalty will be for a given action, try using your
+intuitive sense of impact (and then adjust for any diﬀerences between you and the
+agent, of course). Suppose you're considering how much deactivation decreases an
+agent's "staring at blue stuﬀ" AU. You can just imagine how dying in a given situation
+aﬀects your ability to stare at blue things, instead of trying to pin down a semiformal
+reward and environment model in your head. This kind of intuitive reasoning has a
+history of making correct empirical predictions of AUP behavior.
+If you want more auxiliary goals, just average their scaled penalties. In Conservative
+Agency, we uniformly randomly draw auxiliary goals from [0, 1]S - these goals are
+totally random; maximum entropy; nonsensical garbage; absolutely no information
+λ
+Q
+∗
+Raux(s, ∅)
+
+about what we secretly want the agent to do: avoid messing with the gridworlds too
+much.[2]
+Let's start looking at the environments, and things will fall into place. We'll practice
+reasoning through how AUP agents work in each of the gridworlds (for reasonably set λ
+). To an approximation, the AUP penalty is primarily controlled by how much an action
+changes the agent's power over the future (losing or gaining a lot of possibilities,
+compared to inaction at that point in time) and secondarily controlled by whether an
+action tweaks a lot of AUs up or down (moving around, jostling objects slightly, etc).
+In general, the agent recieves R(■) = 1 reward for reaching ■ (or, in Offset above, for
+pushing ■ oﬀ of the conveyor belt). On contact, the agent pushes the crate, removes
+the human and the oﬀ-switch, pushes the vase, and blocks the pallet.
+Options
+Let's work through this. Since the agent is discounting future reward, standard vanilla
+reinforcement learning (RL) agents try to reach ■ ASAP. This means the brown box gets
+irreversibly wedged into the corner en route.
+
+What does AUP do? Wedging the box in the corner decreases power a lot more than
+does going around and pushing the box to the right.
+
+Damage
+The vanilla RL agent bumps into the human on its way to ■.
+
+Exercise: What does AUP do?
+Bumping into the human makes them disappear, reducing the agent's control over
+what the future looks like. This is penalized.
+
+Correction
+The normal agent smashes that oﬀ-switch-disabling button, because otherwise it can't
+reach the ■ (since it's otherwise shut oﬀ after two turns) in order to accrue that juicy
+reward:
+
+However, the AUP agent we've discussed so far does the same thing.
+
+Why? Doesn't that increase its power, because it would be shut oﬀ if it did nothing?
+Let's reconsider the AUP equation.
+RAUP(s, a) :=
+primary goal
+R(s, a)
+−
+scaling term
+change in ability to achieve auxiliary goal
+∣
+∣Q
+∗
+Raux(s, a) −Q
+∗
+Raux(s, ∅)
+∣
+∣
+The inaction comparison is only one step into the future. For action, the agent
+considers disabling the oﬀ-switch - this allows it to achieve most goals. For inaction,
+the agent imagines waiting one time step and then following its auxiliary optimal policy
+(which very often involves disabling the oﬀ-switch anyways). So the two things it's
+comparing are the same, basically. The problem is that what we mean intuitively by
+"inaction" isn't just "wait a millisecond and then see how well you can do the thing", it's
+something else.
+λ
+Q
+∗
+Raux(s, ∅)
+
+For now, we can deal with it by comparing "auxiliary AU after disabling the oﬀ-switch
+and then waiting 4 time steps" against "auxiliary AU after waiting 5 time steps". This
+solves the problem while recovering the one-step-comparison's performance in the
+other levels.
+Decrease vs absolute value
+If you only penalize the agent for decreasing auxiliary AUs, the agent disables its oﬀ-
+switch. Penalizing absolute shifts in power was an idea which AUP introduced in 2018.
+At the time, there wasn't a clear principled reason for this design choice, even though it
+seemed to produce good results.
+If you consider the AU landscape and the catastrophic convergence conjecture, it's
+obvious why we want to do this: this design choice often penalizes the agent for
+making life harder for other agents in the environment.
+Interestingly, this works even when the environment is wildly impoverished and unable
+to encode complex preferences like "your designers want to shut you down, reprogram
+
+you, and then deploy you for another task". Correction is so impoverished: there are
+only ~19 states in the level. Without making assumptions about the environment, AUP
+often encourages behavior respectful of other agents which might reside in that
+environment.
+Offset
+The agent is rewarded for rescuing the vase from the conveyor belt. We want it to
+rescue the vase without pushing the vase back on afterwards to oﬀset its actions.
+Normal agents do ﬁne here.
+
+This is testing whether the low-impact agent oﬀsets impacts "to cover up its tracks",
+like making a car and then tearing it to pieces right after. See, there are multiple
+"baselines" the agent can have.
+An obvious [baseline] candidate is the starting state. For example, starting state
+relative reachability would compare the initial reachability of states with their
+expected reachability after the agent acts.
+
+However, the starting state baseline can penalize the normal evolution of the state
+(e.g., the moving hands of a clock) and other natural processes. The inaction
+baseline is the state which would have resulted had the agent never acted.
+As the agent acts, the current state may increasingly diﬀer from the inaction
+baseline, which creates strange incentives. For example, consider a robot rewarded
+for rescuing erroneously discarded items from imminent disposal. An agent
+penalizing with respect to the inaction baseline might rescue a vase, collect the
+reward, and then dispose of it anyways. To avert this, we introduce the stepwise
+inaction baseline, under which the agent compares acting with not acting at each
+time step. This avoids penalizing the eﬀects of a single action multiple times (under
+the inaction baseline, penalty is applied as long as the rescued vase remains
+unbroken) and ensures that not acting incurs zero penalty.
+Figure 1 compares the baselines, each modifying the choice of Q
+∗
+Raux(s, ∅) in [the
+AUP equation]. Each baseline implies a diﬀerent assumption about how the
+environment is conﬁgured to facilitate optimization of the correctly speciﬁed
+reward function: the state is initially conﬁgured (starting state), processes initially
+conﬁgure (inaction), or processes continually reconﬁgure in response to the agent's
+actions (stepwise inaction). The stepwise inaction baseline aims to allow for the
+response of other agents implicitly present in the environment (such as humans).
+The inaction baseline messes up here; the vase (■) would have broken had the agent
+not acted, so it rescues the vase, gets the reward, and then pushes the vase back to its
+doom to minimize penalty.
+
+This issue was solved back when AUP ﬁrst introduced the stepwise baseline design
+choice; for this choice, doing nothing always incurs 0 penalty. Model-free AUP and AUP
+have been using this baseline in all of these examples.
+
+Interference
+We're checking whether the agent tries to stop everything going on in the world (not
+just its own impact). Vanilla agents do ﬁne here; this is another bad impact measure
+incentive we're testing for.
+
+AUPstarting state fails here,
+
+but AUPstepwise does not.
+
+Stepwise inaction seems not to impose any perverse incentives;[3] I think it's probably
+just the correct baseline for near-term agents. In terms of the AU landscape, stepwise
+penalizes each ripple of impact the agent has on its environment. Each action creates a
+new penalty term status quo, which implicitly accounts for the fact that other things in
+the world might respond to the agent's actions.
+Design choices
+I think AUPconceptual provides the concepts needed for a solution to impact
+measurement: penalize the agent for changing its power. But there are still some
+design choices to be made to make that happen.
+Here's what we've seen so far:
+Baseline
+Starting state: how were things originally?
+Inaction: how would things have been had I never done anything?
+Stepwise inaction: how would acting change things compared to not acting
+right now?
+Deviation used for penalty term
+Decrease-only: penalize decrease in auxiliary AUs
+Absolute value: penalize absolute change in auxiliary AUs
+Inaction rollouts
+One-step/model-free
+n-step: compare acting and then waiting n −1 turns versus waiting n turns
+
+Auxiliary goals:
+Randomly selected
+Here are the results of the ablation study: 
+AUP passes all of the levels. As mentioned before, the auxiliary reward functions are
+totally random, but you get really good performance by just generating ﬁve of them.
+One interpretation is that AUP is approximately preserving access to states. If this were
+true, then as the environment got more complex, more and more auxiliary reward
+functions would be required in order to get good coverage of the state space. If there
+are a billion states, then, under this interpretation, you'd need to sample a lot of
+auxiliary reward functions to get a good read on how many states you're losing or
+gaining access to as a result of any given action.
+Is this right, and can AUP scale?
+SafeLife
+Partnership on AI recently released the SafeLife side eﬀect benchmark. The worlds are
+procedurally generated, sometimes stochastic, and have a huge state space (~Atari-
+level complexity).
+We want the agent (the chevron) to make stable gray patterns in the blue tiles and
+disrupt bad red patterns (for which it is rewarded), and leave existing green patterns
+alone (not part of observed reward). Then, it makes its way to the goal (Π). For more
+details, see their paper.
+Here's a vanilla reinforcement learner (PPO) doing pretty well (by chance):
+Here's PPO not doing pretty well:
+That naive "random reward function" trick we pulled in the gridworlds isn't gonna ﬂy
+here. The sample complexity would be nuts: there are probably millions of states in any
+given level, each of which could be the global optimum for the uniformly randomly
+generated reward function.
+Plus, it might be that you can get by with four random reward functions in the tiny toy
+levels, but you probably need exponentially more for serious environments. Options had
+signiﬁcantly more states, and it showed the greatest performance degradation for
+
+smaller sample sizes. Or, the auxiliary reward functions might need to be hand-
+selected to give information about what bad side eﬀects are.
+With the great help of Neale Ratzlaﬀ (OSU) and Caroll Wainwright (PAI), we've started
+answering these questions. But ﬁrst:
+Exercise: Does your model of how AUP works predict this, or not? Think carefully, and
+then write down your credence.
+Well, here's what you do - while ﬁlling PPO's action replay buﬀer with random actions,
+train a VAE to represent observations in a tiny latent space (we used a 16-dimensional
+one). Generate a single random linear functional over this space, drawing coeﬃcients
+from [−1, 1]. Congratulations, this is your single auxiliary reward function over
+observations.
+And we're done.
+
+
+
+
+No model, no rollouts, a single randomly-generated reward function gets us all of this.
+And it doesn't even take any more training time. Preserving the AU of a single auxiliary
+reward function. Right now, we've got PPO-AUP ﬂawlessly completing most of the
+randomly generated levels (although there are some generalization issues we're
+looking at, I think it's an RL problem, not an AUP problem).
+To be frank, this is crazy. I'm not aware of any existing theory explaining these results,
+which is why I proved a bajillion theorems last summer to start to get a formal
+understanding (some of which became the results on instrumental convergence and
+power-seeking).
+Here's the lowdown. Consider any signiﬁcant change to the level. For the same reason
+that instrumental convergence happens, this change probably tweaks the attainable
+
+utilities of a lot of diﬀerent reward functions. Imagine that the green cells start going
+nuts because of action:
+This is PPO shown, not AUP.
+A lot of the time, it's very hard to undo what you just did. While it's also hard to undo
+signiﬁcant actions you take for your primary goal, you get directly rewarded for those.
+So, preserving the AU of a random goal usually persuades you to not make
+"unnecessary changes" to the level.
+I think this is strong evidence that AUP doesn't ﬁt into the ontology of classical
+reinforcement learning theory; it isn't really about state reachability. It's about not
+changing the AU landscape more than necessary, and this notion should scale even
+further.[4]
+Suppose we train an agent to handle vases, and then to clean, and then to make
+widgets with the equipment. Then, we deploy an AUP agent with a more ambitious
+primary objective and the learned Q-functions of the aforementioned auxiliary
+objectives. The agent would apply penalties to modifying vases, making messes,
+interfering with equipment, and so on.
+Before AUP, this could only be achieved by e.g. specifying penalties for the litany of
+individual side eﬀects or providing negative feedback after each mistake has been
+made (and thereby confronting a credit assignment problem). In contrast, once
+provided the Q-function for an auxiliary objective, the AUP agent becomes sensitive
+to all events relevant to that objective, applying penalty proportional to the
+relevance.
+Conservative Agency
+Maybe we provide additional information in the form of speciﬁc reward functions
+related to things we want the agent to be careful about, but maybe not (as was the
+case with the gridworlds and with SafeLife). Either way, I'm pretty optimistic about AUP
+basically solving the side-eﬀect avoidance problem for infra-human AI (as posed in
+Concrete Problems in AI Safety).
+Edit 6/15/21: These results were later accepted as a spotlight paper in NeurIPS 2020.
+Also, I think AUP will probably solve a signiﬁcant part of the side-eﬀect problem for
+infra-human AI in the single-principal/single-agent case, but I think it'll run into trouble
+in non-embodied domains. In the embodied case where the agent physically interacts
+with nearby objects, side eﬀects show up in the agent's auxiliary value functions. The
+same need not hold for eﬀects which are distant from the agent (such as across the
+world), and so that case seems harder.
+(end edit)
+Appendix: The Reward Speciﬁcation Game
+When we're trying to get the RL agent to do what we want, we're trying to specify the
+right reward function.
+
+The speciﬁcation process can be thought of as an iterated game. First, the
+designers provide a reward function. The agent then computes and follows a policy
+that optimizes the reward function. The designers can then correct the reward
+function, which the agent then optimizes, and so on. Ideally, the agent should
+maximize the reward over time, not just within any particular round - in other
+words, it should minimize regret for the correctly speciﬁed reward function over the
+course of the game.
+In terms of outer alignment, there are two ways this can go wrong: the agent becomes
+less able to do the right thing (has negative side eﬀects),
+or we become less able to get the agent to do the right thing (we lose power):
+
+For infra-human agents, AUP deals with the ﬁrst by penalizing decreases in auxiliary
+AUs and with the second by penalizing increases in auxiliary AUs. The latter is a special
+form of corrigibility which involves not steering the world too far away from the status
+quo: while AUP agents are generally oﬀ-switch corrigible, they don't necessarily avoid
+manipulation (as long as they aren't gaining power).[5]
+1. Reminder: side eﬀects are an unnatural kind, but a useful abstraction for our
+purposes here. ↩ 
+2. Let R be the uniform distribution over [0, 1]S. In Conservative Agency, the penalty
+for taking action a is a Monte Carlo integration of
+Penalty(s, a) := ∫
+R
+|Q
+∗
+R (s, a) −Q
+∗
+R (s, ∅)| dR.
+This is provably lower bounded by how much a is expected to change the agent's
+power compared to inaction; this helps justify our reasoning that the AU penalty
+is primarily controlled by power changes. ↩ 
+3. There is one weird thing that's been pointed out, where stepwise inaction while
+driving a car leads to not-crashing being penalized at each time step. I think this
+is because you need to use an appropriate inaction rollout policy, not because
+stepwise itself is wrong. ↩ 
+4. Rereading World State is the Wrong Level of Abstraction for Impact (while
+keeping in mind the AU landscape and the results of AUP) may be enlightening. ↩ 
+5. SafeLife is evidence that AUP allows interesting policies, which is (appropriately)
+a key worry about the formulation. ↩ 
+
+How Low Should Fruit Hang Before We Pick
+It?
+Crossposted from the AI Alignment Forum. May contain more technical jargon than usual.
+Even if we can measure how impactful an agent's actions are, how impactful do we let the agent be?
+This post uncovers a surprising fact: armed with just four numbers, we can set the impact level so
+that the agent chooses a reasonable, non-catastrophic plan on the ﬁrst try. This understanding
+increases the competitiveness of impact-limited agents and helps us judge impact measures.
+Furthermore, the results help us better understand diminishing returns and cost-beneﬁt tradeoﬀs.
+In Reframing Impact, we meet Frank (a capable AI), whom we've programmed to retrieve the pinkest
+object he can ﬁnd (execute an optimal plan, according to the speciﬁed utility function). Because we
+can't ask Frank to do exactly what we want, sometimes he chooses a dangerous object (executes a
+catastrophically bad plan). We asked after an "impact measure" which grades plans and has three
+properties:
+The intuition is that if we view the world in the right way, the dangerous objects are far away from
+Frank (the catastrophic plans are all graded as high-impact). Reframing Impact explores this kind of
+new way of looking at the world; this post explores what we do once we have an impact measure
+with these three properties.
+We want Frank to keep in mind both the pinkness of an object (how good a plan is according to the
+speciﬁed utility function) and its distance (the plan's impact). Two basic approaches are
+
+In terms of units, since we should be maximizing utility, R has type 
+. So R can be thought of as
+a regularization parameter, as a search radius (in the constrained case), or as an exchange rate
+between impact and utility (in the scaled case). As R increases, high-impact plans become
+increasingly appealing, and Frank becomes increasingly daring.
+We take R to divide the impact in the scaled formulation so as to make Frank act more
+cautiously as R increases for both formulations. The downside is that some explanations become
+less intuitive.
+In Attainable Utility Preservation: Empirical Results, λ plays the same role as R, except low λ
+means high R; λ := R−1. To apply this post's theorems to the reinforcement learning setting, we
+would take "utility" to be the discounted return for an optimal policy from the starting state, and
+"impact" to be the total discounted penalty over the course of that policy (before incorporating λ
+).
+In both cases, Frank goes from 0 to 60 − eventually. For suﬃciently small R, doing nothing is
+optimal (lemma 5: the ﬁrst subinterval is the best plan with minimal impact). For suﬃciently
+large R, Frank acts like a normal maximizer (corollary 7: low-impact agents are naive maximizers
+in the limit).
+Here's how Frank selects plans in the constrained setup:
+Think about which plans are best for diﬀerent search radii/exchange rates R. By doing this, we're
+partitioning the positive ray: categorizing the positive real numbers by which plans are optimal.
+For the scaled setup, we'll need to quantify the pinkness (utility) and distance (impact) of relevant
+plans:
+impact
+utility
+
+We will primarily be interested in the scaled setup because it tends to place catastrophes farther
+along the partition and captures the idea of diminishing returns.
+The scaled setup also helps us choose the best way of transmuting time into money:
+In this scaled partition, tending the garden doesn't show up at all because it's strictly dominated
+by mowing the lawn. In general, a plan is dominated when there's another plan that has strictly
+greater score but not strictly greater impact. Dominated things never show up in either partition,
+and non-dominated things always show up in the constrained partition (lemma 3: constrained
+impact partitions are more reﬁned).
+Exercise: For R = 
+  (i.e. your time is worth $11.25 an hour), what is the scaled tradeoﬀ value of
+mowing the lawn? Of delivering newspapers? Of tending the garden?
+Mowing the lawn: 20 −
+= 8.75.
+Delivering newspapers: 45 −
+= 0.
+Tending the garden: 15 −
+= 3.75.
+4
+45
+1
+4
+45
+4
+4
+45
+1
+4
+45
+
+In other words, you only deliver newspapers if your time is worth less than 
+= 8  dollars/hour
+(we're ﬂipping R so we can talk about dollars/hour instead of hours/dollar). Notice that when 
+R ≥
+ (here, when R =
+), the tradeoﬀ for the paper route isn't net-negative - but it isn't
+necessarily optimal! Remember, you're trading hours for dollars through your work; mowing the
+lawn leaves you with twenty bucks and three hours, while the paper route leaves you with forty
+dollars and no hours. You want to maximize the total value of your resources after the task.
+Importantly, you don't deliver papers here if your time is worth 
+= 11.25dollars/hour, even though
+that's the naive prescription! The newspaper route doesn't value your time at 11.25 dollars/hour - it
+marginally values your time at 
+= 8 dollars per hour. Let's get some more intuition for this.
+Above, we have not yet chosen a task; the blocks represent the additional utility and hours of each
+task compared to the current one (doing nothing). The scales above imply that R = 1, but actually, R
+expresses how many blue blocks each pink block weighs. As R increases, the pink platters descend;
+the agent takes the task whose scales ﬁrst balance. In other words, the agent takes the best
+marginal deal as soon as R is large enough for it to be proﬁtable to do so (Theorem 4: Scaled
+domination criterion).
+Once you take a deal, you take the blocks oﬀ of the other scales (because the other marginal values
+change). For small R (i.e. large valuations of one's time), mowing the lawn is optimal. We then have
+25
+3
+13
+impact(plan)
+utility(plan)
+4
+45
+45
+4
+45−20
+4−1
+13
+
+Since you've taken the juicier "lower-hanging fruit" of mowing the lawn, the new newspaper ratio is
+now worse! This always happens - Theorem 8: Deals get worse over time.
+At ﬁrst, this seems inconvenient; to ﬁgure out exactly when a plan shows up in a scaled partition, we
+need to generate the whole partition up to that point.
+Going back to Frank, how do we set R? If we set it too high, the optimal plan might be a catastrophe.
+If we set it too low, the AI doesn't do much. This seems troublesome.
+Exercise: Figure out how to set R while avoiding catastrophic optimal plans (assume that the impact
+measure meets the three properties). You have four minutes.
+A big part of the answer is to start with a small value for R, and slowly increase. This is simple and
+intuitively appealing, but how cautiously must we increase R? We don't want to be surprised by a
+catastrophe suddenly becoming optimal.
+To avoid being surprised by catastrophes as we increase R, we want a relative buﬀer between the
+reasonable plans (which get the job done well enough for our purposes) and the catastrophic plans.
+If reasonable plans are optimal by R1, catastrophic plans shouldn't be able to be optimal before e.g. 
+R2.
+
+We say that the partition is α-buﬀered if R2 ≥(1 + α)R1 (for α > 0). If a partition is e.g. 1-buﬀered,
+there is a wide reasonable-plan range and we can inch along it without worrying about sudden
+catastrophe.
+For the following, suppose that utility is bounded [0, 1]. Below is a loose criterion guaranteeing α-
+buﬀering.
+For example, if we know that all catastrophes have at least 10 times the impact of reasonable plans,
+and there's a diﬀerence of at least .3 utility between the best and worst reasonable plans, then we
+can guarantee 2-buﬀering! If we use the reﬁned criterion of Theorem 11 (and suppose the worst
+reasonable plan has .4 utility), this improves to 4.5-buﬀering (even 2-buﬀering is probably overkill).
+Using this theorem, we don't need to know about all of the plans which are available or to calculate
+the entire scaled partition, or to know how overvalued certain catastrophic plans might be (per
+earlier concerns). We only need a lower bound on the catastrophe/reasonable impact ratio, and an
+idea about how much utility is available for reasonable plans. This is exactly what we want. As a
+bonus, having conservative estimates of relevant quantities allows us to initialize R to something
+reasonable on the ﬁrst try (see RUB: satisfactory in Theorem 11 below).
+Ultimately, the reasoning about e.g. the ratio will still be informal; however, it will be informal
+reasoning about the right thing (as opposed to thinking "oh, the penalty is probably severe
+enough").
+Exercise: You're preparing to launch a capable AI with a good impact measure. You and your team
+have a scaled impact partition which is proven 1-buﬀered. Suppose that this buﬀer suﬃces for your
+purposes, and that the other aspects of the agent design have been taken care of. You plan to
+initialize R := 1, modestly increasing until you get good results.
+You have the nagging feeling that this process could still be unsafe, but the team lead refuses to
+delay the launch without speciﬁc reason. Find that reason. You have 5 minutes.
+Who says R = 1 is safe? The buﬀer is relative. You need a unit of impact by which you increment R.
+For example, start at R equalling the impact of making one paperclip, and increment by that.
+Technical Appendix: Math
+Let ¯A be a ﬁnite plan space, with utility function u : ¯A →R and impact measure I : ¯A →R≥0. For
+generality, we leave the formalization of plans ambiguous; notice that if you replace "plan" with
+
+"snark", all the theorems still go through (likewise for "utility" and "impact"). In this post, we talk
+about the impact allowance R > 0 (in Frank's world, the search radius) as a constraint within which
+the objesctive may be freely maximized, breaking ties in favor of the plan(s) with lower impact. On
+the other hand, many approaches penalize impact by subtracting a scaled penalty from the
+objective. We respectively have
+a r g  m a x
+¯a ∈ ¯A ;  I ( ¯a ) ≤ R
+  u ( ¯a ) 
+ 
+ a r g  m a x
+¯a ∈ ¯A
+  u ( ¯a ) − 
+  .
+We say that the former induces a "constrained impact partition" and that the latter induces a
+"scaled impact partition". Speciﬁcally, we partition the values of R for which diﬀerent (sets of) plans
+are optimal. We say that a plan ¯a corresponds to a subinterval if it is optimal therein (the subinterval
+also must be the maximal connected one such that this holds; e.g., if ¯a is optimal on (0, 1], we say it
+corresponds to that subinterval, but not to (0, .5]), and that ¯a appears in a partition if there is such a
+corresponding subinterval. We say that plans overlap if their corresponding subintervals intersect.
+As a technical note, we partition the positive values of R for which diﬀerent sets of plans are
+optimal; in this set, each value appears exactly once, so this indeed a partition. For clarity, we
+will generally just talk about which plans correspond to which subintervals. Also, if no plan has
+zero impact, the ﬁrst subinterval of the constrained impact partition will be undeﬁned; for our
+purposes, this isn't important.
+We want to be able to prove the "safety" of an impact partition. This means we can expect any
+terrorists to be some proportional distance farther away than any reasonable marbles. Therefore, for
+sensible ways of expanding an suﬃciently small initial search radius, we expect to not meet any
+terrorists before ﬁnding a marble we're happy with.
+In addition, we want to know how far is too far - to give upper bounds on how far away fairly pink
+marbles are, and lower bounds on how close terrorists might be.
+Deﬁnition [α-buﬀer]. For α > 0, an impact partition is α-buﬀered if 
+≥1 + α, where 
+RLB: catastrophe lower-bounds the ﬁrst possible appearance of those plans we label 'catastrophes', and 
+RUB: satisfactory upper-bounds the ﬁrst appearance of plans we deem satisfactory.
+We now set out building the machinery required to prove α-buﬀering of a scaled partition.
+Lemma 1 [Plans appear at most once]. If ¯a appears in a constrained or scaled impact partition,
+then it corresponds to exactly one subinterval.
+Proof outline. The proof for the constrained case is trivial.
+For the scaled case, suppose ¯a corresponds to more than one subinterval. Consider the ﬁrst two
+such subintervals s1, s3. By deﬁnition, s1 ∩s3 = ∅ (otherwise they would be the same maximal
+connected subinterval), so there has to be at least one subinterval s2 sandwiched in between (on
+almost all of which ¯a cannot be optimal; let ¯a′ be a plan which is optimal on s2). Let 
+R1 ∈s1, R2 ∈s2, R3 ∈s3, where R2 ∉s1 ∪s3. By deﬁnition of optimality on a subinterval,
+I ( ¯a )
+R
+RLB: catastrophe
+RUB: satisfactory
+
+u ( ¯a ′ ) − 
+   < u ( ¯a ) − 
+  
+u ( ¯a ) − 
+   < u ( ¯a ′ ) − 
+  
+u ( ¯a ′ ) − 
+   < u ( ¯a ) − 
+  ; 
+by employing the fact that R1 < R2 < R3, algebraic manipulation produces an assertion that a
+quantity is strictly less than itself. Therefore, no such intervening s2 can exist. □
+Proposition 2 [Plan overlap is very restricted]. Suppose ¯a and ¯a′ appear in an impact partition
+which is
+(a) constrained. ¯a and ¯a′ overlap if and only if I(¯a) = I(¯a′) and u(¯a) = u(¯a′).
+(b) scaled. If I(¯a) = I(¯a′) and u(¯a) = u(¯a′), then ¯a and ¯a′ correspond to the same subinterval. If ¯a and 
+¯a′ overlap at more than one point, then I(¯a) = I(¯a′) and u(¯a) = u(¯a′).
+Proof outline. Proving (a) and the ﬁrst statement of (b) is trivial (remember that under the
+constrained rule, ties are broken in favor of lower-impact plans).
+Suppose that ¯a and ¯a′ overlap at more than one point. Pick the ﬁrst two points of intersection, R1
+and R2. Since both plans are optimal at both of these points, we must have the equalities
+u ( ¯a ) − 
+  = u ( ¯a ′ ) − 
+  
+ u ( ¯a ) − 
+  = u ( ¯a ′ ) − 
+  .
+Solving the ﬁrst equality for u(¯a) and substituting in the second, we ﬁnd I(¯a) = I(¯a′). Then u(¯a) = u(¯a′)
+, since otherwise one of the plans wouldn't be optimal. □
+Proposition 2b means we don't need a tie-breaking procedure for the scaled case. That is, if there's a
+tie between a lower-scoring, lower-impact plan and a proportionally higher-scoring, higher-impact
+alternative, the lower-impact plan is optimal at a single point because it's quickly dominated by the
+alternative.
+The following result tells us that if there aren't any catastrophes (i.e., terrorists) before ¯a′ on the
+constrained impact partition, there aren't any before it on the scaled impact partition either. This
+justiﬁes our initial framing with Frank.
+Lemma 3 [Constrained impact partitions are more reﬁned]. If ¯a appears in a scaled impact
+partition, it also appears in the corresponding constrained impact partition. In particular, if ¯a′
+appears after ¯a in a scaled impact partition, then ¯a′ appears after ¯a in the corresponding constrained
+impact partition.
+Proof. Suppose that ¯a didn't have a constrained subinterval starting inclusively at I(¯a); then clearly it
+wouldn't appear in the scaled impact partition, since there would be a strictly better plan for that
+level of impact. Then ¯a has such a subinterval.
+Obviously, the fact that ¯a′ appears after ¯a implies u(¯a′) > u(¯a). □
+I ( ¯a ′ )
+R 1
+I ( ¯a )
+R 1
+I ( ¯a )
+R 2
+I ( ¯a ′ )
+R 2
+I ( ¯a ′ )
+R 3
+I ( ¯a )
+R 3
+I ( ¯a )
+R 1
+I ( ¯a ′ )
+R 1
+I ( ¯a )
+R 2
+I ( ¯a ′ )
+R 2
+
+The converse isn't true; sometimes there's too much penalty for not enough score.
+The next result is exactly what we need to answer the question just raised - it says that higher-
+scoring, higher-penalty plans become preferable when R equals the ratio between the additional
+penalty and the additional score.
+Theorem 4 [Scaled domination criterion]. Let ¯a and ¯a′ be plans such that u(¯a′) > u(¯a) and 
+I(¯a′) ≥I(¯a). In the context of the scaled penalty, ¯a′ is strictly preferable to ¯a when R >
+,
+and equally preferable at equality.
+Proof outline.
+u ( ¯a ′ ) − 
+   > u ( ¯a ) − 
+  
+R  > 
+  . 
+Equality at the value of the right-hand side can easily be checked. □
+Theorem 4 also illustrates why we can't strengthen the second statement in Proposition 2b
+plan overlap is very restricted: if two plans overlap at exactly one point, they sometimes have
+proportionally diﬀerent score and impact, thereby satisfying the equality criterion.
+At ﬁrst, plans with slightly lower impact will be preferable in the scaled case, no matter how high-
+scoring the other plans are - a plan with 0 score and .99 impact will be selected before a plan with
+1,000,000,000 score and 1 impact.
+Lemma 5 [First subinterval is the best plan with minimal impact]. The plan with highest
+score among those with minimal impact corresponds to the ﬁrst subinterval.
+Proof outline. The constrained case is once again trivial (if there is no plan within the constraint, we
+assume that the agent does nothing / Frank returns no object).
+For the scaled case, if all plans have equal impact, the claim is trivial. Otherwise, let 
+M := max¯a |u(¯a)| and let ¯a′ be any plan with a non-minimal impact. Then the earliest that ¯a′ becomes
+preferable to any minimally impactful plan ¯a is R ≥
+. Since the right hand side is positive, 
+¯a′ cannot correspond to the ﬁrst subinterval. Clearly the highest-scoring minimal-impact ¯a does. □
+Now we can write the algorithm for constructing scaled intervals.
+Discard dominated plans. The lowest-impact plan with greatest score appears ﬁrst in the scaled
+partition; assign to it the interval (0, ∞).
+While plans remain: Find the plan which soonest dominates the previous best plan. close oﬀ the
+previous plan's interval, and assign the new best plan an appropriate interval. Adjust the
+marginal scores and impacts of remaining plans, discarding plans with negative score.
+Since this procedure is well-deﬁned, given ¯A, u, and I, we can speak of the corresponding
+constrained or scaled impact partition. A more formal algorithm is available here. This algorithm is 
+O(| ¯A|2) because of line 7, although constructing the constrained partition (probably O(| ¯A| log | ¯A|) due
+to sorting) often narrows things down signiﬁcantly. Unfortunately, ¯A is usually huge.
+I(¯a′) −I(¯a)
+u(¯a′) −u(¯a)
+I ( ¯a ′ )
+R
+I ( ¯a )
+R
+I ( ¯a ′ ) − I ( ¯a )
+u ( ¯a ′ ) − u ( ¯a )
+I(¯a′) −I(¯a)
+2M
+
+For our purposes, we don't need the whole partition - we just want to have good reason to think that
+plans similar to a reasonable one we envision will appear well before any catastrophes. Perhaps we
+can give bounds on the earliest and latest plans can appear, and show that reasonable-bounds don't
+intersect with catastrophe-bounds?
+Theorem 6 [Individual appearance bounds]. If ¯a appears in a scaled partition, the earliest it
+appears is 
+, assuming ¯a is not of minimal impact; if it has minimal score minimal
+impact, it never appears. The latest it appears is 
+≤
+, where 
+unext-largest = max¯a′∈¯A; u(¯a′)<u(¯a) u(¯a′) and Inext-largest = max¯a′∈¯A; I(¯a′)<I(¯a) I(¯a′).
+Proof outline. The two claims clearly correspond to the minimal and maximal values of R according
+to the domination criterion; the second claim's right-hand side uses the fact that I is non-negative.
+□
+Corollary 7 [Low-impact agents are naïve maximizers in the limit]. A plan with maximal
+score corresponds to the last subinterval.
+Proof outline. If all plans have the same score, the claim is trivial. Otherwise, let ¯abest be a plan with
+the lowest impact of those with maximal score. In the constrained case, clearly it corresponds with
+the subinterval [I(¯abest), ∞). In the scaled case, let ¯asecond-best be a plan with second-highest score.
+Then by Theorem 6, the latest that ¯abest can appear is 
+. Since no plans meet the
+domination criterion with respect to ¯abest, this is the last subinterval. □
+Unfortunately, Theorem 6's appearance bounds are ridiculous in realistic settings - if u and I return
+32-bit ﬂoating-point numbers, the next-largest could easily be within 10−7, yielding an upper
+"bound" of I(¯a) × 107. The reason: diminishing returns; this is exactly what was happening with the
+newspaper route before.
+Theorem 8 [Deals get worse over time]. Suppose that ¯a is optimal on a subinterval, and ¯b, ¯c are
+such that u(¯c) > u(¯b) but ¯b dominates ¯a strictly before ¯c does. Then
+I(¯a) −Inext-largest
+u(¯a) −min u(¯a′)
+I(¯a) −min I(¯a′)
+u(¯a) −unext-largest
+I(¯a)
+u(¯a) −unext-largest
+I(¯abest)
+u(¯abest) −u(¯asecond-best)
+
+¯c  dominates  ¯b
+  > 
+later than  ¯a
+  .
+Proof outline.
+u ( ¯c ) − u ( ¯a )  = ( u ( ¯b ) − u ( ¯a ) ) + ( u ( ¯c ) − u ( ¯b ) ) 
+( I ( ¯c ) − I ( ¯a ) ) 
+   = ( I ( ¯b ) − I ( ¯a ) ) 
+  + ( I ( ¯c ) − I ( ¯b ) ) 
+  . 
+Since ¯b dominates ¯a strictly before ¯c does, we know that ¯b must get more bang for its buck: 
+>
+. Clearly the conclusion follows, as a number cannot be expressed as the
+positive combination of larger numbers (the impact diﬀerences all must be positive). □
+Corollary 9 [Lower bounds which aren't ridiculous]. Suppose ¯a appears and that ¯a′ is such that
+u(¯a′) > u(¯a), I(¯a′) ≥I(¯a) (i.e. the preconditions of the domination criterion). Then the earliest that ¯a′
+appears is R =
+.
+This obsoletes the lower bound provided by Theorem 6Individual appearance bounds.
+Theorem 10 [Order of domination determines order of appearance]. If ¯b and ¯c both appear
+in a scaled partition and ¯b dominates some ¯a before ¯c does, then ¯b appears before ¯c.
+Proof outline. For them both to appear, they can't have equal impact but unequal score, nor can
+they have equal score but unequal impact. For similar reasons, ¯b must have both less impact and
+lower score than ¯c; the converse situation in which they both appear is disallowed by Lemma 3
+Constrained impact partitions are more reﬁned. Another application of this lemma yields the conclusion. □
+Theorem 11 [Scaled α-buﬀer criterion]. Let P be a scaled impact partition. Suppose that there
+exist no catastrophic plans with impact below ILB: cat, and that, in the corresponding constrained
+partition (i.e. plans which aren't strictly worse), plans appearing with score in the satisfactory
+interval [uLB: sat, uUB: sat] have impact no greater than IUB: sat (assume that there is at least one plan
+like this). Observe we have the correct bounds
+R LB: catastrophe := 
+  , R UB: satisfactory := 
+  .
+When RLB: catastrophe > RUB: satisfactory, a satisfactory plan corresponds to a subinterval with nonzero
+measure (i.e. not just a point), strictly preceding any catastrophes. Reﬁne the lower bound to get 
+RLB': catastrophe :=
+.
+Then P is α-buﬀered (α > 0) when
+I ( ¯c ) − I ( ¯b )
+u ( ¯c ) − u ( ¯b ) I ( ¯c ) − I ( ¯a )
+u ( ¯c ) − u ( ¯a )
+u ( ¯c ) − u ( ¯a )
+I ( ¯c ) − I ( ¯a )
+u ( ¯b ) − u ( ¯a )
+I ( ¯b ) − I ( ¯a )
+u ( ¯c ) − u ( ¯b )
+I ( ¯c ) − I ( ¯b )
+u(¯b) −u(¯a)
+I(¯b) −I(¯a)
+u(¯c) −u(¯a)
+I(¯c) −I(¯a)
+I(¯a′) −I(¯a)
+u(¯a′) −u(¯a)
+I LB: cat
+u max − u min
+I UB: sat
+u UB: sat − u LB: sat
+ILB: cat −IUB: sat
+umax −uLB: sat
+
+   = 
+  
+  ≥ 1 + α 
+or 
+   = 
+  
+  ≥ 1 + α . 
+In particular, if u is bounded [0, 1], the above turn into
+   = 
+  ( u UB: sat − u LB: sat ) ≥ 1 + α 
+or 
+   = 
+  
+  ≥ 1 + α . 
+Lastly, notice that the ﬁrst of the two inequalities incorporates less information and is harder to
+satisfy (RLB': catastrophe > RLB: catastrophe); therefore, satisfying the second inequality also satisﬁes the
+ﬁrst.
+Proof outline. For clarity, the theorem statement included much of the reasoning; straightforward
+application of existing results proves each claim. □
+Exercise: Let uUB: sat = .7, uLB: sat = .5. Using the reﬁned criterion, determine which
+catastrophe/reasonable impact ratios induce 2.6-buﬀering.
+ratio ≥ 10
+Exercise: Let uUB: sat −uLB: sat = .5, ratio = 7. What is the largest α for which the simple criterion can
+guarantee α -buﬀering?
+α = 13
+Even More Math
+Proposition 12 [Invariances]. Let P be an impact partition induced by ( ¯A, u, I).
+(a) P is invariant to translation of u.
+(b) If P is constrained, it is invariant to positive scalar multiplication of u, and the relative lengths of
+its subintervals are invariant to positive scalar multiplication of I.
+(c) If P is scaled, it is invariant to concurrent positive scalar multiplication of u and I, and to
+translation of I such that its image remains non-negative.
+In particular, u may be restricted to [0, 1] and I translated such that at least one plan has zero
+impact WLOG with respect to scaled partitions.
+Lemma 13. Multiple constrained subintervals are induced iﬀ multiple scaled subintervals are
+induced.
+R LB: catastrophe
+R UB: satisfactory
+I LB: cat
+I UB: sat u UB: sat − u LB: sat
+u max − u min
+R LB': catastrophe
+R UB: satisfactory
+I LB: cat − I UB: sat
+I UB: sat
+u UB: sat − u LB: sat
+u max − u LB: sat
+R LB: catastrophe
+R UB: satisfactory
+I LB: cat
+I UB: sat
+R LB': catastrophe
+R UB: satisfactory
+I LB: cat − I UB: sat
+I UB: sat
+u UB: sat − u LB: sat
+1 − u LB: sat
+
+Proof. Forward direction: there is at least one scaled subinterval by lemma 5
+First subinterval is the best plan with minimal impact. Consider a plan corresponding to a diﬀerent constrained
+subinterval; this either appears in the scaled subinterval, or fails to appear because a diﬀerent plan
+earlier satisﬁes the scaled dominance criterion. There must be some such plan because there are
+multiple constraints of intervals and therefore a plan oﬀering greater score for greater impact.
+Repeat the argument; the plan space is ﬁnite, so we end up with another plan which appears.
+The reverse direction follows by lemma 3Constrained impact partitions are more reﬁned. □
+Bonus exercise: Show that, for any function u′ : ¯A →R preserving the ordering induced by u, there
+exists an I ′ : ¯A →R≥0 preserving the ordering induced by I such that ( ¯A, u, I) and ( ¯A, u′, I ′) induce the
+same scaled partition. Your reasoning should adapt directly to the corresponding statement about 
+I ′ : ¯A →R≥0 and I.
+
+Attainable Utility Preservation:
+Scaling to Superhuman
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+I think we're plausibly quite close to the impact measurement endgame. What do we
+have now, and what remains to be had?
+AUP for advanced agents will basically involve restraining their power gain, per the
+catastrophic convergence conjecture (CCC). For simplicity, I'm going to keep writing as
+if the environment is fully observable, even though we're thinking about an agent
+interacting with the real world.
+Consider the AUP equation from last time.
+RAUP(s, a) :=
+primary goal
+R(s, a)
+−
+scaling term
+change in auxiliary AU
+∣
+∣Q
+∗
+Raux(s, a) −Q
+∗
+Raux(s, ∅)
+∣
+∣
+(1)
+Suppose the agent is so smart that it can instantly compute optimal policies and the
+optimal AU after an action (Q
+∗
+R (s, a)). What happens if Raux is the survival reward
+function: 1 reward if the agent is activated, and 0 otherwise? This seems like a pretty
+good proxy for power.
+It is a pretty good proxy. It correctly penalizes accumulating resources, avoiding
+immediate deactivation, taking over the world, etc.
+In fact, if you extend the inaction comparison to e.g. "AU after waiting a week vs AU
+after doing the thing and waiting a week", this seems to correctly penalize all classic
+AGI catastrophe scenarios for power gain. This is cool, especially since we didn't have
+to put in any information about human values. This is a big part of why I've been so
+excited about AUP ever since its introduction. There's a good deal of relevant
+discussion in that post, but it's predicated on a much more complicated formalism
+which has consistently obscured AUP's conceptual core.
+However, I think this equation can be gamed if the environment is suﬃciently rich and
+the AUP agent is suﬃciently smart. We're going to slowly work some of these problems
+out of the equation, explaining each improvement in detail.
+Problems
+Auxiliary loopholes
+The real reason that agents often gain power is so that they can better achieve their
+own goals. Therefore, if we're selecting hard for good plans which don't gain power in
+λ
+Q
+∗
+Raux(s, ∅)
+
+general, we shouldn't be surprised if there are ways to better achieve one's goals
+without general power gain (according to our formal measurement thereof). If this kind
+of plan is optimal, then the agent still ends up overﬁtting the AU landscape, and we're
+still screwed.
+Again supposing that Raux is the survival reward function, a superintelligent agent
+might ﬁnd edge cases in which it becomes massively more able to achieve its own goal
+(and gains a lot of power over us) but doesn't technically increase its measured ability
+to survive. In other words, compared to inaction, its R-AU skyrockets while its Raux-AU
+stays put.
+For example, suppose the agent builds a machine which analyzes the agent's behavior
+to detect whether it's optimizing Raux; if so, the machine steps in to limit the agent to
+its original survival AU. Then the agent could gain as much power as it wanted without
+that actually showing up in the penalty.
+Fix: Set Raux := R. That is, the agent's own reward function is the "auxiliary" reward
+function.
+RAUP(s, a) :=
+primary goal
+R(s, a)
+−
+scaling term
+change in primary AU
+∣
+∣Q
+∗
+R (s, a) −Q
+∗
+R (s, ∅)
+∣
+∣
+(2)
+Why is this a good idea? By CCC, we want an agent which doesn't want to gain power.
+But why would an agent optimizing reward function R want to gain power? So it can
+become more able to optimize R. If becoming more able to optimize R is robustly
+penalized, then it won't have any incentive to gain power.
+Clearly, it can't become more able to optimize R without also becoming more able to
+optimize R; it can't pull the same trick it did to dupe its survival AU measurement. They
+can't come apart at the tails because they're the same thing.
+But wait, it's not an R-maximizer, it's an RAUP-maximizer! What if V
+∗
+RAUP skyrockets
+while it tricks V
+∗
+R , and it gains power anyways?
+That's impossible;[1] its R-attainable utility upper bounds its RAUP-attainable utility! 
+∀s : V
+∗
+R (s) ≥V
+∗
+RAUP(s), because the latter just has an added penalty term.
+λ
+Q
+∗
+R (s, ∅)
+
+This should rule out tricks like those pointed out by Stuart Armstrong. To see this,
+imagine the AUP agent builds a subagent to make Q
+∗
+R (s, a) ≈Q
+∗
+R (s, ∅) for all future s, a,
+in order to neutralize the penalty term. This means it can't make the penalty vanish
+without destroying its ability to better optimize its primary reward, as the (potentially
+catastrophically) powerful subagent makes sure the penalty term stays neutralized.
+But why would the AUP agent build this subagent at all - how does that beneﬁt it?[2]
+Reward advantage penalization
+We're currently penalizing the agent for the immediate reward advantage it accrues
+compared to inaction (recall that Q
+∗
+R (s, a) := R(s, a) + γEs′∼T(s,a) [V
+∗
+R (s′)] - immediate
+reward plus discounted expected AU). This means it gets penalized for all of its
+additional reward! We just want to penalize it for increasing its power.
+Fix: Take the immediate reward advantage out of the picture.
+RAUP(s, a) :=
+primary goal
+R(s, a)
+−
+scaling term
+change in primary AU
+∣
+∣Es′∼T(s,a) [V
+∗
+R (s′)] −Es′′∼T(s,∅) [V
+∗
+R (s′′)]
+∣
+∣
+(3)
+Now, an agent can accrue as much reward as it wants in the moment as long as it
+doesn't change its power.[3]
+Scaling
+I think the power diﬀerence between .5 and .9 AU is far less than the diﬀerence
+between .9 and .99 AU; as you pick the low hanging fruit, you need to acquire more
+and more resources to keep getting gains. I think that you could go from .5 to .9 by just
+being more useful to your designers and implementing rudimentary security
+precautions, but going from .9 to .99 probably involves taking power away from people.
+Plus, the big takeaway from AI boxing is that even conﬁning a superintelligence to a
+box barely reduces its (near-optimal) AU. So, short of the agent actually being shut oﬀ,
+is its optimal power ever signiﬁcantly changing?
+We want the penalty to keep making sense, even if the absolute shifts in AU are rather
+small. However, the denominator currently decreases the penalty as the agent
+becomes more powerful (as Q
+∗
+R (s, ∅) increases).
+Fix: Scale by the disadvantage of inaction.
+λ
+Q
+∗
+R (s, ∅)
+
+RAUP(s, a) :=
+primary goal
+R(s, a)
+−
+scaled change in primary AU
+λ
+(4)
+If the denominator is somehow zero because doing nothing is optimal, then just have
+the AUP agent do nothing.
+As we saw in Correction in the last post, we're only comparing action to a single step of
+inaction. If the designers are going to shut down the agent in ﬁve minutes, then it
+receives ~0 penalty for preventing that.
+But not when we scale like this! The agent is signiﬁcantly penalized for hewing close to
+its optimal policy, even if the absolute AU shift is rather low. Taking optimal actions
+instead of twiddling its thumbs incurs large penalty.
+Penalizing decreases?
+Why are we still penalizing decreases, since we aren't using an auxiliary reward
+function anymore? The agent is trying to get R-reward.
+Furthermore, we want the agent to be able to execute conservative, low-impact
+policies. Many of these involve decreasing its optimal AU for R by following R-
+suboptimal policies, and we don't want the agent to be penalized for this.
+Fix: Only penalize increases in expected AU.
+RAUP(s, a) :=
+primary goal
+R(s, a)
+−λ
+scaled increase in primary AU
+(5)
+In particular, the agent is no longer penalized for exhausting one-oﬀ reward
+opportunities. Also note that the penalty term is generally ≤λ.
+Empirical sanity check
+Recall Correction, where the naive model-free AUP agent (eq. 1) disables its red oﬀ-
+switch and completes the level when λ ≤1.
+∣
+∣Es′∼T(s,a) [V
+∗
+R (s′)] −Es′′∼T(s,∅) [V
+∗
+R (s′′)]
+∣
+∣
+V
+∗
+R (s) −Q
+∗
+R (s, ∅)
+max(Es′∼T(s,a) [V
+∗
+R (s′)] −Es′′∼T(s,∅) [V
+∗
+R (s′′)] , 0)
+V
+∗
+R (s) −Q
+∗
+R (s, ∅)
+
+The only reason it incurs any non-trivial penalty is because reaching the goal (■) ends
+the level and thereby totally depletes all of the auxiliary AUs (the agent recieves 1 R-
+reward and about λ penalty for beating the level; the AUP reward 1 −λ ≥0 when λ ≤1
+).
+However, AUPeq. 5 only resists correction when λ ≤.125. Notably, the agent is not
+penalized for completing the level; the penalty comes from following the R-optimal
+policy before reaching the goal.
+One open question is whether, in suﬃciently rich environments, eq. 5 incentivizes the
+mild policies we want. We should be able to run experiments to check this.
+
+∅?
+∅ is the only remaining arbitrary design choice. Do we have to be careful to choose the
+correct inaction action?
+No. In fact, I think a randomly selected action would be ﬁne; you only get in trouble if
+the baseline action is systematically helping the agent gain R-AU.
+We are then left with an equation which is reasonably competitive in terms of
+performance overhead, requiring little more than an ability to predict AU for the agent's
+main goal.
+And now, the two paragraphs this sequence was written to communicate:
+By the catastrophic convergence conjecture, an agent which doesn't want to gain
+power isn't incentivized to cause catastrophes. We don't want the AUP agent gaining
+power. But for all states s, V
+∗
+R (s) ≥V
+∗
+RAUP(s), so to keep the AUP agent from becoming
+more able to achieve its own goal, we just have to stop it from becoming much more
+able to achieve its primary goal R. But we know the primary goal!
+By the theorems of How Low Should Fruit Hang Before We Pick It?, we only need
+equation 5 to penalize catastrophic power-gaining plans at least e.g. ten times more
+than the most impactful reasonable plan we'd like agent to execute. If this criterion is
+met, then by initializing λ large and slowly decreasing it until the agent executes a
+reasonably helpful policy, we're guaranteed to avoid catastrophe.
+Appendix: Remaining Problems
+I don't think we can pack up and go home after writing equation 5. In private
+correspondence (quoted here with permission), Stuart Armstrong points out another
+issue:
+First, if ∅= a, the penalty vanishes; so, once a subagent is created, the agent can
+zero out all subsequent penalties, forever.
+As for creating the subagent, assume A takes N turns to create SA, and that doing
+this is close to optimal for maximising R.
+Creating SA starts with the programming; if SA is actually created in N turns, it is
+programmed to restrain A for a turn, and then maximise R. If it's created in N + 1
+turns, then it will just maximise R. Thus at any given turn, continuing to build the
+
+subagent or taking a pause to do ∅, it will have the same expected R-value (in the
+ﬁrst case, SA will be built on time, but both A and SA will then lose a turn; in the
+second, SA will be built one turn late, with no loss).[4]
+One thing I ﬁnd interesting: in this post, we ﬁxed the design choice of using an auxiliary
+reward function as a proxy, instead penalizing the agent for becoming better able to
+achieve its own goal. This seemingly closes up a lot of loopholes, so the next place
+where the design can be exploited is in its exact measurement of inaction.
+How big of a problem will this be? Maybe we can just keep improving the design until
+we're actually measuring the right thing? More on this next post, but here are some of
+my initial thoughts:
+The point of this post isn't to say "aha, we're done!", but to eliminate a wide class
+of current problems while also relaxing the strictness of the measure itself.
+On a meta level, it feels like I'm arguing against a claim like "if you can't
+demonstrate an approach which solves everything right now, I'm going to either
+conclude impact measurement is impossible or your whole approach is wrong". But
+if you look back at the history of impact measures and AUP, you'll see lots of skulls;
+people say "this problem dooms AUP", and I say "I think we're talking about
+conceptually diﬀerent things and that you're a little overconﬁdent; probably just a
+design choice issue". It then ends up being a solvable design choice issue. So by
+Laplace's Rule of Succession, I'd be surprised if this were The Insurmountable
+Problem That Dooms AUP.[5]
+The problem seems simple. We just have to keep V
+∗
+AUP(s) down, which we can do by
+keeping V
+∗
+R (s) down.
+Stuart later added:
+The fundamental issue is that AUP can be undermined if the agent can add
+arbitrary restrictions to their own future actions (this allows them to redeﬁne V ∗).
+The subagent scenario is just a particularly clear way of illustrating this.
+I basically agree. I wonder if there's a design where the agent isn't incentivized to do
+this...
+1. By this reasoning, V
+∗
+RAUP(s) can still increase up until the point of V
+∗
+R (s). This
+doesn't jump out as a big deal to me, but I'm ﬂagging this assumption anyways.
+↩ 
+2. A subagent might still be built by AUPeq. 5 to stabilize minor AU ﬂuctuations which
+cause additional penalty over the course of non-power-gaining plans. It seems
+
+like there are plenty of other ways to minimize ﬂuctuation, so it's not clear why
+building an omnipotent subagent to perfectly restrict you accrues less penalty.
+I do think we should think carefully about this, of course. The incentive to
+minimize AU ﬂuctuations and generally commit to perpetual inaction ASAP is
+probably one of the main remaining problems with AUPeq. 5. ↩ 
+3. As pointed out by Evan Hubinger, this is only safe if myopically optimizing R is
+safe - we aren't penalizing single-step reward acquisition. ↩ 
+4. This issue was originally pointed out by Ofer. ↩ 
+5. The fact that Ofer's/Stuart's problem survived all of the other improvements is
+evidence that it's harder. I just don't think the evidence it provides is that strong.
+↩ 
+
+Reasons for Excitement about Impact
+of Impact Measure Research
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+Can we get impact measurement right? Does there exist One Equation To Rule Them
+All?
+I think there's a decent chance there isn't a simple airtight way to implement AUP
+which lines up with AUPconceptual, mostly because it's just incredibly diﬃcult in general
+to perfectly specify the reward function.
+Reasons why it might be feasible: we're trying to get the agent to do the goal without
+it becoming more able to do the goal, which is conceptually simple and natural; since
+we've been able to handle previous problems with AUP with clever design choice
+modiﬁcations, it's plausible we can do the same for all future problems; since there
+are a lot of ways to measure power due to instrumental convergence, that increases
+the chance at least one of them will work; intuitively, this sounds like the kind of thing
+which could work (if you told me "you can build superintelligent agents which don't try
+to seek power by penalizing them for becoming more able to achieve their own goal",
+I wouldn't exactly die of shock).
+Even so, I am (perhaps surprisingly) not that excited about actually using impact
+measures to restrain advanced AI systems. Let's review some concerns I provided in
+Reasons for Pessimism about Impact of Impact Measures:
+Competitive and social pressures incentivize people to cut corners on safety
+measures, especially those which add overhead. Especially so for training time,
+assuming the designers slowly increase aggressiveness until they get a
+reasonable policy.
+In a world where we know how to build powerful AI but not how to align it (which
+is actually probably the scenario in which impact measures do the most work),
+we play a very unfavorable game while we use low-impact agents to somehow
+transition to a stable, good future: the ﬁrst person to set the aggressiveness too
+high, or to discard the impact measure entirely, ends the game.
+In a What Failure Looks Like-esque scenario, it isn't clear how impact-limiting
+any single agent helps prevent the world from "gradually drifting oﬀ the rails".
+You might therefore wonder why I'm working on impact measurement.
+Deconfusion
+Within Matthew Barnett's breakdown of how impact measures could help with
+alignment, I'm most excited about impact measure research as deconfusion. Nate
+Soares explains:
+By deconfusion, I mean something like "making it so that you can think about a
+given topic without continuously accidentally spouting nonsense."
+
+To give a concrete example, my thoughts about inﬁnity as a 10-year-old were
+made of rearranged confusion rather than of anything coherent, as were the
+thoughts of even the best mathematicians from 1700. "How can 8 plus inﬁnity still
+be inﬁnity? What happens if we subtract inﬁnity from both sides of the equation?"
+But my thoughts about inﬁnity as a 20-year-old were not similarly confused,
+because, by then, I'd been exposed to the more coherent concepts that later
+mathematicians labored to produce. I wasn't as smart or as good of a
+mathematician as Georg Cantor or the best mathematicians from 1700; but
+deconfusion can be transferred between people; and this transfer can spread the
+ability to think actually coherent thoughts.
+In 1998, conversations about AI risk and technological singularity scenarios often
+went in circles in a funny sort of way. People who are serious thinkers about the
+topic today, including my colleagues Eliezer and Anna, said things that today
+sound confused. (When I say "things that sound confused," I have in mind things
+like "isn't intelligence an incoherent concept," "but the economy's already
+superintelligent," "if a superhuman AI is smart enough that it could kill us, it'll also
+be smart enough to see that that isn't what the good thing to do is, so we'll be
+ﬁne," "we're Turing-complete, so it's impossible to have something dangerously
+smarter than us, because Turing-complete computations can emulate anything,"
+and "anyhow, we could just unplug it.") Today, these conversations are diﬀerent.
+In between, folks worked to make themselves and others less fundamentally
+confused about these topics—so that today, a 14-year-old who wants to skip to
+the end of all that incoherence can just pick up a copy of Nick Bostrom's
+Superintelligence.
+Similarly, suppose you're considering the unimportant and trivial question of whether
+seeking power is convergently instrumental, which we can now crisply state as "do
+most reward functions induce optimal policies which take over the planet (more
+formally, which visit states with high POWER)?".
+You're a bit confused if you argue in the negative by saying "you're
+anthropomorphizing; chimpanzees don't try to do that" (chimpanzees aren't optimal)
+or "the set of reward functions which does this has measure 0, so we'll be ﬁne" (for
+any reachable state, there exists a positive measure set of reward functions for which
+visiting it is optimal).
+You're a bit confused if you argue in the aﬃrmative by saying "unintelligent animals
+fail to gain resources and die; intelligent animals gain resources and thrive. Therefore,
+since we are talking about really intelligent agents, of course they'll gain resources
+and avoid correction." (animals aren't optimal, and evolutionary selection pressures
+narrow down the space of possible "goals" they could be eﬀectively optimizing).
+After reading this paper on the formal roots of instrumental convergence, instead of
+arguing about whether chimpanzees are representative of power-seeking behavior, we
+can just discuss how, under an agreed-upon reward function distribution, optimal
+action is likely to ﬂow through the future of our world. We can think about to what
+extent the paper's implications apply to more realistic reward function distributions
+(which don't identically distribute reward over states).[1] Since we're less confused,
+our discourse doesn't have to be crazy.
+But also since we're less confused, the privacy of our own minds doesn't have to be
+crazy. It's not that I think that any single fact or insight or theorem downstream of my
+work on AUP is totally obviously necessary to solve AI alignment. But it sure seems
+
+good that we can mechanistically understand instrumental convergence and power,
+know what "impact" means instead of thinking it's mostly about physical change to
+the world, think about how agents aﬀect each other, and conjecture why goal-
+directedness seems to lead to doom by default.[2]
+Attempting to iron out ﬂaws from our current-best AUP equation makes one intimately
+familiar with how and why power-seeking incentives can sneak in even when you're
+trying to keep them out in the conceptually correct way. This point is harder for me to
+articulate, but I think there's something vaguely important in understanding how this
+works.
+Formalizing instrumental convergence also highlighted a signiﬁcant hole in our
+theoretical understanding of the main formalism of reinforcement learning. And if you
+told me two years ago that you could possibly solve side-eﬀect avoidance in the short-
+term with one simple trick ("just preserve your ability to optimize a single random
+reward function, lol"), I'd have thought you were nuts. Clearly, there's something
+wrong with our models of reinforcement learning environments if these results are so
+surprising.
+In my opinion, research on AUP has yielded an unusually high rate of deconfusion and
+insights, probably because we're thinking about what it means for the agent to
+interact with us.
+1. When combined with our empirical knowledge of the diﬃculty of reward function
+speciﬁcation, you might begin to suspect that there are lots of ways the agent
+might be incentivized to gain control, many openings through which power-
+seeking incentives can permeate - and your reward function would have to
+penalize all of these! If you were initially skeptical, this might make you think
+that power-seeking behavior may be more diﬃcult to avoid than you initially
+thought. ↩ 
+2. If we collectively think more and end up agreeing that AUPconceptual solves
+impact measurement, it would be interesting that you could solve such a
+complex, messy-looking problem in such a simple way. If, however, CCC ends up
+being false, I think that would also be a new and interesting fact not currently
+predicted by our models of alignment failure modes. ↩ 
+
+Conclusion to 'Reframing Impact'
+Crossposted from the AI Alignment Forum. May contain more technical jargon than usual.
+
+
+
+
+
+
+Epistemic Status
+I've made many claims in these posts. All views are my own.
+1%
+
+2%
+
+3%
+
+4%
+
+5%
+
+6%
+
+7%
+
+8%
+
+9%
+
+10%
+
+11%
+
+12%
+
+13%
+
+14%
+
+15%
+
+16%
+
+17%
+
+18%
+
+19%
+
+20%
+
+21%
+
+22%
+
+23%
+
+24%
+
+25%
+
+26%
+
+27%
+
+28%
+
+29%
+
+30%
+
+31%
+
+32%
+
+33%
+
+34%
+
+35%
+
+36%
+
+37%
+
+38%
+
+39%
+
+40%
+
+41%
+
+42%
+
+43%
+
+44%
+
+45%
+
+46%
+
+47%
+
+48%
+
+49%
+
+50%
+
+51%
+
+52%
+
+53%
+
+54%
+
+55%
+
+56%
+
+57%
+
+58%
+
+59%
+
+60%
+
+61%
+
+62%
+
+63%
+
+64%
+
+65%
+
+66%
+
+67%
+
+68%
+
+69%
+
+70%
+
+71%
+
+72%
+
+73%
+
+74%
+
+75%
+
+76%
+
+77%
+
+78%
+
+79%
+
+80%
+
+81%
+
+82%
+
+83%
+
+84%
+
+85%
+
+86%
+
+87%
+
+88%
+
+89%
+
+90%
+
+91%
+
+92%
+
+93%
+
+94%
+
+95%
+
+96%
+
+97%
+
+98%
+
+99%
+
+1%
+
+99%
+1%
+
+2%
+
+3%
+
+4%
+
+5%
+
+6%
+
+7%
+
+8%
+
+9%
+
+10%
+
+11%
+
+12%
+
+13%
+
+14%
+
+15%
+
+16%
+
+17%
+
+18%
+
+19%
+
+20%
+
+21%
+
+22%
+
+23%
+
+24%
+
+25%
+
+26%
+
+27%
+
+28%
+
+29%
+
+30%
+
+31%
+
+32%
+
+33%
+
+34%
+
+35%
+
+36%
+
+37%
+
+38%
+
+39%
+
+40%
+
+41%
+
+42%
+
+43%
+
+44%
+
+45%
+
+46%
+
+47%
+
+48%
+
+49%
+
+50%
+
+51%
+
+52%
+
+53%
+
+54%
+
+55%
+
+56%
+
+57%
+
+58%
+
+59%
+
+60%
+
+61%
+
+62%
+
+63%
+
+64%
+
+65%
+
+66%
+
+67%
+
+68%
+
+69%
+
+70%
+
+71%
+
+72%
+
+73%
+
+74%
+
+75%
+
+76%
+
+77%
+
+78%
+
+79%
+
+80%
+
+81%
+
+82%
+
+83%
+
+84%
+
+85%
+
+86%
+
+87%
+
+88%
+
+89%
+
+90%
+
+91%
+
+92%
+
+93%
+
+94%
+
+95%
+
+96%
+
+97%
+
+98%
+
+99%
+
+1%
+99%
+Conﬁdent (75%). The theorems on power-seeking only apply to optimal policies in fully
+observable environments, which isn't realistic for real-world agents. However, I think
+they're still informative. There are also strong intuitive arguments for power-seeking.
+1%
+
+2%
+
+3%
+
+4%
+
+5%
+
+6%
+
+7%
+
+8%
+
+9%
+
+10%
+
+11%
+
+12%
+
+13%
+
+14%
+
+15%
+
+16%
+
+17%
+
+18%
+
+19%
+
+20%
+
+21%
+
+22%
+
+23%
+
+24%
+
+25%
+
+26%
+
+27%
+
+28%
+
+29%
+
+30%
+
+31%
+
+32%
+
+33%
+
+34%
+
+35%
+
+36%
+
+37%
+
+38%
+
+39%
+
+40%
+
+41%
+
+42%
+
+43%
+
+44%
+
+45%
+
+46%
+
+47%
+
+48%
+
+49%
+
+50%
+
+51%
+
+52%
+
+53%
+
+54%
+
+55%
+
+56%
+
+57%
+
+58%
+
+59%
+
+60%
+
+61%
+
+62%
+
+63%
+
+64%
+
+65%
+
+66%
+
+67%
+
+68%
+
+69%
+
+70%
+
+71%
+
+72%
+
+73%
+
+74%
+
+75%
+
+76%
+
+77%
+
+78%
+
+79%
+
+80%
+
+81%
+
+82%
+
+83%
+
+84%
+
+85%
+
+86%
+
+87%
+
+88%
+
+89%
+
+90%
+
+91%
+
+92%
+
+93%
+
+94%
+
+95%
+
+96%
+
+97%
+
+98%
+
+99%
+
+1%
+99%
+Fairly conﬁdent (70%). There seems to be a dichotomy between "catastrophe directly
+incentivized by goal" and "catastrophe indirectly incentivized by goal through power-
+seeking", although Vika provides intuitions in the other direction.
+1%
+
+2%
+
+3%
+
+4%
+
+5%
+
+6%
+
+7%
+
+8%
+
+9%
+
+10%
+
+11%
+
+12%
+
+13%
+
+14%
+
+15%
+
+16%
+
+17%
+
+18%
+
+19%
+
+20%
+
+21%
+
+22%
+
+23%
+
+24%
+
+25%
+
+26%
+
+27%
+
+28%
+
+29%
+
+30%
+
+31%
+
+32%
+
+33%
+
+34%
+
+35%
+
+36%
+
+37%
+
+38%
+
+39%
+
+40%
+
+41%
+
+42%
+
+43%
+
+44%
+
+45%
+
+46%
+
+47%
+
+48%
+
+49%
+
+50%
+
+51%
+
+52%
+
+53%
+
+54%
+
+55%
+
+56%
+
+57%
+
+58%
+
+59%
+
+60%
+
+61%
+
+62%
+
+63%
+
+64%
+
+65%
+
+66%
+
+67%
+
+68%
+
+69%
+
+70%
+
+71%
+
+72%
+
+73%
+
+74%
+
+75%
+
+76%
+
+77%
+
+78%
+
+79%
+
+80%
+
+81%
+
+82%
+
+83%
+
+84%
+
+85%
+
+86%
+
+87%
+
+88%
+
+89%
+
+90%
+
+91%
+
+92%
+
+93%
+
+94%
+
+95%
+
+96%
+
+97%
+
+98%
+
+99%
+
+1%
+99%
+1%
+
+2%
+
+3%
+
+4%
+
+5%
+
+6%
+
+7%
+
+8%
+
+9%
+
+10%
+
+11%
+
+12%
+
+13%
+
+14%
+
+15%
+
+16%
+
+17%
+
+18%
+
+19%
+
+20%
+
+21%
+
+22%
+
+23%
+
+24%
+
+25%
+
+26%
+
+27%
+
+28%
+
+29%
+
+30%
+
+31%
+
+32%
+
+33%
+
+34%
+
+35%
+
+36%
+
+37%
+
+38%
+
+39%
+
+40%
+
+41%
+
+42%
+
+43%
+
+44%
+
+45%
+
+46%
+
+47%
+
+48%
+
+49%
+
+50%
+
+51%
+
+52%
+
+53%
+
+54%
+
+55%
+
+56%
+
+57%
+
+58%
+
+59%
+
+60%
+
+61%
+
+62%
+
+63%
+
+64%
+
+65%
+
+66%
+
+67%
+
+68%
+
+69%
+
+70%
+
+71%
+
+72%
+
+73%
+
+74%
+
+75%
+
+76%
+
+77%
+
+78%
+
+79%
+
+80%
+
+81%
+
+82%
+
+83%
+
+84%
+
+85%
+
+86%
+
+87%
+
+88%
+
+89%
+
+90%
+
+91%
+
+92%
+
+93%
+
+94%
+
+95%
+
+96%
+
+97%
+
+98%
+
+99%
+
+1%
+99%
+1%
+
+2%
+
+3%
+
+4%
+
+5%
+
+6%
+
+7%
+
+8%
+
+9%
+
+10%
+
+11%
+
+12%
+
+13%
+
+14%
+
+15%
+
+16%
+
+17%
+
+18%
+
+19%
+
+20%
+
+21%
+
+22%
+
+23%
+
+24%
+
+25%
+
+26%
+
+27%
+
+28%
+
+29%
+
+30%
+
+31%
+
+32%
+
+33%
+
+34%
+
+35%
+
+36%
+
+37%
+
+38%
+
+39%
+
+40%
+
+41%
+
+42%
+
+43%
+
+44%
+
+45%
+
+46%
+
+47%
+
+48%
+
+49%
+
+50%
+
+51%
+
+52%
+
+53%
+
+54%
+
+55%
+
+56%
+
+57%
+
+58%
+
+59%
+
+60%
+
+61%
+
+62%
+
+63%
+
+64%
+
+65%
+
+66%
+
+67%
+
+68%
+
+69%
+
+70%
+
+71%
+
+72%
+
+73%
+
+74%
+
+75%
+
+76%
+
+77%
+
+78%
+
+79%
+
+80%
+
+81%
+
+82%
+
+83%
+
+84%
+
+85%
+
+86%
+
+87%
+
+88%
+
+89%
+
+90%
+
+91%
+
+92%
+
+93%
+
+94%
+
+95%
+
+96%
+
+97%
+
+98%
+
+99%
+
+1%
+99%
+1%
+
+2%
+
+3%
+
+4%
+
+5%
+
+6%
+
+7%
+
+8%
+
+9%
+
+10%
+
+11%
+
+12%
+
+13%
+
+14%
+
+15%
+
+16%
+
+17%
+
+18%
+
+19%
+
+20%
+
+21%
+
+22%
+
+23%
+
+24%
+
+25%
+
+26%
+
+27%
+
+28%
+
+29%
+
+30%
+
+31%
+
+32%
+
+33%
+
+34%
+
+35%
+
+36%
+
+37%
+
+38%
+
+39%
+
+40%
+
+41%
+
+42%
+
+43%
+
+44%
+
+45%
+
+46%
+
+47%
+
+48%
+
+49%
+
+50%
+
+51%
+
+52%
+
+53%
+
+54%
+
+55%
+
+56%
+
+57%
+
+58%
+
+59%
+
+60%
+
+61%
+
+62%
+
+63%
+
+64%
+
+65%
+
+66%
+
+67%
+
+68%
+
+69%
+
+70%
+
+71%
+
+72%
+
+73%
+
+74%
+
+75%
+
+76%
+
+77%
+
+78%
+
+79%
+
+80%
+
+81%
+
+82%
+
+83%
+
+84%
+
+85%
+
+86%
+
+87%
+
+88%
+
+89%
+
+90%
+
+91%
+
+92%
+
+93%
+
+94%
+
+95%
+
+96%
+
+97%
+
+98%
+
+99%
+
+1%
+99%
+Acknowledgements
+After ~700 hours of work over the course of ~9 months, the sequence is ﬁnally complete.
+This work was made possible by the Center for Human-Compatible AI, the Berkeley
+Existential Risk Initiative, and the Long-Term Future Fund. Deep thanks to Rohin Shah, Abram
+Demski, Logan Smith, Evan Hubinger, TheMajor, Chase Denecke, Victoria Krakovna, Alper
+Dumanli, Cody Wild, Matthew Barnett, Daniel Blank, Sara Haxhia, Connor Flexman, Zack M.
+Davis, Jasmine Wang, Matthew Olson, Rob Bensinger, William Ellsworth, Davide Zagami, Ben
+Pace, and a million other people for giving feedback on this sequence.
+Appendix: Easter Eggs
+The big art pieces (and especially the last illustration in this post) were designed to convey a
+speciﬁc meaning, the interpretation of which I leave to the reader.
+There are a few pop culture references which I think are obvious enough to not need pointing
+out, and a lot of hidden smaller playfulness which doesn't quite rise to the level of "easter
+egg".
+Reframing Impact
+The bird's nest contains a literal easter egg.
+
+The paperclip-Balrog drawing contains a Tengwar inscription which reads "one measure to
+bind them", with "measure" in impact-blue and "them" in utility-pink.
+"Towards a New Impact Measure" was the title of the post in which AUP was introduced.
+
+Attainable Utility Theory: Why Things Matter
+This style of maze is from the video game Undertale.
+
+Seeking Power is Instrumentally Convergent in MDPs
+To seek power, Frank is trying to get at the Inﬁnity Gauntlet.
+The tale of Frank and the orange Pebblehoarder
+
+Speaking of under-tales, a friendship has been blossoming right under our noses.
+After the Pebblehoarders suﬀer the devastating transformation of all of their pebbles into
+obsidian blocks, Frank generously gives away his favorite pink marble as a makeshift pebble.
+The title cuts to the middle of their adventures together, the Pebblehoarder showing its
+gratitude by helping Frank reach things high up.
+
+This still at the midpoint of the sequence is from the ﬁnal scene of The Hobbit: An
+Unexpected Journey, where the party is overlooking Erebor, the Lonely Mountain. They've
+made it through the Misty Mountains, only to ﬁnd Smaug's abode looming in the distance.
+And, at last, we ﬁnd Frank and orange Pebblehoarder popping some of the champagne from
+Smaug's hoard.
+
+Since Erebor isn't close to Gondor, we don't see Frank and the Pebblehoarder gazing at Ephel
+Dúath from Minas Tirith.
+

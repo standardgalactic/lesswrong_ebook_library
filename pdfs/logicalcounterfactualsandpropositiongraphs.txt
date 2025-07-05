@@ -1,0 +1,393 @@
+
+Logical Counterfactuals and Proposition
+graphs
+1. Logical Counterfactuals and Proposition graphs, Part 1
+2. Logical Counterfactuals and Proposition graphs, Part 2
+3. Logical Counterfactuals and Proposition graphs, Part 3
+
+Logical Counterfactuals and
+Proposition graphs, Part 1
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+Within this sequence of posts I will outline a procedure for logical counterfactuals
+based on something similar to proof length. In this post I present a reimagining of
+propositional logic in which proving a theorem is taking a walk around a graph of
+equivalent proposititions.
+Within this post, I will use Latin symbols, for speciﬁc symbols within proof strings. I will
+sometimes use symbols like ∀ to represent a function with particular properties.
+I will use Greek letters to represent an arbitrary symbol, upper case for single
+symbols, lower case for strings.
+Respecifying Propositional logic
+The goal of this ﬁrst section is to reformulate ﬁrst order logic in a way that makes
+logical counterfactuals easier. Lets start with propositional logic.
+We have a set of primitive propositions p, q, r, . . . as well as the symbols ⊤, ⊥. We also
+have the symbols ∨, ∧ which are technically functions from Bool2 →Bool but will be
+written p ∨q not ∨(p, q) . There is also ¬ : Bool →Bool
+Consider the equivalence rules.
+1. α ≡¬¬α
+2. α ∧β ≡β ∧α
+3. (α ∧β) ∧γ ≡α ∧(β ∧γ)
+4. ¬α ∧¬β ≡¬(α ∨β)
+5. α ∧⊤≡α
+6. ¬α ∨α ≡⊤
+7. ⊥≡¬⊤
+
+8. α ∧(β ∨γ) ≡(α ∧β) ∨(α ∧γ)
+9. ⊥∧α ≡⊥
+10.α ≡α ∧α
+Theorem
+Any tautology provable in propositional logic can be created by starting at ⊤ and
+repeatedly applying equivalence rules.
+Proof
+First consider α ⟹β to be shorthand for ¬α ∨β.
+Lemma
+We can convert ⊤ into any of the 3 axioms.
+α ⟹(β ⟹α) is a shorthand for
+¬α ∨(¬β ∨α) ≡1
+¬¬(¬α ∨(¬β ∨α)) ≡4
+¬(¬¬α ∧¬(¬β ∨α)) ≡4
+¬(¬¬α ∧(¬¬β ∧¬α)) ≡1
+¬(¬¬α ∧(β ∧¬α)) ≡2
+¬(¬¬α ∧(¬α ∧β)) ≡3
+¬((¬¬α ∧¬α) ∧β) ≡4
+¬(¬(¬α ∨α) ∧β) ≡6
+
+¬(¬⊤∧β) ≡7
+  ¬(⊥∧β) ≡9
+¬⊥≡7
+⊤
+Similarly
+(α ⟹(β ⟹γ)) ⟹((α ⟹β) ⟹(α ⟹γ))
+(¬α ⟹¬β) ⟹(β ⟹α)
+(if these can't be proved, add that they ≡⊤ as axioms)
+End Lemma
+Whenever you have α ∧(α ⟹β), that is equiv to
+α ∧(¬α ∨β) ≡8
+(α ∧¬α) ∨(α ∧β) ≡1
+(¬¬α ∧¬α) ∨(α ∧β) ≡4
+¬(¬α ∨α) ∨(α ∧β) ≡6
+¬⊤∨(α ∧β) ≡1
+¬¬(¬⊤∨(α ∧β)) ≡4
+¬(¬¬⊤∧¬(α ∧β)) ≡1
+¬(⊤∧¬(α ∧β)) ≡2
+¬(¬(α ∧β) ∧⊤) ≡5
+
+¬¬(α ∧β) ≡1
+α ∧β
+This means that you can create and apply axioms. For any tautology, look at the proof
+of it in standard propositional logic. Call the statements in this proof p1, p2, p3. . .
+suppose we have already found a sequence of substitutions from ⊤ to p1 ∧p2. . . ∧pi−1
+Whenever pi is a new axiom, use (5.) to get p1 ∧p2. . . ∧pi−1 ∧⊤, then convert ⊤ into
+the instance of the axiom you want. (substitute alpha and beta with arbitrary props in
+above proof schema)
+Using substitution rules (2.) and (3.) you can rearrange the terms representing lines in
+the proof and ignore their bracketing.
+Whenever pi is produced by modus ponus from the previous pj and pk = pj ⟹pi then
+duplicate pk with rule (10.), move one copy next to pj and use the previous procedure
+to turn pj ∧(pj ⟹pi) into pj ∧pi. Then move pi to end.
+Once you reach the end of the proof, duplicate the result and unwind all the working
+back to ⊤, which can be removed by rule (5.)
+Corollary
+{p, q, r} ⊢s then p ∧q ∧r ≡p ∧q ∧r ∧s
+Because p ∧q ∧r ⟹s is a tautology and can be applied to get s.
+Corollary
+Any contradiction is reachable from ⊥
+The negation of any contradiction k is a tautology.
+⊥≡¬⊤≡¬¬k ≡k
+Intuitive overview perspective 1
+
+An illustration of rule 4. ¬α ∧¬β ≡¬(α ∨β) in action.
+We can consider a proposition to be a tree with a root. The nodes are labeled with
+symbols. The axiomatic equivalences become local modiﬁcations to the tree structure,
+which are also capable of duplicating and merging identical subtrees by (10.).
+Arbitrary subtrees can be created or deleted by (5.).
+We can merge nodes with identical subtrees into a single node. This produces a
+directed acyclic graph, as shown above. Under this interpretation, all we have to do is
+test node identity.
+Intuitive overview perspective 2
+Consider each possible expression to be a single node within an inﬁnite graph.
+Each axiomatic equivalence above describes an inﬁnite set of edges. To get a single
+edge, substitute the generic α, β. . . with a particular expression. For example, if you
+take (2. α ∧β ≡β ∧α ) and substitute α := p ∨q and β := ¬q. We ﬁnd a link between
+the node (p ∨q) ∧¬q and ¬q ∧(p ∨q).
+
+Here is a connected subsection of the graph. Note that, unlike the previous graph, this
+one is cyclic and edges are not directed.
+All statements that are provably equivalent in propositional logic will be within the
+same connected component of the graph. All statements that can't be proved
+equivalent are in diﬀerent components, with no path between them.
+Finding a mathematical proof becomes an exercise in navigating an inﬁnite maze.
+In the next Post
+We will see how to extend the equivalence based proof system to an arbitrary ﬁrst
+order theory. We will see what the connectedness does then. We might even get on to
+inﬁnite dimensional vector spaces and why any of this relates to logical
+counterfactual.
+
+Logical Counterfactuals and
+Proposition graphs, Part 2
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+If you haven't read part 1, read it here.
+In this post we extend the notion of propositional graphs to cover any ﬁrst order
+theory.
+Consider some arbitrary ﬁrst order theory. For example a theory of integers.
+We can consider the program to deal with two basic types. B = {⊤, ⊥} and 
+N = {0, 1, 2, . . . }. All the functions and transformation rules in the previous post apply
+to B. For example, ⊤ is of type B. ∧ is a function from B2 →B.
+3 and 7 are of type N, and < is a function from N2 →B. So 3 < 7 is a valid Boolean that
+can be treated just like p with respect to the propositional transformations. ie 
+(3 < 7) ∧p ≡p ∧(3 < 7).
+We can also add S : N →N the successor function. Here are some more equivalence
+rules you might want.
+Sα < Sβ ≡α < β
+α < 0 ≡⊥
+0 < Sα ≡⊤
+¬(α < β) ≡β < Sα
+In general, there is a ﬁnite list of types. Call them X1, X2, . . . Xn
+All functions have a ﬁxed number of inputs, each with a ﬁxed type, and output
+something of a ﬁxed type. In our parse tree from before, this means that our edges
+have one of ﬁnitely many diﬀerent colours, and that each symbol node has a ﬁxed
+pattern of colors for its inputs and outputs. + is a node of type N and both its children
+are of type N. < is a node of type B, and both its children are of type N. ¬ is of type B
+
+and has one child of type B. Where the output type is not clear, it may be indicated by
+a subscript. <B (3N, 5N)
+Before we can get to predicate logic, we will introduce a set of implicit variable
+symbols VX for each type X in use. V = ∪
+n
+x=1VX is the set of all implicit variables. An
+implicit variable is an abstract symbol like ⊥ or 3. Speciﬁc implicit variables will be
+represented by capital roman letters (ABC). Substitution rules can also contain
+references to arbitrary members of some VX. Eg
+Sub(ΓN, δN, +N(αN, βN)) ≡+N(Sub(ΓN, δN, αN), Sub(ΓN, δN, βN))
+Sub(ΓN, δN, ΓN) ≡δN
+Here Sub is the substitution function, the αN, βN, δN represent any expression that has
+a real type. The ΓN represents any single symbol from the set VN.
+Applying these equivalences tells us that
+Sub(X, 5, +(3, X)) ≡+(Sub(X, 5, 3), Sub(X, 5, X)) ≡+(Sub(X, 5, 3), 5)
+If 3 is a shorthand for S(S(S(0))) then the rules Sub(ΓN, δN, S(αN)) ≡S(Sub(ΓN, δN, αN))
+and Sub(ΓN, δN, 0N) ≡0N allow deduction all the way to +(Sub(X, 5, 3), 5) ≡8
+A general ﬁrst order theory makes use of = and ∀ as well as [/] for substitution. These
+do not need any special properties, and can be deﬁned by the normal substitution
+rules. Technically there is a collection of Sub's, one for each pair of types.
+We have 4 axioms, which can be turned into rules by making them all equivalent to ⊤.
+∀B(ΓN, =B, (ΓN, ΓN)) ≡⊤
+∀B(ΓN, ∀(ΔN, ⟹B(=B (αN, βN), =B (ϕB, Sub(ΓN, ΔN, ϕB))))) ≡⊤
+⟹B(∀B(ΓN, ϕB), Sub(ΓN, αN, ϕB)) ≡⊤
+⟹B(∀N(ΓN, ⟹B(ϕB, ψB)), ⟹B(∀N(ΓN, ϕB), ∀N(ΓN, ψB)))
+
+And a rule that allows generalization.
+∀N(ΓN, ⊤) ≡⊤
+I believe that this set of substitution rules, or something like it, can produce predicate
+logic. I also believe that more substitution rules and symbols can be added to make
+any ﬁrst order theory. The intuition is that you can take any proof in any ﬁrst order
+logical theory and convert it into a series of substitution rules by anding in any
+axioms, and applying moduls ponens. Generalization can be done by turning ⊤ into 
+∀(X, ⊤) and then using substitutions not dependent on X to turn it into ∀(X, p).
+Theorem
+For any set of symbols with appropriate type signatures, for any recursively
+enumerable equivalence relation H. (With the property that a ≡b ⟹f(a) ≡f(b)
+)There exists a ﬁnite set of extra symbols and a ﬁnite set of substitution rules such
+that these equivalences hold.
+Proof Outline
+Introduce the symbols 0,1,end so that binary strings can be stored 0(1(1(0(end))))
+Give them some new type Y, and add a load of type converters, symbols that take in
+an object of type Y, and output some other type.
+Introduce + for concatenation.
++(0(αY ), βY ) ≡0(+(αY , βY ))
+And the same for 1
++(end, αY ) ≡αY
+By adding the rules
+P(α, 0(β)) ≡0(P(0(α), β))
+P(α, 1(β)) ≡0(P(1(α), β))
+P(α, end) ≡1(α)
+Then if |α| = n then P(end, α) ≡0n1 reverse(α).
+
+This means that J(α, β) ≡+(P(end, α), P(end, β)) can unambiguously express pairs of
+bitstrings as a single bitstring.
+Arbitrary syntax trees can be encoded like 
+∗(ConvN(αY ), ConvN(βY )) ≡ConvN(J(010end, J(αY , βY )))
+Where 010 is the unique bitstring representing "*", an arbitrary symbol.
+Then add a rule that
+ConvN(αY ) ≡rightN(TM1(left(J(αY , βY ))))
+As βY  can be anything, it could be an encoding of what you want. Then we let 
+left(0(α)) ≡0(left(α)) and the same for one, to run left to the far end of the bitstring.
+Then left(end) ≡n(left(end)) where n is a null symbol for tape that doesn't store data
+and we can extend tape as needed. Using rules like TM1(n(α)) ≡1(TM3(α)) we can
+run any turing machine with one symbol per state. Then ﬁnally we have a rule like 
+TM4(0(α)) ≡success(TM4(0(α))). Let success commute with 0,1 so it can go up to the
+top. Let right(success(α)) ≡right(success(n(α))).
+Then you can unwind all the computations, and 
+rightN(success(TM1(left(J(αY , βY ))))) ≡ConvN(βy) means that you can take the bit
+stream that you computed to be equal, and decode it back into its symbols.
+Lemma
+Any possible computably checkable formal proof system can be converted into an
+equivalence graph.
+Post Ending.
+Next time we will see when diﬀerent proof systems are provably the same. I know the
+formatting is rough and the explanations aren't always as clear as could be. Tell me
+about any unusually opaque parts. If these ideas turn out to be important, someone
+will need to rework this. I know the axioms used are not the simplest possible, and
+proofs are not fully formalized.
+
+Logical Counterfactuals and
+Proposition graphs, Part 3
+Crossposted from the AI Alignment Forum. May contain more technical jargon than
+usual.
+Notation note, [ ] are for lists, ( ) are for functions.
+Note that many of the words and symbols I am using are made up. When this maths is
+better understood, someone should reinvent the notation. My notation isn't that great,
+but its hard to make good notation when you are still working out what you want to
+describe.
+A theory (of my new type, not standard maths) T is formally deﬁned to be,
+T = [ψ, ρ, Ξ, type, arity]
+Where ψ = {s1, s2, . . . } are the theories symbols. These can be arbitrary mathematical
+objects.
+Ξ = {Ξ1, Ξ2, . . . } is the set of types, also arbitrary.
+type : ψ →Ξ is a function.
+a r i t y : ψ → ∪ 
+∞
+i = 0 Ξ × Ξ × ⋯ × Ξ
+                        i
+Is also a function.
+An expression E in a theory is deﬁned recursively, it consists of a pair 
+E = [s, v1, v2, ⋯, vn]. Here s ∈ψ and ∀1 ≤i ≤n : vi is an expression.
+Let arity(s) = [x1, x2, . . . xm]
+Sometimes we will write type(E), what we really mean is type(s), and 
+arity(E) = arity(s) We write symbol(E) = s when we want to refer to just s and ignore 
+v1, . . . , vn
+
+Expressions have the restriction that m = n the number of elements of Ξ that s is
+mapped to is the same as the number of other expressions.
+We also insist that for all i, type(vi) = xi
+The base case happens when arity(s) = [ ] the empty list.
+All expressions are strictly ﬁnite mathematical objects. There are no self referential
+expressions.
+Expressions can be written s(v1, . . . , vn)
+We can deﬁne equality between expressions e = s(v1, . . . ) and f = t(w1, . . . ) recursively
+by saying e = f iﬀ symbol(e) = symbol(f) and forall i : vi = wi
+The distinction between expressions e, f is deﬁned recursively.
+e −f = [e, f] if symbol(e) ≠symbol(f)
+e −f = [e, f] if ∃i ≠j ∈N : vi ≠wi and vj ≠wj
+e −f = None if e = f
+e −f = vi −wi if ∃1 i : vi ≠wi
+These can be uniquely expressed as strings made up of Ξ ∪{ ′(′,  ′,′ ,  ′)′}
+Lets deﬁne V (n) = V (Ξn) to be the set of all possible expressions of type Ξn.
+A function f : V (n1) ×. . . V (nt) →V (m) is called basic if it is constant, or it is the
+projection function ( so f(e1, . . . et) = ek for ﬁxed k ≤t) or f can be expressed as
+f(e1, . . . et) = s(v1, . . . vn) where s is constant and each vi is a basic function of e1, . . . et
+.
+Note you can cross as much extra junk into f as you like and ignore it. If f(e1, e2) is
+basic, so is g(e1, e3, e2, e4) = f(e1, e2).
+
+Basic functions can be said to have type(f) = Ξm and arity(f) = [Ξn1, . . . Ξnt]
+Basic functions can be deﬁned in the style of f(α, β) = s1(c1, α, s2(α, β))
+Finally, ρ = {[f1, g1], [f2, g2], ⋯} where fi and gi are basic functions with the same
+domains and codomains. type(vi) = type(wi)
+We write x(α) ≡y(z(α)) to mean that the pair of basic functions f(α) = x(α) and 
+g(α) = y(z(α)) are matched in ρ. Ie [f, g] ∈ρ where x, y, z ∈ψ
+We express the concept that for expressions e, f that e −f = [p, q] and there exists 
+[f, g] ∈ρ and expressions v1, . . . vn such that p = f(v1, . . . vn) and q = g(v1, . . . vn) by
+saying
+e ≡f.
+We express that ∃ e1, e2, . . . , en such that ∀ i < n : ei ≡ei+1 and e1 = e and en = f as 
+e ∼f. (previous posts use ≡ for both concepts)
+Lets create a new theory, called T1, this is a very simple theory, it has only 1 constant,
+2 functions and 2 substitution rules, with only a single type.
+a(b(α)) ≡α
+b(a(α)) ≡α
+With the only constant being 0. This theory can be considered to be a weak theory of
+integers with only a +1 and -1 function. It has a connected component of its graph for
+each integer. Propositions are in the same graph if and only if they have the same 
+count(a) −count(b). Theorems look like a(a(a(b(b(0))))) ∼b(a(a(0))).
+Now consider the theory T2 formed by the symbols f, g, h
+f(f(f(g(g(α)))) ≡α
+f(α) ≡h(g(α))
+
+f(h(α)) ≡h(f(α))
+g(h(α)) ≡h(g(α))
+It turns out that this theory also has one connected component for each integer, but
+this time, propositions are in the same component if 
+2 × count(f) −3 × count(g) + 5 × count(h) is the same.
+When S = (ψS, ρS, ΞS, typeS, arityS) is a theory and similarly for T.
+We can deﬁne the disjoint union, S ⊔T to be the theory 
+(ψS ⊔ψT, ρS ⊔ρT, ΞS ⊔Ξt, typeS ⊔typeT, arityS ⊔arityT)
+Consider a function f : ΞS →ΞT and a function Q : ψS →basic functions in T, such that
+type(Q(si)) = f(type(si)) and wherearity(si) = [X1, . . . Xn] means 
+arity(Q(si)) = [f(Q(s1)), . . . f(Q(sn))].
+These arity conditions mean that for any expression e = s(v1, . . . vn) i n S, we can
+deﬁne an expression in T
+VT is the set of expressions in T. Call Q∗: VS →VT a transjection if it meets the
+condition that Q∗(e) = Q(s)(Q∗(v1), . . . Q∗(vn)). For each Q meeting the above
+conditions, there exists exactly one transjection.
+We can now deﬁne a relation.
+We say S ≲T iﬀ there exists Q∗: VS →VT a transjection such that e ∼f in S iﬀ 
+Q∗(e) ∼Q∗(f) in T. Call such transjections projections.
+Say S ≈T iﬀ S ≲T and T ≲S.
+Theorem
+S ≲T and T ≲U implies S ≲U.
+
+Proof
+There exists a Q : VS →VT and R : VT →VU projections.
+The composition of basic maps is basic, by the recursive deﬁnition.
+The composition of transjections is a transjection.
+So R ∘Q is a transjection.
+For all e, f ∈VS, then e ∼f ⟺Q(e) ∼Q(f) ⟺R(Q(e)) ∼R(Q(f))
+Hence R ∘Q is a projection.
+Lemma
+S ≲S
+Let Q be the identity. The identity map is a projection.
+Theorem
+Suppose S and T are theories, with Q : VS →VT and R : VT →VS transjections.
+Suppose that for all e = s(v1, . . . , vn) ∈VS we know that R(Q(e)) ∼e.
+And the same when we swap S with T. Call Q and R psudoinverses.
+If we also know that for all [f(v1, . . . vn), g(v1, . . . vn)] ∈ρS a pair of basic functions, that
+for all v1, . . . vn we know Q(f(v1, . . . )) ∼Q(g(v1, . . . )) . Say that Q is axiom preserving.
+Again we know the same when S is swapped with T, IE that R is axiom preserving.
+Note that all these claims are potentially provable with a ﬁnite list of a ∼b ∼c. . . when
+the expressions contain the arbitrary constants v1, . . . vn.
+All the stuﬀ above implies that S ≈T.
+
+Proof
+Consider e ≡f ∈VS. We know that e −f = [a, b]. st there exists [f, g] ∈ρS and some 
+v1, . . . such that f(v1, . . . ) = a and g(v1, . . . ) = b (or visa versa.)
+This tells us that Q(a) ∼Q(b)
+If ∀i : Q(vi) ∼Q(wi) then Q(s(v1, . . . vn)) ∼Q(s(w1, . . . wn)). True because Q(s) is a basic
+function, and they preserve similarity.
+Repeat this to ﬁnd that Q(e) ∼Q(f).
+If e ∼f then e = e1, f = en and ei ≡ei+1, so Q(ei) ∼Q(ei+1) so Q(e) ∼Q(f).
+On the other hand, if Q(e) ∼Q(f) then R(Q(e)) ∼R(Q(f)) because the same reasoning
+also applies to R. For any e′, f ′ ∈VT we know e′ ∼f ′ ⟹R(e′) ∼R(f ′).
+We know Q(e), Q(f) ∈VT. But S and T are psudoinverses, so e ∼R(Q(e)) ∼ R(Q(f)) ∼ f
+hence e ∼f ⟺Q(e) ∼Q(f)
+Therefore S ≲T. Symmetrically, T ≲S so S ≈T
+Remember our theories T1 and T2 from earlier? The ones about a,b and f,g,h?
+We can now express the concept that they are basically the same. T1 ≈T2.
+We can prove this by giving basic functions for each symbol, that generates
+transjections, and by showing that they are psudoinverses and axiom preserving, we
+know they are projections and T1 ≈T2.
+Q : T1 →T2
+Q(0) = 0 , Q(a(α)) = f(f(g(Q(α)))) , Q(b(α)) = f(g(Q(α))).
+R : T2 →T1
+
+R(f(α)) = a(a(R(α))) , R(g(α)) = b(b(b(R(α)))) , R(h(α)) = a(a(a(a(a(R(α)))))) , R(0) = 0 .
+For example, pick the symbol a. To show that Q and R are psudoinverses, we need to
+show that R(Q(a(α))) ∼a(α). We know 
+R(Q(a(α))) = R(f(f(g(Q(α))))) = a(a(a(a(b(b(b(R(Q(α))))))))) ∼a(a(a(a(b(b(b(α))))))) ∼a(α)
+.
+To prove these transjections to be psudoinverses, do this with all symbols in ψS ⊔ψT.
+Finally we prove that Q is axiom preserving. We must show that Q(a(b(α))) ∼Q(α) and
+that Q(b(a(α))) ∼Q(α) . 
+Q(a(b(α))) = f(f(g(f(g(Q(α)))))) ≡f(f(g(h(g(g(Q(α)))))))
+≡f(f(h(g(g(g(Q(α))))))) ≡f(f(f(g(g(Q(α)))))) ≡Q(α)
+Likewise Q(a(b(α))) ∼Q(α) .
+R is also axiom preserving.
+So T1 ≈T2.
+Conclusion
+We have formally deﬁned a notion of a theory, and provided a criteria for telling when
+two theories are trivial distortions of each other. This will allow us notions of logical
+provability that aren't dependent on an arbitrary choice of formalism. By looking at all
+equivalent theories, weighted by simplicity, we can hope for a less arbitrary system of
+logical counterfactuals based on something thematically similar to proof length,
+although kind of more continuous with graduations of partly true.
+

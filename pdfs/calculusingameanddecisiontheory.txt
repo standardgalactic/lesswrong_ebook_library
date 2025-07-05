@@ -1,0 +1,520 @@
+
+Calculus in Game and Decision Theory
+1. A Very Mathematical Explanation of Derivatives
+2. The Calculus of Nash Equilibria
+3. The Calculus of Newcomb's Problem
+
+A Very Mathematical Explanation of
+Derivatives
+This post is meant for readers familiar with algebra and derivatives, but want to deepen their
+understanding and/or need a refresh.
+Linear functions
+Let's start with a family of very basic functions: the linear functions, expressed as f(x) = ax + b. You
+might remember its derivative is f ′(x) = a, because x is multiplied by a and the constant b
+ "disappears" when taking the derivative. This is correct, but let's actually calculate the derivative.
+Since f(x) is a linear function, f ′(x) is the same for all x. That is, a linear function "goes up" with the
+same "speed" everywhere, as can be seen in the following graph for g(x) = 2x + 5:
+For example, between x = 0 and x = 1, f(x) increases with 2, just like it does between e.g. x = 2 and 
+x = 3. Therefore, determining the average slope between x and x + d will do. The average slope
+between x and x + d is how much f(x) increases between x and x + d, divided by the diﬀerence
+ between x and x + d (which is d). Let d = 1, in which case we don't have to do the division, as 
+f ′(x) =
+= f(x + 1) −f(x). Filling in ax + b for f(x) and a(x + 1) + b for f(x + 1), we get:
+f ′ ( x ) = f ( x + 1 ) − f ( x ) = ( a ( x + 1 ) + b ) − ( a x + b ) = a x + a + b − a x − b = a
+f(x+1)−f(x)
+1
+
+There it is! f ′(x) = a. So for g(x) = 2x + 5, where a = 2, this means g′(x) = 2. 
+Polynomials (and more)
+Polynomials are functions with the following form:
+f ( x ) = a 0 x n + a 1 x n − 1 + . . . + a n − 1 x + a n
+Determining their derivative is a bit more tricky than determining the derivative of a linear function,
+because now, the derivative isn't necessarily the same everywhere. After all, take g(x) = x2:
+We can see this is a curved line, and so the derivative is constantly changing. We can sill do
+something like the "trick" we did with linear functions, but we can't determine f ′(x)by looking how 
+f(x) changes between x and x + 1: that would assume f ′(x) is the same between x and x + 1, which
+isn't true. For x and x + 0.001, we would have a better estimate of f ′(x), but we'd still assume f ′(x) to
+be constant between these values. We need to determine how f(x) changes between x and some 
+x + d, where d needs to approach zero: the smaller d gets, the more accurate our calculation for f ′(x)
+ becomes. We can do this using limits:
+f ′ ( x ) = lim d → 0 
+ 
+(Since d isn't 1 now, we need to do the division.) We can read this as follows: what value does 
+ approach when d approaches 0?
+f ( x + d ) − f ( x )
+d
+f(x+d)+f(x)
+d
+
+Let's do this for the simple polynomial g(x) = x2:
+g ′ ( x ) = lim d → 0 
+  = lim d → 0 
+  = lim d → 0 
+  = lim d → 0 
+ 
+g ′ ( x ) = lim d → 0 ( 
+  + 
+  ) = lim d → 0 ( 2 x + d )
+When d approaches 0, 2x + d becomes 2x:
+g′(x) = limd→0(2x + d) = 2x.
+So for g(x) = x2, g′(x) = 2x. You might have learned the general rule:
+For f(x) = axb, f ′(x) = abxb−1
+This is known as the power rule, and indeed works for g(x) = x2, where a = 1 and b = 2and 
+1 ∗2 ∗x2−1 = 2x1 = 2x. It also works for the linear function h(x) = 2x, where a = 2 and b = 1: 
+h′(x) = 1 ∗2x1−1 = 1 ∗2x0 = 1 ∗2 ∗1 = 2. But does it work in general? Yes, and we can proof it.
+Let's ﬁrst proof it works for all natural numbers (0, 1, 2, 3, . . .) b:  b ∈N. We need the product rule
+and mathematical induction for this proof though, so let's discuss those ﬁrst.
+Product rule
+The product rule states that when f(x) = g(x) ∗h(x), f ′(x) = g′(x) ∗h(x) + g(x) ∗h′(x). So when e.g. 
+g(x) = 2x and h(x) = 3x2, f(x) = 2x ∗3x2 and
+f ′(x) = g′(x) ∗h(x) + g(x) ∗h′(x) = 2 ∗3x2 + 2x ∗6x = 6x2 + 12x2 = 18x2. We can show the product
+rule is correct by determining what f ′(x) should be using the original deﬁnition of the derivative:
+f ′ ( x ) = lim d → 0 
+  = 
+ 
+Since we want to write f ′(x) as g′(x) ∗h(x) + g(x) ∗h′(x), let's rewrite the divisor to include the terms 
+g(x + d) −g(x) and h(x + d) −h(x):
+f ′ ( x ) = lim d → 0 
+ 
+and note that indeed, h(x)(g(x + d) −g(x)) + g(x + d)(h(x + d) −h(x)) =
+h ( x ) g ( x + d ) − g ( x ) h ( x ) + g ( x + d ) h ( x + d ) − h ( x ) g ( x + d ) =
+g(x + d)h(x + d) −g(x)h(x), which was our original divisor.
+g ( x + d ) − g ( x )
+d
+( x + d ) 2 − x 2
+d
+x 2 + 2 d x + d 2 − x 2
+d
+2 d x + d 2
+d
+2 d x
+d
+d 2
+d
+f ( x + d ) − f ( x )
+d
+g ( x + d ) ∗ h ( x + d ) − g ( x ) ∗ h ( x )
+d
+h ( x ) ( g ( x + d ) − g ( x ) ) + g ( x + d ) ( h ( x + d ) − h ( x ) )
+d
+
+Simplifying f ′(x) = limd→0
+, we get
+f ′ ( x ) = lim d → 0 
+  + lim d → 0 
+ 
+Since h(x) doesn't contain d, we can take it outside the ﬁrst limit term. We can also rewrite the
+second term:
+f ′ ( x ) = h ( x ) ∗ lim d → 0 
+  + lim d → 0 g ( x + d ) ∗ lim d → 0 
+ 
+When d approaches 0, limd→0g(x + d) becomes g(x). Furthermore, by deﬁnition,
+limd→0
+= g′(x) and limd→0
+= h′(x),
+so we now have f ′(x) = h(x) ∗g′(x) + g(x) ∗h′(x) = g′(x) ∗h(x) + g(x) ∗h′(x),
+which is the product rule!
+Mathematical induction
+Mathematical induction is a method for proving something is true for all natural numbers N. For
+example, say we want to proof that for every natural number n ∈N, S(n) =
+, where S(n) is
+simply 0 + 1 + 2+ . . . + n. We can do this by ﬁrst showing the condition holds for n = 0. That's Step 1,
+and yes, it does: 
+= 0 = S(0). Then, we show that if the condition holds for some n, it also holds
+for n + 1. That's Step 2. So for this step we assume S(n) =
+, and need to show that 
+S(n + 1) =
+. That holds as well: if S(n) =
+, then 
+S(n + 1) = 0 + 1 + 2+ . . . + n + (n + 1) = S(n) + n + 1. Since for this step we assumed S(n) =
+, we
+have S(n + 1) =
++ n + 1 =
++
+. So S(n + 1) =
+=
+=
+.
+So we now know that our condition holds for n = 0 and that if it holds for some n, it must also hold
+for n + 1. But then it holds for all natural numbers! Does our condition hold for n = 3? Yes! It holds
+for n = 0 by Step 1, so it holds for n = 1 by Step 2; but then, since it holds for n = 1, it also holds for 
+n = 2, again by Step 2. Applying Step 2 one more time gives that the condition S(n) =
+ holds
+for n = 3 as well. And we can apply this process to every natural number!
+Proof of the power rule for natural numbers
+Using the product rule and mathematical induction, we can show that the power rule (for f(x) = axb, 
+f ′(x) = abxb−1) works for all b ∈N.
+h(x)(g(x+d)−g(x))+g(x+d)(h(x+d)−h(x))
+d
+h ( x ) ( g ( x + d ) − g ( x ) )
+d
+g ( x + d ) ( h ( x + d ) − h ( x ) )
+d
+g ( x + d ) − g ( x )
+d
+h ( x + d ) − h ( x )
+d
+g(x+d)−g(x)
+d
+h(x+d)−h(x)
+d
+n(n+1)
+2
+0(0+1)
+2
+n(n+1)
+2
+(n+1)((n+1)+1)
+2
+n(n+1)
+2
+n(n+1)
+2
+n(n+1)
+2
+n(n+1)
+2
+2(n+1)
+2
+n(n+1)+2(n+1)
+2
+(n+1)(n+2)
+2
+(n+1)((n+1)+1)
+2
+n(n+1)
+2
+
+Step 1 is to show this is true for b = 0. Yes: then f(x) = axb = ax0 = a, and 
+abxb−1 = a ∗0x0−1 = 0 = f ′(x). (Since f(x) is constant (a), its derivative f ′(x) is indeed 0.
+Step 2 is to show that if f ′(x) = abxb−1 for some b ∈N and f(x) = axb, then for b + 1 and g(x) = axb+1
+, g′(x) = a(b + 1)xb.
+We can write g(x) = axb+1 as g(x) = x ∗axb. Then, deﬁne h(x) = x. Then g(x) = h(x) ∗f(x), and then
+the product rule says g′(x) = h′(x) ∗f(x) + h(x) ∗f ′(x). But by the assumption of Step 2, f ′(x) = abxb−1
+. Furthermore, h′(x) = 1. So g′(x) = 1 ∗axb + x ∗abxb−1 = axb + abxxb−1 = axb + abxb = a(b + 1)xb,
+which is what we wanted to proof!
+So we have shown the power rule works for b ∈N. We could extend this proof to e.g. cover negative
+integers for b as well. But I'd like to use a diﬀerent method of proof, that proofs the power rule works
+for b ∈R. For this, we ﬁrst need to know the chain rule, the constant multiple rule, Euler's number
+and how to take the derivative of the natural logarithm.
+Chain rule
+Deﬁne f(x) = (3x)2. (Note this is distinct from 3x2.) We want to determine its derivative. We could
+say f(x) = (3x)2 = 9x2, which would make f ′(x) = 18x. This is true, but let's take the opportunity to
+study the chain rule. Deﬁne g(x) = 3x and h(x) = x2. We can then write f(x) as h(g(x)). Then:
+f ′ ( x ) = lim d → 0 
+  = lim d → 0 
+ 
+Multiplying by 
+, which equals 1 and is allowed if g(x + d) ≠g(x) (otherwise we are dividing
+by 0), gives:
+f ′ ( x ) = lim d → 0 
+ 
+or f ′(x) = limd→0
+∗limd→0
+Note that limd→0
+= h′(g(x)), and limd→0
+= g′(x). So we now have 
+f ′(x) = h′(g(x)) ∗g′(x). That's the chain rule, and it holds whenever we can write a function f(x) as 
+f(x) = h(g(x)). Originally, we said f(x) = (3x)2, with g(x) = 3x and h(x) = x2. Then 
+h′(g(x)) = 2g(x) = 2 ∗3x = 6x and g′(x) = 3. According to the chain rule, then, f ′(x) = 6x ∗3 = 18x,
+which is also what we got by applying the power rule to f(x) = (3x)2 = 9x2.
+f ( x + d ) − f ( x )
+d
+h ( g ( x + d ) ) − h ( g ( x ) )
+d
+g(x+d)−g(x)
+g(x+d)−g(x)
+( h ( g ( x + d ) ) − h ( g ( x ) ) ) ∗ ( g ( x + d ) − g ( x ) )
+( g ( x + d ) − g ( x ) ) ∗ d
+h(g(x+d))−h(g(x))
+g(x+d)−g(x)
+g(x+d)−g(x)
+d
+h(g(x+d))−h(g(x))
+g(x+d)−g(x)
+g(x+d)−g(x)
+d
+
+Before, we temporarily assumed g(x + d) ≠g(x). What if g(x + d) = g(x)? Well, then 
+h(g(x + d)) = h(g(x)), and h(g(x + d)) −h(g(x)) = 0. Then f ′(x) = limd→0
+= 0, and 
+g′(x) = limd→0
+= limd→0
+= 0. So the chain rule would still apply, as 
+h′(g(x)) ∗g′(x) = h′(g(x)) ∗0 = 0 = f ′(x).
+Constant multiple rule
+If f(x) = a ∗g(x), f ′(x) = a ∗g′(x). This might make intuitive sense, but it also follows from the chain
+rule: deﬁne h(x) = ax and f(x) = h(g(x)). Then f ′(x) = h′(g(x)) ∗g′(x) = a ∗g′(x), which is the constant
+multiple rule. Indeed, this same rule also follows from the product rule: if f(x) = a ∗g(x), deﬁne 
+h(x) = a. Then f(x) = h(x) ∗g(x) and f ′(x) = h′(x) ∗g(x) + h(x) ∗g′(x) = 0 ∗g(x) + a ∗g′(x) = a ∗g′(x).
+Euler's number and the natural logarithm
+You might know that Euler's number e, which is chosen so that if f(x) = ex, f ′(x) = ex. You may also
+remember the natural logarithm ln, where eln x = x. What's the derivative of f(x) = ln x? We can ﬁnd it
+with the chain rule! Deﬁne g(x) = ef(x) = eln x and h(x) = ex. Then g(x) = h(f(x)), and applying the
+chain rule gives g′(x) = h′(f(x)) ∗f ′(x) = eln x ∗f ′(x). But also, g(x) = eln x = x, so g′(x) = 1. So we
+learn g′(x) = eln x ∗f ′(x) = 1, or x ∗f ′(x) = 1, and so f ′(x) =
+. So for f(x) = ln x, f ′(x) =
+.
+General proof of the power rule
+Now we're ready to proof the power rule (for f(x) = axb, f ′(x) = abxb−1) works for b ∈R. Let's rewrite 
+x as eln x. Then f(x) = a(eln x)b = aeb ln x. Deﬁne g(x) = aex and h(x) = b ln x. Then f(x) = g(h(x)), and
+via the chain rule (and the constant multiple rule) 
+f ′(x) = g′(h(x)) ∗h′(x) = aeb ln x ∗b ∗
+= aeb ln x ∗
+. Remember aeb ln x = a(eln x)b = axb, so 
+f ′(x) = axb ∗
+=
+= abxb−1, which is what we need to proof the power rule for b ∈R.
+Local maxima, local minima and second derivatives
+As you might know, polynomials like f(x) = −x2  can have local maxima (or peaks, where the graph
+ﬁrst goes up and then goes down) and local minima (or minima, where the graph ﬁrst goes down and
+then goes up). When a graph goes up, the derivative is positive; when it goes down, the derivative is
+negative. In the peak, the derivative must be 0! It's similar for valleys - the derivative is 0there, too.
+That means we can ﬁnd local maxima and local minima by setting the derivative to 0! For f(x) = −x2
+0d
+g(x+d)−g(x)
+d
+0d
+1x
+1x
+1x
+bx
+bx
+abxb
+x
+
+, f ′(x) = −2x. f ′(x) = 0 gives −2x = 0 and thus x = 0. Therefore, there must be a local maximum or
+minimum at f(0). Which is it? Well, note that in a local maximum, the derivative must be decreasing
+(through 0): otherwise, the graph wouldn't ﬁrst go up and then go down. But if the derivative is
+decreasing, the derivative of the derivative, called the second derivative (written f ′′(x)), must be
+negative! Conversely, in a local minimum, the second derivative must be positive. For f(x) = −x2, 
+f ′(x) = −2x and f ′′(x) = −2 < 0. So f(x) = 0 is a local maximum!
+Now consider g(x) = x3 + x2. We have g′(x) = 3x2 + 2x, and g′(x) = 0 gives 3x2 + 2x = 0 or 
+x(3x + 2) = 0. Then x = 0 ∨3x + 2 = 0 and so x = 0 ∨x = −. We have a local maximum or
+minimum in x = 0 and a local maximum or minimum in x = −. g′′(x) = 6x + 2, 
+g′′(0) = 6 ∗0 + 2 = 2 > 0 and g′′(−) = 6 ∗−
++ 2 = −2 < 0. Therefore, we have a local minimum in 
+x = 0 and a local maximum in x = −.
+Multivariable functions
+Multivariable functions are functions with, well, more than one variable. Take for example 
+f(x, y) = 2x + 3y. For x = 4 and y = 5, we have f(4, 5) = 2 ∗4 + 3 ∗5 = 23. Or we can take 
+g(x, y, z) = x + 5y + 2z, with g(1, 1, 1) = 1 + 5 + 2 = 8.
+Partial derivatives
+A partial derivative of a multivariable function is determined by treating all but one variable like
+constants and taking the derivative with respect to the one variable left. For example, for 
+f(x, y) = 2x + 3y, we can derive with respect to x: f
+′
+x(x, y) = 2 and with respect to y: f
+′
+y = 3. More
+generally, for any 2-variable function f(x, y), f
+′
+x(x, y) = limd→0
+ and 
+f
+′
+y(x, y) = limd→0
+. For f(x, y) = 2x + 3y, this means 
+f
+′
+x(x, y) = limd→0
+= limd→0
+= limd→0
+, which indeed simpliﬁes
+to f
+′
+x(x, y) = limd→0
+= limd→0 2 = 2.
+23
+23
+23
+23
+23
+f(x+d,y)−f(x,y)
+d
+f(x,y+d)−f(x,y)
+d
+f(x+d,y)−f(x,y)
+d
+(2(x+d)+3y)−(2x+3y)
+d
+(2x+2d+3y)−2x−3y)
+d
+2d
+d
+
+The Calculus of Nash Equilibria
+Now that we know a bit about derivatives, it's time to use them to ﬁnd dominant strategies
+and Nash equilibria. It helps if the reader is familiar with Nash equilibria already.
+Prisoner's dilemma
+The payoﬀ matrix of the Prisoner's dilemma can be as follows:
+We can see that the payoﬀ for Prisoner 1 depends on her own action (Cooperate/Defect) but
+also on the action of Prisoner 2. Therefore, the payoﬀ function for Prisoner 1 is a
+multivariable function: V 1(a1, a2), where an is the action of Prisoner n (and n ∈{1, 2}). Let's
+ say an = 0 when the action of Prisoner n is Cooperate, and an = 1 for Defect. So an ∈{0, 1}.
+Then V 1(a1, a2) = 20 −20a2 + 10a1, and crucially, V 1
+′
+a1(a1, a2) = 10. So for Defect (a1 = 1),
+Prisoner 1's payoﬀ will be 10 higher than for Cooperate (a2 = 0), as can be conﬁrmed in the
+table. Note that a2 doesn't show up in V 1
+′
+a1(a1, a2): Defect gives $10 more for Prisoner 1
+regardless of what Prisoner 2 does, which makes Defect a dominant strategy. Don't get me
+wrong: Prisoner 1's payoﬀ certainly does depend on what Prisoner 2 does. The point is that
+no matter what Prisoner 2 does, Prisoner 1's payoﬀ will be $10 higher when she (Prisoner 1)
+defects - and that's what's reﬂected in V 1
+′
+a1(a1, a2) = 10.
+Since the payoﬀ matrix is symmetrical, V 2(a1, a2) = 20 −20a1 + 10a2 and V 2
+′
+a2(a1, a2) = 10.
+Prisoner 2 therefore also has a dominant strategy: Defect. The Prisoner's dilemma, then, has
+a Nash equilibrium: when both prisoners defect. With the partial derivatives, we
+demonstrated that when both prisoners defect, no one prisoner can do better by changing
+her action to Cooperate. If e.g. Prisoner 1 were to do this, then a1 would go from 1 to 0, and
+since V 1
+′
+a1(a1, a2) > 0, that would lower V 1 (regardless of a2). By symmetry, the same is
+true for Prisoner 2.
+
+Nonlinear payoﬀ functions
+In the Prisoner's dilemma, the payoﬀs of both players (prisoners) can be modelled by linear
+payoﬀ functions. What if the payoﬀs are nonlinear?
+Let's say V 1(a1, a2) = −a
+2
+1 and V 2(a1, a2) = −a
+2
+2 + a2. Then V 1
+′
+a1(a1, a2) = −2a1 and 
+V 2
+′
+a2(a1, a2) = −2a2 + 1. A Nash equilibrium is a point where no player can do better by
+doing another action given the action of the other player; therefore, V 1(a1, a2) should be
+maximized with respect to a1 while keeping a2 constant, whereas V 2(a1, a2) should be
+maximized with respect to a2 while keeping a1 constant. If V 1(a1, a2) has a peak value with
+respect to a1, V 1
+′
+a1(a1, a2) = −2a1 must be 0 in that point. V 1
+′
+a1(a1, a2) = −2a1 = 0 gives 
+a1 =
+= 0. So a1 = 0 could represent a peak, but also a valley, since V 1
+′
+a1(a1, a2) would be 
+0 in both. If V 1
+′
+a1(a1, a2) = −2a1, V 1
+′′
+a1(a1, a2) = −2 < 0. So a1 = 0 represents a local
+maximum in V 1(a1, a2) (when a2 is held constant)! Since V 1(a1, a2) is quadratic, we can be
+sure this local maximum is the global maximum too (so there are no values for a1 for which 
+V 1(a1, a2) is higher when a2 is held constant).
+V 2
+′
+a2(a1, a2) = −2a2 + 1 = 0 gives 2a2 = 1 and a2 =
+. V 2
+′′
+a2(a1, a2) = −2 < 0, so a2 =
+ again
+represents a local maximum. V 2(a1, a2) is quadratic, so this is a global maximum as well.
+So a1 = 0 represents a global maximum for V 1 (for a constant a2), and a2 =
+represents a
+global maximum for V 2 (for a constant a1). That means a1 = 0 is a dominant strategy for
+player 1, a2 =
+ is a dominant strategy for player 2 and we have a Nash equilibrium in 
+(a1 = 0, a2 =
+).
+Making things a bit more complicated
+Let's now deﬁne V 1(a1, a2) = −a
+2
+1 ∗a2 and V 2(a1, a2) = −(a2 −1)2. Then for 
+V 1
+′
+a1(a1, a2) = −2a2 ∗a1 = 0, we have a2 = 0 ∨a1 = 0. V 1
+′′
+a1(a1, a2) = −2a2, which is
+negative when a2 > 0.
+0
+−2
+12
+12
+12
+12
+12
+
+For V 2
+′
+a2 = −2a2 + 2 = 0 we have a2 = 1. V 2
+′′
+a2 = −2 < 0, so this is a local optimum - and also
+the global one, since V 2(a1, a2) is quadratic. For a2 = 1, V 1
+′
+a1 = −2 ∗1 ∗a1 = −2a1. Solving
+for 0 gives a1 = 0 (which we found earlier as well). And since a2 = 1 > 0 and therefore 
+V 1
+′′
+a1(a1, a2) < 0, we now have a local maximum for V 1(a1, a2)! For a constant a2, V 1(a1, a2)
+ is quadratic, so this is the global maximum as well. We found a Nash equilibrium: 
+(a1 = 0, a2 = 1).
+
+The Calculus of Newcomb's Problem
+In the previous post, we applied some calculus to game theoretic problems. Let's now
+look at the famous Newcomb's problem, and how we can use calculus to ﬁnd a
+solution.
+Newcomb's problem
+From Functional Decision Theory: A New Theory of Instrumental Rationality:
+An agent ﬁnds herself standing in front of a transparent box labeled "A" that
+contains $1,000, and an opaque box labeled "B" that contains either $1,000,000
+or $0. A reliable predictor, who has made similar predictions in the past and been
+correct 99% of the time, claims to have placed $1,000,000 in box B iﬀ she
+predicted that the agent would leave box A behind. The predictor has already
+made her prediction and left. Box B is now empty or full. Should the agent take
+both boxes ("two-boxing"), or only box B, leaving the transparent box containing
+$1,000 behind ("one-boxing")?
+First, we need to come up with a function modeling the amount of money the agent
+gets. There's only one action to do: call this a. Then V (a) is the function for the
+amount of money earned for each action (one-boxing or two-boxing). However, as you
+might know, historically, thinkers have diverged on what V (a) should be.
+Causal Decision Theory
+Causal Decision Theory (CDT) states that an agent should look only at the causal
+eﬀects of her actions. In Newcomb's problem, this means acknowledging that the
+predictor already made her prediction (and either put $1, 000, 000 in box B or not),
+and that the agent's action now can't causally inﬂuence what's in box B. So either
+there's $1, 000, 000in box B or not. In both cases, two-boxing earns $1, 000 more (the
+content of box A) than one-boxing. Then V (a) = B + 1, 000a, where B is a constant
+representing the amount of money in box B and a ∈{0, 1}, where a = 0 is one-boxing
+and a = 1 is two-boxing. V ′(a) = 1, 000 > 0, and of course V (a) returns the most value
+for the highest value of a: a = 1 (two-boxing).
+This is all pretty straightforward, but the problem is that almost all agents using CDT
+ends up with only $1, 000, as the predictor predicts the agents will two-box with 0.99
+accuracy and put nothing in box B. It's one-boxing that gets you the $1, 000, 000.
+Enter logical decision theories, e.g. Functional Decision Theory.
+
+Functional Decision Theory
+Functional Decision Theory (FDT) reasons about the eﬀects of the agents decision
+procedure (which produces an action) instead of the eﬀects of her actions. The point is
+that a decision procedure can be implemented multiple times. In Newcomb's problem,
+it seems the predictor implements the decision procedure of the agent: she can run
+this model of the agent's decision procedure to see what action it produces, and use it
+to predict what the actual agent will do. In V (a) = B + 1, 000a, this means that B and a
+ are dependent on the same decision procedure! The decision procedure's
+implementation in the agent produces a, and the implementation in the predictor is
+used to determine what B should be. Let's write d for the decision procedure: 
+d ∈{0, 1}, where 0 means a one-boxing decision and 1 means a two-boxing decision.
+Then a = d, and B = 0.99 ∗1, 000, 000 −0.98 ∗1, 000, 000d = 990, 000 −980, 000d.
+After all: if d = 0, the agent decides on one-boxing and the predictor will have
+predicted that with 0.99accuracy, giving an expected value of 
+0.99 ∗$1, 000, 000 = $990, 000 in box B. Should the agent decide to two-box, the
+predictor will have predicted that with probability 0.99and only put $1, 000, 000 in box
+B if she mistakenly predicted a one-box action. Then the expected value of box B is 
+0.01 ∗$1, 000, 000 = $10, 000, which for d = 1 is represented by 
+B = 990, 000 −980, 000d. Great! We now have 
+V (d) = (990, 000 −980, 000d) + 1000d = 990, 000 −979, 000d. V ′(d) = −979, 000 < 0.
+The lowest possible decision, then, wins: d = 0, which gives V (0) = 990, 000, whereas 
+V (1) = 990, 000 −979, 000 = 11, 000.
+This outcome reﬂects the fact that it's one-boxers who almost always win $1, 000, 000,
+whereas two-boxer rarely do. If they do, they get the $1, 000, 000 and the $1, 000 of
+box A, for a total of $1, 001, 000, but the probability of getting the $1, 000, 000 is too
+low for this to matter enough.
+

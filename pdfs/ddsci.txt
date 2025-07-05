@@ -1,0 +1,1029 @@
+
+D&D.Sci
+1. D&D.Sci
+2. D&D.Sci Evaluation and Ruleset
+3. D&D.Sci II: The Sorceror's Personal Shopper
+4. D&D.Sci II Evaluation and Ruleset
+5. D&D.Sci April 2021: Voyages of the Gray Swan
+6. D&D.Sci April 2021 Evaluation and Ruleset
+7. D&D.Sci May 2021: Monster Carcass Auction
+8. D&D.Sci May 2021 Evaluation and Ruleset
+9. D&D.Sci(-Fi) June 2021: The Duel with Earwax
+10. D&D.Sci(-Fi) June 2021 Evaluation and Ruleset
+11. D&D.Sci August 2021: The Oracle and the Monk
+12. D&D.Sci August 2021 Evaluation and Ruleset
+
+D&D.Sci
+You are studying to become an Adventurer. You're excited to begin your Great Quest,
+but also anxious: over a third of the graduates from your program fail to accomplish
+their Great Quests. And if you're being brutally honest with yourself, your odds are
+probably worse than that, since your stats - while about average for the general
+population - are pretty lousy by the standards of Adventurer College.
+STR: 6/20
+CON: 14/20
+DEX: 13/20
+INT: 13/20
+WIS: 12/20
+CHA: 4/20
+On the eve of your graduation, you're visited by a mysterious fairy oﬀering to add a
+total of ten extra points to whichever attributes you most want to improve. Following
+the college's standard mysterious fairy protocol, you humbly request a week for
+research and contemplation before deciding how best to use this one-in-a-lifetime
+opportunity. (Your low Charisma ensures you come oﬀ as simultaneously entitled and
+disinterested when saying this, but she agrees regardless.)
+The college Archivist provides you a complete but anonymised record of the stats of
+everyone who graduated last year, and whether they succeeded at their Great Quests.
+(The record-keeping is magically perfect, and as Great Quests never take more than a
+year there are no incomplete Great Quests to account for.) The rest is up to you.
+Where will you allocate those ten points?
+I'll be posting an interactive letting you test your decision, along with a complete
+explanation of the dataset, sometime next Saturday. I'm giving you a week, but the
+task shouldn't take more than a few hours; use Excel, R, Python, random guessing, or
+whatever other tools you think are appropriate. Let me know in the comments if you
+have any questions about the scenario.
+ETA: If you want to investigate this collaboratively with other lesswrongers (or just
+share your conclusions without waiting a week), feel free to do so in the comments;
+however, please use spoiler tags when sharing inferences, so people intending to ﬂy
+solo can look for clariﬁcations without being spoiled.
+
+D&D.Sci Evaluation and Ruleset
+This is a followup to the D&D.Sci post I made a week ago; if you haven't already read
+it, you should do so now before spoiling yourself.
+Here is the web interactive I built to let you test your solution; below is a complete
+explanation of the rules used to generate the dataset. You'll probably want to test
+your answer before reading any further.
+(Unless you'd prefer to enter your answer, then read through the rules with a slowly
+growing sense of vindication and/or concern before clicking "Begin Quest!"; or unless
+you'd like to completely ignore the spirit of the exercise and use the rules to improve
+your solution. I'm not the boss of you.)
+Ruleset
+Generation and Selection
+An applicant for Adventurer College gets their stats by rolling two ten-sided dice for
+each stat and then adding them.
+Not everyone who applies gets in. Only those with >60 total points are allowed entry;
+you, with your 62 points, barely made the cut. Of course, you only get the records for
+those who were accepted; this produces small but non-negligible selection eﬀects.
+Advantage and Disadvantage
+On graduation, an Adventurer will inevitably ﬁnd themselves in a party of 3-6 loyal
+friends who help each other with their Great Quests. Your chances of success are
+determined by how well you can contribute to a team like that (your Advantage), and
+how much you get in their way (your Disadvantage). These quantities are calculated
+as follows:
+Everyone starts with 1 Advantage and 1 Disadvantage.
+You can ignore the Dexterity score; in this world, it's useless for everything
+Adventurers do except qualifying for Adventurer College.
+Having unusually high stats allows you to help take skill checks for your team.
+For every non-Dexterity skill you have above 12 points, add 2 Advantage for
+every point it exceeds 12 by. (For example, if you had 15 Charisma, that would
+give you (15-12)*2=6 extra Advantage.)
+Having unusually low stats means you cause trouble for your team. For every
+non-Dexterity skill you have below 8 points, add 3 Disadvantage for every point
+under 8. (For example, if you had 5 Charisma, that would give you (8-5)*3=9
+extra Disadvantage.)
+If your Strength is greater than your Constitution, you'll end up committed to
+physical tasks you don't have the stamina to see through: that's +2
+Disadvantage.
+For similar reasons, if your Intelligence is greater than your Wisdom, that's also
++2 Disadvantage.
+
+Being able to out-talk the local Vizier (who has Charisma 16) is very useful.
+Adventurers with >16 Charisma get an additional +5 Advantage.
+Success and Failure
+Your odds of success are the ratio between your Advantage and your Disadvantage.
+That is:
+P(Success) = Advantage / (Advantage + Disadvantage)
+As Advantage and Disadvantage are both always >0, there is always a chance of
+success or failure.
+Strategy
+With the above in mind, the optimal strategy given your starting position is as follows:
+Get STR and CHA to 8.
+Get WIS above INT.
+Put your remaining skill points into WIS and/or CON and/or INT, while keeping
+WIS above INT.
+Closing Thoughts
+You may have several objections to this scenario. Relevant selection eﬀects were only
+vaguely alluded to, and the dataset contains phenomena - the discontinuity at
+CHA>16, and the STR-CON interaction - irrelevant to your situation. To this, I can only
+plead realism: most datasets in the real world are much messier, have much more
+dubious relevance to your goals, and contain distortions about which the GM provides
+no hints at all.
+You may also object to the use of random elements in scoring. Even with perfect
+allocation, you can't get above a 93.75% chance of success: it is not only possible, but
+plausible, to do everything right and still lose. Meanwhile, refusing the fairy's oﬀer
+leaves you a 25% chance of success, deliberately allocating points badly leaves you
+about one chance in three, and most random allocations still give better-than-even
+odds. I plead realism here too, but I can see why it might bother some people; as a
+compromise, I provide probability-of-success alongside success/failure, in case you'd
+prefer to keep score that way.
+Finally, you may object to the ways that the challenge was unfair in your favour. If you
+didn't account for selection eﬀects, you may have correctly avoided boosting DEX
+because you thought it was actively harmful instead of merely useless. If you didn't
+look for interactions, you may have dodged the WIS<INT penalty just because WIS
+seemed like a better place to put points than INT. And I'm pretty sure even the three
+people who submitted optimal answers on the last post (good job simon, seed, and
+Ericf) didn't ﬁnd them by using the right link function, just because the linkage I set up
+between predictors and response was so arbitrary and idiosyncratic.
+Here, I not only excuse but congratulate myself. The main beneﬁt of exercises like this
+over Kaggle analyses - aside from Fate's unwillingness to show up the following week
+
+and explain the algorithm it used to choose who would survive the sinking of the
+Titanic - is that making real-fake-world decisions based on real-fake-world data trains
+the ability to make mistakes that don't hurt you.
+(If you have any other objections, please let me know. I very much want feedback so I
+can make the next challenge better.)
+
+D&D.Sci II: The Sorceror's Personal
+Shopper
+The day's task shows up in an envelope, and not in glowing purple letters emblazoned
+across the inside of your eyelids, which is usually a good sign. The owl that brought it
+looks on with equanimity as you read its master's message:
+Hello,
+I hearde that you do odde jobs for Wizards. I neede 120 mana for a ritual but
+cannot leave my Tower righte now. Go to the caravans in towne and buy enough
+magic items that I can gette that much by sacriﬁcinge them.
+My Owle has a pouch. It is biggere inside than oute. Putte the things in it ande she
+will carrye them back.
+Enclosed is my Thormo Tharmeu Magic Sensing Device. It usually lies but is
+probably bettere than guessinge. Returne it when you are done. Enclosed is also a
+list of 836 itemse I sacriﬁced and what coloure they glowed and how muche mana
+I gotte and what the Thau Lying Box said when I pointede it at them. I like lists.
+The pouch contains 200 gold pieces. You may keepe what coins are lefte over. If I
+do notte gette at leaste 120 mana from the things you sende me, you shalle owe
+me 200 gold pieces.
+Goodbye,
+Wakalix the Wizard
+PS: If you do not accepte the jobbe, I bid you sende the Owle and the gold back
+before sundown, that I may ﬁnde another to charge with it.
+Your spirits lift with every line. Clear objectives, payment in advance,
+acknowledgement that you have the right to refuse the task, no threats of involuntary
+transformation, no random tangents about world domination or beard care,
+handwriting legible, capitalization not entirely random . . . this is one of the good
+clients. And if you make clever enough use of the list he provided, you suspect you
+could end up taking home a decent fraction of that 200gp once this day's work is
+done. With a song in your heart, you depart for the travelling caravans and their
+magic items.
+The selection of artefacts that greets you is as follows:
+Item name
+Glow color Thaumometer reading Price
+Longsword of Wounding +2 Red
+14
+66gp
+Warhammer of Justice +1
+Yellow
+5
+41gp
+Hammer of Capability
+Blue
+35
+35gp
+Pendant of Truth
+Red
+40
+38gp
+Ring of Joy +5
+Blue
+29
+32gp
+Warhammer of Flame +2
+Yellow
+48
+65gp
+
+Battleaxe of Glory
+Blue
+7
+23gp
+Plough of Plenty
+Yellow
+12
+35gp
+Saw of Capability +1
+Green
+16
+35gp
+Amulet of Wounding +2
+Green
+50
+35gp
+Pendant of Hope
+Blue
+77
+34gp
+Pendant of Joy +4
+Green
+42
+39gp
+ 
+Will you accept Wakalix's errand? If so, what will you buy?
+I'll be posting an interactive letting you test your decision, along with an explanation
+of how I generated the dataset, sometime this Sunday. I'm giving you a week, but the
+task shouldn't take more than a few hours; use Excel, R, Python, tarot readings, or
+whatever other tools you think are appropriate. Let me know in the comments if you
+have any questions about the scenario.
+If you want to investigate this collaboratively and/or call your decisions in advance,
+feel free to do so in the comments; however, please use spoiler tags when sharing
+inferences/strategies/decisions, so people intending to ﬂy solo can look for
+clariﬁcations without being spoiled.
+
+D&D.Sci II Evaluation and Ruleset
+This is a followup to the D&D.Sci post I made earlier this week; if you haven't already
+read it, you should do so now before spoiling yourself.
+Here is the web interactive I built to let you test your solution; below is a complete
+explanation of the rules used to generate the dataset. You'll probably want to test
+your answer before reading any further.
+(The generation process is more complex than last time, so I'm leaving some
+extremely minor and irrelevant details out: feel free to dig through my code for the full
+story if this bothers you.)
+Ruleset
+Item Types
+A magic item is either a Weapon (Sword, Longsword, Warhammer, Battleaxe), Tool
+(Plough, Saw, Hammer, Axe), or Trinket (Ring, Pendant, Amulet).
+Abstractions
+Every item has an abstraction (Wrath, Prosperity, etc.) assigned to it. Weapons are
+randomly assigned Weaponish abstractions, Tools are randomly assigned Toolish
+abstractions, and Trinkets are randomly assigned Weaponish or Toolish or Trinketish
+abstractions. These abstractions have no eﬀect on other features, and are only
+relevant to this exercise insofar as they make the demarcation of item types more
+obviously meaningful.
+Modiﬁers
+Weapons are assigned modiﬁers (+1, +2, etc.) explaining how much more damage
+the enchantment lets them inﬂict. This is both easily testable and tightly-regulated in-
+universe: warriors can just swing their new Battleaxe of Wrath +2 at a training dummy
+and conﬁrm it does 2 extra damage. This is potentially relevant to us because the
+amount of extra damage is equal to mana/10 rounded down.
+Non-Weapon items are also sometimes assigned modiﬁers; this is a marketing tactic
+performed ad-hoc by salesmen with shaky or nonexistent justiﬁcation, and provides no
+actual information.
+Color and Mana
+Enchanting an item randomly assigns it a color, and then randomly assigns it an
+amount of mana via a process based on that color:
+Red-enchanted items have 1d4*1d4*1d6 mana.
+
+Blue-enchanted items have 1d6*1d10 mana.
+Yellow-enchanted items have 17+1d4 mana.
+Green-enchanted items have 2*1d20 mana.
+The mean amount of mana for each color is near 20, but the variance varies a lot.
+The Thaumometer
+Wakalix did not read the instructions which came with his Thaumometer, and does not
+realize it needs to be calibrated based on the size and color of an item. Unfortunately,
+your lack of magical ability prevents you from adjusting it yourself.
+It is currently optimized for Weapons and Tools which glow blue: its readings will only
+be oﬀ by one when applied to them.
+When applied to Trinkets which glow blue, it will consistently overestimate the amount
+of mana present by 22, then be oﬀ by one from that position; for example, a Ring
+which glows blue and has a reading of 52 will have either 29 or 31 mana.
+For a non-blue Weapon or Tool, it will roll 1d6*1d10 and report the result, completely
+disregarding the amount of mana present. For a Trinket, it will add 22 to this ﬁgure
+before reporting.
+Purchase History
+On a given day, the caravans (the only local source of magic items) will have 4-5
+randomly-generated Weapons, 2-3 randomly-generated Tools, and 5-6 randomly-
+generated Trinkets. The value of Weapons is aﬀected by their mana content via their
+modiﬁers; the value of other item types is completely uncorrelated with mana, since
+mana level for Trinkets and Tools is both diﬃcult to detect and irrelevant for most
+customers.
+Since before he started his list, Wakalix's strategy when buying items for sacriﬁce has
+been to trust in his wizardly intuition and buy whatever two items he feels are best
+while disregarding cost; for the last 418 shopping trips, he has purchased two items
+almost completely at random. His only limitation is that these two items will not share
+a noun, abstraction, or modiﬁer (he believes this lowers his chances of coming home
+with two low-mana items); selection eﬀects produced thus are irrelevant enough to
+neglect.
+(If you're wondering why I included selection eﬀects that didn't aﬀect the outcome,
+it's because creating a dataset entirely without selection eﬀects would cause me to
+turn to ash and blow away in the wind.)
+Sacriﬁcing
+When sacriﬁcing an item, Wakalix always harvests all of its mana, can always tell
+exactly how much mana that is, and will always honestly report it. He's very reliable
+like that.
+
+Strategy
+Using the Thaumometer, you can deduce the amount of mana every blue-glowing
+object has to a tolerance of +/-1. You can also make use of the fact that yellow-
+glowing objects never have less than 18 mana. Using this information, you can
+guarantee >120 total mana by buying the Pendant of Hope, the Hammer of
+Capability, the Plough of Plenty, and the Warhammer of Justice +1, leaving you with
+55gp proﬁt.
+(It is possible to do better than this by guessing randomly and being lucky. But given
+the information provided, and given that you're trying to max your character's EV and
+not your chances of topping the leaderboard, the above solution is optimal.)
+Reﬂections
+This challenge was intended primarily as a horrible, unfair trap for those inclined to
+approach problems by throwing conventional ML algorithms at relevant datasets
+without doing manual data exploration. My condolences to everyone who got caught
+out, and my apologies to those who didn't: I'll endeavour to make future tricks harder
+to dodge.
+Congratulations to gjm and GuySrinivasan for producing my intended solution.
+Congratulations also to everyone who produced my intended solution plus some
+safety margin, to everyone who came up with a solution that made them a proﬁt, and
+to everyone who chose to send the owl back when they couldn't ﬁnd a solution they
+thought was worth gambling on.
+(I really mean that last one, by the way. Making the best choice you can even if it
+seems boring or counter-intuitive is an important life skill; and also, the fact that
+people were willing to do this increases the variety of themes I can use in future
+games.)
+I have some mixed feelings about how puzzle-ish this challenge turned out: ideally, I
+want challenges to have a smoother - or at least more natural - incentive gradient for
+ﬁguring things out, but I couldn't ﬁnd a good way of doing that with this concept.
+Feedback on this point would be greatly appreciated, as would feedback about
+anything else about the challenge.
+Scheduling
+Week-long delays between posting a challenge and posting its solution don't seem
+optimal; most of the action in the comments section happens in the ﬁrst few days
+after I post, and I don't want to leave people waiting for most of a week after coming
+to a ﬁnal conclusion (or worse, leave anyone nerdsniped for an entire ~168 hours). At
+the same time, I want to ensure everyone has a chance to investigate before I reveal
+the ruleset, and I want to be able to clear up questions about the premise while
+people are still playing. I think the best way to balance this is to hold challenges over
+shorter periods of time, and call these well in advance: to that end, I hereby commit
+to posting the next challenge at 7pm UTC on Friday the 5th of March, and
+resolve it at 11pm UTC the following Sunday.
+
+(My much more tentative long-term plan is to post a challenge on the ﬁrst Friday of
+every month for the rest of this year. We'll see how that goes.)
+
+D&D.Sci April 2021: Voyages of the
+Gray Swan
+You were prepared for gratitude, a commendation from the Admiral, your own
+department, parades in your name. You were also prepared to hear that your 'list of
+helpful suggestions for ensuring supply ships survive random encounters' was an
+impudent insult to the collective intellect of High Command, and receive a public
+execution for your trouble. What you weren't prepared for was what happened: being
+allocated a modest stipend, assigned to a vessel, and told that if you're so clever you
+should implement your plans personally.
+You have 100gp to spend, and your options are as follows:
+Intervention
+Cost
+Coating the underside of the ship in shark repellent
+would ensure that no journey would feature shark
+attacks; however, Vaarsuvius' Law ("every trip
+between plot-relevant locations will have exactly
+one random encounter") means something else
+would attack instead.
+40gp
+You've given up trying to understand what it is
+about woodwork that makes its practitioners so
+good at ﬁghting Crabmonsters, but your ﬁndings are
+undeniable: arming the ship's carpenters would
+halve the damage done by Crabmonster attacks.
+20gp
+Oﬀering tribute to the Merpeople would ensure they
+won't attack the ship, similar to the eﬀect of shark
+repellent.
+45gp
+There's enough space in the lower decks to add up
+to twenty more oars, so when ﬂeeing is the best
+option, the entire crew can work together to escape.
+Each extra oar would decrease the damage done by
+Krakens and Demon Whales by 2%.
+1gp/oar
+You wouldn't think these ships could ﬁt more
+artillery, but clever ergonomics allow you to add up
+to three more cannons. Your studies suggest each
+cannon would reduce the damage suﬀered in Nessie
+and Pirate attacks by 10%.
+10gp/cannon
+Arming the Crow's Nest with state-of-the-art riﬂes
+would give lookouts a 70% chance of ensuring a
+given Harpy attack does no damage.
+35gp
+Giving the deck crew novelty foam swords to wield
+alongside their standard-issue cutlasses would
+improve their eﬀectiveness when ﬁghting Water
+Elementals, reducing the damage these creatures
+do by 60%.
+15gp
+You're completely conﬁdent in the eﬀectiveness of your ideas, but much less conﬁdent
+that you know which combination would make the best use of your limited budget. To
+
+investigate this angle, you've procured a record of random encounters encountered by
+the ships travelling your assigned route; unfortunately, it's missing some important
+information for the ships that sank, due to everyone who could ﬁll in those details
+being dead.
+As you board the Gray Swan (why do they give these ships such charmingly unique
+names when they're all built and operated identically?), it occurs to you that this
+might have been intended as an execution after all. The dataset suggests that without
+any of your clever plans, the survival rate for a journey along your route is a little
+below 90%, and the Gray Swan is scheduled to make ten trips - ﬁve northbound
+voyages, ﬁve southbound - in quick succession. Hopefully this indicates nothing more
+than your superiors wanting to test your interventions very very thoroughly.
+Your top priority is to save your skin. Secondary priorities are minimizing total damage
+taken and spending as little gold as possible, to impress High Command and return to
+their good graces.
+What will you do?
+(Notes:
+As a passenger, you'll be kept away from any ﬁghts, but the Gray Swan has no
+lifeboats; keeping the ship from sinking is necessary and suﬃcient to ensure
+your survival.
+Ships are fully repaired every time they make port.
+Interventions stack such that two 10% reductions are equivalent to one 20%
+reduction.
+Interventions apply such that a 10% reduction to an attack that would do 80%
+damage does 72% damage instead.
+Each journey takes a month; it is currently Month 5, Year 1406.)
+I'll be posting an interactive letting you test your decision, along with an explanation
+of how I generated the dataset, sometime next Monday. I'm giving you a week, but
+the task shouldn't take more than a few hours; use Excel, R, Python, a priori
+knowledge, or whatever other tools you think are appropriate. Let me know in the
+comments if you have any questions about the scenario.
+If you want to investigate collaboratively and/or call your decisions in advance, feel
+free to do so in the comments; however, please use spoiler tags or rot13 when sharing
+inferences/strategies/decisions, so people intending to ﬂy solo can look for
+clariﬁcations without being spoiled.
+
+D&D.Sci April 2021 Evaluation and
+Ruleset
+This is a followup to the D&D.Sci post I made last week; if you haven't already read it, you
+should do so now before spoiling yourself.
+Here is the web interactive I built to let you evaluate your solution; below is an explanation
+of the rules used to generate the dataset. You'll probably want to test your answer before
+reading any further.
+Ruleset
+(Note: to make writing this easier, I'm using standard D&D dice notation, in which "3+4d8"
+means "roll four eight-sided dice, sum the results, then add three".)
+Enemies
+Sharks
+Sharks are 1/6 of encounters.
+They attack in groups of 2+1d4, each of which does 1d10 points of damage.
+Demon Whales
+
+Demon Whales are 1/14 of encounters. (If that fraction seems high, you're failing to account
+for all the sunk ships that couldn't report encountering them.)
+An attack from a Demon Whale does 17d12 points of damage.
+A Demon Whale encounter has a ~78% fatality rate
+Crabmonsters
+Crabmonsters are 1/14 of encounters.
+A Crabmonster repeatedly rolls 1d80 as it tears through the ship, adding a point of damage
+with each roll, until it rolls a 1 (that is, encounters someone or something that stops it).
+
+~8% of Crabmonster encounters do >200% damage; a Crabmonster encounter
+has a ~28% fatality rate
+Pirates
+Though the Navy's records don't bother to distinguish, Pirates come in two categories:
+Brigands (local criminals who had the poor fortune to cross paths with Naval supply ships
+while ﬂying the black ﬂag, and/or to mistake them for civilian cargo ships) and Privateers
+(agents of an enemy government, harassing your Navy's ﬂeet using hit-and-run tactics).
+Brigands are 1/6 of random encounters during your voyages, Privateers 1/21.
+A ﬁght with Brigands does 4d8 points of damage; a ﬁght with Privateers does 6d12.
+
+Merpeople
+Surface-dwellers are unaware of the intricacies of underwater society, and record both
+Atlantean Merfolk (1/14 of encounters) and Alexandrian Merfolk (2/21 of encounters) as
+
+"Merpeople". Fortunately, the two city-states are close enough politically that befriending
+one will cause them both to allow you free passage.
+Atlanteans do 20+3d20 damage; Alexandrians do 1d8*1d8*1d8+1d20 damage.
+~14% of Alexandrian attacks do >200% damage; an Alexandrian attack has a
+~37% fatality rate
+
+Kraken
+Kraken are 2/21 of encounters.
+They do 12d8 points of damage.
+Nessie
+Nessie is 1/21 of encounters.
+She does 40+10d8 points of damage.
+
+An encounter with Nessie has a ~2% fatality rate
+Harpies
+Harpies are 1/14 of encounters.
+They do 1d4+1d8+1d12 points of damage.
+
+Water Elementals
+Water Elementals are 2/21 of encounters.
+The Navy has countering the powerful but predictable attacks of Water Elementals down to
+an art; there are well-known methods for ensuring they only almost destroy a given ship.
+They do 73+1d12 points of damage.
+
+Direction
+Direction is irrelevant from perspectives both practical (you have no control over how many
+trips you take each way) and epistemic (direction happens to have no eﬀect on outcomes).
+Time eﬀects
+Time has almost no eﬀect. The one exception is that Privateers used to be much more
+common (and other encounters therefore slightly less common) before 4/1401; this is when
+your nation's main rival changed tactics and stopped hiring mercenaries to attack supply
+ships.
+Sinking Risk by Enemy
+In the absence of interventions, ~50% of shipwrecks are caused by Demon Whales, ~18% by
+Crabmonsters, ~31% by Merpeople, ~1% by Nessie, and 0% by other threats.
+Strategy
+If attempting to optimize odds of survival, your best choices are to buy all oars, arm
+carpenters, tribute the Merpeople, and buy one extra cannon; congratulations to simon,
+GuySrinivasan and Measure for reaching this conclusion.
+However, since Pirates never sink ships and Nessie is pretty bad at it, you may wish to take
+the money you'd spend on the cannon and either hold onto it (to impress the Navy's
+accountants) or spend it on foam swords (to impress the Navy's dockworkers).
+
+Reﬂections
+All else equal, there's a little extra uncertainty when predicting quantities instead of
+categories: "is that sudden peak at 14% noise, or a clue to the generating function?", etc.
+However, the main reason this challenge was so much more speculative than its
+predecessors is that the most important information - details of attacks that did 100%+
+damage - was censored by the mechanics of the world. In the absence of hard evidence,
+small errors in inference compound, priors pick up the slack, and considerations like "what
+genres apply here?" or "is the scenario designer enough of a troll to have Demon Whale
+damage arbitrarily cap out at 99%?" take on a signiﬁcance they wouldn't otherwise.
+This is both good and bad. Good because the personal touch adds intrigue to what would
+otherwise just be data-wrangling; bad because every unit of eﬀort spent psychoanalyzing the
+GM is a unit of eﬀort not spent on getting better at data-wrangling or on psychoanalyzing
+reality's GM (i.e. studying Math and Science). I enthusiastically solicit feedback on this point,
+as well as on every other point.
+Scheduling
+The next D&D.Sci challenge should be ready sometime earlyish next month, but nebulous
+and open-ended work commitments mean I can't promise anything.
+
+D&D.Sci May 2021: Monster Carcass
+Auction
+You are an apprentice to Carver, the most successful butcher in your tiny, snow-swept
+village. Today, for the ﬁrst time since you joined her, she is sending you to buy
+carcasses at the daily Auction.
+(The (ﬁrst-price, sealed-bid) Monster Carcass Auction began as a collective eﬀort by
+local shopkeepers to divert Adventurers from trying to sell them random corpses, but
+has since become an integral part of the village economy, as well as the population's
+main protein source.)
+Carver thinks you should trust your instincts and bid however feels right. It's an
+approach that's served her well thus far - the record you've been compiling of her
+bids and subsequent sales attests to that, among other things - but you suspect a
+more data-driven approach would work better. And if you do well enough on this
+expedition, that might suﬃce to prove it to her.
+You make sure to arrive at the very end of the event, like your boss always does; this
+means you'll lose any tie-breakers - matching bids are resolved in favour of whoever
+bid ﬁrst - but also means your rivals will have already put in their bids, so none of
+them will be able to change their bidding strategy to account for Carver's absence.
+The lots available are as follows:
+Lot
+Species
+Days Since Death
+#1
+Yeti
+0
+#2
+Snow Serpent 2
+#3
+Snow Serpent 1
+#4
+Winter Wolf
+1
+#5
+Yeti
+5
+#6
+Winter Wolf
+1
+#7
+Snow Serpent 1
+#8
+Snow Serpent 5
+#9
+Winter Wolf
+3
+#10 Winter Wolf
+7
+#11 Winter Wolf
+8
+#12 Snow Serpent 8
+#13 Winter Wolf
+2
+(As usual, this is all the information given to bidders; the original organizers took the
+term 'blind auction' a little too literally, and by the time anyone realized, the practice
+of hiding almost everything about the lots had become a tradition.)
+You and your employer are risk-neutral, and don't care how much or little time and
+eﬀort you spend butchering. You brought 400 silver pieces. How much will you bid for
+each lot?
+
+Notes:
+Payments are collected in lot order; if you're unable to pay your bid by the time
+a given lot comes up, you lose your claim to that lot but incur no penalty.
+Your records are in no particular order, but the glacial pace of life in your village
+suggests there are no time trends to account for.
+I'll be posting an interactive letting you test your decision, along with an explanation
+of how I generated the dataset, sometime next Friday. I'm giving you a week, but the
+task shouldn't take more than a few hours; use Excel, R, Python, Ouija boards, or
+whatever other tools you think are appropriate. Let me know in the comments if you
+have any questions about the scenario.
+If you want to investigate collaboratively and/or call your decisions in advance, feel
+free to do so in the comments; however, please use spoiler tags or rot13 when sharing
+inferences/strategies/decisions, so people intending to ﬂy solo can look for
+clariﬁcations without being spoiled.
+
+D&D.Sci May 2021 Evaluation and
+Ruleset
+This is a followup to the D&D.Sci post I made last week; if you haven't already read it, you
+should do so now before spoiling yourself.
+Here is the web interactive I built to let you evaluate your solution; below is an explanation
+of the rules used to generate the dataset. You'll probably want to test your answer before
+reading any further.
+Ruleset
+(Note: to make writing this easier, I'm using standard D&D dice notation, in which "4d8+3"
+means "roll four eight-sided dice, sum the results, then add three".)
+Species
+The carcasses brought back by adventurers are 2/13 Yetis, 5/13 Snow Serpents, and 6/13
+Winter Wolves.
+Days Since Death
+The days since each creature's death is modelled by rolling two d12s, taking the lowest
+result, and subtracting 1.
+(For the rest of this post, let "[DSD]" stand in for "Days Since Death".)
+Butchery
+Carver takes a "collect anything the local alchemists might pay for, then carve out all the
+technically-edible meat you can still access" approach to her vocation.
+The amount Carver gains from a Yeti carcass is given by 72+1d6-[DSD]d6, the amount from
+a Snow Serpent is 20+2d6 (she can't prepare snakemeat, so all the proﬁt comes from non-
+degrading components like scales and fangs; ergo, no time eﬀects), and the amount from a
+Winter Wolf is 25-2*[DSD]+4d6.
+Bidders
+There are three bidders at a given auction: Alistair, Betty, and - except for today's auction,
+where you take her place - your employer Carver.
+Carver the Butcher
+Carver bids 32-2*[DSD]+2d20 on Yeti carcasses, 7+2d10 on Snow Serpent carcasses, and
+31-3*[DSD]+2d8 on Winter Wolf carcasses.
+
+Alistair the Butcher
+Alistair has a diﬀerent business model to Carver, focusing on extracting the highest quality
+cuts and selling them to rich clients; as such, his utility sharply decreases with time since
+death.
+He is very predictable, bidding 55-6*[DSD] for Yetis, 60-20*[DSD] for Snow Serpents, and 50-
+12*[DSD] for Winter Wolves.
+Betty the Necromancer
+Betty doesn't care how long something's been dead, so long as no-one's interfered with the
+body.
+She bids 29+1d6 on Yetis, 9+1d8 on Snow Serpents, and 19+1d4 on Winter Wolves.
+Strategy
+The relevant factors are summarized in these graphs.
+
+In almost all cases where rivals aren't making bids greater than the Expected Value of the lot
+to Carver, the EV-maximizing choice is to bid the lowest amount that would guarantee
+winning the lot. The one exception is with lot #11, where it's possible to eke out a tiny
+amount of extra EV by bidding 21 or 22 silver pieces.
+Reﬂections
+I aimed to make this entry as straightforward and approachable as I could. From the, uh,
+comprehensiveness with which it was solved, I think it's fair to say I succeeded.
+Congratulations to simon and GuySrinivasan for reaching perfect answers; and then,
+between them, managing to deduce my entire generation process.
+
+The main problem with this scenario from my point of view is that I once again ended up
+making a puzzle when I was aiming for a challenge. It's premised on some Weird Crap
+(distorting eﬀects of selection bias, auctions against rival agents) but the fact it needs a
+'proper' solution obligates the Weird Crap to impose itself with a reliability it would never
+possess in real life (Carver acts implausibly randomly to limit the eﬀect of selection bias,
+opposing bidders are wind-up toys who don't know anything you don't), and so players
+develop abilities optimized for synthetic problems.
+I'm mad about this, but only a little. While my game failed to live up to my standards of
+quote-unquote-'realism', it succeeded at its primary objectives: being playable, giving
+players an excuse to practice technical skills, and setting things up for the Bonus Round
+(which I'm pleased to report is absolutely not a puzzle).
+Scheduling
+Oh yeah, there's a Bonus Round. It's all written up and ready, but I'm delaying it slightly so I
+can have it both be a week long and end on a weekend; I plan to run it starting next Monday
+and conclude it the Monday after, unless I get hit by a truck or someone in the comments
+gives me a reason to use a diﬀerent time window. Watch this space.
+
+D&D.Sci(-Fi) June 2021: The Duel with
+Earwax
+It is dark in the submarine, and Maria isn't ready.
+Maria isn't ready at all. Maria is in her usual post-battle fugue, disoriented,
+dissociated, checked-out, can't come to the phone right now. Sending her to ﬁght in
+this condition would be both homicide and suicide; also, your boss wouldn't let you.
+Janelle, the backup pilot, is ready. That is, she's
+physically/psychologically/pneumatologically prepared to go toe-to-toe with a soul-
+eating monstrosity, throw Beta Resonance at it, and almost certainly die. But in the
+sense of having a >5% chance to successfully protect herself and her colleagues from
+the aforementioned soul consumption, Janelle is not ready.
+There are four other viable volunteers: Amir, Corazon, Flint, and Will. None of these
+pseudo-under-understudies have so much as a double-digit number of missions under
+their belt, and none of them have ever faced an adversary half as strong as the one
+you're dealing with. In other words, they're not ready either.
+You are Ratio Tile, a scientist working at the Sphere, a deep-sea research facility
+dedicated to studying mysterious - and frequently aggressive - accumulations of soul
+energy called heteropneums. You are ready. Or, at least, you'd better be.
+Three hours ago, ace pilot Maria N. returned from heading oﬀ a possible attack,
+exorcising the oﬀending heteropneum so swiftly and thoroughly that your superiors
+saw ﬁt to posthumously assign it the oﬃcial designation "Toast". Two hours ago, while
+Maria was still catatonic, a heteropneum previously considered benign (amplitude: 3.2
+kCept, designation: "Earwax") teleported onto the Sphere, ﬂooding half of the base
+and injuring 21% of active personnel before dispersing. Sixteen minutes ago, sensor
+readings indicated that Earwax is reforming. Your communications are down, and
+there is no time to evacuate.
+Dr. Cept was incapacitated in Earwax's ﬁrst attack. Cecelia is on her annual visit to the
+surface, visiting friends and family, unaware of her colleagues' peril. In their absence,
+the decision of which pilot to send and which type of Resonance they should use falls
+to you and you alone.
+Your boss seems to think that you can use Soul Coherence Theory to choose the
+pilot/Resonance combination most likely to produce >3.2 kCept of Eﬀective Field
+Strength and therefore save everyone. Unfortunately, Soul Coherence Theory
+straightforwardly predicts that you're almost certainly all going to die; though it also
+rules out such observed phenomena as Pseudo-Refraction, heteropneums with
+amplitudes over 4.92 kCept (no, Cept, the instruments are not 'potentially unreliable'),
+and - topically - heteropneums vanishing and reappearing the way Earwax did. So
+instead, you're going to look at the data for all ﬁghts thus far with fresh eyes, treating
+this as a pure analysis problem.
+There is one other relevant factor. (Really, Ratio? You're pulling this now?) When a
+pilot overwhelms a heteropneum by generating an Eﬀective Field Strength of more
+than double its amplitude, you get readings of much greater precision, and can use
+Branch-Loop Analysis to determine how much EFS would have been generated if the
+
+pilot had used a diﬀerent Resonance. Earwax is exhibiting previously unseen
+behaviours and abilities; if you can not only defeat but dominate it, you just know that
+data will help you construct an alternative to Soul Coherence Theory. And this isn't
+(just) your (boundless, inappropriate, potentially lethal) curiosity talking: ﬁguring out
+how this creature works could be key to protecting the Sphere against future attacks.
+You are Ratio Tile. You have ﬁve possible pilots, seven known Resonances, one
+functioning submarine, and one chance. You are ready. Who will you send, and how
+will you have them ﬁght?
+Notes:
+This challenge is fanﬁction of Nostalgebraist's Floornight, but having read it is
+unlikely to help you achieve your desired outcome.
+The change in genre is matched by some changes in my approach to data
+generation. I will not be telling you what they are.
+Your instruments have limited precision, but unerring accuracy. For example,
+since they say Earwax has an amplitude of 3.2 kCept, you can be 100% sure the
+true value is between 3.15 and 3.25 kCept; and since they say Janelle (would
+have) generated 2.02 kCept of amplitude from Alpha Resonance in her most
+recent ﬁght, you can be 100% sure the true value is between 2.015 and 2.025
+kCept.
+I'll be posting an interactive letting you test your decision, along with an explanation
+of how I generated the dataset, sometime next Tuesday. I'm giving you a week, but
+the task shouldn't take more than a few hours; use Excel, R, Python, the Summer
+Diary, or whatever other tools you think are appropriate. Let me know in the
+comments if you have any questions about the scenario.
+If you want to investigate collaboratively and/or call your decisions in advance, feel
+free to do so in the comments; however, please use spoiler tags or rot13 when sharing
+inferences/strategies/decisions, so people intending to ﬂy solo can look for
+clariﬁcations without being spoiled. Please also spoiler or rot13 any Floornight plot
+points.
+
+D&D.Sci(-Fi) June 2021 Evaluation and
+Ruleset
+This is a followup to the D&D.Sci post I made last week; if you haven't already read it, you
+should do so now before spoiling yourself.
+Here is the web interactive I built to let you evaluate your solution; below is an explanation
+of the rules used to generate the dataset. You'll probably want to test your answer before
+reading any further.
+Ruleset
+This challenge runs mostly on Poisson distributions; the rest of this post will abbreviate "Take
+the result of a Poisson process with lambda=X" as "Po(X)".
+Heteropneums
+There are two types of heteropneum. The most common is the garden-variety heteropneum,
+which exists as a natural consequence of the way soul energy clusters. This type has a
+randomly-generated amplitude which is always a multiple of 0.142 kCept. (You can infer that
+Earwax must not be of this kind because no amplitude which would round to 3.2 kCept is a
+multiple of 0.142 kCept.)
+There are also a much smaller number of [Teeming] heteropneums, which exist because the
+[Teeming] hivemind does. These appear at times and with intensities not determined by the
+rules of this world (in other words, decided arbitrarily by the GM). Nicholas, Neville, Jasper,
+Athena, Endeavour, Spindle, Divisor, Desk, Pencil, Duchess, Economy, Sirocco, Constellation,
+Harbinger, Minimalist, Spackle, Tourniquet, Painting, Toast, and most importantly Earwax are
+[Teeming] heteropneums; all others are not.
+Who Fights What
+Heteropneums with amplitudes of >2.5 kCept are handled by Maria. Heteropneums in the
+1.2-2.5 kCept range are split evenly between Maria and Janelle. Weaker heteropneums are
+allocated unevenly between all viable pilots.
+Fighting (as Maria)
+Let A be the amplitude of the heteropneum Maria is facing, in kCept.
+Alpha
+Alpha Resonance lets Maria create 3.4444 + 0.0285*Po(10.2) kCept of Eﬀective Field
+Strength. On Floorday 502, a breakthrough was made which allowed the Sphere's
+submarines to better utilize this form of Resonance; this adds an extra 0.5111 kCept.
+
+Beta
+Beta Resonance lets Maria create 2.4011 + 0.1034*Po(3.9) kCept of Eﬀective Field Strength.
+Gamma
+Gamma Resonance gets stronger as the enemy does. It lets Maria create 0.6626 +
+A*0.66*Po(1.1) kCept of Eﬀective Field Strength.
+
+
+Delta
+Delta Resonance is Maria's preferred means of attacking. It lets her create A*0.32 + 3.253 +
+0.0882*Po(19.2) kCept of Eﬀective Field Strength.
+Epsilon
+Epsilon Resonance has a complex but predictable eﬀect. It lets Maria create 0.46 - 1.12*A +
+0.93*A^2 - 0.14*A^3 kCept of Eﬀective Field Strength.
+
+Zeta
+Zeta Resonance randomly fails and produces 0kCept 22% of the time. When it succeeds, it
+lets Maria create 2.1571 kCept of EFS against an ordinary heteropneum, or 7.5311 kCept
+against a [Teeming] heteropneum.
+Eta
+Eta Resonance varies sharply and arbitrarily with time, as shown below.
+
+Fighting (as anyone else)
+Every pilot/Resonance combination has a factor representing how well that pilot handles that
+resonance compared to Maria. The EFS they generate is always the EFS Maria would
+generate multiplied by that factor. All factors are tabulated below.
+ 
+Janelle Amir Corazon Flint Will
+Alpha
+0.48
+0.50 0.59
+0.42 0.23
+Beta
+0.98
+0.72 0.11
+0.32 0.55
+Gamma 1.34
+0.42 0.58
+0.36 0.14
+Delta
+0.24
+0.34 0.16
+0.32 0.21
+Epsilon 0.79
+0.78 0.35
+1.23 2.11
+Zeta
+0.43
+0.41 0.92
+0.39 0.12
+Eta
+0.45
+0.23 0.12
+1.08 0.95
+Strategy
+Once you know everything about this system, the two dominant solutions are to have Will
+use Epsilon Resonance (100% chance to live), or have Corazon use Zeta Resonance (22%
+chance to die, 78% chance to live and replace Soul Coherence Theory). However, the small
+amount of data you were provided may not have been enough for you to conﬁdently assess
+how reliably Zeta Resonance works on [Teeming] heteropneums, and/or you may have
+suspected that Earwax is unique enough that Zeta Resonance wouldn't treat it like other
+[Teeming]s; thus, you may have reasonably opted for having Janelle use Gamma Resonance
+(~33% chance to die, ~37% chance to live but keep SCT, ~30% chance to live and replace
+SCT). Ultimately, your choice depends on your values and your circumrational reasoning.
+(You may also choose to sabotage the ﬁght and kill everyone. But why would a Sphere
+scientist ever do something like that?)
+Reﬂections
+This scenario was a puzzle; for once, I think that's justiﬁed. When dealing with a problem
+rooted in (Meta)Physics and (Xeno)Biology instead of Economics and Sociology, exact
+predictions become sensible goals and sophisticated modelling becomes a valid tactic. The
+fact that it had three intended solutions made me comfortable turning up the diﬃculty for
+this one: congratulations to everyone who found at least one answer, and particular
+congratulations to simon for ﬁnding the two optimal ones.
+This scenario was also fanﬁction. It . . . probably shouldn't have been. I had hoped that using
+someone else's canon would let me borrow gravitas, cut down on exposition, and enable
+players' pre-existing attitudes towards the characters both motivate and bias them. This was
+undercut somewhat by the fact that - to my surprise - literally 0% of players seem to have
+read Floornight (in my defence, it was big on rationalist tumblr!). But the main problems
+were inherent to the idea: it's hard to write an introduction such that it works for both fans
+and non-fans, ~700 words of problem description just isn't enough for me to successfully
+cloud people's judgement, and the whole "solve this puzzle or your husbando gets it!"
+conceit seems tacky in hindsight (especially given I didn't invent the husbando in question).
+Next time I do a D&D.Sci challenge as fanﬁc, I'll pick a less obscure story; and next time I try
+to inﬂict Feels on you, I'll use both a better format and original characters.
+Finally, this scenario was Sci-Fi, with capital letters and everything. No dungeons, no
+dragons, no questing heroes, and most importantly no dicerolls. I'm conﬂicted both about
+
+whether Sci-Fi is less likely than Fantasy to alienate potential players, and about whether
+using 'grown-up' distributions that could conceivably show up in players' dayjobs is an
+improvement over my usual approach.
+. . . this is typically the part where I say "Feedback on these points, and on all other points, is
+enthusiastically solicited", but it's possible Nostalgebraist might read this and I want him to
+think I'm cool. Therefore: I cooly solicit cool feedback on these cool points (in a cool sort of
+way).
+Scheduling
+I've just started a new job. This shouldn't interfere with making July's challenge - especially
+since I've done all the conceptual work for it already - but unexpected delays are a lot more
+likely. Best guess: I'll post it towards the end of next month.
+
+D&D.Sci August 2021: The Oracle and
+the Monk
+You are Oeis the Wise, professional Oracle. Your uncanny ability to predict how lists of
+whole numbers will continue - and only how lists of whole numbers will continue -
+creates infrequent but intense demand for your counsel: you usually leave your
+mountain home about once a month, whenever circumstances place a local noble or
+merchant lord in need of your services.
+Today's customer is Morgan, a monk. (Morgan has no money, but his temple has
+frequently provided you with food and shelter while travelling to more lucrative
+clients, so you're ﬁne doing this one for free.)
+Morgan explains that he uses transcendental meditation to link himself to the
+substructure of the universe, observing the pulse and ﬂicker of those lights which cast
+all we know as shadows. In his notes, he records ﬂows of mana as they rise and ebb,
+forming the rhythms that undergird reality.
+You tell him that sounds cool and you hope it works out for him.
+However, Morgan continues, a recent supernova of unusual intensity has disrupted
+the leylines of the world, creating the possibility of ﬂux in realms which have
+previously known only stasis. In ten days - day 384 in his record - he will have a once-
+in-several-lifetimes chance to not merely channel these ﬂows, but change them: he
+plans to invoke two mana types simultaneously, wielding them in a ritual that subtly
+but profoundly reshapes the world for the better. If he is to do this, he must begin the
+endeavour now; to determine which sources of power he should prepare to conjure on
+that fateful day, he zealously entreats your assistance.
+You tell him that sounds cool and you hope it works out for him. (Living alone on a
+mountain has not done wonders for your conversational repertoire.)
+Morgan concludes by saying that his priorities for day 384 are as follows:
+Firstly, the strongest of the two mana types he channels cannot be Void, Doom,
+or Spite. These may be used if you are certain they will be the weaker of the
+pair, but if they dominate, darkness will possess him and he will transform into
+an immortal demon, wreaking horror and bloodshed upon the world he sought to
+improve.
+Secondly, the ritual must work. For this to occur, the two mana types together
+must have a combined power of at least 70.
+Finally, as a strictly tertiary objective, increasing the total amount of mana
+channelled would allow him to increase the amount of good done; however, this
+is much less important than guaranteeing the ritual works at all.
+From the dedication in his eyes, you perceive Morgan will not be persuaded from this
+path: all you can do is ensure he walks it as best he can. You are Oeis the Wise, and
+you have a title to uphold. What, in your Oeisdom Wisdom, will you advise him to do?
+I'll be posting an interactive letting you test your decision, along with an explanation
+of how I generated the dataset, sometime next Friday on Monday the 23rd. I'm giving
+
+you a week, but the task shouldn't take more than a few hours; use Excel, R, Python,
+Shivers, Inland Empire, Espirit de Corps, or whatever other tools you think are
+appropriate. Let me know in the comments if you have any questions about the
+scenario.
+If you want to investigate collaboratively and/or call your decisions in advance, feel
+free to do so in the comments; however, please use spoiler tags or rot13 when sharing
+inferences/strategies/decisions, so people intending to ﬂy solo can look for
+clariﬁcations without being spoiled.
+
+D&D.Sci August 2021 Evaluation and
+Ruleset
+This is a followup to the D&D.Sci post I made ten days ago; if you haven't already read it,
+you should do so now before spoiling yourself.
+Here is the web interactive I built to let you evaluate your solution; below is an explanation
+of the rules used to generate the dataset. You'll probably want to test your answer before
+reading any further.
+Ruleset
+Below is a summary of how the dataset works; full generation code is available here.
+(Note: to make writing this easier, I'm using standard D&D dice notation, in which "4d8+3"
+means "roll four eight-sided dice, sum the results, then add three".)
+Mana types
+Solar
+Solar is the strongest and most complicated mana type. It can be decomposed into an
+average (40), a small amount of random noise (+ 1d2 - 1d2), two seasonality components,
+and the eﬀects of distant supernovae.
+
+The power of Solar on Day 384 is 45 + 1d2 - 1d2
+Lunar
+The moon reﬂects and inverts the eﬀects of the sun, with a delay. It provides a power of 75
+minus the amount of Solar power 14 days ago.
+The power of Lunar on Day 384 is 16, because the power of Solar on Day 370 was 59.
+Earth and Ocean
+
+Earth and Ocean combine to create the World. World Mana can be decomposed into an
+average (68), some random noise (1d4 - 1d4), and a seasonality eﬀect.
+On a given day, Earth takes (15+1d80)% of World Mana, rounded down; Ocean gets the rest.
+The combined power of Earth and Ocean on Day 384 is 77 + 1d4 - 1d4.
+Breeze
+The breeze varies, as does its variance. It is composed of an average (13), and some random
+noise which varies seasonally (1dN - 1dN, where N is given in the graph below).
+
+The power of Breeze on Day 384 is 13 + 1d4 - 1d4
+Flame
+Flame catches, sputters and starts, building and waning randomly. Today's Flame mana is
+yesterday's, minus 25% (rounded down), plus the lowest of two d20 rolls.
+The spread of possibilities at Day 384 looks like this:
+Ash
+Ash is what remains when Flame is extinguished. Today's Ash is the 25% removed from
+yesterday's Flame.
+The spread of possibilities at Day 384 looks like this:
+
+Void
+Void is timeless; all motion within it is random, and all apparent trends or correspondences
+are merely noise. The power of Void on Day 384 - and all other days - is 24+1d8-1d8.
+Doom
+Doom builds gradually, then diminishes sharply as it is fulﬁlled. On a typical day, it can be
+decomposed into a starting point (24), some random noise (1d6), and a jagged seasonality
+eﬀect.
+
+However, there have been four recorded days - 34, 91, 181 and 249 - where the die rolled
+an impossible value. There's a 99% chance that this is due to natural disasters, to Morgan's
+pure heart and optimism making him slightly unreliable at quantifying Doom ﬂows, or to
+some other innocuous explanation . . . and a 1% chance that this is due to the demon lord
+Astaroth modifying Doom whenever he detects a mortal using it in a ritual. As such, the
+power of Doom on Day 384 has a 99% chance of being 27+1d6, and a 1% chance of being
+one unit greater than whatever other mana ﬂow Morgan channels.
+(In my defense, I did literally call it 'Doom'.)
+Spite
+Spite lays dormant, then explodes brieﬂy, only to become silent again. Its default power is 0;
+to this we add 13, 7, 18 and 6 at 4-, 5-, 7- and 14-day intervals respectively.
+On Day 384, Spite is 0.
+Strategy
+The only strategy which ensures Morgan's success is using Earth and Ocean. However, you
+don't have to share his priorities, and you had no way of knowing that there would be no
+supernova eﬀect on Day 384. As such, taking an unknown risk to gain an unknown beneﬁt in
+the form of Doom and Solar is also a not-strictly-dominated answer; for that matter, you
+could also prioritize best-case outcomes over guaranteed successes by suggesting Solar and
+Earth, or sabotage the ritual by advising him to use (to give one example) Lunar and Doom.
+Reﬂections
+The premise for this challenge was speciﬁed by GuySrinivasan, as a prize for winning an
+earlier game. He asked for a scenario about chronological eﬀects: I built a system of
+autocorrelations, lagging and leading indicators, overlapping seasonalities, transient
+anomalies, and factors which turn out to actually just be random, all overshadowed by the
+potential for Black Swan events.
+One thing I did not include was any overall time trends: Morgan and Oeis' world is naturally
+one of stasis, cycles, and noise. Congratulations to everyone who successfully enabled them
+to change it, and particular congratulations to aphyer for reaching the intended solution
+within three hours (!) of the challenge being posted.
+Using someone else's premise was unexpectedly pleasant: there's a lot of fun to be had
+working around arbitrary but lenient constraints, and I appreciated the guarantee that at
+least one player would appreciate the subject matter chosen. As such, I conclude this section
+by soliciting both feedback on this challenge and suggestions for what you'd like to see in
+future ones.
+Scheduling
+. . . speaking of which, I'm sorry to say you're unlikely to see much from me for a while. I'm
+about to begin an intense and protracted piece of contract-work, and I don't know how much
+attention I'll be able to spare for this hobby of mine. I hope to get the next entry done
+sometime in October, but it's entirely possible this will be the last D&D.Sci challenge posted
+this year.
+
+(If this state of aﬀairs bothers you, you are warmly encouraged to amend it: all my work is
+public domain, and I never planned to be the sole custodian of this genre. I look forward to
+investigating whatever scenarios you ﬁnd the time and inspiration to construct.)
+
